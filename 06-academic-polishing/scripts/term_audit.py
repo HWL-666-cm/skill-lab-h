@@ -64,7 +64,7 @@ def latin_terms(text):
     variants = defaultdict(Counter)
     first_line = {}
     for i, (pos, w) in enumerate(tokens):
-        if w.lower() in STOP_EN or len(w) < 4:
+        if w.lower() in STOP_EN:
             continue
         for n in (1, 2):
             seq = tokens[i:i + n]
@@ -155,7 +155,9 @@ def rescan(text, glossary_terms):
     report = []
     for t in glossary_terms:
         k = t.get("concept")
-        allowed = set(t.get("variants_found") or []) | {t.get("preferred") or ""}
+        # 只允许"首选写法"本身：其它历史变体若仍留在文本里，说明没统一，应继续报 drift
+        preferred = t.get("preferred")
+        allowed = {preferred} if preferred else set(t.get("variants_found") or [])
         found = variants.get(k, Counter())
         drift = sorted(f for f in found if f and f not in allowed)
         if drift:

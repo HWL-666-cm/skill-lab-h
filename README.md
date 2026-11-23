@@ -49,6 +49,13 @@
 playground submit --challenge-id <ID> --skill <目录> --trace <原生会话日志>
 ```
 
+## 进度
+
+| 题目 | 状态 | 说明 |
+|---|---|---|
+| 06 学术语言润色 | ✅ 已完成 v1.1 | `06-academic-polishing/`：双审计脚本 + 两份提示词 + 4 条自测用例，`run_selftest.py` 全 PASS |
+| 其余九题 | ⬜ 待做 | 复用 06 的骨架（SKILL.md 结构 / result.json 契约 / 自测方式） |
+
 ## 许可
 
 本仓库内容仅用于赛事提交与学习交流。引用请注明来源。
