@@ -1,0 +1,10 @@
+{
+  "_note": "示例输入，仅用于说明接口与字段对应关系，不是赛事正式案例，也不是任何正式结果。",
+  "case_id": "example-001",
+  "genre": "journal-article",
+  "instruction": "润色 Results 段落：修正语法与用词，统一术语，保持数据、单位与引用编号不变，逐句给出修改说明。",
+  "glossary": [
+    {"concept": "sea fog", "preferred": "sea fog", "variants_found": ["sea fog", "sea-fog", "Sea Fog"]}
+  ],
+  "source_text": "The treatment may reduce the incidence of sea fog by about 12% in coastal areas [3], and this effect was not significant in inland stations (Fig. 2). Sea-fog events were recorded at 14 stations from 2015 to 2020."
+}
