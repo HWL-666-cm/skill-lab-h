@@ -1,7 +1,7 @@
-# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 06 / 03 / 07 题）
+# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 06 / 03 / 07 / 02 题）
 
 本题为 Skill 创作任务，**只提交 Skill 及其必要资源**，不提交答案、白板或正式测试结果。
-本文件夹汇总三题的提交材料，每题的 Skill 目录均远低于平台资源上限
+本文件夹汇总四题的提交材料，每题的 Skill 目录均远低于平台资源上限
 （50 个 UTF-8 文本文件 / 单文件 500 KB / 总计 2 MB）。
 
 ---
@@ -89,7 +89,38 @@ playground submit \
   --dry-run
 ```
 
-> 第 07 题尚未提交。trace 必须取本题相关对话并脱敏，不能复用 06 或 03 的 trace。
+> 第 07 题尚未提交。trace 必须取本题相关对话并脱敏，不能复用 06 或 03 的 trace。trace 已备好在 `_trace/07_trace.jsonl`（40 条、valid=true）。
+
+---
+
+## 第 02 题：文献翻译
+
+### 目录结构与用途
+
+| 路径 | 作用 | 对应提交参数 |
+|---|---|---|
+| `02-translation-audit/` | Skill 本体 14 个文件（含 `GITHUB_URL.txt`）：入口 `SKILL.md`、工作流提示词、字段字典、翻译保真规则、评分自查、4 个脚本、示例、13 条自测 | `--skill` |
+| `02-translation-audit/SKILL.md` | 平台入口；说明"脚本负责锁和查、Agent 负责译"的分工与六步流程 | — |
+| `02-translation-audit/scripts/pdf_paragraphs.py` | PDF→段落级结构：双栏按 x0/y0 排阅读顺序、页眉页脚自适应剔除、跨页续段标记、公式/表行/参考文献/元数据分类 | — |
+| `02-translation-audit/scripts/term_extract.py` | 术语候选抽取：缩写定义（含小写 lvp）、高频名词短语；单复数与同缩写合并；只给候选与位置，不定译名 | — |
+| `02-translation-audit/scripts/translation_audit.py` | 核心审计：段号覆盖、术语漂移/禁用别名、数字单位引用否定守恒；支持 `--scope` 局部审计 | — |
+| `02-translation-audit/scripts/make_result.py` | 组装 `result.json` 对齐 `output_contract`，并产出 `bilingual.md` + `glossary.csv` | — |
+| `02-translation-audit/scripts/run_selftest.py` | 13 条合成用例；本地实跑 13/13 通过 | — |
+| `02-outputs/` | 只放说明，**没有任何答案文件** | `--outputs` |
+| `02-outputs/GITHUB_URL.txt` | 公开仓库对应目录链接 | — |
+
+题面 ID：`product-arena-01-5a9928c1`（阅读03｜文献翻译；平台占位名与实际题号不一致，以 ID 为准）。
+
+```bash
+playground submit \
+  --challenge-id product-arena-01-5a9928c1 \
+  --skill    "D:/桌面/bohrium-cugb-p1/submission/02-translation-audit" \
+  --outputs  "D:/桌面/bohrium-cugb-p1/submission/02-outputs" \
+  --trace    "<本题真实 Agent 会话日志 jsonl 的绝对路径>" \
+  --dry-run
+```
+
+> 第 02 题尚未提交。验证用的海雾论文原文全程本地处理，未上传、未进包。
 
 ---
 
@@ -114,5 +145,6 @@ playground submit \
 - 06：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/06-academic-polishing
 - 03：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/03-structured-notes
 - 07：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/07-structured-citation
+- 02：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/02-translation-audit
 
 提交前需用**未登录** GitHub 的浏览器窗口打开一次链接确认可见。
