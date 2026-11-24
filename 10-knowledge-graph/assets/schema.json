@@ -1,0 +1,360 @@
+{
+  "version": "1.0.0",
+  "note": "实体类型与关系类型先定义再抽取。每个关系都带 domain/range，类型不匹配的边在校验阶段直接拒绝。不提供 RELATED_TO 这类兜底关系：要么写出具体动词，要么不建边。",
+  "entity_types": {
+    "PHENOMENON": {
+      "zh": "现象",
+      "definition": "论文研究的自然现象或过程，例如海雾、平流雾、上升流、消散过程。",
+      "examples": [
+        "sea fog",
+        "advective fog",
+        "fog dissipation",
+        "cold water upwelling"
+      ]
+    },
+    "METHOD": {
+      "zh": "方法",
+      "definition": "模式、算法、方案、反演或预报技术。允许同名但不同配置的实例并存。",
+      "examples": [
+        "WRF",
+        "3DVAR",
+        "random forest",
+        "LSTM",
+        "light gradient boosting"
+      ]
+    },
+    "DATASET": {
+      "zh": "数据",
+      "definition": "观测网、再分析产品、浮标、探空、航次或自建数据集。",
+      "examples": [
+        "ERA5",
+        "radiosonde",
+        "buoy observation",
+        "AWS"
+      ]
+    },
+    "VARIABLE": {
+      "zh": "变量或指标",
+      "definition": "物理量或评价指标，例如能见度、气温、风速、液态水路径、RMSE、准确率。",
+      "examples": [
+        "visibility",
+        "air temperature",
+        "wind speed",
+        "RMSE",
+        "accuracy"
+      ]
+    },
+    "LOCATION": {
+      "zh": "地点",
+      "definition": "海区、港口、站点、城市或模式区域。",
+      "examples": [
+        "Incheon Port",
+        "Haeundae Beach",
+        "Yellow Sea"
+      ]
+    },
+    "TIME_PERIOD": {
+      "zh": "时段",
+      "definition": "研究时段、季节或个例时间，必须能在原文找到。",
+      "examples": [
+        "2016-2018",
+        "summer",
+        "3 May 2018"
+      ]
+    },
+    "VALUE": {
+      "zh": "数值结果",
+      "definition": "带单位的定量结果，数值必须逐字出现在证据句中。",
+      "examples": [
+        "0.87",
+        "30 %",
+        "4.2 km",
+        "1.2 m s-1"
+      ]
+    },
+    "PERSON": {
+      "zh": "研究者",
+      "definition": "仅在被点名的研究者本人主张需要区分时才建节点；作者列表本身不算图谱节点。",
+      "examples": [
+        "Gultepe"
+      ]
+    }
+  },
+  "relation_types": {
+    "APPLIES_METHOD": {
+      "zh": "使用某方法",
+      "domain": [
+        "PHENOMENON",
+        "DATASET",
+        "VARIABLE",
+        "LOCATION"
+      ],
+      "range": [
+        "METHOD"
+      ],
+      "definition": "主体（现象、数据或变量）由宾语方法处理或模拟。方向：被处理对象 → 方法。",
+      "examples": [
+        "sea fog was simulated using WRF"
+      ]
+    },
+    "TARGETS": {
+      "zh": "以某对象为目标",
+      "domain": [
+        "METHOD"
+      ],
+      "range": [
+        "PHENOMENON",
+        "VARIABLE"
+      ],
+      "definition": "方法以某现象或变量为预报、预测、估计目标。方向：方法 → 目标。",
+      "examples": [
+        "the model predicts fog dissipation"
+      ]
+    },
+    "EVALUATES": {
+      "zh": "以某量或数据评估",
+      "domain": [
+        "METHOD"
+      ],
+      "range": [
+        "VARIABLE",
+        "DATASET"
+      ],
+      "definition": "方法用某变量或数据检验效果。方向：方法 → 被用作标准的量或数据。",
+      "examples": [
+        "the model was evaluated against visibility observations"
+      ]
+    },
+    "ACHIEVES": {
+      "zh": "达到某数值",
+      "domain": [
+        "METHOD"
+      ],
+      "range": [
+        "VALUE"
+      ],
+      "definition": "方法取得的定量结果。数值必须与证据句逐字一致。",
+      "examples": [
+        "the model achieved an RMSE of 1.2 km"
+      ]
+    },
+    "CAUSES": {
+      "zh": "导致",
+      "domain": [
+        "PHENOMENON",
+        "VARIABLE"
+      ],
+      "range": [
+        "PHENOMENON",
+        "VARIABLE"
+      ],
+      "definition": "原文明确表述的因果，不是同句共现。方向：原因 → 结果。",
+      "examples": [
+        "cold water upwelling leads to fog formation"
+      ]
+    },
+    "ASSOCIATED_WITH": {
+      "zh": "相关",
+      "domain": [
+        "*"
+      ],
+      "range": [
+        "*"
+      ],
+      "definition": "原文只表述相关或共变，未表述因果。不得被下游当作因果使用。",
+      "examples": [
+        "fog frequency is correlated with wind speed"
+      ]
+    },
+    "IMPROVES_ON": {
+      "zh": "优于",
+      "domain": [
+        "METHOD"
+      ],
+      "range": [
+        "METHOD"
+      ],
+      "definition": "原文明确比较并判定优劣。方向：较优者 → 被比较者。",
+      "examples": [
+        "the LSTM model outperforms the persistence baseline"
+      ]
+    },
+    "OCCURS_AT": {
+      "zh": "发生于",
+      "domain": [
+        "PHENOMENON",
+        "VARIABLE"
+      ],
+      "range": [
+        "LOCATION"
+      ],
+      "definition": "现象或变量出现的地点。方向：现象 → 地点。",
+      "examples": [
+        "sea fog occurs frequently at Incheon Port"
+      ]
+    },
+    "OBSERVED_DURING": {
+      "zh": "观测于某时段",
+      "domain": [
+        "PHENOMENON",
+        "VARIABLE",
+        "METHOD",
+        "LOCATION",
+        "DATASET"
+      ],
+      "range": [
+        "TIME_PERIOD"
+      ],
+      "definition": "现象、变量或方法对应的时段。方向：对象 → 时段。",
+      "examples": [
+        "fog events were recorded during summer 2018"
+      ]
+    },
+    "MEASURED_BY": {
+      "zh": "由某手段测量",
+      "domain": [
+        "VARIABLE"
+      ],
+      "range": [
+        "METHOD",
+        "DATASET"
+      ],
+      "definition": "变量由某仪器、方法或数据测得。方向：变量 → 测量手段。",
+      "examples": [
+        "visibility was measured by a forward scatter sensor"
+      ]
+    },
+    "PART_OF": {
+      "zh": "属于",
+      "domain": [
+        "LOCATION"
+      ],
+      "range": [
+        "LOCATION"
+      ],
+      "definition": "地点之间的包含关系，或方法作为更大体系的一部分。",
+      "examples": [
+        "Haeundae Beach is part of Busan"
+      ]
+    },
+    "CONTRADICTS": {
+      "zh": "与…冲突",
+      "domain": [
+        "*"
+      ],
+      "range": [
+        "*"
+      ],
+      "definition": "由冲突检测生成，不由抽取生成：同一主语同一关系得出不相容宾语时建立。两侧证据都要保留。",
+      "examples": []
+    },
+    "DEFINED_AS": {
+      "zh": "定义为",
+      "domain": [
+        "PHENOMENON",
+        "VARIABLE"
+      ],
+      "range": [
+        "VALUE"
+      ],
+      "definition": "原文给出的判定阈值或定义值，例如能见度低于 1100 m 记为雾。方向：被定义对象 → 阈值。",
+      "examples": [
+        "fog is defined as visibility below 1100 m"
+      ]
+    }
+  },
+  "evidence_strength": {
+    "own_result": {
+      "weight": 0.9,
+      "definition": "本文自己的实验或计算得到的结论。",
+      "markers": [
+        "we found",
+        "our results",
+        "in this study",
+        "this study shows",
+        "we show",
+        "our simulation",
+        "the present study"
+      ]
+    },
+    "own_method": {
+      "weight": 0.8,
+      "definition": "本文自己采用的方法、配置或数据。",
+      "markers": [
+        "we used",
+        "we applied",
+        "we conducted",
+        "was used in this study",
+        "in this study we"
+      ]
+    },
+    "cited": {
+      "weight": 0.4,
+      "definition": "转述他人工作，不能当作本文结论。",
+      "markers": [
+        "reported by",
+        "previous stud",
+        "et al.",
+        "[",
+        "was reported",
+        "have shown",
+        "earlier stud"
+      ]
+    },
+    "review": {
+      "weight": 0.5,
+      "definition": "综述性陈述或领域常识。",
+      "markers": [
+        "it is well known",
+        "generally",
+        "in general",
+        "typically",
+        "is known to"
+      ]
+    },
+    "hypothesis": {
+      "weight": 0.2,
+      "definition": "推测、假设或未验证的可能机制。",
+      "markers": [
+        "may",
+        "might",
+        "could",
+        "we hypothesize",
+        "is likely",
+        "suggest"
+      ]
+    },
+    "background": {
+      "weight": 0.3,
+      "definition": "背景介绍，既非本文结果也非明确引用。",
+      "markers": []
+    }
+  },
+  "identity_scope": {
+    "product": "公共产品、标准方法或公开数据集这一层的同一性（如 ERA5 这一产品）。跨篇只能在这一层合并，且必须注明各篇的配置可能不同。",
+    "instance": "某篇论文中具体的一次实验、一个模型实例、一段观测。实例层节点不跨篇合并。"
+  },
+  "generic_terms": [
+    "model",
+    "models",
+    "method",
+    "methods",
+    "data",
+    "dataset",
+    "results",
+    "study",
+    "paper",
+    "figure",
+    "table",
+    "section",
+    "value",
+    "case",
+    "approach",
+    "analysis",
+    "模型",
+    "方法",
+    "数据",
+    "结果",
+    "研究"
+  ]
+}

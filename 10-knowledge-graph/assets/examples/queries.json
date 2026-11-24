@@ -1,0 +1,158 @@
+{
+  "example": true,
+  "example_note": "示例：取自两篇 CC-BY 4.0 公开论文（DOI 10.1371/journal.pone.0267895、10.3390/s21155232）的一次真实运行结果，用于说明字段形状与四类对齐记录。不是平台 3 个固定案例的任何正式答案。",
+  "queries": [
+    {
+      "id": "Q1",
+      "question": "两篇材料里，哪些方法被用于 sea fog，各自报告了什么指标？",
+      "type": "method_comparison",
+      "status": "answered",
+      "answer": "WRF 报告 RMSE = 1.83°C",
+      "comparable": true,
+      "not_comparable_because": [],
+      "node_ids": [
+        "n:4b8476ecf1",
+        "n:c3b0e09a71",
+        "n:3b0071db8d"
+      ],
+      "edge_ids": [
+        "e:79dadc4af4",
+        "e:9777b3da19"
+      ],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "The temperature results obtained from the WRF model showed good agreement with the observations (RMSE = 1.83°C, MBE = 0.22°C, IOA = 0.94, and R = 0.88)."
+        },
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "In this study, the numerical model WRF (v.3.9.1.1: [24]) was used for the sea fog simulation."
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "Q2",
+      "question": "WRF 与 Korean Peninsula 之间靠什么证据链连起来？",
+      "type": "path",
+      "status": "answered",
+      "answer": "WRF -APPLIES_METHOD-> sea fog -OCCURS_AT-> Korean Peninsula",
+      "node_ids": [
+        "n:3b0071db8d",
+        "n:01ab3aac16"
+      ],
+      "edge_ids": [
+        "e:79dadc4af4",
+        "e:05dd14d0ed"
+      ],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "In this study, the numerical model WRF (v.3.9.1.1: [24]) was used for the sea fog simulation."
+        },
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "To analyze the differences in the sea fog simulation according to the difference in SST resolution in the coastal area, the horizontal resolution was set to 3 km and 1 km for the second (d02) and third (d03) domains, respectively, across the southeastern Korean Peninsula (Fig 1)."
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "Q3",
+      "question": "两篇之间有哪些冲突结论，或同名但未合并的对象？",
+      "type": "conflicts",
+      "status": "answered",
+      "answer": "0 条冲突；2 组同名未合并：sea fog（PMC9359529 / PMC8347079）、visibility（PMC9359529 / PMC8347079）",
+      "node_ids": [],
+      "edge_ids": [],
+      "evidence": [],
+      "conflicts": [],
+      "candidate_alignments": [
+        {
+          "a": {
+            "surface": "sea fog",
+            "source_id": "PMC9359529"
+          },
+          "b": {
+            "surface": "sea fog",
+            "source_id": "PMC8347079"
+          },
+          "basis": "same_surface_only",
+          "decision": "not_merged",
+          "reason": "两篇写法相同，但没有共同标识符，也不属于可共享的公共产品；不合并，保留为待人工判定的候选对齐。"
+        },
+        {
+          "a": {
+            "surface": "visibility",
+            "source_id": "PMC9359529"
+          },
+          "b": {
+            "surface": "visibility",
+            "source_id": "PMC8347079"
+          },
+          "basis": "same_surface_only",
+          "decision": "not_merged",
+          "reason": "两篇写法相同，但没有共同标识符，也不属于可共享的公共产品；不合并，保留为待人工判定的候选对齐。"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "Q4",
+      "question": "2025 年该区域的海雾频率是多少？",
+      "type": "negative",
+      "status": "insufficient_evidence",
+      "answer": "材料中没有支持该问题的断言。",
+      "limitations": [
+        "图谱不含该问题的实体或时段；不据此推断，也不补造数据。"
+      ],
+      "node_ids": [],
+      "edge_ids": [],
+      "evidence": []
+    },
+    {
+      "id": "Q5",
+      "question": "sea fog 在两篇里的节点与证据分别是什么？",
+      "type": "entity_profile",
+      "status": "answered",
+      "answer": "sea fog（PHENOMENON，instance，来源 PMC9359529）5 条关系；sea fog（PHENOMENON，instance，来源 PMC8347079）1 条关系",
+      "node_ids": [
+        "n:4b8476ecf1",
+        "n:c3b0e09a71"
+      ],
+      "edge_ids": [
+        "e:79dadc4af4",
+        "e:4401815354",
+        "e:92ba002a4d",
+        "e:a9918b123f",
+        "e:05dd14d0ed",
+        "e:eb60c1d8cb"
+      ],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "In this study, the numerical model WRF (v.3.9.1.1: [24]) was used for the sea fog simulation."
+        },
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p002",
+          "quote": "Sea fog is a type of fog that generally occurs from advective fog when relatively wet and warm air moves over the sea surface with its temperature falling below the dew point [3]."
+        }
+      ],
+      "limitations": [
+        "同名节点有 2 个，分属不同论文，未合并；上面的关系统计是它们的并集。"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "answered": 4,
+    "partial": 0,
+    "insufficient_evidence": 1
+  }
+}

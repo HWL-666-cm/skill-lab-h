@@ -44,3 +44,6 @@ submission/*-outputs/
 _refs/
 _stage04/
 04-nanopub-assertions.zip
+# 10 制作暂存：下载的 JATS 原文、语料转换脚本、A/B 对照产物（论文全文不入库）
+_stage10/
+10-knowledge-graph.zip

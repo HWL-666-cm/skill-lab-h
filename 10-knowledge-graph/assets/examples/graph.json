@@ -1,0 +1,1117 @@
+{
+  "example": true,
+  "example_note": "示例：取自两篇 CC-BY 4.0 公开论文（DOI 10.1371/journal.pone.0267895、10.3390/s21155232）的一次真实运行结果，用于说明字段形状与四类对齐记录。不是平台 3 个固定案例的任何正式答案。",
+  "nodes": [
+    {
+      "id": "n:5346d816e4",
+      "label": "FNL",
+      "type": "DATASET",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p008",
+          "quote": "The FNL data do not provide separate SST datasets; rather the values corresponding to the skin temperature of the sea were used for the SST variable."
+        }
+      ]
+    },
+    {
+      "id": "n:c9e5704196",
+      "label": "RTG-SST",
+      "type": "DATASET",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p009",
+          "quote": "To use accurate SST data of high resolution in the numerical model, real-time global sea surface temperature (RTG-SST) data from the National Oceanic and Atmospheric Administration (NOAA)/NCEP were employed in the simulation (https://www.nco.ncep.noaa.gov/pmb/products/sst/)."
+        }
+      ]
+    },
+    {
+      "id": "n:c869e8daaa",
+      "label": "Busan",
+      "type": "LOCATION",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p018",
+          "quote": "Data came from both Incheon port and Haeundae beach (Busan) of the Republic of Korea."
+        }
+      ]
+    },
+    {
+      "id": "n:a752eaff20",
+      "label": "Haeundae beach",
+      "type": "LOCATION",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [
+        "Haeundae"
+      ],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p007",
+          "quote": "For Incheon, the period of observations is seven years from 1 January 2012 to 31 May 2019, and for Haeundae, the period is over five years from 1 January 2014 to 31 July 2019."
+        },
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p018",
+          "quote": "Data came from both Incheon port and Haeundae beach (Busan) of the Republic of Korea."
+        }
+      ]
+    },
+    {
+      "id": "n:267811af9c",
+      "label": "Incheon port",
+      "type": "LOCATION",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [
+        "Incheon"
+      ],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p007",
+          "quote": "For Incheon, the period of observations is seven years from 1 January 2012 to 31 May 2019, and for Haeundae, the period is over five years from 1 January 2014 to 31 July 2019."
+        },
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p018",
+          "quote": "Data came from both Incheon port and Haeundae beach (Busan) of the Republic of Korea."
+        }
+      ]
+    },
+    {
+      "id": "n:01ab3aac16",
+      "label": "Korean Peninsula",
+      "type": "LOCATION",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "To analyze the differences in the sea fog simulation according to the difference in SST resolution in the coastal area, the horizontal resolution was set to 3 km and 1 km for the second (d02) and third (d03) domains, respectively, across the southeastern Korean Peninsula (Fig 1)."
+        }
+      ]
+    },
+    {
+      "id": "n:67166dc45a",
+      "label": "best models of classification",
+      "type": "METHOD",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p069",
+          "quote": "CSI scores were within 0.82 and 0.96 for the best models of classification depending on the prediction horizon for the classification task."
+        }
+      ]
+    },
+    {
+      "id": "n:4525ed7bdc",
+      "label": "FFNN",
+      "type": "METHOD",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p059",
+          "quote": "Given three hours of past features, FFNN presented an R2 of 0.99 and 0.97 for Incheon port and Haeundae beach, respectively, and this ranks it as the best model."
+        }
+      ]
+    },
+    {
+      "id": "n:3af65e0554",
+      "label": "FNL_1/4°",
+      "type": "METHOD",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "Accordingly, model validation was performed on the FNL_1/4° experiment, and the results of the statistical analyses are presented in Table 3."
+        }
+      ]
+    },
+    {
+      "id": "n:31200f4e5b",
+      "label": "RNN",
+      "type": "METHOD",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p059",
+          "quote": "Overall, except for the FFNN, both the RNN and CNN ranked much worse than the other models when compared with their ranking in the classification case."
+        }
+      ]
+    },
+    {
+      "id": "n:ccf729bab6",
+      "label": "RTG_1/12°",
+      "type": "METHOD",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p025",
+          "quote": "Even the input SST for the RTG_1/12° experiment overestimated the observed SST at the selected sites, e.g., the mean bias in GA, ORD, JA, and GJG was +2.9 K (Table 2), thus the sea fogs were successively simulated."
+        }
+      ]
+    },
+    {
+      "id": "n:3b0071db8d",
+      "label": "WRF",
+      "type": "METHOD",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "In this study, the numerical model WRF (v.3.9.1.1: [24]) was used for the sea fog simulation."
+        }
+      ]
+    },
+    {
+      "id": "n:77f5410480",
+      "label": "advection of warm and humid air",
+      "type": "PHENOMENON",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p009",
+          "quote": "To simulate the sea fog formed by advection of warm and humid air over the cold sea surface, high-resolution SST was required for an accurate consideration of CWM."
+        }
+      ]
+    },
+    {
+      "id": "n:cb0bd9fd60",
+      "label": "advective fog",
+      "type": "PHENOMENON",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p002",
+          "quote": "Sea fog is a type of fog that generally occurs from advective fog when relatively wet and warm air moves over the sea surface with its temperature falling below the dew point [3]."
+        }
+      ]
+    },
+    {
+      "id": "n:2020b1edc0",
+      "label": "CWM",
+      "type": "PHENOMENON",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p009",
+          "quote": "To simulate the sea fog formed by advection of warm and humid air over the cold sea surface, high-resolution SST was required for an accurate consideration of CWM."
+        }
+      ]
+    },
+    {
+      "id": "n:694deb7e70",
+      "label": "fog",
+      "type": "PHENOMENON",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p010",
+          "quote": "We define fog as the visibility with less than or equal to 1100 m."
+        }
+      ]
+    },
+    {
+      "id": "n:dcca0ec436",
+      "label": "fog dissipation",
+      "type": "PHENOMENON",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p004",
+          "quote": "While fog prediction is a well-studied [11] and established area, fog dissipation is scarce in the literature."
+        }
+      ]
+    },
+    {
+      "id": "n:4b8476ecf1",
+      "label": "sea fog",
+      "type": "PHENOMENON",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "In this study, the numerical model WRF (v.3.9.1.1: [24]) was used for the sea fog simulation."
+        }
+      ]
+    },
+    {
+      "id": "n:c3b0e09a71",
+      "label": "sea fog",
+      "type": "PHENOMENON",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p002",
+          "quote": "Sea fog is a type of fog that generally occurs from advective fog when relatively wet and warm air moves over the sea surface with its temperature falling below the dew point [3]."
+        }
+      ]
+    },
+    {
+      "id": "n:d8ba5d5a9a",
+      "label": "1 January 2012 to 31 May 2019",
+      "type": "TIME_PERIOD",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p007",
+          "quote": "For Incheon, the period of observations is seven years from 1 January 2012 to 31 May 2019, and for Haeundae, the period is over five years from 1 January 2014 to 31 July 2019."
+        }
+      ]
+    },
+    {
+      "id": "n:17b8c9032d",
+      "label": "+2.9 K",
+      "type": "VALUE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p025",
+          "quote": "Even the input SST for the RTG_1/12° experiment overestimated the observed SST at the selected sites, e.g., the mean bias in GA, ORD, JA, and GJG was +2.9 K (Table 2), thus the sea fogs were successively simulated."
+        }
+      ]
+    },
+    {
+      "id": "n:1b8afef15b",
+      "label": "0.82 and 0.96",
+      "type": "VALUE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p069",
+          "quote": "CSI scores were within 0.82 and 0.96 for the best models of classification depending on the prediction horizon for the classification task."
+        }
+      ]
+    },
+    {
+      "id": "n:4b7e9b5fb9",
+      "label": "0.97",
+      "type": "VALUE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p059",
+          "quote": "Given three hours of past features, FFNN presented an R2 of 0.99 and 0.97 for Incheon port and Haeundae beach, respectively, and this ranks it as the best model."
+        }
+      ]
+    },
+    {
+      "id": "n:8a60b76094",
+      "label": "0.99",
+      "type": "VALUE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p059",
+          "quote": "Given three hours of past features, FFNN presented an R2 of 0.99 and 0.97 for Incheon port and Haeundae beach, respectively, and this ranks it as the best model."
+        }
+      ]
+    },
+    {
+      "id": "n:53de3543df",
+      "label": "1100 m",
+      "type": "VALUE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p010",
+          "quote": "We define fog as the visibility with less than or equal to 1100 m."
+        }
+      ]
+    },
+    {
+      "id": "n:e7c7973f5b",
+      "label": "RMSE = 1.83°C",
+      "type": "VALUE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "The temperature results obtained from the WRF model showed good agreement with the observations (RMSE = 1.83°C, MBE = 0.22°C, IOA = 0.94, and R = 0.88)."
+        }
+      ]
+    },
+    {
+      "id": "n:5e860c7b24",
+      "label": "10 m wind speed",
+      "type": "VARIABLE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "To evaluate the WRF model performance, the simulation results from June 25 to 30 were compared with 2 m temperature and 10 m wind speed data collected across 12 meteorological observation points in the d03 area (plus sign in Fig 1)."
+        }
+      ]
+    },
+    {
+      "id": "n:38b33740f4",
+      "label": "2 m temperature",
+      "type": "VARIABLE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "To evaluate the WRF model performance, the simulation results from June 25 to 30 were compared with 2 m temperature and 10 m wind speed data collected across 12 meteorological observation points in the d03 area (plus sign in Fig 1)."
+        }
+      ]
+    },
+    {
+      "id": "n:146148a1de",
+      "label": "CSI",
+      "type": "VARIABLE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p048",
+          "quote": "For the binary classification task, we evaluated each model's performance using the critical success index (CSI) score, precision score, recall score, and F1 score."
+        }
+      ]
+    },
+    {
+      "id": "n:806a499d68",
+      "label": "SST",
+      "type": "VARIABLE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p008",
+          "quote": "The FNL data do not provide separate SST datasets; rather the values corresponding to the skin temperature of the sea were used for the SST variable."
+        }
+      ]
+    },
+    {
+      "id": "n:3c70f078c0",
+      "label": "visibility",
+      "type": "VARIABLE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC9359529"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p026",
+          "quote": "In the future, it will be necessary to perform more detailed analyses on the importance of lower boundary condition data of numerical meteorological models by combining them with visibility observations from the sea or satellite data."
+        }
+      ]
+    },
+    {
+      "id": "n:59139f04d3",
+      "label": "visibility",
+      "type": "VARIABLE",
+      "identity_scope": "instance",
+      "source_ids": [
+        "PMC8347079"
+      ],
+      "aliases": [],
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p010",
+          "quote": "We define fog as the visibility with less than or equal to 1100 m."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e:9777b3da19",
+      "subject": "n:3b0071db8d",
+      "predicate": "ACHIEVES",
+      "object": "n:e7c7973f5b",
+      "subject_label": "WRF",
+      "object_label": "RMSE = 1.83°C",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "The temperature results obtained from the WRF model showed good agreement with the observations (RMSE = 1.83°C, MBE = 0.22°C, IOA = 0.94, and R = 0.88)."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [
+        "variable=temperature",
+        "period=25-30 June 2016"
+      ],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:0e39f6670f",
+      "subject": "n:4525ed7bdc",
+      "predicate": "ACHIEVES",
+      "object": "n:8a60b76094",
+      "subject_label": "FFNN",
+      "object_label": "0.99",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p059",
+          "quote": "Given three hours of past features, FFNN presented an R2 of 0.99 and 0.97 for Incheon port and Haeundae beach, respectively, and this ranks it as the best model."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [
+        "site=Incheon port",
+        "features=three hours of past features"
+      ],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:404ef83e64",
+      "subject": "n:4525ed7bdc",
+      "predicate": "ACHIEVES",
+      "object": "n:4b7e9b5fb9",
+      "subject_label": "FFNN",
+      "object_label": "0.97",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p059",
+          "quote": "Given three hours of past features, FFNN presented an R2 of 0.99 and 0.97 for Incheon port and Haeundae beach, respectively, and this ranks it as the best model."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [
+        "site=Haeundae beach",
+        "features=three hours of past features"
+      ],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:973302fc12",
+      "subject": "n:67166dc45a",
+      "predicate": "ACHIEVES",
+      "object": "n:1b8afef15b",
+      "subject_label": "best models of classification",
+      "object_label": "0.82 and 0.96",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p069",
+          "quote": "CSI scores were within 0.82 and 0.96 for the best models of classification depending on the prediction horizon for the classification task."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [
+        "metric=CSI",
+        "horizon=varies with prediction horizon"
+      ],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:89d42ccf3d",
+      "subject": "n:ccf729bab6",
+      "predicate": "ACHIEVES",
+      "object": "n:17b8c9032d",
+      "subject_label": "RTG_1/12°",
+      "object_label": "+2.9 K",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p025",
+          "quote": "Even the input SST for the RTG_1/12° experiment overestimated the observed SST at the selected sites, e.g., the mean bias in GA, ORD, JA, and GJG was +2.9 K (Table 2), thus the sea fogs were successively simulated."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [
+        "variable=SST mean bias",
+        "sites=GA,ORD,JA,GJG"
+      ],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:79dadc4af4",
+      "subject": "n:4b8476ecf1",
+      "predicate": "APPLIES_METHOD",
+      "object": "n:3b0071db8d",
+      "subject_label": "sea fog",
+      "object_label": "WRF",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "In this study, the numerical model WRF (v.3.9.1.1: [24]) was used for the sea fog simulation."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:4401815354",
+      "subject": "n:2020b1edc0",
+      "predicate": "ASSOCIATED_WITH",
+      "object": "n:4b8476ecf1",
+      "subject_label": "CWM",
+      "object_label": "sea fog",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p026",
+          "quote": "As reported in Cho et al., the CWM and sea fog in the southeastern ocean are strongly related and therefore the sea fog in this area occurred frequently in the summer season [13]."
+        }
+      ],
+      "strength": {
+        "class": "cited",
+        "weight": 0.4,
+        "attribution": "cited_work"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:92ba002a4d",
+      "subject": "n:2020b1edc0",
+      "predicate": "CAUSES",
+      "object": "n:4b8476ecf1",
+      "subject_label": "CWM",
+      "object_label": "sea fog",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p026",
+          "quote": "Nevertheless, the previous simulations convinced that the sea fog is attributed to the CWM along the southeastern coast of the Korean Peninsula."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "'attributed to' (reverse trigger): cause follows effect"
+    },
+    {
+      "id": "e:a9918b123f",
+      "subject": "n:77f5410480",
+      "predicate": "CAUSES",
+      "object": "n:4b8476ecf1",
+      "subject_label": "advection of warm and humid air",
+      "object_label": "sea fog",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p009",
+          "quote": "To simulate the sea fog formed by advection of warm and humid air over the cold sea surface, high-resolution SST was required for an accurate consideration of CWM."
+        }
+      ],
+      "strength": {
+        "class": "background",
+        "weight": 0.3,
+        "attribution": "background"
+      },
+      "conditions": [],
+      "direction_basis": "passive 'formed by' (reverse trigger): cause follows effect"
+    },
+    {
+      "id": "e:eb60c1d8cb",
+      "subject": "n:cb0bd9fd60",
+      "predicate": "CAUSES",
+      "object": "n:c3b0e09a71",
+      "subject_label": "advective fog",
+      "object_label": "sea fog",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p002",
+          "quote": "Sea fog is a type of fog that generally occurs from advective fog when relatively wet and warm air moves over the sea surface with its temperature falling below the dew point [3]."
+        }
+      ],
+      "strength": {
+        "class": "cited",
+        "weight": 0.4,
+        "attribution": "cited_work"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:d16a896166",
+      "subject": "n:694deb7e70",
+      "predicate": "DEFINED_AS",
+      "object": "n:53de3543df",
+      "subject_label": "fog",
+      "object_label": "1100 m",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p010",
+          "quote": "We define fog as the visibility with less than or equal to 1100 m."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:4e15ca0317",
+      "subject": "n:3b0071db8d",
+      "predicate": "EVALUATES",
+      "object": "n:38b33740f4",
+      "subject_label": "WRF",
+      "object_label": "2 m temperature",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "To evaluate the WRF model performance, the simulation results from June 25 to 30 were compared with 2 m temperature and 10 m wind speed data collected across 12 meteorological observation points in the d03 area (plus sign in Fig 1)."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:97718a2b9f",
+      "subject": "n:3b0071db8d",
+      "predicate": "EVALUATES",
+      "object": "n:5e860c7b24",
+      "subject_label": "WRF",
+      "object_label": "10 m wind speed",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p016",
+          "quote": "To evaluate the WRF model performance, the simulation results from June 25 to 30 were compared with 2 m temperature and 10 m wind speed data collected across 12 meteorological observation points in the d03 area (plus sign in Fig 1)."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:24d4af962f",
+      "subject": "n:4525ed7bdc",
+      "predicate": "IMPROVES_ON",
+      "object": "n:31200f4e5b",
+      "subject_label": "FFNN",
+      "object_label": "RNN",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p059",
+          "quote": "Overall, except for the FFNN, both the RNN and CNN ranked much worse than the other models when compared with their ranking in the classification case."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:a7b2f3ce09",
+      "subject": "n:806a499d68",
+      "predicate": "MEASURED_BY",
+      "object": "n:5346d816e4",
+      "subject_label": "SST",
+      "object_label": "FNL",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p008",
+          "quote": "The FNL data do not provide separate SST datasets; rather the values corresponding to the skin temperature of the sea were used for the SST variable."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [
+        "variable=SST",
+        "source=FNL skin temperature"
+      ],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:9aef5b9e10",
+      "subject": "n:806a499d68",
+      "predicate": "MEASURED_BY",
+      "object": "n:c9e5704196",
+      "subject_label": "SST",
+      "object_label": "RTG-SST",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p009",
+          "quote": "To use accurate SST data of high resolution in the numerical model, real-time global sea surface temperature (RTG-SST) data from the National Oceanic and Atmospheric Administration (NOAA)/NCEP were employed in the simulation (https://www.nco.ncep.noaa.gov/pmb/products/sst/)."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [
+        "variable=SST",
+        "source=RTG-SST 1/12°"
+      ],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:8802e9c98d",
+      "subject": "n:267811af9c",
+      "predicate": "OBSERVED_DURING",
+      "object": "n:d8ba5d5a9a",
+      "subject_label": "Incheon port",
+      "object_label": "1 January 2012 to 31 May 2019",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p007",
+          "quote": "For Incheon, the period of observations is seven years from 1 January 2012 to 31 May 2019, and for Haeundae, the period is over five years from 1 January 2014 to 31 July 2019."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:05dd14d0ed",
+      "subject": "n:4b8476ecf1",
+      "predicate": "OCCURS_AT",
+      "object": "n:01ab3aac16",
+      "subject_label": "sea fog",
+      "object_label": "Korean Peninsula",
+      "evidence": [
+        {
+          "source_id": "PMC9359529",
+          "paragraph_id": "p007",
+          "quote": "To analyze the differences in the sea fog simulation according to the difference in SST resolution in the coastal area, the horizontal resolution was set to 3 km and 1 km for the second (d02) and third (d03) domains, respectively, across the southeastern Korean Peninsula (Fig 1)."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:015d343a82",
+      "subject": "n:694deb7e70",
+      "predicate": "OCCURS_AT",
+      "object": "n:267811af9c",
+      "subject_label": "fog",
+      "object_label": "Incheon port",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p018",
+          "quote": "Fog cases represent 0.8% and 2.8% of all the observations for Incheon port and Haeundae beach, respectively."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:369e947fec",
+      "subject": "n:694deb7e70",
+      "predicate": "OCCURS_AT",
+      "object": "n:a752eaff20",
+      "subject_label": "fog",
+      "object_label": "Haeundae beach",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p018",
+          "quote": "Fog cases represent 0.8% and 2.8% of all the observations for Incheon port and Haeundae beach, respectively."
+        }
+      ],
+      "strength": {
+        "class": "own_result",
+        "weight": 0.9,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    },
+    {
+      "id": "e:cfb8ad1e2b",
+      "subject": "n:a752eaff20",
+      "predicate": "PART_OF",
+      "object": "n:c869e8daaa",
+      "subject_label": "Haeundae beach",
+      "object_label": "Busan",
+      "evidence": [
+        {
+          "source_id": "PMC8347079",
+          "paragraph_id": "p018",
+          "quote": "Data came from both Incheon port and Haeundae beach (Busan) of the Republic of Korea."
+        }
+      ],
+      "strength": {
+        "class": "own_method",
+        "weight": 0.8,
+        "attribution": "this_paper"
+      },
+      "conditions": [],
+      "direction_basis": "subject precedes trigger in the quoted sentence"
+    }
+  ],
+  "merges": [
+    {
+      "source_id": "PMC8347079",
+      "type": "LOCATION",
+      "surfaces": [
+        "Incheon",
+        "Incheon port"
+      ],
+      "basis": "declared_alias_in_same_paper",
+      "node_id": "n:267811af9c",
+      "label": "Incheon port",
+      "identity_scope": "instance"
+    },
+    {
+      "source_id": "PMC8347079",
+      "type": "LOCATION",
+      "surfaces": [
+        "Haeundae",
+        "Haeundae beach"
+      ],
+      "basis": "declared_alias_in_same_paper",
+      "node_id": "n:a752eaff20",
+      "label": "Haeundae beach",
+      "identity_scope": "instance"
+    }
+  ],
+  "candidate_alignments": [
+    {
+      "a": {
+        "surface": "sea fog",
+        "source_id": "PMC9359529"
+      },
+      "b": {
+        "surface": "sea fog",
+        "source_id": "PMC8347079"
+      },
+      "basis": "same_surface_only",
+      "decision": "not_merged",
+      "reason": "两篇写法相同，但没有共同标识符，也不属于可共享的公共产品；不合并，保留为待人工判定的候选对齐。"
+    },
+    {
+      "a": {
+        "surface": "visibility",
+        "source_id": "PMC9359529"
+      },
+      "b": {
+        "surface": "visibility",
+        "source_id": "PMC8347079"
+      },
+      "basis": "same_surface_only",
+      "decision": "not_merged",
+      "reason": "两篇写法相同，但没有共同标识符，也不属于可共享的公共产品；不合并，保留为待人工判定的候选对齐。"
+    }
+  ],
+  "type_conflicts": [],
+  "conflicts": [],
+  "dropped": [],
+  "stats": {
+    "nodes": 32,
+    "edges": 21,
+    "sources": 2,
+    "product_nodes": 0,
+    "instance_nodes": 32,
+    "merges": 0,
+    "alias_merges": 2,
+    "candidate_alignments": 2,
+    "conflicts": 0
+  }
+}
