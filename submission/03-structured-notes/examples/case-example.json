@@ -1,0 +1,14 @@
+{
+  "_comment": "示意输入，不是正式案例，也不是答案。字段名按语义举例，实际以 /input/case.json 为准。",
+  "case_id": "demo-paper-01",
+  "instruction": "阅读论文，输出结构化笔记：研究问题、数据、方法、主要发现、局限，每条结论给出原文页码与证据。",
+  "material": {
+    "kind": "pdf",
+    "path": "/input/paper.pdf",
+    "note": "实际运行时由平台提供原始 PDF，无预提取答案层"
+  },
+  "output_hint": {
+    "format": "result.json",
+    "required_fields": ["case_id", "status", "paper_card", "section_outline", "claim_notes", "source_map", "uncertainties"]
+  }
+}
