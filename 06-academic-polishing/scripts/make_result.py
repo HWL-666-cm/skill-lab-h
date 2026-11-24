@@ -24,6 +24,62 @@ from pathlib import Path
 
 REQUIRED_TYPES = {"grammar", "term", "register", "hedge", "logic", "format"}
 
+# 平台 output_contract 常见字段名 -> 本 Skill 默认字段。名字不同但语义相同，按契约补一份。
+CONTRACT_ALIASES = {
+    "revised_text": "revised_inline", "polished": "revised_inline",
+    "final_text": "revised_inline", "revised": "revised_inline", "text": "revised_inline",
+    "changes": "change_log", "edit_log": "change_log", "diff": "change_log",
+    "change_log": "change_log",
+    "glossary": "term_table", "terminology": "term_table", "term_table": "term_table",
+    "evidence": "fact_map", "sources": "fact_map", "fact_map": "fact_map",
+    "uncertainty": "uncertainties", "uncertainties": "uncertainties", "notes": "uncertainties",
+    "limitations": "limitations", "status": "status", "case_id": "case_id",
+    "genre": "genre_assumption", "word_count": "char_count",
+}
+
+
+def parse_contract(case_path):
+    """读 /input/case.json 的 output_contract。读不到返回空，不编造契约。"""
+    if not case_path or not Path(case_path).exists():
+        return {}
+    try:
+        case = json.loads(Path(case_path).read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    c = case.get("output_contract") or {}
+    return c if isinstance(c, dict) else {}
+
+
+def contract_value(field, result, revised_text):
+    key = CONTRACT_ALIASES.get(field)
+    if key == "revised_inline":
+        return revised_text
+    if key == "genre_assumption":
+        return (result.get("target_deliverable") or {}).get("genre_assumption")
+    if key == "char_count":
+        return (result.get("target_deliverable") or {}).get("char_count")
+    return result.get(key) if key else None
+
+
+def task_coverage_from(path):
+    if not path or not Path(path).exists():
+        return []
+    try:
+        d = json.loads(Path(path).read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    out = []
+    for it in (d.get("items") or []):
+        if not isinstance(it, dict):
+            continue
+        out.append({
+            "id": it.get("id") or f"T{len(out) + 1}",
+            "action": it.get("action", "not_available"),
+            "scope": it.get("scope", "not_available"),
+            "status": it.get("status", "pending"),
+        })
+    return out
+
 
 def load_json(path):
     if not path:
@@ -116,10 +172,12 @@ def term_table_from_terms(terms_report):
 def main():
     ap = argparse.ArgumentParser(description="组装 result.json")
     ap.add_argument("--case-id", default=None)
+    ap.add_argument("--case-json", default=None, help="/input/case.json，读取平台 output_contract")
     ap.add_argument("--revised", required=True)
     ap.add_argument("--changes", default=None)
     ap.add_argument("--audit", default=None)
     ap.add_argument("--terms", default=None)
+    ap.add_argument("--task-items", default=None, help="/app/work/task_items.json，逐条核对任务完成度")
     ap.add_argument("--out", required=True)
     ap.add_argument("--genre", default=None, help="目标文体；不给则记为假设")
     ap.add_argument("--partial", action="store_true", help="标记为 partial（有未处理项）")
@@ -149,6 +207,14 @@ def main():
     if args.note:
         limitations.append(args.note)
 
+    task_coverage = task_coverage_from(args.task_items)
+    pending_tasks = [t for t in task_coverage if t.get("status") != "done"]
+    if pending_tasks:
+        status = "partial" if revised_text.strip() else "failed"
+        limitations.append(
+            f"任务项清单有 {len(pending_tasks)} 项未完成："
+            + ", ".join(t["id"] for t in pending_tasks))
+
     result = {
         "case_id": case_id,
         "status": status,
@@ -175,11 +241,41 @@ def main():
             "terms_verdict": (terms or {}).get("verdict", "not_run"),
         },
         "provenance": {
-            "generator": "make_result.py v1.0",
+            "generator": "make_result.py v1.1",
             "audit_source": str(args.audit) if args.audit else "not_provided",
             "terms_source": str(args.terms) if args.terms else "not_provided",
         },
+        "task_coverage": task_coverage,
+        "revised_text": revised_text,
     }
+
+    # 平台 output_contract 对齐：字段名照抄平台，缺必需字段就把 status 降为 partial。
+    contract = parse_contract(args.case_json)
+    filled, missing_required = [], []
+    if contract:
+        for field, spec in contract.items():
+            required = spec.get("required", True) if isinstance(spec, dict) else True
+            if field in result:
+                continue
+            value = contract_value(field, result, revised_text)
+            if value is None:
+                if required:
+                    missing_required.append(field)
+            else:
+                result[field] = value
+                filled.append(field)
+        result["output_contract_alignment"] = {
+            "source": str(args.case_json),
+            "declared_fields": sorted(contract),
+            "filled_from_aliases": filled,
+            "missing_required": missing_required,
+        }
+        if missing_required:
+            status = "partial" if revised_text.strip() else "failed"
+            result["status"] = status
+            limitations.append(
+                "平台 output_contract 必需字段缺失：" + ", ".join(missing_required))
+            result["limitations"] = limitations
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -13,8 +13,9 @@ The treatment may reduce the incidence of sea fog by approximately 12% in coasta
 | C1 | about 12% | approximately 12% | register | `about` 在期刊正文偏口语；`approximately` 不改变精度 | none |
 | C2 | , and this effect | ; this effect | format | 两个独立分句，逗号粘连改为分号 | none |
 | C3 | not significant | not statistically significant | term | 补全统计口径，避免被读成"实际无差异" | meaning |
-| C4 | at inland stations | at inland stations | — | 刻意未改：介词搭配成立，无需替换 | none |
-| C5 | Sea-fog | Sea fog | term | 统一到术语表首选写法（原文字面已保留，仅连字符归一） | none |
+| C4 | Sea-fog | Sea fog | term | 统一到术语表首选写法（原文字面已保留，仅连字符归一） | none |
+
+"刻意未改"的内容放在 `kept` 字段，不进 `change_log`——修改清单里每一条都应是真实发生过的改动，否则第三方逐条核对时会发现"原文=改文"的空记录。
 
 ## 3. 未改且需保留的内容
 

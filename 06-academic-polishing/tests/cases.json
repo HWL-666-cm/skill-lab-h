@@ -32,6 +32,26 @@
       "expect_good_verdict": "pass"
     },
     {
+      "id": "negation-frequency-drop",
+      "check": "hedge",
+      "description": "阴性表述词种类未变但出现次数从 3 降到 1，旧版按 len 判定会漏报",
+      "original": "At station A it was not significant. At station B it was not significant. At station C it was not significant.",
+      "bad": "At station A it was not significant. At station B it was not significant. At station C the effect was observed.",
+      "expect_bad_flags": ["negation_lost"],
+      "good": "At station A it was not significant. At station B it was not significant. At station C it was not statistically significant.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "zh-scope-strengthened",
+      "check": "hedge",
+      "description": "中文阴性/收窄表述被换成正向断言，negation 次数下降且 scope 增强",
+      "original": "该路线在国内公开文献中尚不多见，结论站不住；仍有部分站点未见差异。",
+      "bad": "该路线在国内公开文献中十分常见，结论完全成立；所有站点均如此。",
+      "expect_bad_flags": ["negation_lost", "hedge_strengthened"],
+      "good": "该路线在国内公开文献中尚不多见，结论站不住；仍有部分站点未见差异。",
+      "expect_good_verdict": "pass"
+    },
+    {
       "id": "term-drift",
       "check": "term",
       "description": "同一术语三种写法；bad 未统一，good 统一到术语表首选写法",

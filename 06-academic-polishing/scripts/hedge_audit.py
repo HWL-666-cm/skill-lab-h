@@ -53,6 +53,7 @@ LEXICON = {
         "generally": +1.2, "in general": +1.2, "universally": +2, "always": +1.5,
         "本队列": -1.5, "本研究": -1.2, "本样本": -1.5, "初步": -1.2,
         "仅": -0.8, "目前": -0.8, "普遍": +1.2, "始终": +1.5, "所有": +1.2,
+        "十分常见": +1.5, "十分普遍": +1.5, "广泛存在": +1.2, "均如此": +1.2,
     },
     "approximation": {        # 数量精度（删掉"约"等于抬高精度）
         "about": -1, "approximately": -1, "roughly": -1, "around": -1,
@@ -65,6 +66,8 @@ LEXICON = {
         "not statistically significant": 0, "no statistically significant": 0,
         "was not significantly": 0, "did not significantly differ": 0,
         "无显著": 0, "不显著": 0, "未见差异": 0,
+        "站不住": 0, "不成立": 0, "尚不多见": 0, "仍然少见": 0,
+        "鲜见": 0, "少见": 0, "尚未见": 0,
     },
 }
 
@@ -187,11 +190,18 @@ def main():
             "status": "ok",
         }
         if fam == "negation":
-            # 否定/阴性结果：只要求不少于原文，少了必须报
-            if len(fam_a[fam]) < len(fam_b[fam]):
+            # 阴性结果按"出现次数"比，不按"词种类数"比：
+            # 原文 not significant 出现 3 次、改文剩 1 次，两侧 key 数都是 1，
+            # 若只比 len 就会漏报。阴性表述被削是"没改坏"最严重的错误，必须按频次守。
+            count_b = sum(fam_b[fam].values())
+            count_a = sum(fam_a[fam].values())
+            entry["count_before"] = count_b
+            entry["count_after"] = count_a
+            if count_a < count_b:
                 entry["status"] = "flag"
                 flags.append({"kind": "negation_lost", "family": fam,
-                              "detail": "阴性/否定表述数量减少，需人工确认是否被改写"})
+                              "detail": f"阴性/否定表述出现次数由 {count_b} 降为 {count_a}，需逐条恢复",
+                              "removed_occurrences": count_b - count_a})
         else:
             if delta > 0.5:
                 entry["status"] = "strengthened"

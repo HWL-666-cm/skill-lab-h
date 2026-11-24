@@ -44,6 +44,8 @@ description: 学术文本润色与改写，且保证"没改坏"——逐句给�
 | 术语表 | `glossary` / `terms` / `terminology` | 由 `term_audit.py` 自动发现，标注"自动生成，需人工确认" |
 | 案例标识 | `case_id` / `id` | 用输入文件路径的哈希前 8 位，标注为合成 ID |
 
+**输入是 PDF 时**：先读实际 PDF，不要用文件名、标签或 `case.json` 里的摘要代替正文——题面明确 PDF 案例给的是原始 PDF、没有预提取层。按 `pdf-text-tool` 提取文本；提取出的表格若列错位，用 `pdf-render-tool` 看页面图像核对，扫描件走 `ocr-tool`。提取后先核对数字、引用编号、图表指向是否与页面一致，再做第 1 步基线。核对结果写进 `assumptions`，提取失败写 `status=partial` 并说明哪一页读不出，不凭标签补造内容。
+
 **硬规则：材料里没有的事实、数字、引用，一律不得新增。** 需要补充才能成句时，写成 `[需作者确认：…]` 占位，并计入 `uncertainties`。
 
 **环境探测（第一步就做，别假设）**：
@@ -68,14 +70,29 @@ python3 scripts/hedge_audit.py --original /app/work/source.txt --revised /app/wo
 ```
 先跑一遍"自己对自己"，把原文的术语变体、数值、引用编号全部列出来，作为后续比对的基线。这一步是纯本地计算，不消耗模型额度。
 
-**第 2 步｜通读并锁定不可动清单**
-通读全文，先写下三份清单，再动笔：
+**第 2 步｜拆任务项清单 + 锁定不可动清单**
+
+先拆**任务项清单**，再动笔：把 `instruction` / `task.md` 里要求"做"的动作逐句抽出，每条写清动作、作用范围、出处，存成 `/app/work/task_items.json`：
+
+```json
+{
+  "source": "instruction + task.md",
+  "items": [
+    {"id": "T1", "action": "逐段润色 Results 段", "scope": "Results 全部段落", "from": "instruction 第 1 句", "status": "pending"},
+    {"id": "T2", "action": "建全术语表并统一缩写首次出现", "scope": "全文", "from": "instruction 第 2 句", "status": "pending"}
+  ]
+}
+```
+
+**为什么必须有这张清单**：评分项"结果完整性"按"任务要求的处理项是否都覆盖"给分。只在脑子里记，容易改完正文就忘了任务还要术语表、双语对照或修改清单；落成 JSON 后，第 6 步可逐条对照，`status` 没变成 `done` 的项直接进 `limitations`，`result.json` 的 `status` 就不能写 `ok`。任务里没要求的动作不要自己加进清单——加了就要做，白白耗掉预算。
+
+接着锁定**不可动清单**（三份）：
 - 不可动的数字与单位（含样本量、p 值、置信区间、剂量、时间）
 - 不可动的引用编号与图表指向（`[12]`、`Fig. 3`、`Table 2`、`式(4)`）
 - 必须全篇统一的术语（含缩写首次出现位置）
 
 **第 3 步｜分块编辑（模型调用集中在此）**
-按段落或小标题切块，每块一次调用，单块不超过 1200 字。**实际使用的提示词在 `prompts/pass1-edit.md`**，把 `{{BLOCK_TEXT}}`、`{{GLOSSARY_SLICE}}`、`{{STYLE_RULES_SLICE}}`、`{{GENRE}}` 四处占位符替换后直接使用，不要另写一套。每块要求模型返回**结构化 JSON**，不是自由文本：
+按段落或小标题切块，每块一次调用，单块不超过 1200 字。**实际使用的提示词在 `prompts/pass1-edit.md`**，把 `{{BLOCK_TEXT}}`（本块原文）、`{{TASK_ITEMS_SLICE}}`（本块相关任务项）、`{{GLOSSARY_SLICE}}`（本块相关术语）、`{{STYLE_RULES_SLICE}}`（目标文体规则）、`{{GENRE}}` 五处占位符替换后直接使用，不要另写一套；`{{BLOCK_INDEX}}`、`{{BLOCK_TOTAL}}`、`{{SECTION_NAME}}` 由切块时自动填入，不用单独准备。每块要求模型返回**结构化 JSON**，不是自由文本：
 
 ```json
 {
@@ -115,11 +132,12 @@ python3 scripts/hedge_audit.py --original /app/work/source.txt --revised /app/wo
 
 **第 6 步｜组装结果**
 ```bash
-python3 scripts/make_result.py --case-id <CASE_ID> --revised /app/work/revised.txt \
-  --changes /app/work/changes.json --audit /app/work/facts_after.json \
-  --terms /app/work/terms_after.json --out /app/output/result.json
+python3 scripts/make_result.py --case-id <CASE_ID> --case-json /input/case.json \
+  --revised /app/work/revised.txt --changes /app/work/changes.json \
+  --audit /app/work/facts_after.json --terms /app/work/terms_after.json \
+  --task-items /app/work/task_items.json --out /app/output/result.json
 ```
-同时把可编辑稿写成 `/app/output/polished.md`，修改清单写成 `/app/output/changes.csv`（便于第三方逐条核对）。
+组装前拿第 2 步的 `task_items.json` 逐条核对：做完了标 `done`，没做的保留 `pending` 并写进 `limitations`。**只要有一条 `pending`，`status` 就必须是 `partial`，不能写 `ok`。** 同时把可编辑稿写成 `/app/output/polished.md`，修改清单写成 `/app/output/changes.csv`（便于第三方逐条核对）。
 
 ## 5. 输出契约
 
@@ -149,7 +167,10 @@ python3 scripts/make_result.py --case-id <CASE_ID> --revised /app/work/revised.t
   "uncertainties": ["材料不足或需人工确认的点，逐条说明"],
   "assumptions": ["文体/术语/口径上的默认假设"],
   "limitations": ["本次未覆盖的处理项"],
-  "audit": {"hedge": {...}, "terms": {...}, "facts": {...}}
+  "audit": {"hedge": {...}, "terms": {...}, "facts": {...}},
+  "task_coverage": [
+    {"id": "T1", "action": "逐段润色 Results 段", "status": "done | pending"}
+  ]
 }
 ```
 
@@ -201,6 +222,7 @@ python3 scripts/make_result.py --case-id <CASE_ID> --revised /app/work/revised.t
 | 3 | 抽查 5 处 `change_log` | 每处都能在原文里搜到 `original`，改文里搜到 `revised` |
 | 4 | 看 `audit.flags` 是否为空 | 非空则要么已回改，要么在 `uncertainties` 写明为何保留 |
 | 5 | 同一段重复跑一次 | 两次结论一致；不一致说明规则不稳定，需收紧词表约束 |
+| 6 | 核对 `task_coverage` | 每条任务项都有 `done`/`pending`；有 `pending` 却写 `status=ok` 即为不合格 |
 
 **为什么把自测放第一条**：脚本是这套方法的地基。地基坏了，"没改坏"的结论就是假的——先证明工具能抓错，再证明文本没错。
 
@@ -221,7 +243,7 @@ python3 scripts/make_result.py --case-id <CASE_ID> --revised /app/work/revised.t
 | `references/style-conventions.md` | 文体规则（规则—反例—改法三段式） | 只加"规则"不给反例，模型无法稳定执行 |
 | `references/output-contract.md` | 与平台 `output_contract` 的字段映射 | 平台改字段名时先改这里 |
 | `references/eval-rubric.md` | 对照实验设计与自评表 | 自评表权重变了要重跑一遍对照 |
-| `tests/cases.json` | 4 条已知错误的合成用例 | 加词表就加对应用例，否则新规则未被验证 |
+| `tests/cases.json` | 5 条已知错误的合成用例 | 加词表就加对应用例，否则新规则未被验证 |
 | `scripts/run_selftest.py` | 一条命令验证脚本能抓错 | 新增脚本要接进这里 |
 
-- 版本：v1.1（2026-11-23）。v1.0 → v1.1 变动：补 `prompts/` 两份实际提示词、字段合并规则、对照实验设计与自评表、自测用例与 `run_selftest.py`、预算账与环境探测；修正术语审计对短词二元组的漏抓。
+Skill 版本由仓库提交记录管理，不在正文内标注。

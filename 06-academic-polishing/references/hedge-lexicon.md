@@ -30,7 +30,9 @@
 
 ## 4. negation｜否定与阴性结果（不参与加权，只查数量）
 
-`not significant` / `no significant` / `did not differ` / `non-significant` / `no difference` / `无显著` / `不显著` / `未见差异`
+`not significant` / `no significant` / `did not differ` / `non-significant` / `no difference` / `无显著` / `不显著` / `未见差异` / `站不住` / `不成立` / `尚不多见` / `仍然少见` / `鲜见` / `少见` / `尚未见`
+
+中文的"鲜见""尚不多见""站不住"表达的是否定或收窄判断，与"not significant"同类，按**出现次数**守恒（改后不得多于不得少于原文）；正向放大词（`十分常见`、`十分普遍`、`广泛存在`、`均如此`）归在 scope 家族按强度加权。两族职责不同，同一个词不要同时放进两族，否则会双重计数。
 
 **规则**：改后数量**不得少于**原文。阴性结果被改写成"similar""comparable""no effect"都算丢失——`similar` 是等价性判断，`not significant` 是检验未达阈值，两者在统计上不同。
 

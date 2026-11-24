@@ -1,0 +1,65 @@
+{
+  "_note": "自测用例。全部为合成文本，用于验证脚本能否抓出已知的改动错误，不是赛事正式案例。",
+  "cases": [
+    {
+      "id": "hedge-basic",
+      "check": "hedge",
+      "description": "可能性被改成断言 + 精度被抬高",
+      "original": "The treatment may reduce the incidence by about 12% in coastal areas [3].",
+      "bad": "The treatment reduces the incidence by 12% in coastal areas [3].",
+      "expect_bad_flags": ["hedge_strengthened"],
+      "good": "The treatment may reduce the incidence by approximately 12% in coastal areas [3].",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "negation-lost",
+      "check": "hedge",
+      "description": "阴性结果被改写成等价性判断",
+      "original": "Sea fog frequency was not significant at inland stations.",
+      "bad": "Sea fog frequency was similar at inland stations.",
+      "expect_bad_flags": ["negation_lost"],
+      "good": "Sea fog frequency was not statistically significant at inland stations.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "facts-dropped",
+      "check": "hedge",
+      "description": "样本量与引用编号在改写中丢失",
+      "original": "A total of 14 stations recorded 2779 fog samples (1.33%) from 2015 to 2020 [12].",
+      "bad": "A total of 14 stations recorded fog samples (1.33%) from 2015 to 2020.",
+      "expect_bad_flags": ["fact_missing"],
+      "good": "In total, 14 stations recorded 2779 fog samples (1.33%) between 2015 and 2020 [12].",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "negation-frequency-drop",
+      "check": "hedge",
+      "description": "阴性表述词种类未变但出现次数从 3 降到 1，旧版按 len 判定会漏报",
+      "original": "At station A it was not significant. At station B it was not significant. At station C it was not significant.",
+      "bad": "At station A it was not significant. At station B it was not significant. At station C the effect was observed.",
+      "expect_bad_flags": ["negation_lost"],
+      "good": "At station A it was not significant. At station B it was not significant. At station C it was not statistically significant.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "zh-scope-strengthened",
+      "check": "hedge",
+      "description": "中文阴性/收窄表述被换成正向断言，negation 次数下降且 scope 增强",
+      "original": "该路线在国内公开文献中尚不多见，结论站不住；仍有部分站点未见差异。",
+      "bad": "该路线在国内公开文献中十分常见，结论完全成立；所有站点均如此。",
+      "expect_bad_flags": ["negation_lost", "hedge_strengthened"],
+      "good": "该路线在国内公开文献中尚不多见，结论站不住；仍有部分站点未见差异。",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "term-drift",
+      "check": "term",
+      "description": "同一术语三种写法；bad 未统一，good 统一到术语表首选写法",
+      "original": "Sea-Fog events were frequent in spring. Sea Fog intensity varied by station.",
+      "bad": "sea fog events were frequent in spring. sea fog intensity varied by station.",
+      "expect_rescan_drift": true,
+      "good": "Sea Fog events were frequent in spring. Sea Fog intensity varied by station.",
+      "expect_rescan_drift_after_good": false
+    }
+  ]
+}

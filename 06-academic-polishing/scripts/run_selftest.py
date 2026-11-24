@@ -8,6 +8,8 @@
   3) 术语用例额外验证"建表 → 回扫"的漂移检出能力
 
 用法：
+运行前确认：子进程只调用本包内的 hedge_audit.py / term_audit.py；输入写到 tempfile 临时目录；无网络、无凭据读取、无子进程嵌套。
+
   python3 scripts/run_selftest.py            # 全部用例
   python3 scripts/run_selftest.py --verbose  # 打印每条用例的详细输出
 

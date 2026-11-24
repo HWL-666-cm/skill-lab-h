@@ -10,19 +10,15 @@
 | 2 | `case.json` 的其他约束（`genre`、`audience`、`word_limit`、`format`） | 作为生成约束写进 `assumptions` 并在产物中执行 |
 | 3 | 本 Skill 的默认字段（见 SKILL.md 第 5 节） | 平台没定义的才补，**不覆盖**平台定义 |
 
-**判据**：`result.json` 的顶层必须有 `case_id`，且 `output_contract` 里的每个必需字段在顶层或其指定路径下都能取到。写完用下面这段自检：
+**判据**：`result.json` 的顶层必须有 `case_id`，且 `output_contract` 里的每个必需字段在顶层或其指定路径下都能取到。
 
-```python
-import json
-case = json.load(open("/input/case.json", encoding="utf-8"))
-res = json.load(open("/app/output/result.json", encoding="utf-8"))
-contract = case.get("output_contract") or {}
-missing = []
-for field, spec in contract.items() if isinstance(contract, dict) else []:
-    required = spec.get("required", True) if isinstance(spec, dict) else True
-    if required and field not in res:
-        missing.append(field)
-print("missing:", missing, "case_id:", res.get("case_id"))
+这一步由 `make_result.py` **实际执行**，不是人工自检：调用时传 `--case-json /input/case.json`，脚本读取契约、按 `CONTRACT_ALIASES` 把默认字段补成平台字段名，把结果写进 `result.json` 的 `output_contract_alignment`（含 `filled_from_aliases`、`missing_required`）；只要有 `required: true` 的字段补不出来，`status` 自动降为 `partial`。**不要手工往 result.json 里加字段来"通过"检查**——那会绕过契约校验，评审看不到真实的缺项。
+
+```bash
+python3 scripts/make_result.py --case-id <CASE_ID> --case-json /input/case.json \
+  --revised /app/work/revised.txt --changes /app/work/changes.json \
+  --audit /app/work/facts_after.json --terms /app/work/terms_after.json \
+  --task-items /app/work/task_items.json --out /app/output/result.json
 ```
 
 ## 2. 本 Skill 字段与常见 `output_contract` 字段的对应
@@ -34,7 +30,10 @@ print("missing:", missing, "case_id:", res.get("case_id"))
 | `glossary` / `terminology` | `term_table` | 至少含 `concept`/`preferred`/`variants_found` |
 | `evidence` / `sources` | `fact_map` | 数字与引用逐条，标明是否被改动 |
 | `uncertainty` / `notes` | `uncertainties` | 材料缺口、冲突、需人工确认项 |
+| `task_coverage` / `task_items` | `task_coverage` | 每条任务项的 `done`/`pending`，对应"结果完整性" |
 | `status` | `status` | 只能是 `ok` / `partial` / `failed` |
+
+`revised_text` 同时内联进 `result.json` 顶层（值就是改稿全文），不只放在 `target_deliverable.path`——评审可能只读 JSON，不打开文件。
 
 ## 3. 三种失败情形的写法
 
