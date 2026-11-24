@@ -1,0 +1,2 @@
+https://github.com/HWL-666-cm/skill-lab-h/tree/main/04-nanopub-assertions
+04-nanopub-assertions/SKILL.md

@@ -40,3 +40,7 @@ _validation/
 _submit/
 _backup/
 submission/*-outputs/
+# 04 制作暂存与第三方参考克隆（体积大、非本人作品，不入库）
+_refs/
+_stage04/
+04-nanopub-assertions.zip

@@ -1,0 +1,139 @@
+{
+  "status": "pass",
+  "n_assertions": 2,
+  "counts": {
+    "pass": 2,
+    "warn": 0,
+    "fail": 0
+  },
+  "top_failures": [],
+  "items": [
+    {
+      "id": "A01",
+      "verdict": "pass",
+      "checks": {
+        "aida": {
+          "ok": true,
+          "code": "aida_pass",
+          "detail": "all four criteria hold",
+          "fix": "",
+          "criteria": {
+            "atomic": true,
+            "independent": true,
+            "declarative": true,
+            "absolute": true
+          },
+          "scope_must_keep": []
+        },
+        "quote": {
+          "ok": true,
+          "code": "ok",
+          "detail": "found on page 8 (declared 8)",
+          "fix": "",
+          "located_page": 8,
+          "pid": 184,
+          "sid": "P184S02",
+          "char_span": [
+            22724,
+            22917
+          ],
+          "sentence_text": "We presented a constant factor approximation algorithm which guarantees that the cost of gathering data is within factor 28.9 of the optimal solution and the uncertainty is within a factor 5.5."
+        },
+        "entities": {
+          "ok": true,
+          "code": "ok",
+          "detail": "both entities occur in the evidence"
+        },
+        "relation": {
+          "ok": true
+        },
+        "trigger": {
+          "ok": true,
+          "trigger": "guarantees"
+        },
+        "scope": {
+          "ok": true,
+          "code": "ok",
+          "detail": "scope and polarity preserved",
+          "fix": ""
+        },
+        "paste": {
+          "ok": true
+        },
+        "confidence": {
+          "ok": true,
+          "code": "ok",
+          "detail": "direct statement in the conclusion; the factor 28.9 is copied verbatim"
+        }
+      },
+      "fixes": []
+    },
+    {
+      "id": "A04",
+      "verdict": "pass",
+      "checks": {
+        "aida": {
+          "ok": true,
+          "code": "aida_pass",
+          "detail": "all four criteria hold",
+          "fix": "",
+          "criteria": {
+            "atomic": true,
+            "independent": true,
+            "declarative": true,
+            "absolute": true
+          },
+          "scope_must_keep": [
+            "Given a fixed uncertainty threshold"
+          ]
+        },
+        "quote": {
+          "ok": true,
+          "code": "ok",
+          "detail": "found on page 8 (declared 8)",
+          "fix": "",
+          "located_page": 8,
+          "pid": 181,
+          "sid": "P181S02",
+          "char_span": [
+            22200,
+            22290
+          ],
+          "sentence_text": "Given a fixed U⋆, the estimation performance is robust to the change in the bearing noise."
+        },
+        "entities": {
+          "ok": true,
+          "code": "ok",
+          "detail": "both entities occur in the evidence"
+        },
+        "relation": {
+          "ok": true
+        },
+        "trigger": {
+          "ok": true,
+          "trigger": "robust to"
+        },
+        "scope": {
+          "ok": true,
+          "code": "ok",
+          "detail": "scope and polarity preserved",
+          "fix": ""
+        },
+        "paste": {
+          "ok": true
+        },
+        "confidence": {
+          "ok": true,
+          "code": "ok",
+          "detail": "the paper states robustness only under a fixed threshold, so the scope is kept"
+        }
+      },
+      "fixes": []
+    }
+  ],
+  "structure": {
+    "ok": true,
+    "n_nanopubs": 2,
+    "issues": []
+  }
+}

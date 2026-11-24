@@ -1,0 +1,123 @@
+{
+  "case_id": "example-ral2016-two-assertions",
+  "status": "pass",
+  "task": "nanopublication-assertion-extraction",
+  "input": {
+    "file": "RAL2016_Gathering_Bearing_Data.pdf",
+    "pages": 8,
+    "paragraphs": 201,
+    "sentences": 381
+  },
+  "assertions": [
+    {
+      "id": "A01",
+      "text": "The constant factor approximation algorithm guarantees that the cost of gathering data stays within factor 28.9 of the optimal solution.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "constant factor approximation algorithm",
+        "type": "METHOD"
+      },
+      "predicate": "ENABLES",
+      "predicate_iri": "https://w3id.org/np/rel/ENABLES",
+      "object": {
+        "label": "cost of gathering data",
+        "type": "MEASURE"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "We presented a constant factor approximation algorithm which guarantees that the cost of gathering data is within factor 28.9 of the optimal solution and the uncertainty is within a factor 5.5.",
+        "page": 8,
+        "sentence_id": "P184S02",
+        "char_span": [
+          22724,
+          22917
+        ]
+      },
+      "provenance": {
+        "source": "RAL2016_Gathering_Bearing_Data"
+      },
+      "confidence_basis": "direct statement in the conclusion; the factor 28.9 is copied verbatim",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A04",
+      "text": "Given a fixed uncertainty threshold, the estimation performance is robust to changes in the bearing noise.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "estimation performance",
+        "type": "MEASURE"
+      },
+      "predicate": "ASSOCIATED_WITH",
+      "predicate_iri": "https://w3id.org/np/rel/ASSOCIATED_WITH",
+      "object": {
+        "label": "bearing noise",
+        "type": "MEASURE"
+      },
+      "qualifiers": {
+        "scope": [
+          "Given a fixed uncertainty threshold"
+        ],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Given a ﬁxed U⋆, the estimation performance is robust to the change in the bearing noise.",
+        "page": 8,
+        "sentence_id": "P181S02",
+        "char_span": [
+          22200,
+          22290
+        ]
+      },
+      "provenance": {
+        "source": "RAL2016_Gathering_Bearing_Data"
+      },
+      "confidence_basis": "the paper states robustness only under a fixed threshold, so the scope is kept",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    }
+  ],
+  "sources": [
+    {
+      "name": "RAL2016_Gathering_Bearing_Data.pdf",
+      "iri": "urn:source:example-ral2016",
+      "doi": null,
+      "title": "Gathering Bearing Data for Target Localization",
+      "year": 2016
+    }
+  ],
+  "validation": {
+    "status": "pass",
+    "counts": {
+      "pass": 2,
+      "warn": 0,
+      "fail": 0
+    },
+    "top_failures": [],
+    "structure": {
+      "ok": true,
+      "n_nanopubs": 2,
+      "issues": []
+    }
+  },
+  "uncertainty": [
+    "这是接口示例，取自一篇公开论文的前两条断言，不是平台固定案例的正式结果。"
+  ]
+}

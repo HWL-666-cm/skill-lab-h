@@ -1,0 +1,155 @@
+{
+  "version": "1.0",
+  "note": "Controlled relation vocabulary with type signatures. A triple whose subject and object types are swapped relative to the signature is a direction error, not a new relation.",
+  "entity_types": {
+    "DISEASE": {
+      "zh": "疾病或异常状态",
+      "cues": ["disease", "disorder", "syndrome", "cancer", "tumour", "tumor", "infection", "deficiency", "failure", "dysfunction", "injury", "疾病", "障碍", "综合征", "癌症", "缺乏", "功能异常"]
+    },
+    "CONDITION": {
+      "zh": "状态或现象",
+      "cues": ["condition", "state", "status", "phenomenon", "occurrence", "状况", "状态", "现象"]
+    },
+    "CHEMICAL": {
+      "zh": "化学物质",
+      "cues": ["acid", "vitamin", "compound", "molecule", "ion", "salt", "solvent", "chemical", "酸", "维生素", "化合物", "离子"]
+    },
+    "DRUG": {
+      "zh": "药物或治疗制剂",
+      "suffixes": ["mab", "nib", "olol", "statin", "pril", "sartan", "azepam", "cillin"],
+      "cues": ["drug", "inhibitor", "agonist", "antagonist", "antibody", "vaccine", "药物", "抑制剂", "抗体", "疫苗"]
+    },
+    "GENE": {
+      "zh": "基因或遗传变异",
+      "cues": ["gene", "allele", "mutation", "variant", "polymorphism", "snp", "genotype", "基因", "突变", "变异"]
+    },
+    "PROTEIN": {
+      "zh": "蛋白质或酶",
+      "cues": ["protein", "kinase", "receptor", "enzyme", "peptide", "transporter", "蛋白", "激酶", "受体", "酶"]
+    },
+    "PROCESS": {
+      "zh": "过程、机制或路径",
+      "cues": ["process", "pathway", "mechanism", "growth", "transmission", "localization", "localisation", "diffusion", "coverage", "transport", "过程", "机制", "通路", "传播", "定位"]
+    },
+    "MEASURE": {
+      "zh": "可量化指标",
+      "cues": ["cost", "uncertainty", "precision", "accuracy", "error", "rate", "ratio", "score", "index", "gdop", "variance", "concentration", "temperature", "humidity", "指标", "误差", "精度", "浓度", "温度", "湿度", "不确定度"]
+    },
+    "INTERVENTION": {
+      "zh": "干预措施",
+      "cues": ["therapy", "treatment", "diet", "supplement", "exercise", "procedure", "training", "regulation", "治疗", "饮食", "补充", "训练", "调控"]
+    },
+    "POPULATION": {
+      "zh": "人群、样本或受试对象",
+      "cues": ["patients", "adults", "children", "infants", "mice", "rats", "participants", "subjects", "population", "患者", "成人", "儿童", "小鼠", "样本"]
+    },
+    "METHOD": {
+      "zh": "方法、算法或模型",
+      "cues": ["algorithm", "method", "model", "framework", "approach", "estimator", "classifier", "network", "simulation", "算法", "方法", "模型", "框架", "网络"]
+    },
+    "LOCATION": {
+      "zh": "地点或空间区域",
+      "cues": ["region", "area", "site", "location", "basin", "ocean", "sea", "coast", "区域", "地区", "海域", "站点"]
+    },
+    "TIME": {
+      "zh": "时间或时段",
+      "cues": ["season", "month", "year", "period", "winter", "summer", "季节", "时期", "年"]
+    },
+    "ENTITY": {
+      "zh": "未归类实体",
+      "cues": []
+    }
+  },
+  "relations": {
+    "CAUSES": {
+      "zh": "导致",
+      "subject_types": ["CHEMICAL", "DRUG", "GENE", "PROTEIN", "CONDITION", "PROCESS", "INTERVENTION", "ENTITY"],
+      "object_types": ["DISEASE", "CONDITION", "PROCESS", "MEASURE"],
+      "cues": ["cause", "causes", "caused", "lead to", "leads to", "led to", "result in", "results in", "induce", "induces", "trigger", "triggers", "导致", "引起", "造成", "引发"]
+    },
+    "PREVENTS": {
+      "zh": "预防或阻止",
+      "subject_types": ["DRUG", "INTERVENTION", "CHEMICAL", "PROCESS", "METHOD"],
+      "object_types": ["DISEASE", "CONDITION", "PROCESS"],
+      "cues": ["prevent", "prevents", "prevented", "reduce the risk of", "protect against", "protects against", "inhibit the onset", "预防", "防止", "阻止"]
+    },
+    "TREATS": {
+      "zh": "治疗或缓解",
+      "subject_types": ["DRUG", "INTERVENTION", "CHEMICAL", "METHOD"],
+      "object_types": ["DISEASE", "CONDITION"],
+      "cues": ["treat", "treats", "treated", "therapy for", "effective against", "alleviate", "alleviates", "治疗", "缓解", "改善"]
+    },
+    "INHIBITS": {
+      "zh": "抑制",
+      "subject_types": ["DRUG", "CHEMICAL", "GENE", "PROTEIN", "INTERVENTION"],
+      "object_types": ["PROTEIN", "PROCESS", "GENE", "MEASURE"],
+      "cues": ["inhibit", "inhibits", "inhibited", "suppress", "suppresses", "block", "blocks", "repress", "抑制", "阻断", "压制"]
+    },
+    "ACTIVATES": {
+      "zh": "激活或促进",
+      "subject_types": ["DRUG", "CHEMICAL", "GENE", "PROTEIN", "INTERVENTION"],
+      "object_types": ["PROTEIN", "PROCESS", "GENE"],
+      "cues": ["activate", "activates", "activated", "stimulate", "stimulates", "promote", "promotes", "enhance", "enhances", "激活", "促进", "增强"]
+    },
+    "INCREASES": {
+      "zh": "提高或增加",
+      "subject_types": ["CHEMICAL", "DRUG", "GENE", "PROTEIN", "INTERVENTION", "PROCESS", "METHOD", "CONDITION"],
+      "object_types": ["MEASURE", "PROCESS", "CONDITION"],
+      "cues": ["increase", "increases", "increased", "raise", "raises", "elevate", "elevates", "higher", "提高", "增加", "升高", "上升"]
+    },
+    "DECREASES": {
+      "zh": "降低或减少",
+      "subject_types": ["CHEMICAL", "DRUG", "GENE", "PROTEIN", "INTERVENTION", "PROCESS", "METHOD", "CONDITION"],
+      "object_types": ["MEASURE", "PROCESS", "CONDITION"],
+      "cues": ["decrease", "decreases", "decreased", "reduce", "reduces", "lower", "lowers", "decline", "declines", "降低", "减少", "下降"]
+    },
+    "ASSOCIATED_WITH": {
+      "zh": "与……相关（不主张因果）",
+      "subject_types": ["*"],
+      "object_types": ["*"],
+      "cues": ["associated with", "correlated with", "related to", "linked to", "co-occur", "相关", "关联", "有关"]
+    },
+    "PREDICTS": {
+      "zh": "预测",
+      "subject_types": ["MEASURE", "METHOD", "CONDITION", "PROCESS"],
+      "object_types": ["MEASURE", "CONDITION", "PROCESS", "DISEASE"],
+      "cues": ["predict", "predicts", "predicted", "forecast", "forecasts", "anticipate", "预测", "预报", "预估"]
+    },
+    "DERIVED_FROM": {
+      "zh": "由……计算或推导得出",
+      "subject_types": ["MEASURE", "METHOD", "CONDITION"],
+      "object_types": ["MEASURE", "METHOD", "PROCESS"],
+      "cues": ["derived from", "computed from", "calculated from", "estimated from", "based on", "由", "根据", "基于", "计算得到"]
+    },
+    "PART_OF": {
+      "zh": "是……的组成部分",
+      "subject_types": ["*"],
+      "object_types": ["*"],
+      "cues": ["part of", "component of", "subset of", "belongs to", "属于", "组成部分"]
+    },
+    "OCCURS_IN": {
+      "zh": "发生于",
+      "subject_types": ["PROCESS", "CONDITION", "DISEASE"],
+      "object_types": ["LOCATION", "TIME", "POPULATION"],
+      "cues": ["occur in", "occurs in", "occurred in", "found in", "detected in", "发生于", "出现在", "见于"]
+    },
+    "REQUIRES": {
+      "zh": "需要或依赖",
+      "subject_types": ["METHOD", "PROCESS", "MEASURE", "CONDITION"],
+      "object_types": ["MEASURE", "PROCESS", "METHOD", "CONDITION"],
+      "cues": ["require", "requires", "required", "depend on", "depends on", "need", "needs", "需要", "依赖", "要求"]
+    },
+    "ENABLES": {
+      "zh": "使能或允许",
+      "subject_types": ["METHOD", "MEASURE", "PROCESS", "INTERVENTION"],
+      "object_types": ["PROCESS", "MEASURE", "CONDITION"],
+      "cues": ["enable", "enables", "allow", "allows", "permit", "permits", "make it possible", "使", "允许", "支持"]
+    },
+    "MEASURES": {
+      "zh": "测量或量化",
+      "subject_types": ["METHOD", "MEASURE"],
+      "object_types": ["PROCESS", "CONDITION", "MEASURE"],
+      "cues": ["measure", "measures", "measured", "quantify", "quantifies", "quantify", "estimate", "estimates", "测量", "量化", "估计"]
+    }
+  }
+}
