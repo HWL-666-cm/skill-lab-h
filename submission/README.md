@@ -1,7 +1,7 @@
-# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 06 / 03 / 07 / 02 题）
+# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 01 / 02 / 03 / 04 / 06 / 07 题）
 
 本题为 Skill 创作任务，**只提交 Skill 及其必要资源**，不提交答案、白板或正式测试结果。
-本文件夹汇总四题的提交材料，每题的 Skill 目录均远低于平台资源上限
+本文件夹汇总六题的提交材料，每题的 Skill 目录均远低于平台资源上限
 （50 个 UTF-8 文本文件 / 单文件 500 KB / 总计 2 MB）。
 
 ---
@@ -162,6 +162,34 @@ playground submit \
 
 ---
 
+## 第 04 题：Nanopublication 断言抽取与证据绑定
+
+### 目录结构与用途
+
+| 路径 | 作用 | 对应提交参数 |
+|---|---|---|
+| `04-nanopub-assertions/` | Skill 本体 19 个文件：入口 `SKILL.md`、`requirements.txt`、5 个脚本、4 份参考、示例、自测 | `--skill` |
+| `04-nanopub-assertions/scripts/` | `pdf_text`（取文本与坐标）、`aida_rules`（四判据）、`validate`（12 项检查）、`emit`（JSON + 四图 TriG）、`contract`（平台字段契约）、`run_case`（入口） | — |
+| `04-nanopub-assertions/references/` | AIDA 判据、关系词表、失败模式、字段字典 | — |
+| `04-nanopub-assertions/assets/` | 关系词表 JSON、示例（带 `example: true` 标记）、36 条自测 | — |
+| `04-outputs/` | 只放说明与 `GITHUB_URL.txt`，**没有任何答案文件** | `--outputs` |
+
+题面 ID：`product-arena-09-0e8befd4`（阅读14｜Nanopublication）。评分方式 `human_review_only`。
+
+```bash
+playground submit \
+  --challenge-id product-arena-09-0e8befd4 \
+  --skill    "D:/桌面/bohrium-cugb-p1/04-nanopub-assertions" \
+  --outputs  "D:/桌面/bohrium-cugb-p1/submission/04-outputs" \
+  --trace    "D:/桌面/bohrium-cugb-p1/_trace/04_trace.jsonl" \
+  --dry-run
+```
+
+> 第 04 题已提交：attempt **104566**（2026-11-24 20:43 +08:00，status=submitted，排队位置约 3559）。
+> trace 为 `_trace/04_trace.jsonl`（86 条：user 4 / assistant 82、valid=true，8 类 PII 残留全 0，与样本论文原文重合的 ≥8 词串已隐去）。
+
+---
+
 ## 运行时路径（供核对，不需要手工创建）
 
 - 输入：`/input/case.json` 与同目录 `task.md`；若给 PDF，读取实际 PDF 而非标签推断内容。
@@ -184,5 +212,6 @@ playground submit \
 - 03：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/03-structured-notes
 - 07：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/07-structured-citation
 - 02：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/02-translation-audit
+- 04：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/04-nanopub-assertions（已用未登录浏览器确认 `scripts/contract.py` 可见）
 
 提交前需用**未登录** GitHub 的浏览器窗口打开一次链接确认可见。
