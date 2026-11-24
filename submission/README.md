@@ -1,7 +1,7 @@
-# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 01 / 02 / 03 / 04 / 06 / 07 题）
+# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 01 / 02 / 03 / 04 / 06 / 07 / 10 题）
 
 本题为 Skill 创作任务，**只提交 Skill 及其必要资源**，不提交答案、白板或正式测试结果。
-本文件夹汇总六题的提交材料，每题的 Skill 目录均远低于平台资源上限
+本文件夹汇总七题的提交材料，每题的 Skill 目录均远低于平台资源上限
 （50 个 UTF-8 文本文件 / 单文件 500 KB / 总计 2 MB）。
 
 ---
@@ -190,6 +190,41 @@ playground submit \
 
 ---
 
+## 第 10 题：文献知识图谱构建
+
+### 目录结构与用途
+
+| 路径 | 作用 | 对应提交参数 |
+|---|---|---|
+| `10-knowledge-graph/` | Skill 本体 24 个文件、约 260 KB：入口 `SKILL.md`、`requirements.txt`、8 个脚本、5 份参考、schema 与词表、示例、自测 | `--skill` |
+| `10-knowledge-graph/scripts/run_case.py` | 入口：`prepare` / `auto` / `finish` / `queries` 四阶段 | — |
+| `10-knowledge-graph/scripts/materials.py` | 材料加载：平台 JSON 多种同义结构 + JATS XML 直读；段落 id 缺失时生成并标 `id_source: generated` | — |
+| `10-knowledge-graph/scripts/extract.py` | 候选生成（不做判断）：触发词配对、最近合格提及、证据强度初判 | — |
+| `10-knowledge-graph/scripts/align.py` | 身份决策：并查集、三层合并策略、类型冲突拆节点、按条件分组查冲突 | — |
+| `10-knowledge-graph/scripts/validate.py` | 门禁：节点 5 项 + 边 8 项 + 图级 6 项，逐字引文与方向判定 | — |
+| `10-knowledge-graph/scripts/query.py` | 5 类查询：实体画像、多跳路径、方法对比、冲突、否定/无证据 | — |
+| `10-knowledge-graph/assets/schema.json` | 8 实体类型 × 13 关系（带 domain/range）、证据强度六档、身份作用域定义 | — |
+| `10-knowledge-graph/assets/examples/` | 两篇公开论文的一次真实运行结果，**带 `example: true`** | — |
+| `10-knowledge-graph/assets/tests/run_selftest.py` | 34 项自测，零依赖 | — |
+| `10-outputs/` | 只放 `README.md` 与 `GITHUB_URL.txt`，**没有任何答案文件** | `--outputs` |
+
+题面 ID：`product-arena-10-760d1a0b`（阅读15｜文献知识图谱构建）。评分方式 `human_review_only`。
+
+```bash
+playground submit \
+  --challenge-id product-arena-10-760d1a0b \
+  --skill    "D:/桌面/bohrium-cugb-p1/10-knowledge-graph" \
+  --outputs  "D:/桌面/bohrium-cugb-p1/submission/10-outputs" \
+  --trace    "D:/桌面/bohrium-cugb-p1/_trace/10_trace.jsonl" \
+  --dry-run
+```
+
+> 第 10 题已提交：attempt **104849**（2026-11-24 21:54 +08:00，status=submitted，队列位置 3725）。
+> trace 为 `_trace/10_trace.jsonl`（44 条：user 4 / assistant 40、valid=true，10 类 PII 残留全 0）。
+> 验证：结构预检 18/18、自测 34/34、两篇 CC-BY 论文端到端 `pass`（53/0/0）、A/B 对照 0/21 → 53/0。
+
+---
+
 ## 运行时路径（供核对，不需要手工创建）
 
 - 输入：`/input/case.json` 与同目录 `task.md`；若给 PDF，读取实际 PDF 而非标签推断内容。
@@ -202,6 +237,7 @@ playground submit \
 | 内容 | 位置 | 不进包的原因 |
 |---|---|---|
 | A/B 验证记录、论文抽取结果与可行性判断 | `../_validation/` | 含本地研究材料，题面不要求提交自造测评结果；论文原文全程未上传 |
+| 10 题制作暂存：下载的 JATS 原文、语料转换、A/B 对照产物 | `../_stage10/` | 论文全文与实验中间件不入公开仓库，已加入 `.gitignore` |
 | 旧版回滚备份 | `../_backup/` | 本地版本管理 |
 | 会话轨迹 | `../_trace/` | 提交时单独用 `--trace` 指定，不进 Skill 包 |
 | CLI 调试产物与压缩包 | `../_submit/`、`../playground-arm.zip` | 本地调试，与 Skill 无关 |
@@ -213,5 +249,6 @@ playground submit \
 - 07：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/07-structured-citation
 - 02：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/02-translation-audit
 - 04：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/04-nanopub-assertions（已用未登录浏览器确认 `scripts/contract.py` 可见）
+- 10：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/10-knowledge-graph（已用未登录方式确认 `SKILL.md` / `scripts/` / `assets/` / `references/` / `requirements.txt` 全部可见）
 
 提交前需用**未登录** GitHub 的浏览器窗口打开一次链接确认可见。
