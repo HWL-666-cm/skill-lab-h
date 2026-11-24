@@ -52,6 +52,36 @@
       "expect_good_verdict": "pass"
     },
     {
+      "id": "abbrev-definition-lost",
+      "check": "hedge",
+      "description": "缩写首次定义被删，只剩裸缩写；词表里没有任何相关词，靠①有限集合守恒抓出",
+      "original": "We improved the probability of detection (POD) and the false alarm ratio (FAR) in sea fog prediction.",
+      "bad": "We improved POD and FAR in sea fog prediction.",
+      "expect_bad_flags": ["fact_missing"],
+      "good": "We improved the probability of detection (POD) and the false alarm ratio (FAR) in sea fog forecasting.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "boundary-collapsed",
+      "check": "hedge",
+      "description": "边界表达 at least 被删，命题从'至少'变成确数；靠①有限集合守恒抓出",
+      "original": "Visibility was below 1 km for at least 60 hours at the coastal station.",
+      "bad": "Visibility was below 1 km for 60 hours at the coastal station.",
+      "expect_bad_flags": ["fact_missing"],
+      "good": "Visibility stayed below 1 km for at least 60 hours at the coastal site.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "claim-anchor-intent-to-fact",
+      "check": "hedge",
+      "description": "aims to develop 改成 develops，意图变既成事实；即使留痕齐全也必须报③红线",
+      "original": "This study aims to develop a sea fog prediction model using satellite data.",
+      "bad": "This study develops a sea fog prediction model using satellite data.",
+      "expect_bad_flags": ["substance_redline"],
+      "good": "This study aims to develop a satellite-based sea fog prediction model.",
+      "expect_good_verdict": "pass"
+    },
+    {
       "id": "term-drift",
       "check": "term",
       "description": "同一术语三种写法；bad 未统一，good 统一到术语表首选写法",

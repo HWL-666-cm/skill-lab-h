@@ -108,6 +108,9 @@ python3 scripts/hedge_audit.py --original /app/work/source.txt --revised /app/wo
 
 **分块而非整篇**的理由：单次回复 16384 token，整篇一次改必然截断；分块还能让每块的修改记录就近绑定原文，避免"改完找不到对应句"。
 
+**第 3.5 步｜汇总修改清单**
+把各块返回的 `changes` 按段落顺序合并成 `/app/work/changes.json`（数组，每条含 `original`/`revised`/`type`/`reason`/`risk`）。这一步不能省：第 5 步的留痕核对要靠它逐块比对，缺了它就只能"列出待核对块"而无法判定。
+
 **第 4 步｜术语回扫（本 Skill 的关键差异点）**
 全部块改完后，用**改后全文**重跑术语审计，与基线比对：
 ```bash
@@ -115,17 +118,28 @@ python3 scripts/term_audit.py --input /app/work/revised.txt --glossary /app/work
 ```
 只修 `status=drift` 的项，且修法与术语表一致；不要因为"读起来更顺"而临时改术语。
 
-**第 5 步｜限定强度与事实复检**
+**第 5 步｜三层守恒复检**
 ```bash
-python3 scripts/hedge_audit.py --original /app/work/source.txt --revised /app/work/revised.txt --out /app/work/facts_after.json
+python3 scripts/hedge_audit.py --original /app/work/source.txt --revised /app/work/revised.txt \
+  --changes /app/work/changes.json --out /app/work/facts_after.json
 ```
-脚本会给出每一项的 `delta` 与 `flags`。处理规则：
+脚本按三层查，从强到弱；**强度词表只是辅助，不是唯一防线**——换一篇文档必然出现表外词（`often`、`aims to`、`substantially`……），靠加词追不完，所以前三层都不认词：
+
+| 层 | 查什么 | 为什么这样设计 |
+|---|---|---|
+| ①有限集合 `numbers`/`citations`/`abbreviations`/`boundaries` | 数字、引用、缩写首次定义、边界表达（≤、at least）丢失或多出 | 这些是**有限集合**，可穷举成模式，丢失即报，与词表无关。缩写全称被删只剩裸缩写、`less than or equal to 1 km` 被压成 `1 km` 都属此类 |
+| ②留痕核对 `attribution` | 每个实词改动块在 `change_log` 里有没有对应记录 | 不认词、只认"改动有没有理由"。换任何文档、出现任何表外词都成立。无对应报 `unjustified_change` |
+| ③主张骨架 `claim_anchors` | 作者意图、研究动作、结论方向（`aims to`、`we propose`、本研究……）被动过 | **留痕齐全也不放行**：`aims to develop` → `develops` 把"打算做"变成"已做到"，有理由也是改坏。报 `substance_redline`，必须人工确认 |
+| 辅助 `hedge` 家族 | 表内情态/限定词的净强化或削弱 | 只对表内词给精确方向；表外词由前三层兜底 |
+
+处理规则：
 
 | 脚本结论 | 处置 |
 |---|---|
-| 数字/单位/引用 `missing` 或 `added` | **必须回改**，逐字恢复原样 |
-| 限定强度 `strengthened`（净强化） | 回改到原强度；确属原文笔误才保留，并写进 `uncertainties` |
-| 限定强度 `weakened` | 同上，尤其"阴性结果"不得被削弱成"无差异"以外的新说法 |
+| `fact_missing` / `fact_added` | **必须回改**，逐字恢复原样；缩写定义、边界词同等对待 |
+| `substance_redline` | **必须人工确认**，默认回改；确属原意且作者认可才保留，写进 `uncertainties` |
+| `unjustified_change` | 补 `change_log` 理由（说明改动依据哪条规则）；补不出就回改 |
+| 限定强度 `strengthened`/`weakened` | 回改到原强度；确属原文笔误才保留，并写进 `uncertainties` |
 | 新增术语变体 | 回改到术语表写法 |
 
 回改**不要重写整段**——把脚本的 `flags` / `drift` 原样填进 `prompts/pass2-verify.md`，只让它给出"哪处、改回什么、为什么"。理由：第二次整段改写会引入新的偏移，而脚本只认"这一处有没有回改对"。
@@ -217,12 +231,13 @@ python3 scripts/make_result.py --case-id <CASE_ID> --case-json /input/case.json 
 
 | # | 动作 | 通过标准 |
 |---|---|---|
-| 1 | 跑 `python3 scripts/run_selftest.py`（或 `python`） | 4 条用例全 PASS；有 FAIL 说明审计脚本坏了，先修脚本再动文本 |
+| 1 | 跑 `python3 scripts/run_selftest.py`（或 `python`） | 6 条用例全 PASS；有 FAIL 说明审计脚本坏了，先修脚本再动文本 |
 | 2 | 确认 `result.json` 有 `case_id`，且 `output_contract` 的必需字段齐全 | 缺一即改 `status` 为 `partial` |
 | 3 | 抽查 5 处 `change_log` | 每处都能在原文里搜到 `original`，改文里搜到 `revised` |
 | 4 | 看 `audit.flags` 是否为空 | 非空则要么已回改，要么在 `uncertainties` 写明为何保留 |
-| 5 | 同一段重复跑一次 | 两次结论一致；不一致说明规则不稳定，需收紧词表约束 |
-| 6 | 核对 `task_coverage` | 每条任务项都有 `done`/`pending`；有 `pending` 却写 `status=ok` 即为不合格 |
+| 5 | 三层分别核对：`abbreviations`/`boundaries` 的 `ok`、`attribution.all_explained`、`claim_anchors.ok` | 三项须全为 true；任一为 false 说明有表外破坏未被词表发现 |
+| 6 | 同一段重复跑一次 | 两次结论一致；不一致说明规则不稳定，需收紧判定条件 |
+| 7 | 核对 `task_coverage` | 每条任务项都有 `done`/`pending`；有 `pending` 却写 `status=ok` 即为不合格 |
 
 **为什么把自测放第一条**：脚本是这套方法的地基。地基坏了，"没改坏"的结论就是假的——先证明工具能抓错，再证明文本没错。
 
