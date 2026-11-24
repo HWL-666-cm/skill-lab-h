@@ -116,6 +116,22 @@ PDF 必须是真文件——**不读预抽取文本层之外的任何"提示"**�
 
 若运行环境带平台 OCR 工具（本题 `resources` 声明了 `ocr-tool`），由 Agent 对 `pages/*.png` 识别，把结果按本 Skill 的段落 id 回填后再出 `document.md`。接口名与参数以平台当次注入为准，**脚本不硬编码调用**——猜接口名会在换环境时直接崩。同理，若 `scientific-python` 里没有 PyMuPDF，用平台的 `pdf-text-tool` 先取行级文本，本 Skill 的版面/结构/表格/锚点规则仍适用（输入只需行级 bbox 与字体信息）。
 
+## 确定性边界（哪些由脚本定，哪些由你定）
+
+交付物里**没有一处靠模型即兴生成**，这是刻意的：
+
+| 部分 | 谁产生 | 说明 |
+|---|---|---|
+| `document.json` / `document.md` / `tables/*.md` / `anchors.json` / `audit.json` | **脚本** | 全部来自坐标与字体，同一份 PDF 跑两遍字节一致（`references/benchmark.md` 第四节有哈希） |
+| `result.json` 的每个字段 | **脚本** | `make_result.py` 的 `pick()` 是纯查表 + 纯投影，字段名对不上就置 `null` 并写原因，**不猜、不硬凑** |
+| `status` / `uncertainty` / `changes` | **脚本** | 由锚点通过率、未结构化表格、OCR 页、覆盖缺失推导，不由主观判断 |
+| 你写给用户的结论与建议 | **你** | 只进对话回复，**不进 `result.json`** |
+
+因此有两条禁令：
+
+1. **不要手改 `result.json`** 去"让结果好看些"。锚点是拿 bbox 回抽原文比字符串算出来的，手改正文但没改坐标，可核验性立刻归零。
+2. **不要为了填满契约字段而编造内容**。字段填不出就让它为 `null` 并在 `uncertainty` 说明——空字段是可查的缺陷，编造的内容是不可查的错误。
+
 ## 自检方法（交结果前 30 秒能做完）
 
 1. `run_meta.json` 的 `anchor_pass_rate` ≥ 0.95？低于 0.90 就去 `anchors.json.failures` 看是哪些单元、为什么。

@@ -2,7 +2,6 @@
  "source": "examples\\in\\two_column.pdf",
  "sha256": "4c6a61061f45d9ca",
  "page_count": 3,
- "elapsed_s": 0.1,
  "layout_summary": [
   [
    "2col",
@@ -117,5 +116,6 @@
   "formulas": 0,
   "references": 0,
   "captions": 0
- }
+ },
+ "elapsed_s": 0.12
 }

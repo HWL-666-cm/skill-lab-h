@@ -72,7 +72,35 @@
 
 单元断言（5 条）：NBSP 归一、软连字符删除、`fi/fl` 连字展开、行尾断词合并、私用区乱码计数。
 
-## 四、怎么复算
+## 四、重复运行一致性（同一条命令跑两遍）
+
+平台对同一案例跑三次做稳定性评审，所以"同一份 PDF 跑两遍，产物是否一致"本身就是可验收项。
+这里不看代码写了什么，只看字节。
+
+| 产物 | 第一次 | 第二次 | 一致 |
+|---|---|---|---|
+| `result.json` | sha256 `c67ff462c997aad5` | sha256 `c67ff462c997aad5` | 是 |
+| `document.json` / `document.md` | — | — | 是 |
+| `anchors.json` / `audit.json` | — | — | 是 |
+| `tables/t*.md`、`formulas/f*.png` | — | — | 是（12 个 PNG 全部一致） |
+
+这一项原本**不成立**：`document.json` 的 `meta.elapsed_s` 把解析耗时写了进去（实测 3.06 s 与
+3.32 s），于是同一份 PDF 两次解析出的交付物字节不同，稳定性无法自证。修法是把耗时移出
+`document.json`，只留在 `run_meta.json`——那里是运行记录，不是内容。
+
+唯一的合法差异是 `result.json` 里的 `inputs.output_dir`：它回显调用方传入的输出目录，两次指向
+不同目录时自然不同（平台固定 `/app/output`，所以实际运行中不会出现）。
+
+复算：
+
+```bash
+python scripts/run_case.py --pdf your.pdf --output out/
+sha256sum out/result.json
+rm -rf out && python scripts/run_case.py --pdf your.pdf --output out/
+sha256sum out/result.json   # 两次应完全相同
+```
+
+## 五、怎么复算
 
 ```bash
 # 1) Skill 自身的行为断言（不需要任何外部 PDF）
@@ -92,7 +120,7 @@ PY
 判读标准：`anchor_pass_rate ≥ 0.95` 且 `coverage` 缺失项都能在 `uncertainty` 里找到解释，
 就可以直接用；低于 0.90 先去 `anchors.json` 看失败的是哪类单元。
 
-## 五、这份基准不覆盖什么
+## 六、这份基准不覆盖什么
 
 - **不覆盖**扫描件的 OCR 准确率（本 Skill 只做路由与如实标注，不内置 OCR 引擎）。
 - **不覆盖**异常字体导致的全篇乱码（只有单元级断言）。

@@ -96,7 +96,7 @@ def doc_markdown(doc: dict, meta: dict) -> str:
         f"- 作者：{fm.get('authors') or '未识别'}",
         f"- 单位：{'；'.join(fm.get('affiliations') or []) or '未识别'}",
         f"- 版式：{'、'.join(f'{m} {c} 页' for m, c in meta['layout_summary'])}",
-        f"- 解析耗时：{meta['elapsed_s']}s；锚点通过率：{meta.get('anchor_pass_rate', 'n/a')}",
+        f"- 锚点通过率：{meta.get('anchor_pass_rate', 'n/a')}（{meta.get('counts', {}).get('paragraphs', 0)} 段逐段按 bbox 回抽核对）",
         "",
         "> 段落前的 `[p.N]` 是**物理页码**，用于回查原文；`¶` 表示该段与上一段是同一段被排版切断。",
         "",
@@ -244,11 +244,15 @@ def run(pdf_path: str, outdir: Path, render: bool = True) -> dict:
         modes[m] = modes.get(m, 0) + 1
     layout_summary = sorted(modes.items())
 
+    # 解析耗时**不进** document.json：它是运行期测量值，写进交付物会让同一份 PDF 两次
+    # 解析出的结果字节不一致（实测 3.06 vs 3.32），"重复运行稳定"就无法自证。耗时只落
+    # run_meta.json，那里本来就是运行记录而不是内容。
+    elapsed_s = round(time.time() - t0, 2)
+
     meta = {
         "source": str(pdf_path),
         "sha256": hashlib.sha256(Path(pdf_path).read_bytes()).hexdigest()[:16],
         "page_count": doc["page_count"],
-        "elapsed_s": round(time.time() - t0, 2),
         "layout_summary": layout_summary,
         "anchor_pass_rate": rep["pass_rate"],
         "coverage": coverage_checklist(doc, doc["triage"]),
@@ -284,8 +288,10 @@ def run(pdf_path: str, outdir: Path, render: bool = True) -> dict:
                 f"**{f['id']}**{'（' + str(f['number']) + '）' if f.get('number') else ''}"
                 f" 第 {f['page']} 页\n\n```\n{f['text_scripted']}\n```" for f in doc["formulas"]),
             encoding="utf-8")
-    (outdir / "run_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
-    return {"status": "ok", "doc": doc, "meta": meta, "anchors": doc["anchors"], "outdir": str(outdir)}
+    (outdir / "run_meta.json").write_text(
+        json.dumps({**meta, "elapsed_s": elapsed_s}, ensure_ascii=False, indent=1), encoding="utf-8")
+    return {"status": "ok", "doc": doc, "meta": meta, "anchors": doc["anchors"],
+            "outdir": str(outdir), "elapsed_s": elapsed_s}
 
 
 def main() -> int:
@@ -305,7 +311,7 @@ def main() -> int:
             "counts": res["meta"]["counts"],
             "anchor_pass_rate": res["anchors"]["pass_rate"],
             "coverage_missing": [c["key"] for c in res["meta"]["coverage"] if not c["present"]],
-            "elapsed_s": res["meta"]["elapsed_s"],
+            "elapsed_s": res.get("elapsed_s"),
         })
     else:
         summary["reason"] = res["doc"].get("reason")
