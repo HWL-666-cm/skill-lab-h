@@ -1,0 +1,14 @@
+{
+ "case_id": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+ "task": "把这份 PDF 解析成结构化文档，并给出每段的页码与位置依据。",
+ "files": [
+  "two_column.pdf"
+ ],
+ "output_contract": {
+  "reading_result": "按原版面顺序的正文（Markdown）",
+  "sections": "章节树",
+  "tables": "表格的行列与单元格",
+  "evidence": "页码与区块定位",
+  "uncertainty": "未报告与不确定项"
+ }
+}

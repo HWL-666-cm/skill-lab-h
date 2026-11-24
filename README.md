@@ -9,13 +9,13 @@
 
 | # | 题目 | challenge id | 目录 |
 |---|---|---|---|
-| 01 | 文献文档解析 | `product-arena-08-3027d350` | `01-literature-parsing/` |
-| 02 | 文献翻译 | `product-arena-01-5a9928c1` | `02-literature-translation/` |
-| 03 | 文献总结与结构化笔记 | `product-arena-06-6d8cf72b` | `03-summarization-notes/` |
+| 01 | 文献文档解析 | `product-arena-08-3027d350` | `01-pdf-structure-audit/` |
+| 02 | 文献翻译 | `product-arena-01-5a9928c1` | `02-translation-audit/` |
+| 03 | 文献总结与结构化笔记 | `product-arena-06-6d8cf72b` | `03-structured-notes/` |
 | 04 | Nanopublication | `product-arena-09-0e8befd4` | `04-nanopublication/` |
 | 05 | 文献知识图谱构建 | `product-arena-10-760d1a0b` | `05-knowledge-graph/` |
 | 06 | 学术语言润色 | `product-arena-02-7051d92d` | `06-academic-polishing/` |
-| 07 | 参考文献与引用管理 | `product-arena-03-429cc14d` | `07-citation-management/` |
+| 07 | 参考文献与引用管理 | `product-arena-03-429cc14d` | `07-citation-audit/` |
 | 08 | 引言与相关工作写作 | `product-arena-04-4b82ad21` | `08-intro-related-work/` |
 | 09 | 方法与实验章节写作 | `product-arena-05-64faa4a2` | `09-methods-experiments/` |
 | 10 | LaTeX 写作与编译 | `product-arena-07-865de7e4` | `10-latex-writing/` |
@@ -53,8 +53,12 @@ playground submit --challenge-id <ID> --skill <目录> --trace <原生会话日�
 
 | 题目 | 状态 | 说明 |
 |---|---|---|
+| 01 文献文档解析 | ✅ Skill 已完成，待提交 | `01-pdf-structure-audit/`：六步流水线（分诊→版面→结构→表格→公式→锚点）+ 7 个合成自测件 + 两篇真实论文实测（锚点 0.993 / 0.995），详见该目录 `references/benchmark.md` |
+| 02 文献翻译 | ✅ 已完成，待提交 | `02-translation-audit/` |
+| 03 文献总结与结构化笔记 | ✅ 已完成，待提交 | `03-structured-notes/` |
 | 06 学术语言润色 | ✅ 已完成 v1.1 | `06-academic-polishing/`：双审计脚本 + 两份提示词 + 4 条自测用例，`run_selftest.py` 全 PASS |
-| 其余九题 | ⬜ 待做 | 复用 06 的骨架（SKILL.md 结构 / result.json 契约 / 自测方式） |
+| 07 参考文献与引用管理 | ✅ 已完成，待提交 | `07-citation-audit/` |
+| 其余四题 | ⬜ 待做 | 复用已有骨架（SKILL.md 结构 / result.json 契约 / 自测方式） |
 
 ## 许可
 

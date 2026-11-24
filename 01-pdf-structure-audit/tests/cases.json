@@ -1,0 +1,113 @@
+{
+ "note": "合成用例清单（自测用）。cases 由 tests/make_cases.py 生成，由 scripts/run_selftest.py 执行并断言。真实论文的对照指标另见 references/benchmark.md，不放原文。",
+ "version": "1.0",
+ "cases": [
+  {
+   "id": "single_column",
+   "what": "单栏：标题 + 摘要标签独立成段 + 3 个编号章节 + 1 张有线表",
+   "expect": {
+    "status": ["ok", "partial"],
+    "layout_modes": ["1col"],
+    "min_sections": 3,
+    "min_tables": 1,
+    "min_anchor": 0.95,
+    "title_contains": "Single Column"
+   }
+  },
+  {
+   "id": "two_column",
+   "what": "双栏：通栏标题/摘要 + 左右各 4 段，检验不串栏",
+   "expect": {
+    "status": ["ok", "partial"],
+    "layout_modes": ["2col"],
+    "min_sections": 3,
+    "min_anchor": 0.95,
+    "order_no_backtrack": true
+   }
+  },
+  {
+   "id": "three_column",
+   "what": "三栏：检验栏缝定位（第二道栏缝不能用第一栏的行估）",
+   "expect": {
+    "status": ["ok", "partial"],
+    "layout_modes": ["3col"],
+    "min_anchor": 0.95,
+    "max_paragraphs": 40,
+    "no_table_false_positive": true
+   }
+  },
+  {
+   "id": "cjk_single",
+   "what": "中文单栏：全角空格、全角数字、中文标题不被当乱码",
+   "expect": {
+    "status": ["ok", "partial"],
+    "text_contains": "海雾",
+    "min_anchor": 0.9
+   }
+  },
+  {
+   "id": "scanned",
+   "what": "无文字层（整页贴图）：必须路由 OCR 并降级为 partial，不能编造正文",
+   "expect": {
+    "status": ["partial", "needs_review"],
+    "all_pages_ocr": true,
+    "zero_paragraphs": true
+   }
+  },
+  {
+   "id": "encrypted",
+   "what": "有用户密码的 PDF：空密码打不开 → blocked，写清原因",
+   "expect": {
+    "status": ["blocked"],
+    "has_reason": true
+   }
+  },
+  {
+   "id": "long_doc",
+   "what": "60 页双栏：检验运行时间与稳定性",
+   "expect": {
+    "status": ["ok", "partial"],
+    "min_pages": 60,
+    "max_seconds": 120,
+    "min_anchor": 0.95
+   }
+  }
+ ],
+ "unit_expect": [
+  {
+   "id": "norm_nbsp",
+   "what": "NBSP U+00A0 要归一成普通空格（02 题作者行曾因 NBSP 未被识别）",
+   "fn": "norm_text",
+   "input": "Chen\u00a0Huansang",
+   "expect": "Chen Huansang"
+  },
+  {
+   "id": "norm_soft_hyphen",
+   "what": "软连字符 U+00AD 是排版提示，不是字符，必须删掉",
+   "fn": "norm_text",
+   "input": "compre\u00adhensive",
+   "expect": "comprehensive"
+  },
+  {
+   "id": "norm_ligature",
+   "what": "fi/fl 连字要展开，否则逐字比对必然判不一致",
+   "fn": "norm_text",
+   "input": "\ufb01ne \ufb02ux",
+   "expect": "fine flux"
+  },
+  {
+   "id": "dehyphenate",
+   "what": "行尾断词合并；但 state-of- / the-art 这种要保留连字符",
+   "fn": "dehyphenate",
+   "input": "compre-|hensive",
+   "expect": "comprehensive"
+  },
+  {
+   "id": "garbled_pua",
+   "what": "私用区字符算乱码（ToUnicode 坏掉的典型表现）",
+   "fn": "garbled_ratio_gt",
+   "input": "\ue001\ue002\ue003abc",
+   "expect": 0.4
+  }
+ ]
+}

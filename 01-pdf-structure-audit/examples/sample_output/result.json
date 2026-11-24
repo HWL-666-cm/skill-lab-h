@@ -1,0 +1,708 @@
+{
+ "case_id": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+ "status": "ok",
+ "task": "literature_pdf_parsing",
+ "source": {
+  "file": "two_column.pdf",
+  "sha256_16": "4c6a61061f45d9ca",
+  "page_count": 3,
+  "engine": "PyMuPDF"
+ },
+ "document": {
+  "title": "A Two Column Paper About Visibility Nowcasting",
+  "authors": "C. Writer, D. Writer",
+  "affiliations": [],
+  "abstract": "Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially. Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.",
+  "keywords": null,
+  "sections": [
+   {
+    "id": "sec1",
+    "title": "1 Introduction",
+    "level": 1,
+    "page": 1,
+    "para": "p1para3",
+    "children": [],
+    "number": null
+   },
+   {
+    "id": "sec2",
+    "title": "2 Results",
+    "level": 1,
+    "page": 2,
+    "para": "p2para0",
+    "children": [],
+    "number": null
+   },
+   {
+    "id": "sec3",
+    "title": "3 Results",
+    "level": 1,
+    "page": 3,
+    "para": "p3para0",
+    "children": [],
+    "number": null
+   }
+  ],
+  "tables": [],
+  "figures": [],
+  "formulas": [],
+  "references": []
+ },
+ "body_paragraphs": [
+  {
+   "id": "p1para4",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    51.7,
+    191.3,
+    280.8,
+    238.0
+   ],
+   "text": "Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.",
+   "continued_from": null
+  },
+  {
+   "id": "p1para5",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    51.7,
+    243.2,
+    289.3,
+    301.6
+   ],
+   "text": "Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.",
+   "continued_from": null
+  },
+  {
+   "id": "p1para6",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    51.7,
+    306.5,
+    290.7,
+    364.9
+   ],
+   "text": "The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.",
+   "continued_from": null
+  },
+  {
+   "id": "p1para7",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    51.7,
+    369.9,
+    284.1,
+    416.6
+   ],
+   "text": "We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.",
+   "continued_from": null
+  },
+  {
+   "id": "p1para8",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    304.7,
+    191.3,
+    542.3,
+    249.7
+   ],
+   "text": "Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.",
+   "continued_from": null
+  },
+  {
+   "id": "p1para9",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    304.7,
+    254.6,
+    543.7,
+    313.0
+   ],
+   "text": "The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.",
+   "continued_from": null
+  },
+  {
+   "id": "p1para10",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    304.7,
+    318.0,
+    537.1,
+    364.7
+   ],
+   "text": "We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.",
+   "continued_from": null
+  },
+  {
+   "id": "p1para11",
+   "page": 1,
+   "section": "sec1",
+   "bbox": [
+    304.7,
+    369.9,
+    540.9,
+    428.3
+   ],
+   "text": "Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para1",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    51.7,
+    78.7,
+    290.7,
+    137.1
+   ],
+   "text": "The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para2",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    51.7,
+    142.1,
+    284.1,
+    188.8
+   ],
+   "text": "We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para3",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    51.7,
+    194.0,
+    287.9,
+    252.4
+   ],
+   "text": "Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para4",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    51.7,
+    257.3,
+    290.2,
+    292.4
+   ],
+   "text": "Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para5",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    304.7,
+    78.7,
+    537.1,
+    125.4
+   ],
+   "text": "We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para6",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    304.7,
+    130.6,
+    540.9,
+    189.0
+   ],
+   "text": "Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para7",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    304.7,
+    194.0,
+    543.2,
+    229.0
+   ],
+   "text": "Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.",
+   "continued_from": null
+  },
+  {
+   "id": "p2para8",
+   "page": 2,
+   "section": "sec2",
+   "bbox": [
+    304.7,
+    234.4,
+    533.8,
+    281.1
+   ],
+   "text": "Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para1",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    51.7,
+    78.7,
+    287.9,
+    137.1
+   ],
+   "text": "Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para2",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    51.7,
+    142.1,
+    290.2,
+    177.1
+   ],
+   "text": "Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para3",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    51.7,
+    182.5,
+    280.8,
+    229.2
+   ],
+   "text": "Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para4",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    51.7,
+    234.4,
+    289.3,
+    292.8
+   ],
+   "text": "Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para5",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    304.7,
+    78.7,
+    543.2,
+    113.7
+   ],
+   "text": "Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para6",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    304.7,
+    119.1,
+    533.8,
+    165.8
+   ],
+   "text": "Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para7",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    304.7,
+    171.0,
+    542.3,
+    229.4
+   ],
+   "text": "Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.",
+   "continued_from": null
+  },
+  {
+   "id": "p3para8",
+   "page": 3,
+   "section": "sec3",
+   "bbox": [
+    304.7,
+    234.4,
+    543.7,
+    292.8
+   ],
+   "text": "The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.",
+   "continued_from": null
+  }
+ ],
+ "evidence": {
+  "anchors": {
+   "total_units": 30,
+   "passed": 30,
+   "failed": 0,
+   "pass_rate": 1.0,
+   "by_kind": {
+    "title": {
+     "total": 1,
+     "ok": 1
+    },
+    "authors": {
+     "total": 1,
+     "ok": 1
+    },
+    "abstract": {
+     "total": 1,
+     "ok": 1
+    },
+    "heading": {
+     "total": 3,
+     "ok": 3
+    },
+    "body": {
+     "total": 24,
+     "ok": 24
+    }
+   }
+  },
+  "page_map": [
+   {
+    "page": 1,
+    "route": "text",
+    "layout": {
+     "mode": "2col",
+     "splits": [
+      292.3
+     ],
+     "gutter": [
+      [
+       279.9,
+       304.7
+      ]
+     ],
+     "content": [
+      50.0,
+      42.9,
+      543.7,
+      428.3
+     ]
+    },
+    "paragraphs": 12
+   },
+   {
+    "page": 2,
+    "route": "text",
+    "layout": {
+     "mode": "2col",
+     "splits": [
+      292.5
+     ],
+     "gutter": [
+      [
+       280.4,
+       304.7
+      ]
+     ],
+     "content": [
+      50.0,
+      48.2,
+      543.2,
+      292.4
+     ]
+    },
+    "paragraphs": 9
+   },
+   {
+    "page": 3,
+    "route": "text",
+    "layout": {
+     "mode": "2col",
+     "splits": [
+      290.4
+     ],
+     "gutter": [
+      [
+       276.1,
+       304.7
+      ]
+     ],
+     "content": [
+      50.0,
+      48.2,
+      543.7,
+      292.8
+     ]
+    },
+    "paragraphs": 9
+   }
+  ],
+  "anchor_details_file": "anchors.json",
+  "markdown_file": "document.md",
+  "tables_dir": "tables/"
+ },
+ "coverage": [
+  {
+   "key": "title",
+   "label": "标题",
+   "present": true,
+   "count": 1,
+   "note": null
+  },
+  {
+   "key": "authors",
+   "label": "作者",
+   "present": true,
+   "count": null,
+   "note": null
+  },
+  {
+   "key": "affiliations",
+   "label": "单位",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "abstract",
+   "label": "摘要",
+   "present": true,
+   "count": 74,
+   "note": "explicit_label"
+  },
+  {
+   "key": "keywords",
+   "label": "关键词",
+   "present": false,
+   "count": null,
+   "note": null
+  },
+  {
+   "key": "sections",
+   "label": "章节层级",
+   "present": true,
+   "count": 3,
+   "note": null
+  },
+  {
+   "key": "body",
+   "label": "正文段落",
+   "present": true,
+   "count": 24,
+   "note": null
+  },
+  {
+   "key": "tables",
+   "label": "表格",
+   "present": false,
+   "count": 0,
+   "note": "structure 状态下 n/a"
+  },
+  {
+   "key": "figures",
+   "label": "图与图注",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "formulas",
+   "label": "公式",
+   "present": false,
+   "count": 0,
+   "note": "有编号 0"
+  },
+  {
+   "key": "references",
+   "label": "参考文献",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "headers",
+   "label": "页眉页脚",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "footnotes",
+   "label": "脚注",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "pages",
+   "label": "页数与页面地图",
+   "present": true,
+   "count": 3,
+   "note": null
+  }
+ ],
+ "sources": [
+  {
+   "kind": "pdf",
+   "file": "two_column.pdf",
+   "sha256_16": "4c6a61061f45d9ca",
+   "pages": 3
+  },
+  {
+   "kind": "derived",
+   "note": "结构、表格、公式、锚点均由本机 PyMuPDF 提取，无外部服务、无人工补写"
+  }
+ ],
+ "uncertainty": [
+  "覆盖项缺失：单位（affiliations）——原文可能确实没有，或未能识别，需人工确认",
+  "覆盖项缺失：关键词（keywords）——原文可能确实没有，或未能识别，需人工确认",
+  "覆盖项缺失：表格（tables）——原文可能确实没有，或未能识别，需人工确认",
+  "覆盖项缺失：图与图注（figures）——原文可能确实没有，或未能识别，需人工确认",
+  "覆盖项缺失：公式（formulas）——原文可能确实没有，或未能识别，需人工确认",
+  "覆盖项缺失：参考文献（references）——原文可能确实没有，或未能识别，需人工确认",
+  "覆盖项缺失：页眉页脚（headers）——原文可能确实没有，或未能识别，需人工确认",
+  "覆盖项缺失：脚注（footnotes）——原文可能确实没有，或未能识别，需人工确认"
+ ],
+ "changes": [
+  {
+   "type": "header_footer_isolated",
+   "detail": "按“跨页同位重复”识别并隔离页眉页脚 0 处，未删除，保留在 paras 中可查"
+  },
+  {
+   "type": "reading_order",
+   "detail": "按栏缝 + 通栏分区重排：[('2col', 3)]"
+  },
+  {
+   "type": "tables_reconstructed",
+   "detail": "0 张表按词坐标重建网格，单元格保留 bbox"
+  },
+  {
+   "type": "formulas_scripted",
+   "detail": "0 处公式还原上下标为 ^{}/_{} 形式并附区域截图"
+  },
+  {
+   "type": "anchor_verified",
+   "detail": "逐单元按 bbox 回抽原文核对，通过率 1.0"
+  }
+ ],
+ "stats": {
+  "paragraphs": 24,
+  "sections": 3,
+  "tables": 0,
+  "formulas": 0,
+  "references": 0,
+  "captions": 0
+ },
+ "output_contract": {
+  "reading_result": {
+   "file": "document.md",
+   "chars": 7120,
+   "text": "# A Two Column Paper About Visibility Nowcasting\n\n- 源文件：`two_column.pdf`（3 页）\n- 作者：C. Writer, D. Writer\n- 单位：未识别\n- 版式：2col 3 页\n- 解析耗时：0.1s；锚点通过率：1.0\n\n> 段落前的 `[p.N]` 是**物理页码**，用于回查原文；`¶` 表示该段与上一段是同一段被排版切断。\n\n## 摘要\n\nVisibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially. Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.\n\n## 结构目录\n\n- 1 Introduction（第 1 页）\n- 2 Results（第 2 页）\n- 3 Results（第 3 页）\n\n## 正文\n\n### 1 Introduction\n\n[p.1] Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.\n\n[p.1] Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.\n\n[p.1] The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.\n\n[p.1] We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.\n\n[p.1] Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.\n\n[p.1] The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.\n\n[p.1] We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.\n\n[p.1] Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.\n\n### 2 Results\n\n[p.2] The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.\n\n[p.2] We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.\n\n[p.2] Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.\n\n[p.2] Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.\n\n[p.2] We therefore fit separate models for each forecast step rather than one model with the lead time as a feature, because the error structure changes with horizon and a single model tends to compromise between regimes that behave quite differently.\n\n[p.2] Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.\n\n[p.2] Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.\n\n[p.2] Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.\n\n### 3 Results\n\n[p.3] Calibration is checked with reliability diagrams and the Brier decomposition. A model that is sharp but poorly calibrated is worse than a well calibrated model with the same area under the curve, because the operational decision threshold depends on the user.\n\n[p.3] Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.\n\n[p.3] Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.\n\n[p.3] Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.\n\n[p.3] Missing predictors are imputed from the previous analysis cycle and flagged, so that the downstream consumer can decide whether a given forecast should be trusted at all.\n\n[p.3] Visibility forecasting at airports is a hard problem because low-visibility events are rare, strongly stratified, and driven by interactions between radiative cooling, turbulence and advection that numerical models resolve only partially.\n\n[p.3] Statistical post-processing offers a practical alternative. Instead of resolving the microphysics, it learns a mapping from predictors that are already available from the numerical model to the probability of the target event, using a long archive of historical observations as the training signal.\n\n[p.3] The predictor set matters more than the learning algorithm in most published comparisons. Ceiling, runway visual range, dew point depression and boundary layer height carry most of the signal, while radiation terms add skill only during the evening transition when the boundary layer collapses rapidly.\n"
+  },
+  "sections": [
+   {
+    "id": "sec1",
+    "title": "1 Introduction",
+    "level": 1,
+    "page": 1,
+    "para": "p1para3",
+    "children": [],
+    "number": null
+   },
+   {
+    "id": "sec2",
+    "title": "2 Results",
+    "level": 1,
+    "page": 2,
+    "para": "p2para0",
+    "children": [],
+    "number": null
+   },
+   {
+    "id": "sec3",
+    "title": "3 Results",
+    "level": 1,
+    "page": 3,
+    "para": "p3para0",
+    "children": [],
+    "number": null
+   }
+  ],
+  "tables": [],
+  "evidence": {
+   "total_units": 30,
+   "passed": 30,
+   "failed": 0,
+   "pass_rate": 1.0,
+   "by_kind": {
+    "title": {
+     "total": 1,
+     "ok": 1
+    },
+    "authors": {
+     "total": 1,
+     "ok": 1
+    },
+    "abstract": {
+     "total": 1,
+     "ok": 1
+    },
+    "heading": {
+     "total": 3,
+     "ok": 3
+    },
+    "body": {
+     "total": 24,
+     "ok": 24
+    }
+   }
+  },
+  "uncertainty": [
+   "覆盖项缺失：单位（affiliations）——原文可能确实没有，或未能识别，需人工确认",
+   "覆盖项缺失：关键词（keywords）——原文可能确实没有，或未能识别，需人工确认",
+   "覆盖项缺失：表格（tables）——原文可能确实没有，或未能识别，需人工确认",
+   "覆盖项缺失：图与图注（figures）——原文可能确实没有，或未能识别，需人工确认",
+   "覆盖项缺失：公式（formulas）——原文可能确实没有，或未能识别，需人工确认",
+   "覆盖项缺失：参考文献（references）——原文可能确实没有，或未能识别，需人工确认",
+   "覆盖项缺失：页眉页脚（headers）——原文可能确实没有，或未能识别，需人工确认",
+   "覆盖项缺失：脚注（footnotes）——原文可能确实没有，或未能识别，需人工确认"
+  ]
+ },
+ "output_contract_fields": [
+  "reading_result",
+  "sections",
+  "tables",
+  "evidence",
+  "uncertainty"
+ ],
+ "inputs": {
+  "case_json": "examples\\in\\case.json",
+  "pdf": "examples\\in\\two_column.pdf",
+  "output_dir": "examples\\sample_output"
+ }
+}

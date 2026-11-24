@@ -1,0 +1,182 @@
+{
+ "coverage": [
+  {
+   "key": "title",
+   "label": "标题",
+   "present": true,
+   "count": 1,
+   "note": null
+  },
+  {
+   "key": "authors",
+   "label": "作者",
+   "present": true,
+   "count": null,
+   "note": null
+  },
+  {
+   "key": "affiliations",
+   "label": "单位",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "abstract",
+   "label": "摘要",
+   "present": true,
+   "count": 74,
+   "note": "explicit_label"
+  },
+  {
+   "key": "keywords",
+   "label": "关键词",
+   "present": false,
+   "count": null,
+   "note": null
+  },
+  {
+   "key": "sections",
+   "label": "章节层级",
+   "present": true,
+   "count": 3,
+   "note": null
+  },
+  {
+   "key": "body",
+   "label": "正文段落",
+   "present": true,
+   "count": 24,
+   "note": null
+  },
+  {
+   "key": "tables",
+   "label": "表格",
+   "present": false,
+   "count": 0,
+   "note": "structure 状态下 n/a"
+  },
+  {
+   "key": "figures",
+   "label": "图与图注",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "formulas",
+   "label": "公式",
+   "present": false,
+   "count": 0,
+   "note": "有编号 0"
+  },
+  {
+   "key": "references",
+   "label": "参考文献",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "headers",
+   "label": "页眉页脚",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "footnotes",
+   "label": "脚注",
+   "present": false,
+   "count": 0,
+   "note": null
+  },
+  {
+   "key": "pages",
+   "label": "页数与页面地图",
+   "present": true,
+   "count": 3,
+   "note": null
+  }
+ ],
+ "anchors": {
+  "total_units": 30,
+  "passed": 30,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "by_kind": {
+   "title": {
+    "total": 1,
+    "ok": 1
+   },
+   "authors": {
+    "total": 1,
+    "ok": 1
+   },
+   "abstract": {
+    "total": 1,
+    "ok": 1
+   },
+   "heading": {
+    "total": 3,
+    "ok": 3
+   },
+   "body": {
+    "total": 24,
+    "ok": 24
+   }
+  }
+ },
+ "issues": [],
+ "triage": {
+  "pages": [
+   {
+    "page": 1,
+    "route": "text",
+    "chars": 2825,
+    "garbled_ratio": 0.0,
+    "images": 0,
+    "drawings": 0,
+    "fonts_total": 2,
+    "fonts_missing_tounicode": 0,
+    "rotation": 0,
+    "flags": [],
+    "reasons": []
+   },
+   {
+    "page": 2,
+    "route": "text",
+    "chars": 1905,
+    "garbled_ratio": 0.0,
+    "images": 0,
+    "drawings": 0,
+    "fonts_total": 2,
+    "fonts_missing_tounicode": 0,
+    "rotation": 0,
+    "flags": [],
+    "reasons": []
+   },
+   {
+    "page": 3,
+    "route": "text",
+    "chars": 1990,
+    "garbled_ratio": 0.0,
+    "images": 0,
+    "drawings": 0,
+    "fonts_total": 2,
+    "fonts_missing_tounicode": 0,
+    "rotation": 0,
+    "flags": [],
+    "reasons": []
+   }
+  ],
+  "page_count": 3,
+  "route_counts": {
+   "text": 3
+  },
+  "password_required": false,
+  "opened": true,
+  "needs_ocr_pages": [],
+  "low_text_pages": []
+ }
+}
