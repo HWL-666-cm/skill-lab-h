@@ -148,7 +148,7 @@ python scripts/run_case.py --case /input/case.json \
 
 `assets/examples/case.json` 是示例输入，`pdf` 处填论文路径。对这一篇跑完三步，得到 `assets/examples/result.json`、`assets/examples/assertions.trig`、`assets/examples/validation.json`。
 
-三份文件取自一篇公开论文的两条断言，用于说明字段结构与四图形态，是接口示例，不是平台固定案例的正式结果。
+三份文件取自一篇公开论文的两条断言，用于说明字段结构与四图形态，是接口示例，不是平台固定案例的正式结果。三份都带显式标记：`result.json` 与 `validation.json` 顶层有 `example: true` 和 `example_note`，`assertions.trig` 头部有 `# EXAMPLE-NOT-A-OFFICIAL-CASE` 注释。
 
 ## 运行环境
 

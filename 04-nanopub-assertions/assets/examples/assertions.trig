@@ -1,3 +1,7 @@
+# EXAMPLE-NOT-A-OFFICIAL-CASE
+# 接口示例：一篇公开期刊论文的两条断言，用来说明四图结构。
+# 不是平台 3 个固定案例的任何正式结果；IRI 是内容哈希草稿，未签名。
+
 @prefix np: <http://www.nanopub.org/nschema#> .
 @prefix npx: <http://purl.org/nanopub/x/> .
 @prefix hycl: <http://purl.org/petapico/o/hycl#> .

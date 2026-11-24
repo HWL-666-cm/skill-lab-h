@@ -1,4 +1,6 @@
 {
+  "example": true,
+  "example_note": "EXAMPLE-NOT-A-OFFICIAL-CASE：本文件是接口示例，取自一篇公开期刊论文的两条断言，用于说明字段形状。不是平台 3 个固定案例的任何正式结果。",
   "case_id": "example-ral2016-two-assertions",
   "status": "pass",
   "task": "nanopublication-assertion-extraction",
