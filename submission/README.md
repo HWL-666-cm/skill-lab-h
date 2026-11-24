@@ -1,7 +1,7 @@
-# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 06 题 + 第 03 题）
+# 玻尔产品周赛·地大分站赛第一期 —— 提交包（第 06 / 03 / 07 题）
 
 本题为 Skill 创作任务，**只提交 Skill 及其必要资源**，不提交答案、白板或正式测试结果。
-本文件夹汇总两题的提交材料，每题的 Skill 目录均远低于平台资源上限
+本文件夹汇总三题的提交材料，每题的 Skill 目录均远低于平台资源上限
 （50 个 UTF-8 文本文件 / 单文件 500 KB / 总计 2 MB）。
 
 ---
@@ -64,6 +64,35 @@ playground submit \
 
 ---
 
+## 第 07 题：参考文献与引用管理
+
+### 目录结构与用途
+
+| 路径 | 作用 | 对应提交参数 |
+|---|---|---|
+| `07-structured-citation/` | Skill 本体 12 个文件（含 `GITHUB_URL.txt`）：入口 `SKILL.md`、提示词、字段字典、去重/格式判据、评分自查表、3 个脚本、示例、13 条自测 | `--skill` |
+| `07-structured-citation/SKILL.md` | 平台入口；主线"编得顺"双向编号一致性，第二层"收得净"可解释去重与字段核验 | — |
+| `07-structured-citation/scripts/citation_audit.py` | 核心审计：悬空/未用、编号重排、逐条回链、同 DOI 分级去重、预印本/DOI/访问日期核验 | — |
+| `07-structured-citation/scripts/make_result.py` | 组装 `result.json`，对齐 `output_contract`，输出可编辑稿与 change_log | — |
+| `07-structured-citation/scripts/run_selftest.py` | 13 条合成用例；本地实跑 13/13 通过 | — |
+| `07-outputs/` | 只放说明，**没有任何答案文件** | `--outputs` |
+| `07-outputs/GITHUB_URL.txt` | 公开仓库对应目录链接 | — |
+
+题面 ID：`product-arena-03-429cc14d`（写作04｜参考文献与引用管理；平台占位名与实际题号不一致，以 ID 为准）。
+
+```bash
+playground submit \
+  --challenge-id product-arena-03-429cc14d \
+  --skill    "D:/桌面/bohrium-cugb-p1/submission/07-structured-citation" \
+  --outputs  "D:/桌面/bohrium-cugb-p1/submission/07-outputs" \
+  --trace    "<本题真实 Agent 会话日志 jsonl 的绝对路径>" \
+  --dry-run
+```
+
+> 第 07 题尚未提交。trace 必须取本题相关对话并脱敏，不能复用 06 或 03 的 trace。
+
+---
+
 ## 运行时路径（供核对，不需要手工创建）
 
 - 输入：`/input/case.json` 与同目录 `task.md`；若给 PDF，读取实际 PDF 而非标签推断内容。
@@ -84,5 +113,6 @@ playground submit \
 
 - 06：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/06-academic-polishing
 - 03：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/03-structured-notes
+- 07：`GITHUB_URL.txt` 指向 https://github.com/HWL-666-cm/skill-lab-h/tree/main/07-structured-citation
 
 提交前需用**未登录** GitHub 的浏览器窗口打开一次链接确认可见。
