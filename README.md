@@ -53,11 +53,11 @@ playground submit --challenge-id <ID> --skill <目录> --trace <原生会话日�
 
 | 题目 | 状态 | 说明 |
 |---|---|---|
-| 01 文献文档解析 | ✅ Skill 已完成，待提交 | `01-pdf-structure-audit/`：六步流水线（分诊→版面→结构→表格→公式→锚点）+ 7 个合成自测件 + 两篇真实论文实测（锚点 0.993 / 0.995），详见该目录 `references/benchmark.md` |
-| 02 文献翻译 | ✅ 已完成，待提交 | `02-translation-audit/` |
-| 03 文献总结与结构化笔记 | ✅ 已完成，待提交 | `03-structured-notes/` |
-| 06 学术语言润色 | ✅ 已完成 v1.1 | `06-academic-polishing/`：双审计脚本 + 两份提示词 + 4 条自测用例，`run_selftest.py` 全 PASS |
-| 07 参考文献与引用管理 | ✅ 已完成，待提交 | `07-citation-audit/` |
+| 01 文献文档解析 | ✅ 已提交 attempt 104326 | `01-pdf-structure-audit/`：六步流水线（分诊→版面→结构→表格→公式→锚点）+ 7 个合成自测件 + 两篇真实论文实测（锚点 0.993 / 0.995），详见该目录 `references/benchmark.md` |
+| 02 文献翻译 | ✅ 已提交 attempt 104327 | `02-translation-audit/` |
+| 03 文献总结与结构化笔记 | ✅ 已提交 attempt 104328 | `03-structured-notes/` |
+| 06 学术语言润色 | ✅ 已提交 attempt 103624 / 104330（补齐 requirements 后重提） | `06-academic-polishing/`：双审计脚本 + 两份提示词 + 4 条自测用例，`run_selftest.py` 全 PASS |
+| 07 参考文献与引用管理 | ✅ 已提交 attempt 104329 | `07-citation-audit/` |
 | 其余四题 | ⬜ 待做 | 复用已有骨架（SKILL.md 结构 / result.json 契约 / 自测方式） |
 
 ## 许可

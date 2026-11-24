@@ -24,13 +24,13 @@
 ```bash
 playground submit \
   --challenge-id product-arena-02-7051d92d \
-  --skill    "D:/桌面/bohrium-cugb-p1/submission/06-academic-polishing" \
+  --skill    "D:/桌面/bohrium-cugb-p1/06-academic-polishing" \
   --outputs  "D:/桌面/bohrium-cugb-p1/submission/06-outputs" \
   --trace    "D:/桌面/bohrium-cugb-p1/_trace/06_trace_extended.jsonl" \
   --dry-run
 ```
 
-> 第 06 题已于 2026-11-24 07:11 UTC 正式提交，attempt 103624，状态 submitted / scoring_state queued。
+> 第 06 题两次提交：attempt **103624**（首次，2026-11-24 15:11 +08:00，已在评分）与 attempt **104330**（2026-11-24 19:50 +08:00，补齐 `requirements.txt` 后重提，status=submitted）。
 
 ---
 
@@ -54,13 +54,13 @@ playground submit \
 ```bash
 playground submit \
   --challenge-id product-arena-06-6d8cf72b \
-  --skill    "D:/桌面/bohrium-cugb-p1/submission/03-structured-notes" \
+  --skill    "D:/桌面/bohrium-cugb-p1/03-structured-notes" \
   --outputs  "D:/桌面/bohrium-cugb-p1/submission/03-outputs" \
   --trace    "<本题真实 Agent 会话日志 jsonl 的绝对路径>" \
   --dry-run
 ```
 
-> 第 03 题尚未提交。`--trace` 必须取自本题相关对话，不能伪造或复用 06 的 trace。
+> 第 03 题已提交：attempt **104328**（2026-11-24 19:49 +08:00，status=submitted）。`--trace` 取自本题相关对话，未复用其他题。
 
 ---
 
@@ -96,7 +96,7 @@ playground submit \
   --dry-run
 ```
 
-> 第 01 题尚未提交。trace 已备好在 `_trace/01_trace.jsonl`（48 条、valid=true，8 类 PII 残留全 0；论文题名保留为公开题录信息）。
+> 第 01 题已提交：attempt **104326**（2026-11-24 19:49 +08:00，status=submitted）。trace 为 `_trace/01_trace.jsonl`（48 条、valid=true，8 类 PII 残留全 0；论文题名保留为公开题录信息）。
 > 明细见 `01-提交清单.md`。
 
 ---
@@ -120,13 +120,13 @@ playground submit \
 ```bash
 playground submit \
   --challenge-id product-arena-03-429cc14d \
-  --skill    "D:/桌面/bohrium-cugb-p1/submission/07-structured-citation" \
+  --skill    "D:/桌面/bohrium-cugb-p1/07-citation-audit" \
   --outputs  "D:/桌面/bohrium-cugb-p1/submission/07-outputs" \
   --trace    "<本题真实 Agent 会话日志 jsonl 的绝对路径>" \
   --dry-run
 ```
 
-> 第 07 题尚未提交。trace 必须取本题相关对话并脱敏，不能复用 06 或 03 的 trace。trace 已备好在 `_trace/07_trace.jsonl`（40 条、valid=true）。
+> 第 07 题已提交：attempt **104329**（2026-11-24 19:50 +08:00，status=submitted）。trace 为 `_trace/07_trace.jsonl`（40 条、valid=true），取自本题对话，未复用其他题。
 
 ---
 
@@ -151,14 +151,14 @@ playground submit \
 ```bash
 playground submit \
   --challenge-id product-arena-01-5a9928c1 \
-  --skill    "D:/桌面/bohrium-cugb-p1/submission/02-translation-audit" \
+  --skill    "D:/桌面/bohrium-cugb-p1/02-translation-audit" \
   --outputs  "D:/桌面/bohrium-cugb-p1/submission/02-outputs" \
   --trace    "<本题真实 Agent 会话日志 jsonl 的绝对路径>" \
   --dry-run
 ```
 
-> 第 02 题尚未提交。验证用的海雾论文原文全程本地处理，未上传、未进包。
-> trace 已备好在 `_trace/02_trace.jsonl`（76 条、valid=true，8 类 PII 残留全 0）。
+> 第 02 题已提交：attempt **104327**（2026-11-24 19:49 +08:00，status=submitted）。验证用的海雾论文原文全程本地处理，未上传、未进包。
+> trace 为 `_trace/02_trace.jsonl`（76 条、valid=true，8 类 PII 残留全 0）。
 
 ---
 
