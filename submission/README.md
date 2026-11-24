@@ -64,6 +64,43 @@ playground submit \
 
 ---
 
+## 第 01 题：文献文档解析
+
+### 目录结构与用途
+
+| 路径 | 作用 | 对应提交参数 |
+|---|---|---|
+| `01-pdf-structure-audit/` | Skill 本体 29 文件（含 `GITHUB_URL.txt`）：入口 `SKILL.md`、11 个脚本、`requirements.txt`、工作流提示词、4 份参考（字段字典/版式判据/异常分支/实测基准）、示例、7 条合成自测 | `--skill` |
+| `01-pdf-structure-audit/SKILL.md` | 平台入口；把题面"提得全/排得对/拆得清/核得回"翻成四类可验收交付物 | — |
+| `01-pdf-structure-audit/scripts/pdfcore.py` | 底座：文本归一化（NBSP/连字/软连字符）、乱码占比、ToUnicode 检测、页级 line 模型（含跨栏合行切段）、逐页分诊 | — |
+| `01-pdf-structure-audit/scripts/layout.py` | 分栏（窄行聚类 + 交叉率 + 邻栏中位栏缝）与阅读顺序（通栏行作分区边界） | — |
+| `01-pdf-structure-audit/scripts/structure.py` | 章节树、页眉页脚隔离、题注判据、前言区、参考文献区、续段判定 | — |
+| `01-pdf-structure-audit/scripts/tables.py` | 题注定位 → 横线收紧边界 → 词坐标重建网格 → 一致性校验 → 跨页续表合并 | — |
+| `01-pdf-structure-audit/scripts/formulas.py` | 数学字体/字形 + 右缘编号配对 → 上下标还原 → 区域截图 | — |
+| `01-pdf-structure-audit/scripts/anchors.py` | 核心：bbox 回抽原文、逐单元覆盖率、按类型阈值判定，不静默修补 | — |
+| `01-pdf-structure-audit/scripts/build.py` | 六步编排 + 产物落盘（document.json/md、tables/、formulas.md、audit/anchors/run_meta） | — |
+| `01-pdf-structure-audit/scripts/make_result.py` | 组装 `result.json`，按 `output_contract` 字段名逐个填，填不出写 null + 原因 | — |
+| `01-pdf-structure-audit/scripts/run_case.py` | 平台入口：读 `/input` 找 PDF，异常一律落 `status=blocked` 的结构化结果 | — |
+| `01-pdf-structure-audit/scripts/run_selftest.py` | 7 个合成件 + 5 条单元断言；本地实跑 12/12 通过 | — |
+| `01-outputs/` | 只放说明，**没有任何答案文件** | `--outputs` |
+| `01-outputs/GITHUB_URL.txt` | 公开仓库对应目录链接 | — |
+
+题面 ID：`product-arena-08-3027d350`（阅读01｜文献文档解析；平台占位名与实际题号不一致，以 ID 为准）。
+
+```bash
+playground submit \
+  --challenge-id product-arena-08-3027d350 \
+  --skill    "D:/桌面/bohrium-cugb-p1/01-pdf-structure-audit" \
+  --outputs  "D:/桌面/bohrium-cugb-p1/submission/01-outputs" \
+  --trace    "_trace/01_trace.jsonl" \
+  --dry-run
+```
+
+> 第 01 题尚未提交。trace 已备好在 `_trace/01_trace.jsonl`（48 条、valid=true，8 类 PII 残留全 0；论文题名保留为公开题录信息）。
+> 明细见 `01-提交清单.md`。
+
+---
+
 ## 第 07 题：参考文献与引用管理
 
 ### 目录结构与用途
@@ -121,6 +158,7 @@ playground submit \
 ```
 
 > 第 02 题尚未提交。验证用的海雾论文原文全程本地处理，未上传、未进包。
+> trace 已备好在 `_trace/02_trace.jsonl`（76 条、valid=true，8 类 PII 残留全 0）。
 
 ---
 

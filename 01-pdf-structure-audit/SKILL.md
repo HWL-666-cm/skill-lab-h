@@ -98,13 +98,23 @@ PDF 必须是真文件——**不读预抽取文本层之外的任何"提示"**�
 
 ## 依赖
 
-- Python 3.10+，**PyMuPDF ≥ 1.23**（唯一硬依赖，`pip install pymupdf`）。不依赖 pdfplumber / OCR 引擎 / 任何联网服务。
+- Python 3.10+，**PyMuPDF ≥ 1.23**（唯一硬依赖，`pip install -r requirements.txt`，实测 1.28.2）。不依赖 pdfplumber / 任何联网服务。版本下限的理由写在 `requirements.txt` 注释里。
 - 可选：`Pillow`（只在导出公式区域 PNG 时用到，缺失则跳过截图并在 `uncertainty` 记一条）。
 - 版式规则、判据与阈值为什么这么定：`references/layout-rules.md`。
 - 已知边界与诚实降级口径：`references/failure-modes.md`。
 - 真实论文上的实测指标（只登记题录，不含原文）：`references/benchmark.md`。
 - Agent 侧操作流程（怎么调、怎么读结果、怎么写结论）：`prompts/extraction-workflow.md`。
 - 最小调用示例：`examples/`。
+
+## 扫描页与平台工具怎么协同
+
+本 Skill 不内置 OCR 引擎，但也不会把扫描页当"读过了"。分诊判定某页无可用文字层时：
+
+1. 该页渲成 `pages/pNN.png`（150 dpi）落在输出目录，**产物可核验，不是一句口头说明**；
+2. 正文里不产出这一页的内容（几何推断在无字页上等于编造），`status` 降为 `partial`；
+3. `uncertainty` 写明图片路径与"未回填前不要当成已读"。
+
+若运行环境带平台 OCR 工具（本题 `resources` 声明了 `ocr-tool`），由 Agent 对 `pages/*.png` 识别，把结果按本 Skill 的段落 id 回填后再出 `document.md`。接口名与参数以平台当次注入为准，**脚本不硬编码调用**——猜接口名会在换环境时直接崩。同理，若 `scientific-python` 里没有 PyMuPDF，用平台的 `pdf-text-tool` 先取行级文本，本 Skill 的版面/结构/表格/锚点规则仍适用（输入只需行级 bbox 与字体信息）。
 
 ## 自检方法（交结果前 30 秒能做完）
 

@@ -145,7 +145,7 @@ python3 scripts/make_result.py --case-id <CASE_ID> --case-json /input/case.json 
 
 | 情况 | 处置 |
 |---|---|
-| 扫描件 / 无文本层 | `pdf_extract.py` 报 low_text_page → 用平台 `pdf-render-tool` / `ocr-tool` 取文字，标注"OCR 转录"，数值不当文本抽取 |
+| 扫描件 / 无文本层 | `pdf_extract.py` 报 low_text_page 并自动导出该页图片到 `pages/pNN.png`（150 dpi，文件名写在 `detail` 与 `scan_page_images`）→ 用平台 `ocr-tool` 识别这些图，标注"OCR 转录"，数值不当文本抽取；没导出图就别声称"建议人工核对" |
 | 双栏错序 | 章节骨架按 heading 排，正文按栏读；列错位时看页面图像确认，写进 assumptions |
 | 图表公式缺失 / 乱码 | 标 `issue_page`，锚点只到页、quote 留空、进 uncertainties，不猜内容 |
 | 超长论文（>30 页） | 分章处理，先交前 N 章 + status=partial，说明剩余章节 |

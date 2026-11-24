@@ -1,0 +1,12 @@
+# 唯一硬依赖。实测版本：PyMuPDF 1.28.2 / MuPDF 1.28.2 / Python 3.12.10（Windows）。
+# 安装：pip install -r requirements.txt
+#
+# 版本下限为什么是 1.23：`Page.find_tables()` 自 1.23.0 起提供，本 Skill 的
+# tables.find_bordered 会先试它、失败再自建词坐标网格；低于 1.23 时该分支会被
+# 跳过，有线表格仍可由自建网格还原，但少一道交叉校验。
+pymupdf>=1.23.0
+
+# 以下均**不需要**，本 Skill 刻意不依赖，以降低平台安装风险：
+#   pdfplumber   表格线检测在无竖线表上会退化，本 Skill 改用词坐标投影自建网格
+#   pytesseract / paddleocr / cv2   OCR 由平台 ocr-tool 承担，见 SKILL.md「扫描件协同」
+#   numpy / pandas / scipy          版面判定只用标准库 math / statistics

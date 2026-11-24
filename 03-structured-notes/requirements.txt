@@ -1,0 +1,11 @@
+# 唯一硬依赖。实测版本：PyMuPDF 1.28.2 / Python 3.12.10（Windows）。
+# 安装：pip install -r requirements.txt
+#
+# 本 Skill 用 get_text("text") 取整页文本、get_text("dict") 取字号/粗体判标题、
+# get_pixmap(dpi=) 导出扫描页图片。三组 API 在 1.23 及以上稳定。
+pymupdf>=1.23.0
+
+# 不依赖（刻意）：
+#   pdfplumber              标题层级靠字号/编号/黑名单三重判据，不需要表格解析器
+#   OCR 引擎                扫描页导出 pages/pNN.png 后交给平台 ocr-tool
+#   numpy / pandas          全部逻辑只用标准库 re / statistics / difflib

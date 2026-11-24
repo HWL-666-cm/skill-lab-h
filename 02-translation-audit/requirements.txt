@@ -1,0 +1,11 @@
+# 唯一硬依赖。实测版本：PyMuPDF 1.28.2 / Python 3.12.10（Windows）。
+# 安装：pip install -r requirements.txt
+#
+# 下限 1.23 的理由：`Page.get_text("dict")` 的 span 级 bbox 与 `Page.get_pixmap(dpi=)`
+# 自更早版本就有，但 1.23 起 `find_tables()` 才可用；本 Skill 的段落抽取只用到
+# dict/words/pixmap 三组 API，低于 1.23 仍可运行，故这里的下限按整条工具链取齐。
+pymupdf>=1.23.0
+
+# 不依赖（刻意）：
+#   pdfplumber    段落切分用 PyMuPDF 的 block/span 坐标，无需第二套解析器
+#   OCR 引擎      扫描页只导出图片（pages/pNN.png），识别交给平台 ocr-tool，见 SKILL.md

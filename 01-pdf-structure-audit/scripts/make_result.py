@@ -145,6 +145,16 @@ def build(doc: dict, case: dict, outdir: Path) -> dict:
     for c in missing_cov:
         uncertainty.append(f"覆盖项缺失：{c['label']}（{c['key']}）——原文可能确实没有，或未能识别，需人工确认")
 
+    # 扫描页：不能只说"路由 OCR"就完事——要指出图片落在哪、下一步谁接。
+    # 这条同时是"可人工接管位置的说明"，可靠体验里的异常处置按它判。
+    exports = doc.get("ocr_exports") or []
+    if exports:
+        pages_txt = "、".join(x.replace("pages/", "").replace(".png", "") for x in exports)
+        uncertainty.append(
+            f"无文字层的页已导出为图片：{'、'.join(exports)}（150 dpi）。"
+            f"这些页未产出正文，可用 OCR 识别后按 id 回填；未回填前不要把该页内容当成已读。"
+            f"（页码：{pages_txt}）")
+
     changes = [
         {"type": "header_footer_isolated",
          "detail": f"按“跨页同位重复”识别并隔离页眉页脚 "

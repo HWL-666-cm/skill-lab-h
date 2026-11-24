@@ -29,3 +29,14 @@ credentials.json
 
 # 本地冒烟测试临时目录
 _smoke/
+
+# dry-run 生成的 bundle（每次提交都变，不入库）
+playground-arm.zip
+*.tgz
+
+# 提交辅助目录：trace 含对话记录、validation 含真实论文产物，均不入公开仓库
+_trace/
+_validation/
+_submit/
+_backup/
+submission/*-outputs/

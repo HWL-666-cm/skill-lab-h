@@ -90,7 +90,7 @@ def detect_running_headers(pages_blocks: list[list[dict]]) -> set[str]:
     return {k for k, c in cnt.items() if n_pages >= 3 and c >= max(2, int(n_pages * 0.5))}
 
 
-def extract(pdf_path: Path) -> dict:
+def extract(pdf_path: Path, pages_dir: Path | None = None) -> dict:
     doc = pymupdf.open(str(pdf_path))
     pages_blocks: list[list[dict]] = []
     for pno in range(doc.page_count):
@@ -196,11 +196,24 @@ def extract(pdf_path: Path) -> dict:
                 prev_para_pid = pid
 
     # 低文本页提示（可能扫描页）
+    # 只说"需 OCR 或人工核对"是不可核验的：别人既看不到那一页，也接不上手。
+    # 所以这里把页面渲成图片落盘，并回填文件名到 issue 的 detail 里——谁说"可能是扫描页"，
+    # 谁就有义务交出那一页的图，否则"人工核对"无对象。
+    exported: list[str] = []
     for pno, blocks in enumerate(pages_blocks, 1):
         chars = sum(len(b["text"]) for b in blocks)
         if chars < 120:
-            issues.append({"page": pno, "type": "low_text_page",
-                           "detail": "本页可提取字符很少，可能是图片页/扫描页，需 OCR 或人工核对。"})
+            detail = "本页可提取字符很少，可能是图片页/扫描页，需 OCR 或人工核对。"
+            if pages_dir is not None:
+                try:
+                    pages_dir.mkdir(parents=True, exist_ok=True)
+                    f = pages_dir / f"p{pno:02d}.png"
+                    doc[pno - 1].get_pixmap(dpi=150).save(str(f))
+                    exported.append(f"pages/{f.name}")
+                    detail += f" 已导出该页图片：pages/{f.name}（150 dpi）。"
+                except Exception:
+                    pass          # 单页渲染失败不影响其他页与整体结果
+            issues.append({"page": pno, "type": "low_text_page", "detail": detail})
 
     doc.close()
     return {
@@ -210,6 +223,7 @@ def extract(pdf_path: Path) -> dict:
         "running_headers_removed": len(running),
         "paragraphs": paragraphs,
         "issues": issues,
+        "scan_page_images": exported,
     }
 
 
@@ -217,8 +231,11 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pdf", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--pages-dir", default=None,
+                    help="扫描页图片输出目录；默认取 --out 同级的 pages/，保证默认就留下证据")
     args = ap.parse_args()
-    data = extract(Path(args.pdf))
+    pages_dir = Path(args.pages_dir) if args.pages_dir else Path(args.out).parent / "pages"
+    data = extract(Path(args.pdf), pages_dir=pages_dir)
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     kinds = {}

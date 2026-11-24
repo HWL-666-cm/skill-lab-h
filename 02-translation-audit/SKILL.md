@@ -87,7 +87,7 @@ python3 scripts/make_result.py --case-id <case_id> --case-json /input/case.json 
 
 | 异常 | 处置 |
 |---|---|
-| 无文本层/扫描页 | 标 `low_text_page`，写"需 OCR"，**不编造文本** |
+| 无文本层/扫描页 | 标 `low_text_page`，**不编造文本**；同时把该页渲成 `pages/pNN.png`（150 dpi）落盘，`detail` 与 `scan_page_images` 里写明文件名。只说"需 OCR"而拿不出图，等于把活推给一个看不见页面的人 |
 | 跨页/跨栏续段 | 标 `continued_from`，Agent 判断是否合并 |
 | 术语未定译名 | `glossary_unlocked` 警告，不进一致性检查，但必须补 |
 | 局部/分块翻译 | 必须给 `--scope`，否则未译段被正确报成漏段 |

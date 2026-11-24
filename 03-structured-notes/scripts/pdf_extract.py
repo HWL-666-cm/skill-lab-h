@@ -109,7 +109,7 @@ def clean_heading(t: str) -> str:
     return t
 
 
-def extract(pdf_path: Path) -> dict:
+def extract(pdf_path: Path, pages_dir: Path | None = None) -> dict:
     if pymupdf is None:
         raise RuntimeError(
             "pymupdf/fitz 不可用。请改用平台 pdf-text-tool 提取带页码文本，"
@@ -176,7 +176,6 @@ def extract(pdf_path: Path) -> dict:
                         "font": "",
                     })
             li += 1
-    doc.close()
     # 后处理 1：去掉标题里混入的印刷页码（如 "105 Reference models"）
     for s in sections:
         s["heading"] = re.sub(r"^\d{2,4}\s+", "", s["heading"]).strip()
@@ -188,13 +187,23 @@ def extract(pdf_path: Path) -> dict:
     # 后处理 3：去掉明显是正文残句的标题（过长、含句号结尾的非编号行）
     sections = [s for s in sections if not (s["level"] == 0 and s["heading"].endswith("."))]
     # 图像占比高的页：正文很少说明可能是图片页/扫描页
+    # 光写"需要看页面图像或走 OCR"等于把活推给读者：读者手里没有图。
+    # 这里直接渲出来落盘，并在 detail 里写清文件名——有图才能谈"人工核对"。
+    exported: list[str] = []
     for p in pages:
         if p["chars"] < 120:
-            issues.append({
-                "page": p["page"],
-                "type": "low_text_page",
-                "detail": "本页可提取字符很少，可能是图片页/扫描页，需要看页面图像或走 OCR。",
-            })
+            detail = "本页可提取字符很少，可能是图片页/扫描页，需要看页面图像或走 OCR。"
+            if pages_dir is not None:
+                try:
+                    pages_dir.mkdir(parents=True, exist_ok=True)
+                    f = pages_dir / f"p{p['page']:02d}.png"
+                    doc[p["page"] - 1].get_pixmap(dpi=150).save(str(f))
+                    exported.append(f"pages/{f.name}")
+                    detail += f" 已导出该页图片：pages/{f.name}（150 dpi）。"
+                except Exception:
+                    pass          # 单页渲染失败不影响其他页与整体结果
+            issues.append({"page": p["page"], "type": "low_text_page", "detail": detail})
+    doc.close()
     return {
         "source": str(pdf_path),
         "page_count": len(pages),
@@ -202,6 +211,7 @@ def extract(pdf_path: Path) -> dict:
         "pages": pages,
         "sections": sections,
         "issues": issues,
+        "scan_page_images": exported,
     }
 
 
@@ -209,8 +219,11 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pdf", required=True, help="输入 PDF 路径")
     ap.add_argument("--out", required=True, help="输出 JSON 路径")
+    ap.add_argument("--pages-dir", default=None,
+                    help="扫描页图片输出目录；默认取 --out 同级的 pages/，保证默认就留下证据")
     args = ap.parse_args(argv)
-    data = extract(Path(args.pdf))
+    pages_dir = Path(args.pages_dir) if args.pages_dir else Path(args.out).parent / "pages"
+    data = extract(Path(args.pdf), pages_dir=pages_dir)
     Path(args.out).write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[pdf_extract] pages={data['page_count']} sections={len(data['sections'])} "
           f"issues={len(data['issues'])} -> {args.out}")
