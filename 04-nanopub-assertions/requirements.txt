@@ -1,0 +1,19 @@
+# 04-nanopub-assertions 运行依赖
+# 安装：pip install -r requirements.txt
+#
+# 核心逻辑（AIDA 判定、关系签名、校验、TriG 导出）**只用 Python 3.10+ 标准库**，
+# 不装任何包也能跑 finish 阶段和自测。
+#
+# 唯一需要的是"从 PDF 取文本"这一步，它需要一个文本层引擎：
+#   - 优先 PyMuPDF（通过 `import pymupdf` 导入；旧版包名 `fitz` 也兼容）
+#   - 退路是系统 pdftotext（poppler-utils），需在 PATH 中
+#   - 两者都没有时 run_case.py 不会崩，会写 status=blocked 并说明缺哪个引擎
+#
+# 实测版本：PyMuPDF 1.28.2 / MuPDF 1.28.2 / Python 3.12.10（Windows）
+pymupdf>=1.23.0
+
+# 以下均**不需要**，本 Skill 刻意不依赖：
+#   rdflib        仅用于开发期独立复核 TriG 是否合法（脱离本 Skill 的第三种视角），
+#                 不是运行依赖；运行时 TriG 由 emit.py 手写生成、validate.py 自校验
+#   pandas / numpy   断言与证据都是短文本，用不上
+#   requests         本 Skill 不联网：不检索文献、不解析 DOI、不发布 nanopublication

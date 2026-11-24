@@ -133,6 +133,17 @@ python scripts/run_case.py --case /input/case.json \
 
 `assertions.trig`：一条断言一个 nanopublication，四图结构，只使用官方词表（`np:`、`npx:`、`hycl:`、`cito:`、`prov:`）。AIDA 句用 `http://purl.org/aida/` 加空格换 `+`，证据用 `cito:hasQuotedText`。草稿 IRI 是内容哈希，不是 trusty URI，未签名，不可直接发布。
 
+### 平台输出契约（`output_contract`）
+
+运行约定要求 `result.json` 带上案例声明的**全部 `output_contract` 字段**。这个契约在 `/input/case.json` 里，形态不固定，所以 `scripts/contract.py` 的做法是"输入宽松、输出兜底"：
+
+1. **读名字**：接受 `{"fields": {...}}` / `{"required": [...]}` 包装、字段描述字典、纯名字列表，或能解析成上述任一形态的 JSON 字符串。
+2. **能对上就复制**：声明的名字命中同义词表（如 `claims`/`statements` → `assertions`，`source_metadata` → `sources`）时，把规范字段的值原样复制过去，平台用哪种拼写都能读。
+3. **能算就派生**：顶层声明 `evidence` 一类字段时，从各条断言的 `evidence` 聚合出顶层证据索引（`assertion_id`、`quote`、`page`、`char_span`、`sentence_id`），值来自源头，不另编。
+4. **对不上就留空并说清**：无法映射的名字写成 `null`，同时记进 `uncertainty` 与 `contract_report.missing` —— 让缺口可见，绝不猜内容去填。
+
+每次带契约的运行，`result.json` 多一个 `contract_report`：`declared`（声明了哪些）、`native`（原生就有）、`aliased`（复制自哪个字段）、`derived`（派生自哪个字段）、`missing`（没做出来的）。只有顶层字段名会被重映射，断言对象内部保持 `references/output-contract.md` 的规范键名。
+
 ## 最小示例
 
 `assets/examples/case.json` 是示例输入，`pdf` 处填论文路径。对这一篇跑完三步，得到 `assets/examples/result.json`、`assets/examples/assertions.trig`、`assets/examples/validation.json`。
@@ -172,6 +183,7 @@ python scripts/run_case.py --case /input/case.json \
 - 带条件的结论，`qualifiers.scope` 非空且出现在 `text` 里。
 - `assertions.trig` 的 nanopub 数量等于断言数量。
 - `result.json` 的 `status` 与 `validation.status` 一致。
+- 案例带 `output_contract` 时，`contract_report.missing` 为空；若非空，缺口已写进 `uncertainty`。
 
 ## 异常处置
 

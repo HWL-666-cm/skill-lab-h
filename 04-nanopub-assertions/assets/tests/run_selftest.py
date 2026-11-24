@@ -16,6 +16,7 @@ ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import aida_rules  # noqa: E402
+import contract  # noqa: E402
 import emit  # noqa: E402
 import validate as v  # noqa: E402
 
@@ -224,9 +225,61 @@ def test_determinism() -> None:
         check("determinism.json", p1.read_bytes() == p2.read_bytes(), str(c1)[:20])
 
 
+def test_contract() -> None:
+    """output_contract 声明的字段名必须出现在 result.json 里，且不许瞎填。"""
+    base = {"case_id": "t", "status": "ok", "assertions": [claim()],
+            "sources": [{"name": "fixture.pdf"}], "validation": {"status": "pass"},
+            "uncertainty": []}
+
+    # 1) 列表形态 + 常见同义词：claims 应指向 assertions 的值
+    out, rep = contract.apply(base, ["case_id", "claims", "status"])
+    check("contract.alias", out.get("claims") == base["assertions"], str(rep))
+    check("contract.native", set(rep["native"]) == {"case_id", "status"}, str(rep))
+
+    # 2) 无法映射的字段：写 null + 明确列出，不许编内容
+    out, rep = contract.apply(base, ["case_id", "evidence_graph"])
+    check("contract.missing_null",
+          "evidence_graph" in out and out["evidence_graph"] is None, str(out.keys()))
+    check("contract.missing_listed",
+          rep["missing"] == ["evidence_graph"], str(rep))
+    check("contract.missing_note",
+          any("evidence_graph" in u for u in out["uncertainty"]), str(out["uncertainty"]))
+
+    # 2b) 顶层 evidence：从各条断言聚合，值必须与源头一致，不许另编
+    out, rep = contract.apply(base, ["evidence"])
+    check("contract.derived_evidence",
+          out.get("evidence") == [{"assertion_id": "A01",
+                                   "quote": "Vitamin D deficiency causes rickets in children.",
+                                   "page": 1, "char_span": None, "sentence_id": None}],
+          str(out.get("evidence")))
+    check("contract.derived_reported",
+          rep["derived"] == {"evidence": "evidence_index"} and not rep["missing"], str(rep))
+
+    # 3) 描述式 dict 形态：取键名，且只取一层
+    out, rep = contract.apply(base, {"case_id": "输入标识", "assertions": {"text": "句子"},
+                                     "uncertainty": "不确定项"})
+    check("contract.dictshape",
+          rep["declared"] == ["case_id", "assertions", "uncertainty"], str(rep["declared"]))
+
+    # 4) 没有契约时不留痕，也不改动原对象
+    snapshot = json.dumps(base, sort_keys=True, ensure_ascii=False)
+    out, rep = contract.apply(base, None)
+    check("contract.absent", rep["source"] == "absent" and "contract_report" not in out,
+          str(rep))
+    check("contract.nomutate", json.dumps(base, sort_keys=True, ensure_ascii=False) == snapshot,
+          "apply() mutated the caller's dict")
+
+    # 5) 同输入两跑字节一致
+    a = json.dumps(contract.apply(base, ["case_id", "claims"])[0],
+                   sort_keys=True, ensure_ascii=False)
+    b = json.dumps(contract.apply(base, ["case_id", "claims"])[0],
+                   sort_keys=True, ensure_ascii=False)
+    check("contract.deterministic", a == b, "two runs differed")
+
+
 def main() -> int:
     for fn in (test_aida, test_scope, test_signature, test_validate,
-               test_structure, test_determinism):
+               test_structure, test_determinism, test_contract):
         fn()
     total = len(PASSED) + len(FAILED)
     for name in PASSED:

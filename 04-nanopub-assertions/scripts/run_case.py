@@ -21,6 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import aida_rules  # noqa: E402
+import contract  # noqa: E402
 import emit  # noqa: E402
 import pdf_text  # noqa: E402
 import validate as validate_mod  # noqa: E402
@@ -236,7 +237,8 @@ def prepare(case_path: Path, out_dir: Path, lexicon: dict, limit: int) -> dict:
 
 
 def finish(draft_path: Path, parsed_path: Path, out_dir: Path, lexicon: dict,
-           source_name: str, source_iri: str, case_id: str) -> dict:
+           source_name: str, source_iri: str, case_id: str,
+           output_contract=None) -> dict:
     draft = json.loads(draft_path.read_text(encoding="utf-8"))
     parsed = json.loads(parsed_path.read_text(encoding="utf-8"))
     source = {
@@ -272,9 +274,16 @@ def finish(draft_path: Path, parsed_path: Path, out_dir: Path, lexicon: dict,
     result = emit.build_result(case_id or draft.get("case_id", ""), draft, report,
                                source, parsed, report["status"],
                                draft.get("uncertainty") or [])
+    # The runtime contract requires result.json to carry every field name the
+    # case declares in output_contract. Aliases are added here, after the
+    # canonical result is complete, so nothing can be shadowed or lost.
+    result, contract_report = contract.apply(result, output_contract)
+    if contract_report["source"] != "absent":
+        report["contract"] = contract_report
     written = emit.write_all(out_dir, trig, result, report)
     return {"status": report["status"], **written,
             "counts": report["counts"],
+            "contract": contract_report,
             "needs_repair": len(fixed)}
 
 
@@ -292,6 +301,12 @@ def main(argv: list[str] | None = None) -> int:
     lexicon = json.loads(Path(args.lexicon).read_text(encoding="utf-8"))
     case_path = Path(args.case)
     out_dir = Path(args.out)
+    # The declared contract lives in case.json; read it once for both stages.
+    try:
+        case = json.loads(case_path.read_text(encoding="utf-8")) if case_path.exists() else {}
+    except Exception:
+        case = {}
+    output_contract = case.get("output_contract") if isinstance(case, dict) else None
 
     if args.stage in ("prepare",):
         print(json.dumps(prepare(case_path, out_dir, lexicon, args.limit),
@@ -304,7 +319,7 @@ def main(argv: list[str] | None = None) -> int:
                              ensure_ascii=False))
             return 2
         info = finish(Path(args.draft), out_dir / "parsed.json", out_dir, lexicon,
-                      "", args.source_iri, "")
+                      "", args.source_iri, "", output_contract)
         print(json.dumps(info, ensure_ascii=False, indent=2))
         return 0 if info["status"] == "pass" else 1
 
@@ -323,7 +338,8 @@ def main(argv: list[str] | None = None) -> int:
         draft_path.write_text(json.dumps(draft, ensure_ascii=False, indent=2) + "\n",
                               encoding="utf-8", newline="\n")
         info = finish(draft_path, out_dir / "parsed.json", out_dir, lexicon,
-                      source["name"], source["iri"], cands["case_id"])
+                      source["name"], source["iri"], cands["case_id"],
+                      output_contract)
         print(json.dumps({"prepared": prep, "finished": info}, ensure_ascii=False, indent=2))
         return 0 if info["status"] == "pass" else 1
 

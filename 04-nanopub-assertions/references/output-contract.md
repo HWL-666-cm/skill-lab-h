@@ -98,7 +98,18 @@ AIDA 句 IRI 规则：`http://purl.org/aida/` 加句子，空格换成 `+`，末
 | 运行状态 | `status` |
 | 不确定性 | `uncertainty` |
 
-若 `/input/case.json` 自带 `output_contract`，运行脚本会把它原样记进 `candidates.json` 的 `output_contract` 键，便于按实际契约核对字段名；字段名以契约为准时，改 `result.json` 的顶层键即可，内部结构不变。
+若 `/input/case.json` 自带 `output_contract`，`scripts/contract.py` 会把声明的**顶层**字段名补进 `result.json`：
+
+| 情况 | 处理 | `contract_report` 记在哪 |
+|---|---|---|
+| 名字本身就是规范键（`case_id`、`status`、`uncertainty`…） | 不动 | `native` |
+| 名字是同义词（`claims`→`assertions`、`source_metadata`→`sources`） | 复制规范字段的值 | `aliased` |
+| 顶层要 `evidence` 一类证据字段 | 从各条断言的 `evidence` 聚合出索引 | `derived` |
+| 名字对不上任何字段 | 写 `null`，并追加一条 `uncertainty` | `missing` |
+
+三条硬规则：规范字段一个都不删；对不上的名字**不猜内容**（写 `null` 而不是编造）；断言对象内部键名不变，只在顶层补齐。
+
+契约的原始内容同时原样记进 `candidates.json` 的 `output_contract` 键，便于复核"声明了什么"与"实际给了什么"是否一致。
 
 ## 状态取值
 
