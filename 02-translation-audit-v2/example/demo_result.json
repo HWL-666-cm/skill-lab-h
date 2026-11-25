@@ -1,0 +1,36 @@
+{
+  "_note": "最小调用示例（示意输出，标为示例；非正式案例结果）",
+  "case_id": "example-case",
+  "answer": {},
+  "structured": {
+    "termbase": [
+      {"source": "BERT", "target": "BERT", "do_not_translate": true, "forbidden_alternatives": []},
+      {"source": "attention", "target": "注意力", "do_not_translate": false, "forbidden_alternatives": ["关注", "注意机制"]},
+      {"source": "fine-tuning", "target": "微调", "do_not_translate": false, "forbidden_alternatives": ["精调", "调优"]}
+    ],
+    "bilingual_segments": [
+      {
+        "id": 1, "page": 1, "column": 0, "section": "Abstract",
+        "source": "BERT uses attention and reports 110M parameters with 91.0% accuracy [12].",
+        "protected": "BERT uses attention and reports {{P_1}} parameters with {{P_2}} accuracy {{P_0}}.",
+        "protection_map": {"{{P_0}}": "[12]", "{{P_1}}": "110M", "{{P_2}}": "91.0%"},
+        "target": "BERT 使用注意力机制，报告 110M 个参数，准确率 91.0% [12]。",
+        "term_notes": "BERT 不译；attention→注意力（禁用：注意机制）；数字/单位/引用占位符还原",
+        "status": "accepted"
+      }
+    ],
+    "validation_summary": {
+      "total_segments": 1, "accepted": 1, "needs_review": 0,
+      "placeholder_issues": 0, "missing_terms": 0, "forbidden_hits": 0
+    },
+    "document": {"title": "示例论文", "page_count": 1, "ocr_used": false}
+  },
+  "evidence": [
+    {"item": "attention 译法", "value": "注意力", "source": "page 1, Abstract, segment 1"}
+  ],
+  "status": "success",
+  "status_detail": "示例，仅说明输出格式",
+  "uncertainty": [],
+  "warnings": [],
+  "changes": [{"time": "2026-11-25T00:00:00Z", "action": "示例生成", "detail": "标为示例，非正式结果"}]
+}

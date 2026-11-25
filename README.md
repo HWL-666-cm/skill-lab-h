@@ -60,6 +60,7 @@ playground submit --challenge-id <ID> --outputs <目录> --trace <原生会话�
 | 阅读01 文献文档解析 | `01-pdf-structure-audit/` | 已提交（attempt 107003） |
 | 阅读01 文献文档解析（v2 重做，主攻多栏阅读顺序） | `01-pdf-structure-audit-v2/` | 待提交 |
 | 阅读03 文献翻译 | `02-translation-audit/` | 已提交（attempt 106280） |
+| 阅读03 文献翻译（v2 重做，主攻术语一致性） | `02-translation-audit-v2/` | 待提交 |
 | 阅读10 文献总结与结构化笔记 | `03-structured-notes/` | 已提交（attempt 106281） |
 | 阅读14 Nanopublication | `04-nanopub-assertions/` | 已提交（attempt 107004） |
 | 写作09 方法与实验章节写作 | `05-params-provenance/` | 已提交（attempt 107005） |
