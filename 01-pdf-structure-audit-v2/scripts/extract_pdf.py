@@ -492,6 +492,89 @@ _MATH_FONTS = ("cmmi", "cmsy", "cmex", "math", "symbol", "msbm", "cmr",
 
 _TOC_DOTS = re.compile(r"(\.{2,}|·\s*·|\.\s\.\s\.)")
 
+# 机构/地址/日期/水印词：这些行不是作者，也不是章节
+_AFFIL_RE = re.compile(
+    r"university|institute|laboratory|department|school|college|research|"
+    r"center|centre|inc\.|ltd\.|google|facebook|deepmind|openai|amazon|"
+    r"microsoft|berkeley|stanford|princeton|\bmit\b|eth\s|street|avenue|"
+    r"road|blvd|china|usa|canada|\barxiv\b|\bcs\.|\d{4}\b",
+    re.I)
+
+
+def _is_normal_text(l: "Line") -> bool:
+    """首页正常横向文本（排除 arXiv 竖排印章/侧边条）。"""
+    w = l.x1 - l.x0
+    h = l.y1 - l.y0
+    if h <= 0:
+        return False
+    if w < h * 0.6:
+        return False
+    if re.match(r"^(arXiv:|cs\.|math\.|hep-|quant-)", l.text.strip()):
+        return False
+    return True
+
+
+def _looks_like_authors(t: str) -> bool:
+    """一行像不像作者行（含人名分隔、不含机构/句子开头）。"""
+    t = t.strip()
+    if not t or len(t) > 200:
+        return False
+    if _AFFIL_RE.search(t):
+        return False
+    if re.match(r"^(We|The|This|Our|In|A|An|It|These|Here|To|For|Recent|Existing)\s", t):
+        return False
+    if not re.search(r",\s*[A-Z]|\band\b|\b\d{1,2}\b", t):
+        return False
+    return bool(re.search(r"[A-Z][a-zà-öø-ÿ']+\s+[A-Z][a-zà-öø-ÿ']+", t))
+
+
+def extract_front_matter(lines_by_page: dict, body_size: float):
+    """从首页识别标题/作者，并返回要在章节循环里跳过的 (page, y0) 集合。
+
+    返回 (title, authors, front_matter_keys)。
+    - 标题 = 最大字号的 y 相邻连续块合并（标题换行是常态，第二行不能被当成作者）；
+    - 作者 = 标题之后、字号略小于标题、含人名、不含机构/arXiv 的行；
+    - front_matter_keys 含标题行、作者行、机构行、arXiv 水印，章节循环里跳过。
+    """
+    title = ""
+    authors = ""
+    front_matter_keys = set()  # (page, round(y0, 2))
+    first_lines = [l for l in lines_by_page.get(1, []) if _is_normal_text(l)]
+    first_lines.sort(key=lambda l: l.y0)  # y0 小 = 页面靠上
+    if not first_lines:
+        return title, authors, front_matter_keys
+
+    title_size = max(l.font_size for l in first_lines)
+    tlines = [l for l in first_lines if abs(l.font_size - title_size) <= 0.5]
+    parts = [tlines[0].text.strip()]
+    for prev, cur in zip(tlines, tlines[1:]):
+        if cur.y0 - prev.y0 < title_size * 1.6:
+            parts.append(cur.text.strip())
+        else:
+            break
+    title = " ".join(p for p in parts if p)
+    for l in tlines:
+        front_matter_keys.add((l.page, round(l.y0, 2)))
+
+    rest = [l for l in first_lines if abs(l.font_size - title_size) > 0.5]
+    cand = [l for l in rest if l.font_size >= body_size * 0.85]
+    auth_parts = []
+    for l in cand:
+        if _looks_like_authors(l.text):
+            auth_parts.append(l.text.strip())
+            front_matter_keys.add((l.page, round(l.y0, 2)))
+        elif auth_parts:
+            break
+    authors = " ".join(auth_parts)
+
+    # 机构行（"1 UC Berkeley ..."）与 arXiv 水印也排除
+    for l in lines_by_page.get(1, []):
+        if re.match(r"^\d+\s+", l.text.strip()) and _AFFIL_RE.search(l.text):
+            front_matter_keys.add((l.page, round(l.y0, 2)))
+        if re.match(r"^arXiv:", l.text.strip()):
+            front_matter_keys.add((l.page, round(l.y0, 2)))
+    return title, authors, front_matter_keys
+
 
 def classify_line(line: Line, body_font_size: float) -> str:
     """
@@ -502,6 +585,12 @@ def classify_line(line: Line, body_font_size: float) -> str:
         return "other"
     # 目录行（点线引导）不是正文章节标题
     if _TOC_DOTS.search(t):
+        return "text"
+    # arXiv 水印 / 学科编号不是章节
+    if re.match(r"^arXiv:", t, re.IGNORECASE):
+        return "other"
+    # 机构/地址/日期行不是章节（如 "1 UC Berkeley 2 Facebook AI Research 3 Google Brain"）
+    if _AFFIL_RE.search(t) and re.match(r"^\d+\s+", t):
         return "text"
     if re.match(r"^(Figure|Fig\.?|Table)\s*\d+", t, re.IGNORECASE):
         return "caption"
@@ -653,6 +742,11 @@ def parse_pdf(pdf_path: str, workdir: str) -> dict:
     if body_size <= 0:
         body_size = max((l.font_size for l in lines), default=0) or 12.0
 
+    # 题名/作者/机构（首页前端信息）：先识别并标记，避免被当成章节
+    title, authors, front_matter_keys = extract_front_matter(lines_by_page, body_size)
+    if not authors and lines_by_page.get(1):
+        warnings.append("首页未识别到作者行（标题可能跨多行，或作者不在首页）")
+
     # 章节与段落（按多栏阅读顺序排序）
     ordered_lines = sorted(lines, key=lambda l: reading_order_key(l, columns_by_page))
     sections = []
@@ -661,6 +755,8 @@ def parse_pdf(pdf_path: str, workdir: str) -> dict:
     cur_section = None
     section_order = []
     for l in ordered_lines:
+        if (l.page, round(l.y0, 2)) in front_matter_keys:
+            continue  # 标题/作者/机构/水印不是章节也不是正文
         col = assign_line_to_column(l, columns_by_page.get(l.page, [(0.0, 1.0)]))
         kind = classify_line(l, body_size)
         if kind == "heading":
@@ -726,27 +822,8 @@ def parse_pdf(pdf_path: str, workdir: str) -> dict:
                  if l.font_size and l.font_size < body_size * 0.85
                  and l.y0 > 0.9]
 
-    # 题名/作者：首页字号最大、且为正常横向文本（排除 arXiv 竖排印章/侧边条）
-    def is_normal_text(l: Line) -> bool:
-        w = l.x1 - l.x0
-        h = l.y1 - l.y0
-        if h <= 0:
-            return False
-        if w < h * 0.6:  # 竖排/旋转文本：宽远小于高
-            return False
-        if re.match(r"^(arXiv:|cs\.|math\.|hep-|quant-)", l.text.strip()):
-            return False
-        return True
-
-    first_lines = [l for l in lines_by_page.get(1, []) if is_normal_text(l)]
-    first_lines.sort(key=lambda l: (-l.font_size, l.y0))
-    title = first_lines[0].text if first_lines else ""
-    authors = ""
-    if len(first_lines) >= 2 and first_lines[1].font_size >= body_size * 0.9:
-        authors = first_lines[1].text
-
     result = {
-        "status": "success" if spans else "partial",
+        "status": "success" if (spans and authors) else "partial",
         "status_detail": "解析完成" if spans else "未提取到文本",
         "document": {
             "file": os.path.basename(pdf_path),

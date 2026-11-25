@@ -1,100 +1,142 @@
 {
-  "_note": "本文件为最小调用示意输出（example），非正式案例答案。",
-  "case_id": "example-001",
+  "case_id": "example-pdf",
   "answer": {
-    "title": "示例：Decision Transformer: Reinforcement",
-    "authors": "示例：Learning via Sequence Modeling",
-    "abstract": "示例占位：请按题面从 structured 中提取并附证据"
+    "answer": ""
   },
   "structured": {
-    "title": "Decision Transformer: Reinforcement",
-    "authors": "Learning via Sequence Modeling",
+    "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+    "authors": "Lili Chen 1 , Kevin Lu 2 , and Aravind Rajeswaran 1",
     "sections": [
-      {
-        "heading": "Decision Transformer: Reinforcement",
-        "level": 1,
-        "page": 1,
-        "font_size": 17.0,
-        "bold": true,
-        "x0": 0.271242,
-        "y0": 0.127525,
-        "end_page": 1
-      },
-      {
-        "heading": "Learning via Sequence Modeling",
-        "level": 1,
-        "page": 1,
-        "font_size": 17.0,
-        "bold": true,
-        "x0": 0.302288,
-        "y0": 0.152778,
-        "paragraph_count": 3,
-        "end_page": 1
-      },
-      {
-        "heading": "1 UC Berkeley 2 Facebook AI Research 3 Google Brain",
-        "level": 1,
-        "page": 1,
-        "font_size": 10.0,
-        "bold": false,
-        "x0": 0.312092,
-        "y0": 0.284091,
-        "paragraph_count": 1,
-        "end_page": 1
-      },
       {
         "heading": "Abstract",
         "level": 1,
         "page": 1,
-        "font_size": 12.0,
-        "bold": true,
-        "x0": 0.464052,
-        "y0": 0.356061,
-        "paragraph_count": 12,
-        "end_page": 1
-      },
-      {
-        "heading": "arXiv:2106.01345v2  [cs.LG]  24 Jun 2021",
-        "level": 1,
-        "page": 1,
-        "font_size": 20.0,
-        "bold": false,
-        "x0": 0.052288,
-        "y0": 0.689394,
-        "paragraph_count": 3,
-        "end_page": 1
-      },
-      {
-        "heading": "1 Our code is available at:",
-        "level": 1,
-        "page": 1,
         "font_size": 9.0,
         "bold": false,
-        "x0": 0.197712,
-        "y0": 0.897727,
-        "end_page": 2
+        "x0": 0.46533,
+        "y0": 0.299327,
+        "paragraph_count": 1,
+        "end_page": 1
+      },
+      {
+        "heading": "1 Introduction",
+        "level": 1,
+        "page": 1,
+        "font_size": 14.0,
+        "bold": false,
+        "x0": 0.120952,
+        "y0": 0.365844,
+        "paragraph_count": 2
       }
     ],
+    "tables": [
+      {
+        "page": 1,
+        "y0": 0.224495,
+        "y1": 0.365844,
+        "rows": [
+          {
+            "cells": [
+              "1",
+              "UC Berkeley"
+            ],
+            "y0": 0.224495,
+            "page": 1
+          },
+          {
+            "cells": [
+              "2",
+              "Facebook AI Research"
+            ],
+            "y0": 0.241124,
+            "page": 1
+          },
+          {
+            "cells": [
+              "1",
+              "Introduction"
+            ],
+            "y0": 0.365844,
+            "page": 1
+          }
+        ],
+        "source": "layout-grid"
+      }
+    ],
+    "formulas": [
+      {
+        "text": "Lili Chen 1 , Kevin Lu 2 , and Aravind Rajeswaran 1",
+        "page": 1,
+        "x0": 0.369576,
+        "y0": 0.195988,
+        "evidence": "math-font"
+      },
+      {
+        "text": "1 UC Berkeley",
+        "page": 1,
+        "x0": 0.441812,
+        "y0": 0.224495,
+        "evidence": "math-font"
+      },
+      {
+        "text": "2 Facebook AI Research",
+        "page": 1,
+        "x0": 0.399815,
+        "y0": 0.241124,
+        "evidence": "math-font"
+      },
+      {
+        "text": "lem.",
+        "page": 1,
+        "x0": 0.16295,
+        "y0": 0.331397,
+        "evidence": "math-font"
+      },
+      {
+        "text": "This is the introduction body text.",
+        "page": 1,
+        "x0": 0.120952,
+        "y0": 0.395539,
+        "evidence": "math-font"
+      },
+      {
+        "text": "1",
+        "page": 1,
+        "x0": 0.495568,
+        "y0": 0.941928,
+        "evidence": "math-font"
+      },
+      {
+        "text": "We introduce a framework that abstracts Reinforcement Learning as a sequence modeling prob-",
+        "page": 1,
+        "x0": 0.186468,
+        "y0": 0.318331,
+        "evidence": "math-font"
+      }
+    ],
+    "captions": [],
+    "references": [],
+    "footnotes": [],
     "document": {
-      "file": "paper.pdf",
-      "page_count": 21,
-      "width": 612.0,
-      "height": 792.0,
+      "file": "test_title.pdf",
+      "page_count": 1,
+      "width": 595.276,
+      "height": 841.89,
       "has_text_layer": true,
       "ocr_used": false,
-      "producer": "pdfTeX-1.40.21"
+      "producer": "pdfTeX-1.40.25"
     }
   },
-  "evidence": [
-    {
-      "item": "论文标题",
-      "value": "Decision Transformer: Reinforcement",
-      "source": "第1页, 区块(0.18,0.11)"
-    }
-  ],
+  "evidence": [],
   "status": "success",
-  "status_detail": "示例运行",
+  "status_detail": "解析完成",
   "uncertainty": [],
   "warnings": [],
-  "changes": []
+  "changes": [
+    {
+      "action": "extract_pdf 生成结构化草稿",
+      "detail": "段落 4 段，表格 1，公式 7，参考文献 0"
+    }
+  ],
+  "_note": "示例产物：由两行标题+作者+机构+摘要+章节的样例 PDF 生成，演示 title/authors/sections 的确定性解析，不是平台固定案例的答案。"
 }

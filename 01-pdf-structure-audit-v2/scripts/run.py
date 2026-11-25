@@ -25,7 +25,6 @@ import os
 import shutil
 import subprocess
 import sys
-from datetime import datetime, timezone
 
 INPUT_CASE = "/input/case.json"
 INPUT_TASK = "/input/task.md"
@@ -131,9 +130,8 @@ def build_result(case: dict, task_md: str, extraction: dict) -> dict:
         # 不确定项 / 未报告项
         "uncertainty": extraction.get("uncertainty", []),
         "warnings": extraction.get("warnings", []),
-        # 变更记录（时间戳）
+        # 变更记录（确定性：不写墙钟时间戳，同一 PDF 两次运行字节一致）
         "changes": [{
-            "time": datetime.now(timezone.utc).isoformat(),
             "action": "extract_pdf 生成结构化草稿",
             "detail": f"段落 {extraction.get('paragraph_count')} 段，"
                       f"表格 {len(extraction.get('tables', []))}，"
