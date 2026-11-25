@@ -14,7 +14,7 @@ description: 当用户要求编译 LaTeX 项目、定位和修复 LaTeX 编译�
 ## 核心工作流
 
 ```
-识别工程结构 → 真实多遍编译 → 全量日志分类 → 副本修复 → 重编收敛 → 独立目录复现
+识别工程结构 → 真实多遍编译 → 全量日志分类 → 副本修复 → 重编收敛 → 独立目录复现 → 源码正确性审计
 ```
 
 1. **识别工程**：读 `.tex` 主文件（含 `\documentclass`）、子文件、`.bib`、`.cls/.sty`、字体，判断引擎与文献后端。
@@ -23,6 +23,7 @@ description: 当用户要求编译 LaTeX 项目、定位和修复 LaTeX 编译�
 4. **副本修复**：只在 staging 副本上改，保留原始文件与 diff。
 5. **重编收敛**：修复后重新编译，直到通过或确认需要人工判断。
 6. **独立复现**：换一个干净目录，只拿最终源码按构建清单重编，比对源码哈希、退出码和诊断。
+7. **正确性审计**（编译通过后）：对最终源码做引用/交叉引用/版式检查，抓"编译干净但产物错"的问题，见 `references/correctness-audit.md`。
 
 ## 调用方式
 
@@ -60,6 +61,7 @@ python <skill-dir>/scripts/run_case.py \
 | `changes.md` | 修复台账：已应用 vs 待人工确认 |
 | `build_manifest.json` | 发行版、引擎、命令、轮次、源码哈希、依赖版本 |
 | `reproduce.json` | 独立复现比对结果 |
+| `audit.json` | 源码级正确性审计：引用/交叉引用/版式（只报告不改写） |
 | `validation.json` | 门禁检查结果 |
 
 `status` 三态：`complete`（编译通过、无未解决阻断项、复现通过）、`partial`（有未解决警告或复现差异）、`blocked`（无源码或环境不可用）。
@@ -93,7 +95,7 @@ python <skill-dir>/scripts/run_case.py \
 ## 示例与自测
 
 - `assets/examples/`：一组最小可编译工程（好稿、坏稿），`result.json` 带 `example: true`，**不是正式案例答案**。
-- `assets/tests/run_selftest.py`：冷启动自测 16 项，覆盖多遍收敛、引擎切换、行号定位、honesty 和确定性。运行：
+- `assets/tests/run_selftest.py`：冷启动自测 20 项，覆盖多遍收敛、引擎切换、行号定位、honesty、确定性和源码正确性审计。运行：
 
 ```bash
 python <skill-dir>/assets/tests/run_selftest.py

@@ -72,11 +72,13 @@ def build_result(case_id: str, profile: dict, repair_result: dict,
                  manifest: dict, reproduce: dict, validation: dict,
                  case_raw: dict | None = None, runtime_seconds: float = 0.0,
                  work_dir: str | Path | None = None,
-                 out_dir: str | Path | None = None) -> dict:
+                 out_dir: str | Path | None = None,
+                 audit: dict | None = None) -> dict:
     rr = repair_result or {}
     final_build = rr.get("final_build") or {}
     ledger = rr.get("final_ledger") or {}
     changes = rr.get("changes") or []
+    audit = audit or {"findings": [], "counts": {}, "status": "clean"}
 
     artifacts = copy_editable_sources(Path(work_dir), Path(out_dir)) \
         if work_dir and out_dir else []
@@ -94,6 +96,10 @@ def build_result(case_id: str, profile: dict, repair_result: dict,
                   if f.get("severity") == "blocking"]
     applied = [c for c in changes if c.get("applied")]
     needs_human = [c for c in changes if not c.get("applied")]
+    major_left = [f for f in ledger.get("findings", [])
+                  if f.get("severity") == "major"]
+    audit_major = [f for f in audit.get("findings", [])
+                   if f.get("severity") == "major"]
 
     uncertainty: list[str] = []
     if needs_human:
@@ -114,6 +120,11 @@ def build_result(case_id: str, profile: dict, repair_result: dict,
         uncertainty.append("independent reproduction did not match core checks")
     if reproduce.get("verdict") == "partial":
         uncertainty.append("reproduction matched core checks but PDF bytes or diagnostics differed")
+    if audit.get("findings"):
+        uncertainty.append(
+            f"source audit: {audit['counts'].get('major', 0)} major, "
+            f"{audit['counts'].get('minor', 0)} minor structural issue(s); "
+            "see audit.json (report-only, source not rewritten)")
     if profile.get("issues"):
         uncertainty.extend(profile["issues"])
     if not artifacts:
@@ -121,7 +132,8 @@ def build_result(case_id: str, profile: dict, repair_result: dict,
 
     if not profile.get("main_tex") and not profile.get("inline_source_present"):
         status = "blocked"
-    elif final_build.get("ok") and not unresolved and \
+    elif final_build.get("ok") and not unresolved and not major_left and \
+            not audit_major and \
             reproduce.get("verdict") in ("verified", "partial"):
         status = "complete"
     else:
@@ -130,6 +142,12 @@ def build_result(case_id: str, profile: dict, repair_result: dict,
     limits = []
     if status != "complete":
         limits.append("see error_ledger / reproduction checks for the blocking factor")
+    if major_left:
+        limits.append(f"{len(major_left)} major finding(s) remain (undefined "
+                      "reference/citation or similar) — final output is not yet correct")
+    if audit_major:
+        limits.append(f"{len(audit_major)} major source-audit issue(s): " + ", ".join(
+            sorted({f.get('kind', '') for f in audit_major})))
     if needs_human:
         limits.append("human review required for: " + ", ".join(
             sorted({c.get("category", "") for c in needs_human})))
@@ -144,6 +162,7 @@ def build_result(case_id: str, profile: dict, repair_result: dict,
         "changes": changes,
         "build_manifest": manifest,
         "reproduce": reproduce,
+        "audit": audit,
         "validation": validation,
         "uncertainty": uncertainty,
         "limits": limits,
@@ -166,7 +185,8 @@ def write_all(out_dir: str | Path, result: dict, repair_result: dict,
     for name, obj in (("result.json", result),
                       ("error_ledger.json", (repair_result or {}).get("final_ledger", {})),
                       ("build_manifest.json", result.get("build_manifest", {})),
-                      ("reproduce.json", result.get("reproduce", {}))):
+                      ("reproduce.json", result.get("reproduce", {})),
+                      ("audit.json", result.get("audit", {}))):
         _write_json(out / name, obj)
 
     changes = (repair_result or {}).get("changes", [])
@@ -190,4 +210,4 @@ def write_all(out_dir: str | Path, result: dict, repair_result: dict,
     result, _report = C.apply(result, case_raw.get("output_contract"), None)
     _write_json(out / "result.json", result)
     return ["result.json", "error_ledger.json", "build_manifest.json",
-            "reproduce.json", "changes.md"]
+            "reproduce.json", "audit.json", "changes.md"]

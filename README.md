@@ -90,7 +90,7 @@ playground submit --challenge-id <ID> --outputs <目录> --trace <原生会话�
 | `07-citation-audit/` | 引用元数据逐字段核对，捕获年份/作者/标题混合幻觉 |
 | `08-claim-evidence-binding/` | 断言—证据绑定，anchored/loose/overclaimed 四态判定 |
 | `10-knowledge-graph/` | 文献实体与关系抽取，证据约束的图构建 |
-| `13-latex-compile-repro/` | 工程画像 → 多遍真编译 → 7 类错误分类（文件:行号）→ 副本修复 → 独立目录复现 |
+| `13-latex-compile-repro/` | 工程画像 → 多遍真编译 → 7 类错误分类（文件:行号）→ 副本修复 → 独立目录复现 → 源码正确性审计（引用/交叉引用/版式） |
 
 ## 许可
 

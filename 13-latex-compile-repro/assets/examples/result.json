@@ -1,49 +1,315 @@
 {
-  "example": true,
-  "example_note": "EXAMPLE-NOT-A-OFFICIAL-CASE",
   "case_id": "EXAMPLE-NOT-A-OFFICIAL-CASE",
   "status": "complete",
-  "source": [
+  "project_profile": {
+    "case_id": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+    "root": "<case_root>",
+    "main_tex": "main.tex",
+    "inline_source_present": false,
+    "documentclass": "article",
+    "engine": "pdflatex",
+    "engine_reason": "ASCII-only source with no fontspec/ctex",
+    "unicode_detected": false,
+    "cjk_detected": false,
+    "bib_backend": "natbib",
+    "packages": [
+      "amsmath",
+      "booktabs",
+      "fontenc",
+      "graphicx",
+      "natbib"
+    ],
+    "sub_inputs": [],
+    "bib_names": [
+      "refs"
+    ],
+    "files": [
+      {
+        "name": "main.tex",
+        "kind": "main_tex",
+        "role": "root document",
+        "bytes": 742,
+        "path": "main.tex"
+      },
+      {
+        "name": "refs.bib",
+        "kind": "bib",
+        "role": "bibliography database",
+        "bytes": 195,
+        "path": "refs.bib"
+      }
+    ],
+    "issues": []
+  },
+  "sources": [
     {
       "path": "main.tex",
-      "role": "root document"
+      "kind": "main_tex",
+      "role": "root document",
+      "bytes": 742
     },
     {
       "path": "refs.bib",
-      "role": "bibliography"
+      "kind": "bib",
+      "role": "bibliography database",
+      "bytes": 195
+    },
+    {
+      "path": "main.tex",
+      "kind": "main_tex",
+      "role": "root document",
+      "bytes": 0
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "source/main.tex",
+      "role": "support",
+      "sha256": "23f7ce16143540c3f88d2b3d5ba7a555b0c9ad6065c967bf2a78d569e48c048f",
+      "bytes": 742
+    },
+    {
+      "path": "source/refs.bib",
+      "role": "support",
+      "sha256": "e24bd92b397181dc4bf5567fe273e91fe41137d521948795d52d77f4e13ef62b",
+      "bytes": 195
     }
   ],
   "error_ledger": {
-    "status": "pass",
-    "build_ok": true,
+    "findings": [],
     "counts": {
       "blocking": 0,
       "major": 0,
       "minor": 0
     },
-    "findings": []
+    "total_observations": 0,
+    "build_ok": true,
+    "status": "pass",
+    "note": "Diagnostics are read from all rounds.  Undefined citations and references are normal intermediate states; judge them only after the final pass."
   },
+  "changes": [],
   "build_manifest": {
-    "engine": "pdflatex",
-    "strategy": "sequence",
-    "rounds": 4,
-    "commands": [
-      {
-        "command": [
-          "pdflatex",
-          "-output-directory=<build>",
-          "main.tex"
-        ],
-        "returncode": 0
-      }
-    ],
+    "case_id": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+    "distribution": "TeX Live 2023/Debian",
+    "versions": {
+      "pdftex": "pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)",
+      "xetex": "XeTeX 3.141592653-2.6-0.999995 (TeX Live 2023/Debian)",
+      "luatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+      "latexmk": "Latexmk, John Collins, 31 Jan. 2024. Version 4.83",
+      "bibtex": "BibTeX 0.99d (TeX Live 2023/Debian)",
+      "biber": "biber version: 2.19",
+      "engine_used": "pdflatex",
+      "bibliography_backend": "natbib"
+    },
     "source_hashes": [
       {
         "path": "main.tex",
-        "sha256": "<sha256-of-example-source>"
+        "bytes": 742,
+        "sha256": "23f7ce16143540c3f88d2b3d5ba7a555b0c9ad6065c967bf2a78d569e48c048f"
+      },
+      {
+        "path": "refs.bib",
+        "bytes": 195,
+        "sha256": "e24bd92b397181dc4bf5567fe273e91fe41137d521948795d52d77f4e13ef62b"
       }
+    ],
+    "main_tex": "main.tex",
+    "documentclass": "article",
+    "engine": "pdflatex",
+    "bibliography_backend": "natbib",
+    "strategy": "latexmk",
+    "build_ok": true,
+    "commands": [
+      {
+        "command": [
+          "latexmk",
+          "-pdflatex",
+          "-interaction=nonstopmode",
+          "-file-line-error",
+          "-outdir=<build>",
+          "main.tex"
+        ],
+        "returncode": 0,
+        "timed_out": false
+      }
+    ],
+    "rounds": 1,
+    "diagnostics_signature": {
+      "status": "pass",
+      "counts": {
+        "blocking": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "categories": []
+    },
+    "deterministic_mode": false,
+    "output_pdf": {
+      "bytes": 100788,
+      "sha256": "f7597b2d96e83936d3f45b709a6aacdf8aa7797f8c88aff07cede53c867a610e",
+      "path": "build/main.pdf"
+    },
+    "notes": [
+      "pdfTeX embeds a creation timestamp by default; PDF bytes may differ across runs.",
+      "Reproducibility is verified on source hashes, exit codes and diagnostics.",
+      "Package/font versions beyond the engine are recorded from the .log when available."
     ]
   },
+  "reproduce": {
+    "verdict": "verified",
+    "checks": {
+      "source_hashes_equal": true,
+      "exit_code_equal": true,
+      "diagnostics_equal": true,
+      "pdf_bytes_equal": false
+    },
+    "repro_dir": "repro",
+    "repro_returncode": 0,
+    "original_returncode": 0,
+    "repro_pdf_sha256": "029fd41e50df124b2c1a3b57ac38dc79fa08deb348eafe6664983d708cca5268",
+    "original_pdf_sha256": "f7597b2d96e83936d3f45b709a6aacdf8aa7797f8c88aff07cede53c867a610e",
+    "repro_diagnostics": {
+      "status": "pass",
+      "counts": {
+        "blocking": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "categories": []
+    },
+    "note": "Core verdict compares sources + exit code.  PDF bytes are only a check in deterministic mode; a timestamp difference is not reported as a failure of the default build."
+  },
+  "audit": {
+    "findings": [],
+    "counts": {
+      "major": 0,
+      "minor": 0
+    },
+    "status": "clean",
+    "note": "源码级正确性审计，只报告不改写；major 项会使 result 标 partial，因为这些是最终产物里的真实缺陷"
+  },
+  "validation": {
+    "status": "pass",
+    "checks": [
+      {
+        "name": "has_case_id",
+        "ok": true,
+        "detail": "case_id is EXAMPLE-NOT-A-OFFICIAL-CASE",
+        "severity": "fail"
+      },
+      {
+        "name": "has_sources",
+        "ok": true,
+        "detail": "3 source entries",
+        "severity": "fail"
+      },
+      {
+        "name": "has_artifacts",
+        "ok": true,
+        "detail": "2 editable artifacts",
+        "severity": "fail"
+      },
+      {
+        "name": "has_build_manifest",
+        "ok": true,
+        "detail": "engine=pdflatex rounds=1",
+        "severity": "fail"
+      },
+      {
+        "name": "has_error_ledger",
+        "ok": true,
+        "detail": "0 findings, 0 malformed",
+        "severity": "fail"
+      },
+      {
+        "name": "has_changes",
+        "ok": true,
+        "detail": "0 applied / 0 proposed (clean build needs no change)",
+        "severity": "warn"
+      },
+      {
+        "name": "has_uncertainty",
+        "ok": true,
+        "detail": "0 uncertainty entries",
+        "severity": "warn"
+      },
+      {
+        "name": "compiled",
+        "ok": true,
+        "detail": "final build converged",
+        "severity": "fail"
+      },
+      {
+        "name": "reproduced",
+        "ok": true,
+        "detail": "reproduction verdict=verified",
+        "severity": "warn"
+      },
+      {
+        "name": "no_fabrication",
+        "ok": true,
+        "detail": "status consistent with build/reproduction evidence",
+        "severity": "fail"
+      }
+    ],
+    "counts": {
+      "pass": 10,
+      "fail": 0,
+      "warn": 0
+    },
+    "top_failures": []
+  },
   "uncertainty": [],
-  "note": "示意输出，字段结构来自一次真实示例编译，但哈希为占位；正式结果由运行时生成。"
+  "limits": [],
+  "changes_summary": {
+    "applied": 0,
+    "proposed_only": 0,
+    "source_files_changed": [
+      "main.tex",
+      "refs.bib"
+    ]
+  },
+  "runtime_seconds": 5.58,
+  "example": true,
+  "example_note": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+  "source": [
+    {
+      "path": "source/main.tex",
+      "role": "support",
+      "sha256": "23f7ce16143540c3f88d2b3d5ba7a555b0c9ad6065c967bf2a78d569e48c048f",
+      "bytes": 742
+    },
+    {
+      "path": "source/refs.bib",
+      "role": "support",
+      "sha256": "e24bd92b397181dc4bf5567fe273e91fe41137d521948795d52d77f4e13ef62b",
+      "bytes": 195
+    }
+  ],
+  "contract_report": {
+    "declared": [
+      "case_id",
+      "status",
+      "source",
+      "error_ledger",
+      "build_manifest",
+      "uncertainty"
+    ],
+    "satisfied": [
+      "case_id",
+      "status",
+      "error_ledger",
+      "build_manifest",
+      "uncertainty"
+    ],
+    "aliased": [
+      {
+        "field": "source",
+        "from": "artifacts"
+      }
+    ],
+    "derived": [],
+    "missing": [],
+    "note": ""
+  }
 }

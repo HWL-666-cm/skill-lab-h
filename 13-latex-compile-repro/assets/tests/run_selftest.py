@@ -102,6 +102,17 @@ def main() -> int:
               any("input line" in f["location"] for f in unresolved),
               str([f["location"] for f in unresolved]))
 
+        # 3b. source audit: undefined ref is a major issue, and it downgrades status
+        aud2 = res2.get("audit", {})
+        check("audit: undefined ref detected in source",
+              any(f["kind"] == "undefined" for f in aud2.get("findings", [])),
+              str(aud2.get("counts")))
+        check("audit: major finding downgrades to partial",
+              res2["status"] == "partial", res2["status"])
+        check("audit: good source is clean",
+              res.get("audit", {}).get("counts", {}).get("major", 0) == 0,
+              str(res.get("audit", {}).get("counts")))
+
         # 4. blocked case: empty project
         empty = tmp / "empty_case"
         empty.mkdir()
@@ -134,6 +145,33 @@ def main() -> int:
                 "table_overflow", "stale_aux"}
         check("diagnostics: 6 real-world patterns matched", need <= cats,
               "missing=" + str(sorted(need - cats)))
+
+        # 5b. audit: citation cross-check + layout lint on a synthetic project
+        import audit as A  # noqa: E402
+        synth = tmp / "audit_synth"
+        synth.mkdir()
+        (synth / "main.tex").write_text(
+            "\\documentclass{article}\n"
+            "\\begin{document}\n"
+            "See \\citet{missing2020} and Table~\\ref{tab:nope}.\n"
+            "\\begin{table}[H]\n"
+            "\\label{tab:x}\\caption{Shrunk}\n"
+            "\\resizebox{\\textwidth}{!}{\\begin{tabular}{ll}a&b\\end{tabular}}\n"
+            "\\end{table}\n"
+            "\\bibliographystyle{plain}\\bibliography{refs}\n"
+            "\\end{document}\n", encoding="utf-8")
+        (synth / "refs.bib").write_text(
+            "@article{present2020,author={A},title={T},journal={J},year={2020}}\n",
+            encoding="utf-8")
+        aud = A.audit_source({"main_tex": str(synth / "main.tex"),
+                              "root": str(synth), "files": []})
+        kinds = {f["kind"] for f in aud["findings"]}
+        check("audit: citation/ref/layout all detected",
+              {"missing", "undefined", "shrink_to_fit", "label_before_caption",
+               "forced_float", "unused"} <= kinds,
+              "missing=" + str(sorted({"missing", "undefined", "shrink_to_fit",
+                                       "label_before_caption", "forced_float",
+                                       "unused"} - kinds)))
 
         # 6. contract honesty: unknown fields become null with a note
         import contract as C  # noqa: E402

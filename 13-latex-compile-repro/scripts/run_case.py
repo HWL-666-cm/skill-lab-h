@@ -19,6 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import audit as A          # noqa: E402
 import build as B          # noqa: E402
 import contract as C       # noqa: E402
 import diagnose as D       # noqa: E402
@@ -144,6 +145,8 @@ def main() -> int:
     _write_json(work / "repair_result.json", rep)
     man = M.build_manifest(prof, work, rep)
     repro = M.verify(prof, work, man, lexicon, a.timeout)
+    aud = A.audit_source(prof)
+    _write_json(work / "audit.json", aud)
 
     if a.stage == "reproduce":
         print(json.dumps({"verdict": repro["verdict"], "checks": repro["checks"]},
@@ -152,7 +155,8 @@ def main() -> int:
 
     provisional = emit.build_result(case_id, prof, rep, man, repro,
                                     {"status": "pending", "checks": []},
-                                    raw, time.time() - started, work, out)
+                                    raw, time.time() - started, work, out,
+                                    audit=aud)
     gate = V.validate(provisional, schema, work, out)
     provisional["validation"] = gate
     _write_json(out / "validation.json", gate)
