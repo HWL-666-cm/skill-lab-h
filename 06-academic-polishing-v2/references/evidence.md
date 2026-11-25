@@ -17,6 +17,8 @@ python3 scripts/register_audit.py --original references/evidence-data/src.txt \
 - 改稿 sha256 前 12 位：`6e86d9b3162b`
 - 输出（随附 `references/evidence-data/register_diff.json`）：
 
+> sha256 按 **LF 行尾**计算；若你的 checkout 或打包环节把行尾转成 CRLF，文件 hash 会不同（例如 src.txt 会变成 `53f45196c2eb`），但 `counts` 与 `verdict` 的结论不变。核对时请直接从提交包（`outputs/references/evidence-data/`）取文件算 hash，而不是从本地 checkout。
+
 ```json
 {"mode":"diff","verdict":"clean",
  "counts":{"before":{"colloquial":4,"translationese":5,"nominalization":1,"filler":3,"error":3,"style":10},
@@ -26,7 +28,7 @@ python3 scripts/register_audit.py --original references/evidence-data/src.txt \
 
 要点：`resolved=13`（13 处全消除）、`new=0`（改稿没有引入新的翻译腔）。`new` 按**计数差**计算——同一短语从 1 处变 2 处会报 `new=1`，不会因为"改前就存在"而漏报（该行为由 `tests/cases.json` 的用例锁进回归）。
 
-被消除的 13 处包括：`With the rapid development of`、`attracted more and more attention`、`There has a`（error）、`a lot of`、`make an analysis of`（error）、`The reason is because`（error）、`play an important role in`、`It is worth noting that`、`very important`、`众所周知`、`在当今社会`、`具有重要的理论意义`。
+被消除的 13 处包括：`With the rapid development of`、`attracted more and more attention`（translationese）、`more and more`（colloquial，与前者是两条独立命中）、`There has a`（error）、`a lot of`、`make an analysis of`（error）、`The reason is because`（error）、`play an important role in`、`It is worth noting that`、`very important`、`众所周知`、`在当今社会`、`具有重要的理论意义`。共 13 条，与 `resolved=13` 一致。
 
 ## 证据 2｜守恒审计：把"可能"改成断言、删掉"约"被当场报出
 
