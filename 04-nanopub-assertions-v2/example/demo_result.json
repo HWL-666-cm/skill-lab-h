@@ -1,0 +1,996 @@
+{
+  "_note": "最小调用示例（示意输出，标为示例；20 条断言样例覆盖受控词表，非正式案例结果）",
+  "case_id": "example-case",
+  "answer": {},
+  "structured": {
+    "nanopubs": [
+      {
+        "id": "A01",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "achieves",
+          "object": "80.5 GLUE score",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT LARGE obtains a score of 80.5 on GLUE",
+          "location": {
+            "section": "4.1",
+            "page": 5,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 5
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A02",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "outperforms",
+          "object": "GPT",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "outperforming GPT",
+          "location": {
+            "section": "4.1",
+            "page": 5,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 5
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A03",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "achieves",
+          "object": "80.4 GLUE score",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT BASE obtains a score of 80.4",
+          "location": {
+            "section": "4.1",
+            "page": 5,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 5
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A04",
+        "assertion": {
+          "subject": "BERT",
+          "predicate": "is_a",
+          "object": "deep bidirectional Transformer",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT is a deep bidirectional Transformer model",
+          "location": {
+            "section": "4.1",
+            "page": 2,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 2
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A05",
+        "assertion": {
+          "subject": "BERT",
+          "predicate": "uses",
+          "object": "masked language model pre-training",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT uses masked language model (MLM) pre-training",
+          "location": {
+            "section": "4.1",
+            "page": 3,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 3
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A06",
+        "assertion": {
+          "subject": "BERT",
+          "predicate": "uses",
+          "object": "next sentence prediction",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT also uses a next sentence prediction (NSP) task",
+          "location": {
+            "section": "4.1",
+            "page": 3,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 3
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A07",
+        "assertion": {
+          "subject": "BERT",
+          "predicate": "trained_on",
+          "object": "BooksCorpus (800M words)",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "pre-trained on BooksCorpus (800M words)",
+          "location": {
+            "section": "4.1",
+            "page": 3,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 3
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A08",
+        "assertion": {
+          "subject": "BERT",
+          "predicate": "trained_on",
+          "object": "English Wikipedia (2500M words)",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "and English Wikipedia (2,500M words)",
+          "location": {
+            "section": "4.1",
+            "page": 3,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 3
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A09",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "fine_tuned_on",
+          "object": "GLUE benchmark",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "fine-tuned on the GLUE benchmark",
+          "location": {
+            "section": "4.1",
+            "page": 4,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 4
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A10",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "improves",
+          "object": "SQuAD v1.1 F1 to 93.2",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "improves the SQuAD v1.1 F1 to 93.2",
+          "location": {
+            "section": "4.1",
+            "page": 6,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 6
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A11",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "shows",
+          "object": "improvement with model size",
+          "condition": "",
+          "negation": false,
+          "modality": "claim"
+        },
+        "evidence": {
+          "quote": "larger models lead to better accuracy",
+          "location": {
+            "section": "4.1",
+            "page": 7,
+            "line": 12
+          },
+          "evidence_type": "inferred",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 7
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "共现推断",
+          "level": "medium"
+        }
+      },
+      {
+        "id": "A12",
+        "assertion": {
+          "subject": "masked LM",
+          "predicate": "prevents",
+          "object": "left-to-right conditioning",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "the masked LM prevents left-to-right conditioning",
+          "location": {
+            "section": "4.1",
+            "page": 3,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 3
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A13",
+        "assertion": {
+          "subject": "ablation without NSP",
+          "predicate": "reduces",
+          "object": "GLUE performance",
+          "condition": "",
+          "negation": false,
+          "modality": "claim"
+        },
+        "evidence": {
+          "quote": "removing NSP hurts performance on GLUE",
+          "location": {
+            "section": "4.1",
+            "page": 7,
+            "line": 12
+          },
+          "evidence_type": "inferred",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 7
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "共现推断",
+          "level": "medium"
+        }
+      },
+      {
+        "id": "A14",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "compared_with",
+          "object": "OpenAI GPT",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "compared to OpenAI GPT",
+          "location": {
+            "section": "4.1",
+            "page": 5,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 5
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A15",
+        "assertion": {
+          "subject": "BERT",
+          "predicate": "evaluates",
+          "object": "on GLUE tasks",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "we evaluate BERT on the GLUE benchmark",
+          "location": {
+            "section": "4.1",
+            "page": 4,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 4
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A16",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "reduces",
+          "object": "error by 7.7% on MultiNLI",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "improves MultiNLI accuracy by 4.6%, reducing error by 7.7%",
+          "location": {
+            "section": "4.1",
+            "page": 6,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 6
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A17",
+        "assertion": {
+          "subject": "BERT",
+          "predicate": "consists_of",
+          "object": "Transformer encoder layers",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT's architecture is a multi-layer bidirectional Transformer encoder",
+          "location": {
+            "section": "4.1",
+            "page": 2,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 2
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A18",
+        "assertion": {
+          "subject": "BERT LARGE",
+          "predicate": "outperforms",
+          "object": "human baseline on SWAG",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT LARGE surpasses the human baseline on SWAG",
+          "location": {
+            "section": "4.1",
+            "page": 6,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 6
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      },
+      {
+        "id": "A19",
+        "assertion": {
+          "subject": "word-piece tokens",
+          "predicate": "correlates_with",
+          "object": "subword coverage",
+          "condition": "",
+          "negation": false,
+          "modality": "claim"
+        },
+        "evidence": {
+          "quote": "word-piece tokenization improves subword coverage",
+          "location": {
+            "section": "4.1",
+            "page": 3,
+            "line": 12
+          },
+          "evidence_type": "inferred",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 3
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "共现推断",
+          "level": "low"
+        }
+      },
+      {
+        "id": "A20",
+        "assertion": {
+          "subject": "BERT BASE",
+          "predicate": "achieves",
+          "object": "93.5 F1 on SQuAD v2.0",
+          "condition": "",
+          "negation": false,
+          "modality": "fact"
+        },
+        "evidence": {
+          "quote": "BERT BASE obtains an F1 of 93.5 on SQuAD v2.0",
+          "location": {
+            "section": "4.1",
+            "page": 6,
+            "line": 12
+          },
+          "evidence_type": "direct",
+          "supports": true
+        },
+        "provenance": {
+          "wasDerivedFrom": {
+            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+            "section": "4.1",
+            "page": 6
+          },
+          "method": "text-extraction"
+        },
+        "pubinfo": {
+          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2019,
+          "version": "v2",
+          "identifier": "arXiv:1810.04805"
+        },
+        "confidence": {
+          "basis": "直接引文",
+          "level": "high"
+        }
+      }
+    ],
+    "validation_summary": {
+      "total": 20,
+      "ok": 20,
+      "error": 0,
+      "warning": 0
+    },
+    "predicates": [
+      {
+        "type": "achieves",
+        "label": "achieves"
+      },
+      {
+        "type": "compared_with",
+        "label": "compared_with"
+      },
+      {
+        "type": "consists_of",
+        "label": "consists_of"
+      },
+      {
+        "type": "correlates_with",
+        "label": "correlates_with"
+      },
+      {
+        "type": "evaluates",
+        "label": "evaluates"
+      },
+      {
+        "type": "fine_tuned_on",
+        "label": "fine_tuned_on"
+      },
+      {
+        "type": "improves",
+        "label": "improves"
+      },
+      {
+        "type": "is_a",
+        "label": "is_a"
+      },
+      {
+        "type": "outperforms",
+        "label": "outperforms"
+      },
+      {
+        "type": "prevents",
+        "label": "prevents"
+      },
+      {
+        "type": "reduces",
+        "label": "reduces"
+      },
+      {
+        "type": "shows",
+        "label": "shows"
+      },
+      {
+        "type": "trained_on",
+        "label": "trained_on"
+      },
+      {
+        "type": "uses",
+        "label": "uses"
+      }
+    ],
+    "document": {
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+      "page_count": 16,
+      "ocr_used": false
+    }
+  },
+  "evidence": [
+    {
+      "item": "断言 A01",
+      "value": "80.5 GLUE",
+      "source": "§4.1 p.5 L12"
+    }
+  ],
+  "status": "success",
+  "status_detail": "示例，仅说明输出格式（20 条断言样例）",
+  "uncertainty": [],
+  "warnings": [],
+  "changes": [
+    {
+      "time": "2026-11-25T00:00:00Z",
+      "action": "示例生成",
+      "detail": "标为示例，非正式结果"
+    }
+  ]
+}

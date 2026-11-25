@@ -1,0 +1,21 @@
+{
+  "_note": "受控关系词表：把自然语言关系映射到标准谓词。断言拆解时 predicate 必须取自本表，禁止自由发挥，保证下游程序可直接解析（读得懂）。",
+  "predicates": [
+    {"type": "achieves", "label": "达到/取得", "verbs": ["achieve", "obtain", "reach", "attain", "score", "get", "report"]},
+    {"type": "improves", "label": "提升/优于", "verbs": ["improve", "outperform", "exceed", "surpass", "beat", "better", "boost"]},
+    {"type": "reduces", "label": "降低/减少", "verbs": ["reduce", "decrease", "lower", "mitigate", "alleviate", "shrink"]},
+    {"type": "uses", "label": "使用/采用", "verbs": ["use", "employ", "apply", "leverage", "adopt", "utilize", "rely on"]},
+    {"type": "proposes", "label": "提出/引入", "verbs": ["propose", "introduce", "present", "design", "develop", "present"]},
+    {"type": "evaluates", "label": "评估/测试", "verbs": ["evaluate", "test", "benchmark", "assess", "measure", "examine"]},
+    {"type": "trained_on", "label": "在…上训练", "verbs": ["train on", "pretrain on", "pre-train on", "fit on"]},
+    {"type": "fine_tuned_on", "label": "在…上微调", "verbs": ["fine-tune on", "finetune on", "fine tune on"]},
+    {"type": "causes", "label": "导致/引起", "verbs": ["cause", "lead to", "result in", "induce", "yield", "give rise to"]},
+    {"type": "is_a", "label": "是…的一种", "verbs": ["is a", "is an", "is a type of", "belongs to", "consists of"]},
+    {"type": "compared_with", "label": "与…比较", "verbs": ["compare with", "compared with", "compared to", "versus", "vs."]},
+    {"type": "shows", "label": "表明/显示", "verbs": ["show", "demonstrate", "indicate", "reveal", "suggest", "find"]},
+    {"type": "outperforms", "label": "胜过基线", "verbs": ["outperform", "beat the baseline", "surpass the baseline", "exceed the baseline"]},
+    {"type": "consists_of", "label": "由…组成", "verbs": ["consist of", "comprise", "composed of", "made of", "include"]},
+    {"type": "correlates_with", "label": "与…相关", "verbs": ["correlate with", "associated with", "related to", "linked to"]},
+    {"type": "prevents", "label": "防止/避免", "verbs": ["prevent", "avoid", "eliminate", "remove", "guard against"]}
+  ]
+}
