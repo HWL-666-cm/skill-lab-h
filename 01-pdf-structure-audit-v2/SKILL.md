@@ -59,7 +59,7 @@ description: 科研 PDF 文献结构化解析 Skill。把论文解析成可复�
 
 ## 3. 依赖与资源
 
-评测运行环境为固定镜像，已预装（Harbor Runtime contract 声明）：
+评测运行环境为固定镜像，已预装；运行前 `command -v` 自检，缺失则降级并写 `warnings`：
 - `pdfinfo / pdftohtml / pdftotext / pdffonts / pdftoppm`（poppler-utils，`pdf-text-tool` 与 `pdf-render-tool`）
 - `python3`（`scientific-python`）
 - 可选 `tesseract`（`ocr-tool`，扫描版 PDF 时用）
