@@ -199,6 +199,10 @@ python scripts/validate.py --graph /app/output/graph.json --case /input/case.jso
 - 不联网、不写原始材料、不调用外部服务。
 - 不依赖图数据库：图是 JSON，查询在内存里跑，评审可直接读文件复核。
 
+## 请求预算（题面：64 请求 / 900 秒 / 16384 token）
+
+脚本阶段 0 次模型请求（`extract.py` 规则抽取，只提议不裁决）；Agent 阶段：确认合并 ≤10、确认关系 ≤15、查询 ≤5、复核 ≤5，合计 ≤35，余量 ≥29。抽取与校验都不占模型请求，只占脚本算力。
+
 ## 最小示例
 
 `assets/examples/` 有一组完整示例：`case.json`（输入形态）、`result.json`（一份带 `example: true` 标记的两条边结果）、`queries.json`。示例只说明接口与字段形状，**不是平台固定案例的答案**。
