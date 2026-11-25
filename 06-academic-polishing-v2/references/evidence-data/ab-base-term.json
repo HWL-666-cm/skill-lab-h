@@ -3,7 +3,7 @@
   "version": "1.1",
   "mode": "rescan",
   "input": "references/evidence-data/ab-baseline.txt",
-  "glossary": "/tmp/ab-terms.json",
+  "glossary": "references/evidence-data/ab-terms.json",
   "verdict": "review",
   "terms": [
     {

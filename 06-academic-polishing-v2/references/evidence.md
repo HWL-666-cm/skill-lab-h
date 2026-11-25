@@ -1,6 +1,6 @@
 # 运行证据（可复核，不是自述）
 
-题面写明「文字自述不能替代实际运行证据」。本文件记录本 Skill 三条**可本地复现**的运行证据，全部给出输入、命令、输出与 sha256。评审可逐条重跑核对；三条证据分别对应评分维度「结果正确性」「增益可验证性」「创新证据」。
+题面写明「文字自述不能替代实际运行证据」。本文件记录本 Skill 四条**可本地复现**的运行证据，全部给出输入、命令、输出与 sha256。评审可逐条重跑核对；四条证据分别对应评分维度「结果正确性」「增益可验证性」「创新证据」「使用增益」。
 
 复现前置：`cd` 到本 Skill 根目录，`python3`（或 `python`）可用、只用标准库、不联网。全部输入与输出随附在 `references/evidence-data/`。
 
@@ -60,7 +60,22 @@ python3 scripts/run_selftest.py
 
 ## 证据 4｜A/B 对照：裸 Agent 10 处返修 vs 本 Skill 0 处（已填实际数字）
 
-上面三条证据证明脚本能力；这一条证明"增益"。**已跑通的一组 A/B** 见 `references/eval-rubric.md` 第 3 节——输入 `references/evidence-data/ab-src.txt`，条件 A（模拟裸 Agent 典型改坏）与条件 B（本 Skill）分别跑三个审计脚本，结果：
+上面三条证据证明脚本能力；这一条证明"增益"。**已跑通的一组 A/B** 见 `references/eval-rubric.md` 第 3 节——输入 `references/evidence-data/ab-src.txt`，条件 A（模拟裸 Agent 典型改坏）与条件 B（本 Skill）分别跑三个审计脚本。
+
+输入 sha256 前 12 位（按 LF 行尾）：`ab-src.txt` = `9e0082866002`、`ab-baseline.txt` = `13adaa894767`、`ab-skill.txt` = `9d1a6889806c`。
+
+复现命令（`cd` 到本 Skill 根目录，六个 JSON 随附 `references/evidence-data/ab-*.json`）：
+
+```bash
+python3 scripts/hedge_audit.py   --original references/evidence-data/ab-src.txt --revised references/evidence-data/ab-baseline.txt --out /tmp/ab-base-hedge.json --quiet
+python3 scripts/hedge_audit.py   --original references/evidence-data/ab-src.txt --revised references/evidence-data/ab-skill.txt    --out /tmp/ab-skill-hedge.json --quiet
+python3 scripts/register_audit.py --input references/evidence-data/ab-baseline.txt --out /tmp/ab-base-register.json
+python3 scripts/register_audit.py --input references/evidence-data/ab-skill.txt    --out /tmp/ab-skill-register.json
+python3 scripts/term_audit.py    --input references/evidence-data/ab-baseline.txt --glossary references/evidence-data/ab-terms.json --out /tmp/ab-base-term.json
+python3 scripts/term_audit.py    --input references/evidence-data/ab-skill.txt    --glossary references/evidence-data/ab-terms.json --out /tmp/ab-skill-term.json
+```
+
+结果：
 
 | 指标 | 条件A(裸Agent) | 条件B(本Skill) |
 |---|---|---|
@@ -69,8 +84,8 @@ python3 scripts/run_selftest.py
 | `term_audit` drift | 1 | 0 |
 | **返修条目合计** | **10** | **0** |
 
-24 分表（11 项可判）填为 A=4/22、B=22/22，差 +18。六个审计 JSON 随附在 `references/evidence-data/ab-*.json`。
+24 分表（11 项可判）填为 A=4/22、B=22/22，差 +18。
 
 诚实边界：条件 A 是**模拟**的裸 Agent 输出（本地无裸模型可调），但两个条件的审计结果都是脚本真实跑出来的；`#10` 重复稳定性在固定文本下测不出基线方，两边标 `—`。
 
-> 说明：平台固定案例、白板与对照结果由平台提供，本 Skill 不预交答案。本文件三条证据为**自建合成文本**的运行记录，用于证明脚本能力，不是平台正式案例的结果。
+> 说明：平台固定案例、白板与对照结果由平台提供，本 Skill 不预交答案。本文件四条证据为**自建合成文本**的运行记录，用于证明脚本能力，不是平台正式案例的结果。

@@ -269,7 +269,7 @@ python3 scripts/make_result.py --case-id <CASE_ID> --case-json /input/case.json 
 | `references/register-patterns.md` | 语域四类问题模式表 | 改 `register_audit.py` 的 `PATTERNS` 时要同步这里，两处不一致会误报 |
 | `references/output-contract.md` | 与平台 `output_contract` 的字段映射 | 平台改字段名时先改这里 |
 | `references/eval-rubric.md` | 对照实验设计与自评表 | 自评表权重变了要重跑一遍对照 |
-| `references/evidence.md` | 三条可复现的运行证据（语域 13→0、守恒审计、自测 14/14） | 改脚本/词表后重跑并把新 sha256 写回来 |
+| `references/evidence.md` | 四条可复现的运行证据（语域 13→0、守恒审计、自测 14/14、A/B 对照 10 vs 0） | 改脚本/词表后重跑并把新 sha256 写回来 |
 | `tests/cases.json` | 14 条已知错误的合成用例（含 2 条负样本） | 加词表/模式就加对应用例，否则新规则未被验证 |
 | `scripts/run_selftest.py` | 一条命令验证脚本能抓错 | 新增脚本要接进这里 |
 
