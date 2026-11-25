@@ -506,9 +506,52 @@ def t_v2() -> None:
     out = emit.finalise({"example": True, "output_contract": ["methods"]}, {"case_id": "x"})
     eq("v2.example_flag_propagated", out.get("example"), True)
 
+    # warn 档：status=complete 但 limits 必须写明警告（output-contract.md 承诺）
+    warn_report = {"status": "warn",
+                   "counts": {"pass": 23, "warn": 1, "fail": 0, "not_checked": 0},
+                   "checks": [], "top_failures": []}
+    r_warn = emit.build_result("t",
+                               {"units": [], "files": [], "unreadable": [],
+                                "stats": {"files": 0, "unreadable": 0, "units": 0}},
+                               {"entries": [], "stats": {"entries": 0, "values": 0, "conflicting": 0},
+                                "conflicts": []},
+                               {"text_numbers": 0,
+                                "forward": {"traced": [], "invented": [], "mismatch": [], "trace_rate": 1.0},
+                                "backward": {"not_written": [], "written_rate": 1.0}, "coverage": {}},
+                               {"gaps": [], "counts": {}, "by_severity": {"blocking": 0, "major": 0}},
+                               warn_report, "complete", "")
+    check("v2.warn_limits_written",
+          any("warn" in x for x in r_warn.get("limits", [])),
+          f"limits={r_warn.get('limits')}")
+
+
+def t_example() -> None:
+    """随包示例必须与现码一致：重跑后与 result.json 逐字段一致。"""
+    import json as _json
+    import subprocess as _sp
+    import tempfile as _tf
+    import shutil as _sh
+    from pathlib import Path as _P
+    exdir = _P(tempfile.mkdtemp(prefix="selftest-ex-"))
+    try:
+        _sp.run([sys.executable, str(ROOT / "scripts" / "run_case.py"),
+                 "--case", str(ROOT / "assets" / "examples" / "case.json"),
+                 "--lexicon", str(ROOT / "assets" / "lexicon.json"),
+                 "--schema", str(ROOT / "assets" / "schema.json"),
+                 "--out", exdir, "--stage", "finish",
+                 "--draft", str(ROOT / "assets" / "examples" / "deliverables" / "draft.md")],
+                check=True, capture_output=True, text=True)
+        fresh = _json.loads((_P(exdir) / "result.json").read_text(encoding="utf-8"))
+        ship = _json.loads((ROOT / "assets" / "examples" / "deliverables" / "result.json")
+                           .read_text(encoding="utf-8"))
+        check("example.matches_code", fresh == ship,
+              "随包示例与重跑不一致（示例未随代码重生成）")
+    finally:
+        _sh.rmtree(exdir, ignore_errors=True)
+
 
 def main() -> int:
-    for fn in (t_numbers, t_ledger, t_align, t_gate, t_contract, t_determinism, t_material, t_v2):
+    for fn in (t_numbers, t_ledger, t_align, t_gate, t_contract, t_determinism, t_material, t_v2, t_example):
         try:
             fn()
         except Exception as exc:                    # a crashing test is a failed test

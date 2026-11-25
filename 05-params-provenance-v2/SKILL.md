@@ -137,7 +137,7 @@ python scripts/revision_log.py --before /app/work/round1/result.json \
 python scripts/run_case.py --case /input --lexicon assets/lexicon.json \
     --schema assets/schema.json --out /app/output --stage recheck
 
-# 自测（不需要任何材料，78 项断言）
+# 自测（不需要任何材料，80 项断言）
 python assets/tests/run_selftest.py
 ```
 

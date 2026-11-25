@@ -137,14 +137,15 @@ def build_result(case_id: str, pack: dict, ledger: dict, alignment: dict, gaps: 
                  report: dict, status: str, draft_text: str,
                  extra_uncertainty: list[str] | None = None) -> dict:
     limits: list[str] = []
-    if status != "complete":
-        if report["counts"]["fail"]:
-            limits.append(f"{report['counts']['fail']} gate checks failed; see validation.json")
-        if gaps["by_severity"]["blocking"]:
-            limits.append(f"{gaps['by_severity']['blocking']} blocking gaps need author input "
-                          "before this section can be used")
-        if not limits:
-            limits.append("the run completed with warnings only")
+    if report["counts"].get("fail"):
+        limits.append(f"{report['counts']['fail']} gate checks failed; see validation.json")
+    if gaps["by_severity"]["blocking"]:
+        limits.append(f"{gaps['by_severity']['blocking']} blocking gaps need author input "
+                      "before this section can be used")
+    if report["counts"].get("warn"):
+        limits.append(f"{report['counts']['warn']} gate checks warn; see validation.json")
+    if not limits and status != "complete":
+        limits.append("the run completed with warnings only")
     result = {
         "case_id": case_id,
         "status": status,

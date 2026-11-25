@@ -54,10 +54,11 @@
 
 ## 证据 4：回归（章节/要素/回改）
 
-自测 78/78，覆盖七类数值判定（traced/mismatch/invented/in_material/value_only/ambiguous/ignored）、
+自测 80/80，覆盖七类数值判定（traced/mismatch/invented/in_material/value_only/ambiguous/ignored）、
 四态门禁（pass/warn/fail/not_checked 且 not_checked 永不计 pass）、循环溯源防护（草稿≠材料）、
-字节确定性（同输入两次 sha256 一致）、以及 v2 新增的 `repro` 五项逐判、`revision_log.py` 回改回路
-与软件版本号忽略（"Python 3" 的 3 不算编造数值）。
+字节确定性（同输入两次 sha256 一致）、以及 v2 新增的 `repro` 五项逐判、`revision_log.py` 回改回路、
+软件版本号忽略（"Python 3" 的 3 不算编造数值）、**warn 档 limits 必写明**、
+**随包示例与现码逐字段一致**（重跑示例后比对，防止示例漂移）。
 
 ## 已知边界（如实标注，不算通过）
 
