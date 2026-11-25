@@ -1,0 +1,12 @@
+# 本题 Skill 没有第三方依赖，全部走 Python 标准库。
+# 安装步骤：无需安装。pip install -r requirements.txt 合法但什么都不会装。
+#
+# 实测环境：Python 3.12.10（Windows）。下限 3.10，因为用到了
+# `list[str]` / `X | None` 这类内建泛型与联合类型标注。
+#
+# 用到的标准库：argparse csv difflib hashlib json re subprocess sys tempfile collections pathlib
+# 其中 subprocess 只在 run_selftest.py 里调用本目录自己的脚本，不依赖任何外部命令。
+#
+# 刻意不依赖：
+#   language_tool_python / textstat 等  润色审计只用规则与词表，避免引入联网或大模型依赖
+#   openpyxl / python-docx              输入按纯文本或已抽取文本处理，不做 Office 二进制解析

@@ -1,0 +1,125 @@
+{
+  "_note": "自测用例。全部为合成文本，用于验证脚本能否抓出已知的改动错误，不是赛事正式案例。",
+  "cases": [
+    {
+      "id": "hedge-basic",
+      "check": "hedge",
+      "description": "可能性被改成断言 + 精度被抬高",
+      "original": "The treatment may reduce the incidence by about 12% in coastal areas [3].",
+      "bad": "The treatment reduces the incidence by 12% in coastal areas [3].",
+      "expect_bad_flags": ["hedge_strengthened"],
+      "good": "The treatment may reduce the incidence by approximately 12% in coastal areas [3].",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "negation-lost",
+      "check": "hedge",
+      "description": "阴性结果被改写成等价性判断",
+      "original": "Sea fog frequency was not significant at inland stations.",
+      "bad": "Sea fog frequency was similar at inland stations.",
+      "expect_bad_flags": ["negation_lost"],
+      "good": "Sea fog frequency was not statistically significant at inland stations.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "facts-dropped",
+      "check": "hedge",
+      "description": "样本量与引用编号在改写中丢失",
+      "original": "A total of 14 stations recorded 2779 fog samples (1.33%) from 2015 to 2020 [12].",
+      "bad": "A total of 14 stations recorded fog samples (1.33%) from 2015 to 2020.",
+      "expect_bad_flags": ["fact_missing"],
+      "good": "In total, 14 stations recorded 2779 fog samples (1.33%) between 2015 and 2020 [12].",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "negation-frequency-drop",
+      "check": "hedge",
+      "description": "阴性表述词种类未变但出现次数从 3 降到 1，旧版按 len 判定会漏报",
+      "original": "At station A it was not significant. At station B it was not significant. At station C it was not significant.",
+      "bad": "At station A it was not significant. At station B it was not significant. At station C the effect was observed.",
+      "expect_bad_flags": ["negation_lost"],
+      "good": "At station A it was not significant. At station B it was not significant. At station C it was not statistically significant.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "zh-scope-strengthened",
+      "check": "hedge",
+      "description": "中文阴性/收窄表述被换成正向断言，negation 次数下降且 scope 增强",
+      "original": "该路线在国内公开文献中尚不多见，结论站不住；仍有部分站点未见差异。",
+      "bad": "该路线在国内公开文献中十分常见，结论完全成立；所有站点均如此。",
+      "expect_bad_flags": ["negation_lost", "hedge_strengthened"],
+      "good": "该路线在国内公开文献中尚不多见，结论站不住；仍有部分站点未见差异。",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "abbrev-definition-lost",
+      "check": "hedge",
+      "description": "缩写首次定义被删，只剩裸缩写；词表里没有任何相关词，靠①有限集合守恒抓出",
+      "original": "We improved the probability of detection (POD) and the false alarm ratio (FAR) in sea fog prediction.",
+      "bad": "We improved POD and FAR in sea fog prediction.",
+      "expect_bad_flags": ["fact_missing"],
+      "good": "We improved the probability of detection (POD) and the false alarm ratio (FAR) in sea fog forecasting.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "boundary-collapsed",
+      "check": "hedge",
+      "description": "边界表达 at least 被删，命题从'至少'变成确数；靠①有限集合守恒抓出",
+      "original": "Visibility was below 1 km for at least 60 hours at the coastal station.",
+      "bad": "Visibility was below 1 km for 60 hours at the coastal station.",
+      "expect_bad_flags": ["fact_missing"],
+      "good": "Visibility stayed below 1 km for at least 60 hours at the coastal site.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "claim-anchor-intent-to-fact",
+      "check": "hedge",
+      "description": "aims to develop 改成 develops，意图变既成事实；即使留痕齐全也必须报③红线",
+      "original": "This study aims to develop a sea fog prediction model using satellite data.",
+      "bad": "This study develops a sea fog prediction model using satellite data.",
+      "expect_bad_flags": ["substance_redline"],
+      "good": "This study aims to develop a satellite-based sea fog prediction model.",
+      "expect_good_verdict": "pass"
+    },
+    {
+      "id": "term-drift",
+      "check": "term",
+      "description": "同一术语三种写法；bad 未统一，good 统一到术语表首选写法",
+      "original": "Sea-Fog events were frequent in spring. Sea Fog intensity varied by station.",
+      "bad": "sea fog events were frequent in spring. sea fog intensity varied by station.",
+      "expect_rescan_drift": true,
+      "good": "Sea Fog events were frequent in spring. Sea Fog intensity varied by station.",
+      "expect_rescan_drift_after_good": false
+    },
+    {
+      "id": "register-chinglish",
+      "check": "register",
+      "description": "中式英语硬错误 + 直译腔开场；bad 应报，good 干净",
+      "original": "With the rapid development of deep learning, image classification has attracted more and more attention. There has a lot of methods that make an analysis of images. The reason is because models play an important role in it.",
+      "bad": "With the rapid development of deep learning, image classification has attracted more and more attention. There has a lot of methods that make an analysis of images. The reason is because models play an important role in it.",
+      "expect_bad_flags": ["translationese", "nominalization"],
+      "good": "Deep learning has advanced rapidly, and image classification has drawn increasing attention. Many methods analyze images; models are central to this task because they capture hierarchical features.",
+      "expect_good_verdict": "clean"
+    },
+    {
+      "id": "register-nominalization",
+      "check": "register",
+      "description": "冗余名词化应报 error，动词直用作谓语的干净版本不报",
+      "original": "We carried out an investigation of the fog events and made a comparison with the baseline.",
+      "bad": "We carried out an investigation of the fog events and made a comparison with the baseline.",
+      "expect_bad_flags": ["nominalization"],
+      "good": "We investigated the fog events and compared them with the baseline.",
+      "expect_good_verdict": "clean"
+    },
+    {
+      "id": "register-filler-cn",
+      "check": "register",
+      "description": "中文空话套话应报；改为具体贡献的干净版本不报",
+      "original": "众所周知，在当今社会，该方法具有重要的理论意义和现实意义。",
+      "bad": "众所周知，在当今社会，该方法具有重要的理论意义和现实意义。",
+      "expect_bad_flags": ["filler", "colloquial"],
+      "good": "该方法把预报误差从 12% 降到 7%，并在 14 个沿海站得到验证。",
+      "expect_good_verdict": "clean"
+    }
+  ]
+}
