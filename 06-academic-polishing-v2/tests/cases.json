@@ -120,6 +120,28 @@
       "expect_bad_flags": ["filler", "colloquial"],
       "good": "该方法把预报误差从 12% 降到 7%，并在 14 个沿海站得到验证。",
       "expect_good_verdict": "clean"
+    },
+    {
+      "id": "register-math-term",
+      "check": "register",
+      "description": "负样本：with respect to 是数学/统计固定搭配，不得报 filler",
+      "original": "The partial derivative with respect to each parameter was computed.",
+      "bad": "The partial derivative with respect to each parameter was computed.",
+      "expect_bad_flags": [],
+      "expect_bad_verdict": "clean",
+      "good": "The partial derivative with respect to each parameter was computed.",
+      "expect_good_verdict": "clean"
+    },
+    {
+      "id": "register-cn-normal",
+      "check": "register",
+      "description": "负样本：在…方面 是正常中文学术表达，不得报 translationese",
+      "original": "在误差控制方面，本文采用三折交叉验证。",
+      "bad": "在误差控制方面，本文采用三折交叉验证。",
+      "expect_bad_flags": [],
+      "expect_bad_verdict": "clean",
+      "good": "在误差控制方面，本文采用三折交叉验证。",
+      "expect_good_verdict": "clean"
     }
   ]
 }

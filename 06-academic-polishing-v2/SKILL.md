@@ -130,6 +130,7 @@ python3 scripts/hedge_audit.py --original /app/work/source.txt --revised /app/wo
 python3 scripts/register_audit.py --original /app/work/source.txt --revised /app/work/revised.txt \
   --out /app/work/register_after.json
 ```
+**退出码口径**：两个审计脚本在"有发现"时退出码为 1，0 = 干净，2 = 参数错误。退出码 1 是"发现了问题"的正常结论，**不是脚本崩溃**，结论永远以 JSON 的 `verdict`/`flags` 为准；不要因为退出码非 0 就重跑或当成失败。
 脚本按三层查，从强到弱；**强度词表只是辅助，不是唯一防线**——换一篇文档必然出现表外词（`often`、`aims to`、`substantially`……），靠加词追不完，所以前三层都不认词：
 
 | 层 | 查什么 | 为什么这样设计 |
@@ -239,7 +240,7 @@ python3 scripts/make_result.py --case-id <CASE_ID> --case-json /input/case.json 
 
 | # | 动作 | 通过标准 |
 |---|---|---|
-| 1 | 跑 `python3 scripts/run_selftest.py`（或 `python`） | 12 条用例全 PASS（8 守恒 + 1 术语 + 3 语域）；有 FAIL 说明审计脚本坏了，先修脚本再动文本 |
+| 1 | 跑 `python3 scripts/run_selftest.py`（或 `python`） | 14 条用例全 PASS（8 守恒 + 1 术语 + 5 语域，语域含 2 条负样本）；有 FAIL 说明审计脚本坏了，先修脚本再动文本 |
 | 2 | 确认 `result.json` 有 `case_id`，且 `output_contract` 的必需字段齐全 | 缺一即改 `status` 为 `partial` |
 | 3 | 抽查 5 处 `change_log` | 每处都能在原文里搜到 `original`，改文里搜到 `revised` |
 | 4 | 看 `audit.flags` 是否为空 | 非空则要么已回改，要么在 `uncertainties` 写明为何保留 |
@@ -268,7 +269,8 @@ python3 scripts/make_result.py --case-id <CASE_ID> --case-json /input/case.json 
 | `references/register-patterns.md` | 语域四类问题模式表 | 改 `register_audit.py` 的 `PATTERNS` 时要同步这里，两处不一致会误报 |
 | `references/output-contract.md` | 与平台 `output_contract` 的字段映射 | 平台改字段名时先改这里 |
 | `references/eval-rubric.md` | 对照实验设计与自评表 | 自评表权重变了要重跑一遍对照 |
-| `tests/cases.json` | 12 条已知错误的合成用例 | 加词表/模式就加对应用例，否则新规则未被验证 |
+| `references/evidence.md` | 三条可复现的运行证据（语域 13→0、守恒审计、自测 14/14） | 改脚本/词表后重跑并把新 sha256 写回来 |
+| `tests/cases.json` | 14 条已知错误的合成用例（含 2 条负样本） | 加词表/模式就加对应用例，否则新规则未被验证 |
 | `scripts/run_selftest.py` | 一条命令验证脚本能抓错 | 新增脚本要接进这里 |
 
 Skill 版本由仓库提交记录管理，不在正文内标注。

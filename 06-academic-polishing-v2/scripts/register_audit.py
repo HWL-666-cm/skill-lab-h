@@ -19,6 +19,10 @@ severity 分两档：error（硬错误，应当改）与 style（语域问题，
 用法：
   python3 register_audit.py --input revised.txt --out register.json
   python3 register_audit.py --original src.txt --revised out.txt --out register.json  # 对比净变化
+
+退出码：0 = 无发现（clean）；1 = 有发现（issues）；2 = 参数错误。
+注意：退出码 1 表示"有发现"，不是脚本崩溃——结论永远以 JSON 的 verdict 字段为准，
+调用方（含 Agent）不要因为退出码非 0 就重跑。
 """
 
 from __future__ import annotations
@@ -27,6 +31,7 @@ import argparse
 import json
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 # ---------------------------------------------------------------- pattern table
@@ -63,7 +68,7 @@ PATTERNS: list[dict] = [
      "suggestion": "改为具体作用，如 is essential for / drives / accounts for", "severity": "style"},
     {"category": "translationese", "pattern": r"\battracted more and more attention\b|\bhas attracted (?:much|wide) attention\b",
      "suggestion": "删除热度开场白，直接陈述研究现状与缺口", "severity": "style"},
-    {"category": "translationese", "pattern": r"随着.{0,12}(?:的)?(?:发展|进步|提高)|在.{0,10}方面",
+    {"category": "translationese", "pattern": r"随着.{0,12}(?:的)?(?:发展|进步|提高)",
      "suggestion": "删除直译开场，改为直接陈述", "severity": "style"},
 
     # ---- nominalization 冗余名词化 ----
@@ -89,7 +94,7 @@ PATTERNS: list[dict] = [
      "suggestion": "删除，或把要点写成主句", "severity": "style"},
     {"category": "filler", "pattern": r"\b(?:as is well known|it is well known that|it goes without saying|needless to say)\b",
      "suggestion": "删除（宣称「众所周知」却不给引用，属语域问题）", "severity": "style"},
-    {"category": "filler", "pattern": r"\bwith regard to\b|\bwith respect to\b",
+    {"category": "filler", "pattern": r"\bwith regard to\b",
      "suggestion": "regarding / about / for", "severity": "style"},
     {"category": "filler", "pattern": r"在当今社会|在当前.{0,6}(?:形势|背景下)|具有重要的(?:理论|现实|应用)意义",
      "suggestion": "删除空话，改为具体贡献", "severity": "style"},
@@ -151,20 +156,41 @@ def main() -> int:
         after = read_text(args.revised)
         rb = audit(before)
         ra = audit(after)
-        # 净变化：改后仍有/新增的才算，改前有而改后没有的是"已消除"
-        after_spans = {(f["category"], f["text"].lower()) for f in ra["findings"]}
-        before_spans = {(f["category"], f["text"].lower()) for f in rb["findings"]}
-        remaining = [f for f in ra["findings"]
-                     if (f["category"], f["text"].lower()) in before_spans]
-        new = [f for f in ra["findings"]
-               if (f["category"], f["text"].lower()) not in before_spans]
-        resolved = [f for f in rb["findings"]
-                    if (f["category"], f["text"].lower()) not in after_spans]
+        # 净变化按"计数"而非"集合"：同一短语从 1 处变 2 处，应报 new=1，
+        # 不能因为该短语改前就存在而报 new=0（集合比对会漏报这种"新增一处"）。
+        before_counter = Counter((f["category"], f["text"].lower()) for f in rb["findings"])
+        after_counter = Counter((f["category"], f["text"].lower()) for f in ra["findings"])
+        all_keys = set(before_counter) | set(after_counter)
+
+        def _rep(findings, key):
+            for f in findings:
+                if (f["category"], f["text"].lower()) == key:
+                    return dict(f)
+            return None
+
+        resolved, remaining, new = [], [], []
+        for key in sorted(all_keys):
+            b, a = before_counter[key], after_counter[key]
+            if b > a:
+                it = _rep(rb["findings"], key) or {"category": key[0], "text": key[1]}
+                it.update({"before_count": b, "after_count": a, "count_delta": b - a})
+                resolved.append(it)
+            elif a > b:
+                it = _rep(ra["findings"], key) or {"category": key[0], "text": key[1]}
+                it.update({"before_count": b, "after_count": a, "count_delta": a - b})
+                new.append(it)
+            if b > 0 and a > 0:
+                it = _rep(ra["findings"], key) or {"category": key[0], "text": key[1]}
+                it.update({"before_count": b, "after_count": a,
+                           "count": min(b, a)})
+                remaining.append(it)
         report = {
             "mode": "diff",
-            "verdict": "issues" if remaining or new else "clean",
+            "verdict": "issues" if ra["findings"] else "clean",
             "counts": {"before": rb["counts"], "after": ra["counts"],
-                       "resolved": len(resolved), "remaining": len(remaining), "new": len(new)},
+                       "resolved": sum(x["count_delta"] for x in resolved),
+                       "remaining": sum(x.get("count", 0) for x in remaining),
+                       "new": sum(x["count_delta"] for x in new)},
             "resolved": resolved, "remaining": remaining, "new": new,
         }
     else:

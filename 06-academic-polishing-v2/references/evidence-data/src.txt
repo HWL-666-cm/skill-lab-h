@@ -1,0 +1,1 @@
+With the rapid development of deep learning, image classification has attracted more and more attention. There has a lot of methods that make an analysis of images. The reason is because models play an important role in it. It is worth noting that very important results were obtained. 众所周知，在当今社会该方法具有重要的理论意义。

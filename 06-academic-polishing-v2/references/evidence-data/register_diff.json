@@ -1,0 +1,198 @@
+{
+  "mode": "diff",
+  "verdict": "clean",
+  "counts": {
+    "before": {
+      "colloquial": 4,
+      "translationese": 5,
+      "nominalization": 1,
+      "filler": 3,
+      "error": 3,
+      "style": 10
+    },
+    "after": {
+      "colloquial": 0,
+      "translationese": 0,
+      "nominalization": 0,
+      "filler": 0,
+      "error": 0,
+      "style": 0
+    },
+    "resolved": 13,
+    "remaining": 0,
+    "new": 0
+  },
+  "resolved": [
+    {
+      "category": "colloquial",
+      "severity": "style",
+      "text": "a lot of",
+      "span": [
+        115,
+        123
+      ],
+      "suggestion": "many / numerous / 具体数量",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "colloquial",
+      "severity": "style",
+      "text": "more and more",
+      "span": [
+        80,
+        93
+      ],
+      "suggestion": "increasingly / progressively / 具体趋势",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "colloquial",
+      "severity": "style",
+      "text": "very important",
+      "span": [
+        248,
+        262
+      ],
+      "suggestion": "用更精确的形容词或具体数值代替程度副词",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "colloquial",
+      "severity": "style",
+      "text": "众所周知",
+      "span": [
+        286,
+        290
+      ],
+      "suggestion": "删除，或改为引用具体文献支撑",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "filler",
+      "severity": "style",
+      "text": "It is worth noting that",
+      "span": [
+        224,
+        247
+      ],
+      "suggestion": "删除，或把真正值得强调的点写成主句",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "filler",
+      "severity": "style",
+      "text": "具有重要的理论意义",
+      "span": [
+        299,
+        308
+      ],
+      "suggestion": "删除空话，改为具体贡献",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "filler",
+      "severity": "style",
+      "text": "在当今社会",
+      "span": [
+        291,
+        296
+      ],
+      "suggestion": "删除空话，改为具体贡献",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "nominalization",
+      "severity": "error",
+      "text": "make an analysis of",
+      "span": [
+        137,
+        156
+      ],
+      "suggestion": "analyze / compare / assess / evaluate（动词直接作谓语）",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "translationese",
+      "severity": "style",
+      "text": "attracted more and more attention",
+      "span": [
+        70,
+        103
+      ],
+      "suggestion": "删除热度开场白，直接陈述研究现状与缺口",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "translationese",
+      "severity": "style",
+      "text": "play an important role in",
+      "span": [
+        194,
+        219
+      ],
+      "suggestion": "改为具体作用，如 is essential for / drives / accounts for",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "translationese",
+      "severity": "error",
+      "text": "The reason is because",
+      "span": [
+        165,
+        186
+      ],
+      "suggestion": "the reason is that ...，或直接 because",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "translationese",
+      "severity": "error",
+      "text": "There has a",
+      "span": [
+        105,
+        116
+      ],
+      "suggestion": "there is / there are（there be 句型的主谓一致）",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    },
+    {
+      "category": "translationese",
+      "severity": "style",
+      "text": "With the rapid development of",
+      "span": [
+        0,
+        29
+      ],
+      "suggestion": "删除开场白，直接陈述现象",
+      "before_count": 1,
+      "after_count": 0,
+      "count_delta": 1
+    }
+  ],
+  "remaining": [],
+  "new": []
+}

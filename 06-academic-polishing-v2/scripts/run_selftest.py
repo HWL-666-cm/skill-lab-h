@@ -121,8 +121,15 @@ def main():
             good_r = json.loads((d / "good_r.json").read_text(encoding="utf-8"))
 
             got = {f["category"] for f in bad_r["findings"]}
-            want = set(c["expect_bad_flags"])
-            caught = want <= got
+            want = set(c.get("expect_bad_flags", []))
+            # 负样本：expect_bad_verdict == "clean" 表示 bad.txt 是正常文本，
+            # 不得报任何 flag（用于锁"固定术语/正常表达不被误报"）
+            if c.get("expect_bad_verdict") == "clean":
+                caught = bad_r["verdict"] == "clean" and not got
+                expect_desc = "clean(负样本)"
+            else:
+                caught = want <= got
+                expect_desc = ",".join(sorted(want))
             clean = good_r["verdict"] == c["expect_good_verdict"]
 
             rows.append({
@@ -134,7 +141,7 @@ def main():
             if not (caught and clean):
                 failures += 1
                 if args.verbose:
-                    print(f"\n[{cid}] 期望 {sorted(want)}，实际 {sorted(got)}；good verdict={good_r['verdict']}")
+                    print(f"\n[{cid}] 期望 {expect_desc}，实际 {sorted(got) or 'clean'}；good verdict={good_r['verdict']}")
                     print(json.dumps(bad_r["findings"], ensure_ascii=False, indent=2)[:1200])
 
     w1 = max(len(r["case"]) for r in rows + [{"case": "case"}])

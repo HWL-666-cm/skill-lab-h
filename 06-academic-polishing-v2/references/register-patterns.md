@@ -27,7 +27,9 @@ severity 两档：`error`（硬错误，应当改）与 `style`（语域问题�
 | `according to my/our opinion` | According to our opinion | 删除，或 we argue / we find |
 | `play an important role in` | … plays an important role in … | is essential for / drives / accounts for |
 | `has attracted much attention` | … has attracted wide attention | 删除热度开场，直接陈述缺口 |
-| `随着……的发展 / 在……方面` | 随着社会的发展 | 删除直译开场 |
+| `随着……的发展/进步/提高` | 随着社会的发展 | 删除直译开场 |
+
+> 注：`在……方面`（如"在误差控制方面"）是正常中文学术表达，**不**列入直译腔；`with respect to`（如 `derivative with respect to x`）是数学/统计固定搭配，**不**列入 filler。这两条曾经误报会"改坏正确内容"，已从模式表移除，各有负样本用例锁进回归（见 `tests/cases.json` 的 `register-math-term`、`register-cn-normal`）。
 
 ## 3. nominalization —— 冗余名词化（"轻动词 + 名词"压掉真动词）
 
@@ -50,7 +52,7 @@ severity 两档：`error`（硬错误，应当改）与 `style`（语域问题�
 | `It is worth noting that` | It is worth noting that … | 删除，或把要点写成主句 |
 | `It should be noted that` | It should be noted that … | 删除，或把要点写成主句 |
 | `as is well known / it goes without saying / needless to say` | As is well known, … | 删除（宣称"众所周知"不给引用） |
-| `with regard to / with respect to` | with respect to the data | regarding / about / for |
+| `with regard to` | with regard to the data | regarding / about / for |
 | `在当今社会 / 具有重要的…意义` | 在当今社会，…… | 删除空话，改为具体贡献 |
 
 ## 为什么用固定模式而不是模型语感
