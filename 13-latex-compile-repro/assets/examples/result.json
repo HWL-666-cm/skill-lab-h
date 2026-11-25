@@ -53,12 +53,6 @@
       "kind": "bib",
       "role": "bibliography database",
       "bytes": 195
-    },
-    {
-      "path": "main.tex",
-      "kind": "main_tex",
-      "role": "root document",
-      "bytes": 0
     }
   ],
   "artifacts": [
@@ -146,7 +140,7 @@
     "deterministic_mode": false,
     "output_pdf": {
       "bytes": 100788,
-      "sha256": "f7597b2d96e83936d3f45b709a6aacdf8aa7797f8c88aff07cede53c867a610e",
+      "sha256": "34b2cb8523841bff2c68534128de869ada16b0f1ab1c36dda84e50dc86a83b66",
       "path": "build/main.pdf"
     },
     "notes": [
@@ -166,8 +160,8 @@
     "repro_dir": "repro",
     "repro_returncode": 0,
     "original_returncode": 0,
-    "repro_pdf_sha256": "029fd41e50df124b2c1a3b57ac38dc79fa08deb348eafe6664983d708cca5268",
-    "original_pdf_sha256": "f7597b2d96e83936d3f45b709a6aacdf8aa7797f8c88aff07cede53c867a610e",
+    "repro_pdf_sha256": "597a73bd37b681153583800bafefbffc774c52e71cc3b860144135ab9a9a4915",
+    "original_pdf_sha256": "34b2cb8523841bff2c68534128de869ada16b0f1ab1c36dda84e50dc86a83b66",
     "repro_diagnostics": {
       "status": "pass",
       "counts": {
@@ -200,7 +194,7 @@
       {
         "name": "has_sources",
         "ok": true,
-        "detail": "3 source entries",
+        "detail": "2 source entries",
         "severity": "fail"
       },
       {
@@ -269,7 +263,7 @@
       "refs.bib"
     ]
   },
-  "runtime_seconds": 5.58,
+  "runtime_seconds": 5.65,
   "example": true,
   "example_note": "EXAMPLE-NOT-A-OFFICIAL-CASE",
   "source": [

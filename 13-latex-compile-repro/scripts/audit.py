@@ -31,17 +31,20 @@ _REF_RE = re.compile(
     r"\\(?:eqref|ref|pageref|autoref|cref|Cref|nameref|vref)(?:\*)?\s*\{([^}]+)\}")
 
 # --- visual-fragility layout patterns --------------------------------------
-_SHRINK_RE = re.compile(
-    r"\\(?:resizebox|adjustbox|scalebox)\s*[\[{]")
-_TINY_TABLE_RE = re.compile(
-    r"\\(?:tiny|scriptsize|footnotesize)\b")
-_LABEL_BEFORE_CAPTION_RE = re.compile(
-    r"\\label\s*\{[^}]*\}[\s\S]{0,120}?\\caption\s*[\[{]", re.MULTILINE)
+# resizebox/adjustbox hard-shrinks a table/figure: major.  scalebox is often a
+# legitimate TikZ/overlay node scaling, so it is downgraded to minor.
+_SHRINK_RE = re.compile(r"\\(?:resizebox|adjustbox)\s*[\[{]")
+_SCALEBOX_RE = re.compile(r"\\scalebox\s*[\[{]")
+_TINY_TABLE_RE = re.compile(r"\\(?:tiny|scriptsize|footnotesize)\b")
+_FLOAT_BEGIN_RE = re.compile(r"\\begin\{(figure|table)\*?\}")
+_LABEL_RE_BODY = re.compile(r"\\label\s*\{[^}]*\}")
+_CAPTION_RE_BODY = re.compile(r"\\caption\s*[\[{]")
 _FORCED_FLOAT_RE = re.compile(r"\\begin\{(?:figure|table)\}\s*\[\s*[H!]")
 
 _SEV = {"missing": "major", "undefined": "major", "shrink_to_fit": "major",
         "label_before_caption": "major", "unused": "minor", "near_miss": "minor",
-        "tiny_table_font": "minor", "forced_float": "minor"}
+        "tiny_table_font": "minor", "forced_float": "minor",
+        "scalebox_scaling": "minor"}
 
 
 def _tex_files(prof: dict) -> list[Path]:
@@ -208,9 +211,10 @@ def _findings_layout(prof: dict) -> list[dict]:
     out: list[dict] = []
     for f in _tex_files(prof):
         try:
-            lines = f.read_text(encoding="utf-8", errors="replace").splitlines()
+            text = f.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
+        lines = text.splitlines()
         in_table = False
         for i, ln in enumerate(lines, start=1):
             if "\\begin{tabular" in ln or "\\begin{longtable" in ln or \
@@ -224,9 +228,17 @@ def _findings_layout(prof: dict) -> list[dict]:
                 out.append({
                     "id": f"SHRINK-{i}", "check": "layout", "kind": "shrink_to_fit",
                     "severity": _SEV["shrink_to_fit"], "location": loc,
-                    "detail": "用 \\resizebox/\\adjustbox/\\scalebox 硬缩放表格或图",
+                    "detail": "用 \\resizebox/\\adjustbox 硬缩放表格或图",
                     "suggestion": "用 tabularx 的 X 列、p{} 定宽列或减小 \\tabcolsep，"
                                   "保持字号与线宽一致",
+                })
+            if _SCALEBOX_RE.search(ln):
+                out.append({
+                    "id": f"SCALE-{i}", "check": "layout", "kind": "scalebox_scaling",
+                    "severity": _SEV["scalebox_scaling"], "location": loc,
+                    "detail": "用 \\scalebox 缩放（TikZ/覆盖层里缩放节点常见，一般无害）",
+                    "suggestion": "若缩放的是整张表/整图请改用 tabularx 或定宽列；"
+                                  "缩放单个节点则无需处理",
                 })
             if in_table and _TINY_TABLE_RE.search(ln):
                 out.append({
@@ -235,19 +247,31 @@ def _findings_layout(prof: dict) -> list[dict]:
                     "detail": "表格内用 \\tiny/\\scriptsize 缩字号",
                     "suggestion": "优先重排列宽，字号统一到 \\small 及以上",
                 })
-            if _LABEL_BEFORE_CAPTION_RE.search(ln):
-                out.append({
-                    "id": f"LBC-{i}", "check": "layout", "kind": "label_before_caption",
-                    "severity": _SEV["label_before_caption"], "location": loc,
-                    "detail": "浮动体里 \\label 出现在 \\caption 之前（\\ref 会编号错）",
-                    "suggestion": "把 \\label 移到 \\caption 之后",
-                })
             if _FORCED_FLOAT_RE.search(ln):
                 out.append({
                     "id": f"FLOAT-{i}", "check": "layout", "kind": "forced_float",
                     "severity": _SEV["forced_float"], "location": loc,
                     "detail": "用 [H]/[!h] 强行固定浮动体位置",
                     "suggestion": "让 TeX 自己决定位置，用 \\ref 交叉引用",
+                })
+
+        # label-before-caption must be checked inside a whole float, not per line:
+        # the canonical form puts \\label and \\caption on SEPARATE lines.
+        for m in _FLOAT_BEGIN_RE.finditer(text):
+            kind = m.group(1)
+            end = re.search(rf"\\end\{{{kind}\*?\}}", text[m.end():])
+            body_end = m.end() + (end.start() if end else len(text) - m.end())
+            body = text[m.end():body_end]
+            lab = _LABEL_RE_BODY.search(body)
+            cap = _CAPTION_RE_BODY.search(body)
+            if lab and cap and lab.start() < cap.start():
+                line_no = text[:m.end() + lab.start()].count("\n") + 1
+                out.append({
+                    "id": f"LBC-{line_no}", "check": "layout",
+                    "kind": "label_before_caption", "severity": _SEV["label_before_caption"],
+                    "location": f"{Path(f).name}:{line_no}",
+                    "detail": "浮动体里 \\label 出现在 \\caption 之前（\\ref 会编号错）",
+                    "suggestion": "把 \\label 移到 \\caption 之后",
                 })
     return out
 

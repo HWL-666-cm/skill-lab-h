@@ -6,7 +6,7 @@
 python <skill-dir>/assets/tests/run_selftest.py
 ```
 
-16 项覆盖：好稿完整链路、多遍中间态过滤、引擎自动切换、行号定位、honesty、blocked、确定性、脚本语法。
+25 项覆盖：好稿完整链路、多遍中间态过滤、引擎自动切换、行号定位、honesty、blocked、确定性、源码正确性审计（引用/交叉引用/版式，含跨行 label-before-caption 与 scalebox 降级）、脚本语法。
 
 ## 10 项门禁（`assets/schema.json`）
 

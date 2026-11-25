@@ -14,6 +14,11 @@ from pathlib import Path
 from typing import Any
 
 SKIP_DIRS = {".git", "__pycache__", "node_modules", "tmp", "build", "out"}
+# The platform's own case/result files are inputs/outputs, not project material;
+# listing them as sources would make the skill cite its own output as evidence.
+SKIP_NAMES = {"case.json", "input.json", "result.json", "output.json",
+              "audit.json", "validation.json", "build_manifest.json",
+              "reproduce.json", "error_ledger.json", "project_profile.json"}
 TEXT_EXT = {".tex", ".bib", ".cls", ".sty", ".bst", ".bbx", ".cbx", ".cfg",
             ".mk", ".md", ".txt", ".json", ".yaml", ".yml", ".def", ".fd", ".tfm"}
 TEX_EXT = {".tex"}
@@ -33,17 +38,13 @@ def _read(p: Path) -> str:
         return ""
 
 
-def resolve_case(case_path: Path) -> tuple[dict, Path, str]:
-    """Return (case dict, material root, case_id)."""
-    case_path = Path(case_path).resolve()
-    if case_path.is_dir():
-        for name in ("case.json", "input.json"):
-            if (case_path / name).is_file():
-                raw = json.loads(_read(case_path / name) or "{}")
-                return raw, case_path, str(raw.get("case_id") or case_path.name)
-        return {}, case_path, case_path.name
-    raw = json.loads(_read(case_path) or "{}")
-    base = case_path.parent
+def _resolve_material_root(raw: dict, base: Path) -> Path:
+    """Resolve the material root from case.json, falling back to the case dir.
+
+    Directory and file inputs share this path so `--case <dir>` and
+    `--case <dir>/case.json` select the SAME material subtree (a directory that
+    contains both good/ and bad/ examples must not silently pick bad/main.tex).
+    """
     for key in ("material_dir", "project_dir", "input_dir", "material_path"):
         v = raw.get(key)
         if isinstance(v, str) and v:
@@ -51,7 +52,7 @@ def resolve_case(case_path: Path) -> tuple[dict, Path, str]:
             if not p.is_absolute():
                 p = (base / p).resolve()
             if p.is_dir():
-                return raw, p, str(raw.get("case_id") or base.name)
+                return p
     for key in ("material_dirs", "project_dirs"):
         v = raw.get(key)
         if isinstance(v, list) and v:
@@ -59,8 +60,25 @@ def resolve_case(case_path: Path) -> tuple[dict, Path, str]:
             if not p.is_absolute():
                 p = (base / p).resolve()
             if p.is_dir():
-                return raw, p, str(raw.get("case_id") or base.name)
-    return raw, base, str(raw.get("case_id") or base.name)
+                return p
+    return base
+
+
+def resolve_case(case_path: Path) -> tuple[dict, Path, str]:
+    """Return (case dict, material root, case_id)."""
+    case_path = Path(case_path).resolve()
+    if case_path.is_dir():
+        raw: dict = {}
+        for name in ("case.json", "input.json"):
+            if (case_path / name).is_file():
+                raw = json.loads(_read(case_path / name) or "{}")
+                break
+        root = _resolve_material_root(raw, case_path)
+        return raw, root, str(raw.get("case_id") or case_path.name)
+    raw = json.loads(_read(case_path) or "{}")
+    base = case_path.parent
+    root = _resolve_material_root(raw, base)
+    return raw, root, str(raw.get("case_id") or base.name)
 
 
 def _iter_files(root: Path, extra_roots: list[Path]) -> list[Path]:
@@ -73,6 +91,8 @@ def _iter_files(root: Path, extra_roots: list[Path]) -> list[Path]:
             if not p.is_file():
                 continue
             if any(part in SKIP_DIRS for part in p.parts):
+                continue
+            if p.name in SKIP_NAMES:
                 continue
             rp = p.resolve()
             if rp in seen:

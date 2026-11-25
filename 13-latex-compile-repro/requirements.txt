@@ -9,4 +9,5 @@
 #   latexmk    (optional; auto-detected, falls back to an explicit sequence)
 #   bibtex     (natbib backend)
 #   biber      (biblatex backend)
-# Reference environment used during validation:/n#   TeX Live 2026, pdfTeX 3.141592653-2.6-1.40.29.
+# Reference environment used during validation:
+#   TeX Live 2026, pdfTeX 3.141592653-2.6-1.40.29.

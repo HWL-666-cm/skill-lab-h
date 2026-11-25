@@ -88,8 +88,11 @@ def build_result(case_id: str, profile: dict, repair_result: dict,
         "path": f.get("path", ""), "kind": f.get("kind", ""),
         "role": f.get("role", ""), "bytes": f.get("bytes", 0),
     } for f in clean_profile.get("files", [])]
-    if clean_profile.get("main_tex"):
-        sources.append({"path": clean_profile["main_tex"], "kind": "main_tex",
+    main_tex_name = clean_profile.get("main_tex")
+    # the main .tex is already listed in files with a real byte count; only add a
+    # root-document marker when the profile didn't enumerate it (e.g. inline source)
+    if main_tex_name and main_tex_name not in {s["path"] for s in sources}:
+        sources.append({"path": main_tex_name, "kind": "main_tex",
                         "role": "root document", "bytes": 0})
 
     unresolved = [f for f in ledger.get("findings", [])

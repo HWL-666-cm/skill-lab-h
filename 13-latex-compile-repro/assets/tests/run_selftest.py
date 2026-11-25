@@ -155,9 +155,15 @@ def main() -> int:
             "\\begin{document}\n"
             "See \\citet{missing2020} and Table~\\ref{tab:nope}.\n"
             "\\begin{table}[H]\n"
-            "\\label{tab:x}\\caption{Shrunk}\n"
+            "\\label{tab:x}\n"          # label and caption on SEPARATE lines
+            "\\caption{Shrunk}\n"       # (the real-world form, not one line)
             "\\resizebox{\\textwidth}{!}{\\begin{tabular}{ll}a&b\\end{tabular}}\n"
             "\\end{table}\n"
+            "\\begin{figure}[t]\n"
+            "\\caption{A scalebox in TikZ.}\n"
+            "\\scalebox{0.8}{\\tikz\\node{x};}\n"
+            "\\label{fig:ok}\n"         # caption before label: must NOT report
+            "\\end{figure}\n"
             "\\bibliographystyle{plain}\\bibliography{refs}\n"
             "\\end{document}\n", encoding="utf-8")
         (synth / "refs.bib").write_text(
@@ -168,10 +174,32 @@ def main() -> int:
         kinds = {f["kind"] for f in aud["findings"]}
         check("audit: citation/ref/layout all detected",
               {"missing", "undefined", "shrink_to_fit", "label_before_caption",
-               "forced_float", "unused"} <= kinds,
+               "forced_float", "unused", "scalebox_scaling"} <= kinds,
               "missing=" + str(sorted({"missing", "undefined", "shrink_to_fit",
                                        "label_before_caption", "forced_float",
-                                       "unused"} - kinds)))
+                                       "unused", "scalebox_scaling"} - kinds)))
+        # label-before-caption must be located on the label line (cross-line now)
+        lbc = [f for f in aud["findings"] if f["kind"] == "label_before_caption"]
+        check("audit: label-before-caption located on label line",
+              bool(lbc) and all(":5" in f["location"] for f in lbc),
+              str([f["location"] for f in lbc]))
+        # scalebox in TikZ is minor, not major
+        check("audit: scalebox is minor not major",
+              all(f["severity"] == "minor" for f in aud["findings"]
+                  if f["kind"] == "scalebox_scaling"))
+        # caption-before-label must NOT be flagged as label_before_caption
+        check("audit: caption-then-label not misreported",
+              not any(f["kind"] == "label_before_caption" and "fig" in f["location"]
+                      for f in aud["findings"]))
+
+        # 5c. resolve_case: directory input must honour case.json's material_dir
+        import profile as P  # noqa: E402
+        raw_dir, root_dir, cid_dir = P.resolve_case(SKILL / "assets" / "examples")
+        raw_file, root_file, cid_file = P.resolve_case(
+            SKILL / "assets" / "examples" / "case.json")
+        check("resolve: directory and case.json pick the same material root",
+              root_dir.resolve() == root_file.resolve() and root_dir.name == "good",
+              f"dir={root_dir.name} file={root_file.name}")
 
         # 6. contract honesty: unknown fields become null with a note
         import contract as C  # noqa: E402
@@ -191,6 +219,18 @@ def main() -> int:
         b = json.loads((out4 / "result.json").read_text(encoding="utf-8"))
         check("determinism: structured result identical",
               strip_volatile(a) == strip_volatile(b), f"rc2={rc4}")
+
+        # 7b. the shipped example result.json must match the current code
+        out5 = tmp / "example_out"
+        run_cli(["--case", str(SKILL / "assets" / "examples" / "case.json"),
+                 "--out", str(out5), "--work", str(tmp / "example_work"),
+                 "--lexicon", str(lex), "--schema", str(schema)])
+        fresh = json.loads((out5 / "result.json").read_text(encoding="utf-8"))
+        ship = json.loads((SKILL / "assets" / "examples" / "result.json")
+                          .read_text(encoding="utf-8"))
+        check("example: shipped result.json matches current code",
+              strip_volatile(fresh) == strip_volatile(ship),
+              "示例未随代码重生成（rounds/observations 可能过期）")
 
         # 8. CLI modules compile
         cp = subprocess.run([PYTHON, "-m", "py_compile"] +

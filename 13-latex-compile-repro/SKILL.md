@@ -95,7 +95,7 @@ python <skill-dir>/scripts/run_case.py \
 ## 示例与自测
 
 - `assets/examples/`：一组最小可编译工程（好稿、坏稿），`result.json` 带 `example: true`，**不是正式案例答案**。
-- `assets/tests/run_selftest.py`：冷启动自测 20 项，覆盖多遍收敛、引擎切换、行号定位、honesty、确定性和源码正确性审计。运行：
+- `assets/tests/run_selftest.py`：冷启动自测 25 项，覆盖多遍收敛、引擎切换、行号定位、honesty、确定性和源码正确性审计。运行：
 
 ```bash
 python <skill-dir>/assets/tests/run_selftest.py
