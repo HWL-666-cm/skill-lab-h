@@ -52,7 +52,7 @@ main_findings[] / key_numbers[] / limitations[] / unreported[]
 | BERT | 1323 | 114 | 4 |
 | Decision Transformer | 830 | 242 | 38 |
 
-> 上表为**视觉行数**（extractor 把每个视觉行记为一个条目，行级锚点 `{id, page, column, section}`，**未做段落聚合**）。与阅读03 报告一致：BERT 1323 视觉行、经 `group_lines_to_paragraphs` 聚合为 329 段。图注/表格/公式单独列 `figures_tables[]`，供"每条笔记指回原文"。
+> 上表为**视觉行数**（extractor 把每个视觉行记为一个条目，行级锚点 `{id, page, column, section}`）。阅读03 用 `group_lines_to_paragraphs` 把同一批 1323 行聚合为 329 段；**本题为保留行级精度，未聚合**。图注/表格/公式单独列 `figures_tables[]`，供"每条笔记指回原文"。
 
 ### 2.4 用得上 —— 字段化 + 证据标记 + 知识点条目
 

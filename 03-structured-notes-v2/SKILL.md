@@ -21,7 +21,7 @@ description: 科研文献结构化笔记 Skill。按论文自身章节树生成�
 |-|-|
 | **对得上** | 笔记骨架 = `section_tree`（论文自身章节树，含 `3 → 3.1 → 3.1.1` 层级路径），逐章按"目的/内容/结果"提炼，**不套用**"摘要-方法-结论"通用模板；章节承接关系写进每章"承接"字段。 |
 | **留得住** | 论文卡片统一字段：研究问题、数据、方法、**方法成立的前提条件**、主要发现、关键数值（带单位/基线/条件）、局限、**未报告项**；关键论断用五类证据标记区分"作者主张/文中证据/外部背景/分析判断/待验证"。 |
-| **找得回** | 每条笔记带稳定锚点 `{section, page, paragraph, figure, table}`，锚点粒度与可核验性匹配；数值、变量、方法条件必须落到具体段落/图表/公式。 |
+| **找得回** | 每条笔记带稳定锚点 `{section, page, line, figure, table}`（`line` 为视觉行 id），锚点粒度与可核验性匹配；数值、变量、方法条件必须落到具体行/图表/公式。 |
 | **用得上** | 输出字段化 JSON：`paper_card` + `section_notes[]` + `knowledge_points[]`，知识点条目 `{term, type, definition, evidence_marker, concept_source}` 可检索、可去重、可跨论文比较。 |
 
 ## 3. 工作流程（两阶段，预算友好）
@@ -97,7 +97,7 @@ python3 scripts/build_skeleton.py /app/work/extracted.json /app/work/skeleton.js
   "definition": "定义/说明",
   "evidence_marker": "作者主张|文中证据|外部背景|分析判断|待验证",
   "concept_source": "论文定义|外部来源|LLM综合",
-  "anchor": {"section": "3.1", "page": 4, "paragraph": 15}
+  "anchor": {"section": "3.1", "page": 4, "line": 15}
 }
 ```
 
@@ -119,7 +119,7 @@ python3 scripts/build_skeleton.py /app/work/extracted.json /app/work/skeleton.js
 
 稳定锚点，粒度与可核验性匹配，写进每条笔记：
 
-- 章节：`§3.1`、`§Method`；段落：`p.7 ¶3`（页码+段号）；图表：`Fig.3`、`Table 2`；公式：`Eq.(4)`。
+- 章节：`§3.1`、`§Method`；行：`p.7 L3`（页码+视觉行 id）；图表：`Fig.3`、`Table 2`；公式：`Eq.(4)`。
 - 无固定页码的材料：用章节标题 + 可检索原句定位。
 - 阅读器页序与印刷页码不一致时，同时记录两者（`PDF p.9 / 原文 p.126`）。
 

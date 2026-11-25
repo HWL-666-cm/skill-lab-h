@@ -19,7 +19,7 @@
       {"section_path": "3.1", "heading": "Pre-training BERT", "purpose": "说明双向预训练任务", "content": "MLM 与 NSP 两个任务", "results": "预训练得到双向表征", "bridge": "承接 3 章的模型结构", "anchor": {"page": 3, "page_range": [3, 4]}}
     ],
     "knowledge_points": [
-      {"id": "kp-1", "term": "masked language model", "type": "concept", "definition": "随机掩码部分 token 并预测", "evidence_marker": "论文定义", "concept_source": "论文定义", "anchor": {"section": "3.1", "page": 4, "paragraph": 15}}
+      {"id": "kp-1", "term": "masked language model", "type": "concept", "definition": "随机掩码部分 token 并预测", "evidence_marker": "论文定义", "concept_source": "论文定义", "anchor": {"section": "3.1", "page": 4, "line": 15}}
     ],
     "section_tree": [{"heading": "1 Introduction", "level": 1, "page": 1, "path": "1"}],
     "document": {"title": "示例论文", "page_count": 1, "ocr_used": false}
