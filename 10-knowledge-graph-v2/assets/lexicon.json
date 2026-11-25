@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "note": "通用种子词，只用于生成候选提及（prepare 阶段）。真正的类型判定由草稿给出，脚本只做提示。领域特殊的词应在 case 目录外的 draft 里补充，不要改这份文件。",
+  "PHENOMENON": [
+    "fog", "sea fog", "advection fog", "advective fog", "radiation fog", "coastal fog",
+    "fog dissipation", "fog formation", "fog event", "low visibility event",
+    "upwelling", "cold water upwelling", "boundary layer", "turbulence",
+    "precipitation", "haze", "stratus", "condensation"
+  ],
+  "METHOD": [
+    "WRF", "WRF-Chem", "3DVAR", "4DVAR", "EnKF", "ensemble Kalman filter",
+    "random forest", "gradient boosting", "XGBoost", "LightGBM", "decision tree",
+    "LSTM", "GRU", "RNN", "CNN", "convolutional neural network", "neural network",
+    "deep learning", "machine learning", "support vector machine", "SVM",
+    "k-means", "k nearest neighbor", "KNN", "regression model",
+    "bulk method", "parameterization", "nudging", "data assimilation"
+  ],
+  "DATASET": [
+    "ERA5", "ERA-Interim", "NCEP", "GFS", "GDAS", "CFSR", "MERRA", "JRA-55",
+    "radiosonde", "sounding", "buoy", "AWS", "automatic weather station",
+    "reanalysis", "observation", "observations", "station data", "field campaign",
+    "MODIS", "CALIPSO", "ceilometer", "lidar", "satellite"
+  ],
+  "VARIABLE": [
+    "visibility", "horizontal visibility", "air temperature", "temperature",
+    "sea surface temperature", "SST", "wind speed", "wind direction",
+    "relative humidity", "humidity", "liquid water content", "liquid water path",
+    "water vapor", "pressure", "precipitation", "fog frequency", "fog duration",
+    "RMSE", "root mean square error", "MAE", "mean absolute error", "bias",
+    "accuracy", "precision", "recall", "F1 score", "correlation coefficient",
+    "determination coefficient", "R2", "skill score", "hit rate", "false alarm rate"
+  ],
+  "LOCATION_SUFFIX": [
+    "Port", "Beach", "Sea", "Bay", "Island", "Coast", "Province", "Peninsula",
+    "Strait", "Gulf", "Ocean", "Lake", "Mountain", "City", "Station"
+  ],
+  "UNITS": [
+    "%", "km", "m", "cm", "mm", "m s-1", "m/s", "ms-1", "K", "°C", "C",
+    "hPa", "Pa", "kg m-3", "g m-3", "g kg-1", "W m-2", "s", "min", "hour", "h"
+  ],
+  "ATTRIBUTION": {
+    "first_person": ["we", "our", "this study", "the present study", "this work"],
+    "citation_marker": "\\[[0-9]{1,3}(?:[,-][0-9]{1,3})*\\]",
+    "cited_phrase": "\\b(?:reported by|previous stud\\w*|earlier stud\\w*|have shown|has shown|was reported|et al\\.)"
+  }
+}

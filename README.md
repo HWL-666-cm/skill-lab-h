@@ -64,12 +64,13 @@ playground submit --challenge-id <ID> --outputs <目录> --trace <原生会话�
 | 阅读10 文献总结与结构化笔记 | `03-structured-notes/` | 已提交（attempt 106281） |
 | 阅读10 文献总结与结构化笔记（v2 重做，主攻章节对齐） | `03-structured-notes-v2/` | 待提交 |
 | 阅读14 Nanopublication | `04-nanopub-assertions/` | 已提交（attempt 107004） |
-| 阅读14 Nanopublication（v2 重做） | `04-nanopub-assertions-v2/` | 开发中（待补 TriG/AIDA） |
+| 阅读14 Nanopublication（v2 重做） | `04-nanopub-assertions-v2/` | 已提交（attempt 108129） |
 | 写作09 方法与实验章节写作 | `05-params-provenance/` | 已提交（attempt 107005） |
 | 写作02 学术语言润色 | `06-academic-polishing/` | 已提交（attempt 106276） |
 | 写作04 参考文献与引用管理 | `07-citation-audit/` | 已提交（attempt 106286） |
 | 写作08 引言与相关工作写作 | `08-claim-evidence-binding/` | 已提交（attempt 106837） |
 | 阅读15 文献知识图谱构建 | `10-knowledge-graph/` | 已提交（attempt 107006） |
+| 阅读15 文献知识图谱构建（v2 重做，主攻跨篇实体对齐 + 自动缩写识别 + 增量更新） | `10-knowledge-graph-v2/` | 开发中 |
 | 写作13 LaTeX 写作与编译 | `13-latex-compile-repro/` | 已提交（attempt 106999） |
 
 ## 各题技术要点

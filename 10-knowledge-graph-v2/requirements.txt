@@ -1,0 +1,8 @@
+# 本 Skill 的脚本只用 Python 标准库，不需要安装任何第三方包。
+# 运行环境：Python 3.9+
+#
+# 输入材料是 JATS XML 或平台给的 material JSON；不解析 PDF，因此不需要 PyMuPDF。
+# 若平台只提供 PDF，请先用环境自带的 pdf-text-tool 转成"篇-段"文本 JSON，再交给本 Skill。
+#
+# 自检：
+#   python assets/tests/run_selftest.py

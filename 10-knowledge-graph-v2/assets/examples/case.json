@@ -1,0 +1,21 @@
+{
+  "case_id": "example-seafog-two-papers",
+  "note": "示例输入形状。实际运行时 pdf/materials 路径由平台注入；本文件不放任何答案。",
+  "materials": [
+    "corpus-manifest.json",
+    "material.json",
+    "primary-material.json",
+    "secondary-material.json"
+  ],
+  "output_contract": {
+    "required": [
+      "case_id",
+      "status",
+      "nodes",
+      "edges",
+      "evidence",
+      "queries",
+      "uncertainty"
+    ]
+  }
+}
