@@ -1,0 +1,100 @@
+{
+  "_note": "本文件为最小调用示意输出（example），非正式案例答案。",
+  "case_id": "example-001",
+  "answer": {
+    "title": "示例：Decision Transformer: Reinforcement",
+    "authors": "示例：Learning via Sequence Modeling",
+    "abstract": "示例占位：请按题面从 structured 中提取并附证据"
+  },
+  "structured": {
+    "title": "Decision Transformer: Reinforcement",
+    "authors": "Learning via Sequence Modeling",
+    "sections": [
+      {
+        "heading": "Decision Transformer: Reinforcement",
+        "level": 1,
+        "page": 1,
+        "font_size": 17.0,
+        "bold": true,
+        "x0": 0.271242,
+        "y0": 0.127525,
+        "end_page": 1
+      },
+      {
+        "heading": "Learning via Sequence Modeling",
+        "level": 1,
+        "page": 1,
+        "font_size": 17.0,
+        "bold": true,
+        "x0": 0.302288,
+        "y0": 0.152778,
+        "paragraph_count": 3,
+        "end_page": 1
+      },
+      {
+        "heading": "1 UC Berkeley 2 Facebook AI Research 3 Google Brain",
+        "level": 1,
+        "page": 1,
+        "font_size": 10.0,
+        "bold": false,
+        "x0": 0.312092,
+        "y0": 0.284091,
+        "paragraph_count": 1,
+        "end_page": 1
+      },
+      {
+        "heading": "Abstract",
+        "level": 1,
+        "page": 1,
+        "font_size": 12.0,
+        "bold": true,
+        "x0": 0.464052,
+        "y0": 0.356061,
+        "paragraph_count": 12,
+        "end_page": 1
+      },
+      {
+        "heading": "arXiv:2106.01345v2  [cs.LG]  24 Jun 2021",
+        "level": 1,
+        "page": 1,
+        "font_size": 20.0,
+        "bold": false,
+        "x0": 0.052288,
+        "y0": 0.689394,
+        "paragraph_count": 3,
+        "end_page": 1
+      },
+      {
+        "heading": "1 Our code is available at:",
+        "level": 1,
+        "page": 1,
+        "font_size": 9.0,
+        "bold": false,
+        "x0": 0.197712,
+        "y0": 0.897727,
+        "end_page": 2
+      }
+    ],
+    "document": {
+      "file": "paper.pdf",
+      "page_count": 21,
+      "width": 612.0,
+      "height": 792.0,
+      "has_text_layer": true,
+      "ocr_used": false,
+      "producer": "pdfTeX-1.40.21"
+    }
+  },
+  "evidence": [
+    {
+      "item": "论文标题",
+      "value": "Decision Transformer: Reinforcement",
+      "source": "第1页, 区块(0.18,0.11)"
+    }
+  ],
+  "status": "success",
+  "status_detail": "示例运行",
+  "uncertainty": [],
+  "warnings": [],
+  "changes": []
+}
