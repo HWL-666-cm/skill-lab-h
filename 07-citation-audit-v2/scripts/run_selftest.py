@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from citation_audit import build_report  # noqa: E402
 from render import render_apa, render_gbt, _type_code  # noqa: E402
 from claim_recall import recall  # noqa: E402
+from number_audit import number_diff  # noqa: E402
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -118,10 +119,24 @@ def group_d() -> tuple[int, list[str]]:
     return passed, failed
 
 
+def group_e() -> tuple[int, list[str]]:
+    # 数字守恒：事实底稿 90% 被改成 92% 应报漂移；还原后应 0 漂移
+    src = "准确率已达 90% 以上，误差降低 15%。"
+    bad = "准确率已达 92% 以上，误差降低 15%。"
+    good = "准确率已达 90% 以上，误差降低 15%。"
+    d_bad = number_diff(src, bad)
+    d_good = number_diff(src, good)
+    ok = (d_bad["changed_count"] == 1 and "90%" in d_bad["removed"] and "92%" in d_bad["added"]
+          and d_good["changed_count"] == 0 and d_good["preserved"])
+    passed, failed = int(ok), [] if ok else ["E/number-audit"]
+    print(f"[{'PASS' if ok else 'FAIL'}] E/number-audit  90%→92% 报 1 处漂移，还原后 0 处")
+    return passed, failed
+
+
 def main() -> int:
     total = passed = 0
     all_failed = []
-    for name, fn in [("A", group_a), ("B", group_b), ("C", group_c), ("D", group_d)]:
+    for name, fn in [("A", group_a), ("B", group_b), ("C", group_c), ("D", group_d), ("E", group_e)]:
         p, f = fn()
         passed += p
         total += p + len(f)

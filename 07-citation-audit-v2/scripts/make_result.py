@@ -25,13 +25,16 @@ import csv
 import hashlib
 import json
 import os
+import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from citation_audit import (  # noqa: E402
-    build_report, load_bib, line_at, parse_citations, sentence_at,
+    build_report, load_bib, line_at, norm_doi, parse_citations, sentence_at,
 )
+from number_audit import number_diff  # noqa: E402
 
 CONTRACT_ALIASES = {
     "case_id": "case_id", "status": "status",
@@ -99,6 +102,31 @@ def verdict_to_status(verdict: str) -> str:
     }.get(verdict, "partial")
 
 
+def dedup_status(input_bib, output_bib):
+    """去重是否完成 = 输入库里重复的 DOI 在输出库里是否已合并为一条。
+
+    不依据"输出库里还有没有重复"（合并成功重复就没了，会误报 pending），
+    而是拿输入库和输出库 diff：输入库每个重复 DOI 在输出库只剩一条 -> done。
+    """
+    if input_bib is None:
+        return "n/a"
+
+    def doi_counts(bib):
+        c = Counter()
+        for e in bib:
+            d = norm_doi(e.get("doi") or "")
+            if d and re.match(r"^10\.\d{4,9}/\S+", d):
+                c[d] += 1
+        return c
+
+    ic, oc = doi_counts(input_bib), doi_counts(output_bib)
+    dup_in = {d for d, n in ic.items() if n > 1}
+    if not dup_in:
+        return "n/a"
+    merged = all(oc.get(d, 0) == 1 for d in dup_in)
+    return "done" if merged else "pending"
+
+
 def build_source_map(text: str, citations: list[dict], bib: list[dict]) -> list[dict]:
     """逐条引用 → 句/行号/条目 key/匹配依据/confidence。"""
     keys = [str(e.get("key") or e.get("id") or f"entry{i + 1}") for i, e in enumerate(bib)]
@@ -157,9 +185,13 @@ def main() -> int:
     ap.add_argument("--case-json", default=None)
     ap.add_argument("--manuscript", required=True, help="输入稿件 .md/.txt")
     ap.add_argument("--revised", default=None, help="修订后稿件（无则用原稿）")
-    ap.add_argument("--bib", required=True, help="文献库 .json")
+    ap.add_argument("--bib", required=True, help="文献库 .json（整理后/合并后的库）")
+    ap.add_argument("--bib-in", default=None, help="整理前文献库 .json（用于 diff 判去重是否完成）")
+    ap.add_argument("--fact-base", default=None, help="事实底稿（用于数字守恒审计）")
     ap.add_argument("--audit", required=True, help="原稿审计报告（citation_audit.py 输出）")
     ap.add_argument("--task-items", default=None, help="任务项 JSON（可选）")
+    ap.add_argument("--claims", default=None, help="claim_recall.py 的候选论断句 JSON（判 citation_placement）")
+    ap.add_argument("--rendered", default=None, help="render.py 产出的文末列表文件（判 format_convert）")
     ap.add_argument("--out", required=True)
     ap.add_argument("--note", default=None)
     args = ap.parse_args()
@@ -167,6 +199,7 @@ def main() -> int:
     audit = load_json(args.audit)
     case_id = args.case_id or audit.get("case_id") or synth_case_id(args.manuscript)
     bib = load_bib(load_json(args.bib))
+    input_bib = load_bib(load_json(args.bib_in)) if args.bib_in else None
 
     manuscript_text = Path(args.manuscript).read_text(encoding="utf-8")
     revised_text = (
@@ -205,16 +238,33 @@ def main() -> int:
     change_log = revised_report.get("change_log", []) or audit.get("change_log", [])
     fact_map = build_fact_map(change_log)
 
-    # task_coverage：六键，从脚本输出判断 done/pending
-    has_dedup = bool(revised_report.get("duplicate_decisions"))
+    # 数字守恒审计（事实底稿 vs 修订稿），漂移写进 fact_map + limitations
+    number_drift = []
+    if args.fact_base and Path(args.fact_base).exists():
+        nd = number_diff(Path(args.fact_base).read_text(encoding="utf-8"), revised_text)
+        for n in nd["removed"]:
+            fact_map.append({"action": "number_removed", "field": "fact_number",
+                             "reason": f"事实数字 {n} 在修订稿中消失或被改动"})
+            number_drift.append({"number": n, "change": "removed"})
+        for n in nd["added"]:
+            fact_map.append({"action": "number_added", "field": "fact_number",
+                             "reason": f"修订稿新增事实数字 {n}"})
+            number_drift.append({"number": n, "change": "added"})
+        if nd["changed_count"]:
+            limitations.append(
+                f"数字守恒审计发现 {nd['changed_count']} 处数字漂移（消失 {nd['removed']} / 新增 {nd['added']}），需核对是否故意改动。")
+
+    # task_coverage：六键，每键都有脚本输出判据（不硬编码）
     has_numbering = bool(revised_report.get("numbering", {}).get("proposed"))
+    claims_ran = bool(args.claims and Path(args.claims).exists())
+    rendered_ran = bool(args.rendered and Path(args.rendered).exists())
     task_coverage = {
-        "citation_placement": "done" if citations else "pending",
+        "citation_placement": "done" if claims_ran else ("done" if citations else "pending"),
         "numbering_update": "done" if has_numbering else "pending",
-        "dedup_merge": "done" if has_dedup else "pending",
-        "format_convert": "done",   # render.py 在流程中产出，此处由脚本确认字段齐全
-        "source_verify": "done",    # citation_audit 的字段/来源审计已运行
-        "editable_deliverable": "done",
+        "dedup_merge": dedup_status(input_bib, bib),
+        "format_convert": "done" if rendered_ran else "pending",
+        "source_verify": "done",  # build_report 内已运行 audit_entries（字段/来源审计）
+        "editable_deliverable": "done",  # 本脚本下方写出 edited_manuscript.md
     }
     # 任务项 JSON 覆盖六键之外的用户声明项
     task_items = load_json(args.task_items)
@@ -244,10 +294,12 @@ def main() -> int:
             "notes": revised_report.get("notes", []),
         },
         "numbering_plan": revised_report.get("numbering", {}),
-        "dedup_decisions": revised_report.get("duplicate_decisions", []),
+        # 去重决策来自**原稿审计**（那时才找得到重复）；修订稿合并后重复已消失。
+        "dedup_decisions": audit.get("duplicate_decisions", []) if isinstance(audit, dict) else [],
         "bibliography": bib,
         "source_map": source_map,
         "fact_map": fact_map,
+        "number_drift": number_drift,
         "uncertainties": [i for i in revised_issues if i.get("severity") == "warning"],
         "assumptions": [
             "输入稿件中的 [n] 为顺序编码制引用；\\cite{key} 为键式引用；两者混用时按各自规则核验。",
@@ -258,7 +310,7 @@ def main() -> int:
         "change_log": change_log,
         "task_coverage": task_coverage,
         "provenance": {
-            "generator": "make_result.py v2.0",
+            "generator": "make_result.py v2.1",
             "manuscript_source": str(args.manuscript),
             "bibliography_source": str(args.bib),
             "audit_source": str(args.audit),

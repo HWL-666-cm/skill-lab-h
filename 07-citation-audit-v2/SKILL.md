@@ -12,7 +12,7 @@ version: 1.1.0
 
 适用：
 - 正文引用标记与文末列表对不上（悬空引用、未用条目、跳号、乱序）
-- 插删调序后需要重排编号、同步图表注与附录引用
+- 插删调序后需要重排正文编号与文末列表（图表注只报位置警告，附录暂不支持）
 - 同一文献以中英文题名、预印本/正式版、不同数据库导出形式重复出现
 - 需要检查 DOI 格式、预印本类型标识、电子资源访问日期等字段
 - 需要一份能交给第三方的"改了什么、依据是什么"记录
@@ -26,6 +26,7 @@ SKILL.md                          本文件
 prompts/audit-workflow.md         Agent 执行提示词（加载后按此顺序做）
 scripts/citation_audit.py         核心审计：双向一致性 / 编号 / 去重 / 字段
 scripts/claim_recall.py           论断句规则召回（挂得对的规则侧，v2 新增）
+scripts/number_audit.py           数字守恒审计（事实底稿 vs 修订稿，v2 新增）
 scripts/render.py                 GB/T 7714—2015 / APA 渲染（v2 新增）
 scripts/make_result.py            组装 result.json（v2：status 只据修订稿、逐条 source_map）
 scripts/run_selftest.py           合成自测
@@ -69,7 +70,7 @@ python3 scripts/citation_audit.py \
 
 1. **正反双向闭包**：正文引用在库里找不到 → `dangling_citation`（硬错误）；库里条目正文没引 → `unused_entry`（警告）。稿件自带"参考文献"段时，列表行不被当作正文引用，而是单独核验列表与库是否同步（`reference_list_gap` / `reference_list_mismatch`）。
 2. **编号**：跳号、乱序、重复占用、非法编号；给出按首次出现顺序的 `numbering.proposed`。**悬空编号不进入重排映射**——先补/删，再重排。
-3. **去重**：规范化 DOI 相同且元数据无冲突 → 给合并字段与保留/删除键；DOI 相同但元数据冲突 → 保留两条待人工确认；题名+作者+年份一致但 DOI 不同 → 只提示疑似，不自动合并。
+3. **去重（三级）**：同 DOI 且题名/作者/年份完全一致 → `merge`（保留字段更全的一条）；同 DOI 且差异只在版本标记（`(Preprint)`/arXiv/题名大小写/作者标点）→ `merge_version_variant`（保留正式版，记 `version_note`）；同 DOI 但年份/第一作者姓/卷期页实质冲突 → `keep_both_needs_review`（不自动合并）。题名+作者+年份一致但 DOI 不同 → 只提示疑似，不自动合并。
 4. **字段与来源**：预印本误标 `[J]`、DOI 缺 `https://doi.org/` 前缀、电子资源缺访问日期、缺必需字段；引用落在图题行或过短句末 → 位置警告。
 
 所有字符串比较先做 NFKC 规范化（中文全角、英文 ligature 不影响判定）。**硬错误必须修，警告列入人工确认项。**
@@ -83,7 +84,12 @@ python3 scripts/claim_recall.py --input /app/work/manuscript.md --out /app/work/
 ### 第 3 步：修订
 按 `change_log` 逐条改稿件与文献库：补悬空条目或删无效引用；用 `numbering.proposed` 同步正文与文末；合并重复条目时保留更完整的字段并在 `duplicate_decisions` 留下依据；更正预印本类型与 DOI 前缀。结合第 2.5 步的候选论断句，把缺失的来源补到对应句。
 
-**红线**：不编造文献、DOI、卷期页；缺字段写 `unavailable` 并列为人工确认；不把弱证据当成合并依据。
+**数字守恒**：改引用时不要动事实数字。用 `number_audit.py` 对事实底稿与修订稿比对，`removed/added` 即漂移：
+```bash
+python3 scripts/number_audit.py --source <事实底稿> --revised <修订稿> --out /app/work/numbers.json
+```
+
+**红线**：不编造文献、DOI、卷期页；缺字段写 `unavailable` 并列为人工确认；不把弱证据当成合并依据；改写不改事实数字。
 
 ### 第 3.5 步：格式转换（渲染）
 ```bash
@@ -96,11 +102,12 @@ python3 scripts/render.py --bib /app/work/references.json --style <gbt7714|apa> 
 python3 scripts/make_result.py \
   --case-id <输入 case_id> --case-json /input/case.json \
   --manuscript <原稿> --revised <修订稿> \
-  --bib <文献库> --audit /app/work/audit.json \
-  --out /app/output/result.json
+  --bib <整理后文献库> --bib-in <整理前文献库> \
+  --fact-base <事实底稿> --claims /app/work/claims.json --rendered /app/output/references.txt \
+  --audit /app/work/audit.json --out /app/output/result.json
 ```
 
-`make_result.py` 会**对修订稿重跑一次审计**：`status` 只依据修订稿的复核结果（`ok`/`review_warnings`/`partial`），原稿的问题数单独记进 `issues_found_in_input`，不拉低 status。`result.json` 含：`case_id`、`status`、`edited_manuscript`、`citation_issues`、`issues_found_in_input`、`audit_report`、`numbering_plan`、`dedup_decisions`、`bibliography`、**逐条 `source_map`**（每条引用带句子/行号/条目 key/匹配依据/confidence）、`fact_map`、`task_coverage`（六键）、`uncertainties`、`limitations`、`change_log`。若平台 `output_contract` 声明了别的字段名，按别名表补齐；补不出的必需字段会让 `status` 降级并写进 limitations——不伪造字段。
+`make_result.py` 会**对修订稿重跑一次审计**：`status` 只依据修订稿的复核结果（`ok`/`review_warnings`/`partial`），原稿的问题数单独记进 `issues_found_in_input`，不拉低 status。`result.json` 含：`case_id`、`status`、`edited_manuscript`、`citation_issues`、`issues_found_in_input`、`audit_report`、`numbering_plan`、`dedup_decisions`（来自原稿审计的完整判据：keep/drop/basis/merged_fields/version_note）、`bibliography`、**逐条 `source_map`**（每条引用带句子/行号/条目 key/匹配依据/confidence）、`fact_map`、`number_drift`、`task_coverage`（六键，每键由脚本输出判定）、`uncertainties`、`limitations`、`change_log`。`task_coverage.dedup_merge` 用 `--bib-in` 与整理后库 diff 判定（重复 DOI 已合并为一条才算 done），不因"合并后重复消失"误报 pending。若平台 `output_contract` 声明了别的字段名，按别名表补齐；补不出的必需字段会让 `status` 降级并写进 limitations——不伪造字段。
 
 同时输出可编辑产物 `edited_manuscript.md` 和 `change_log.csv`。
 
@@ -142,12 +149,12 @@ python3 scripts/run_selftest.py   # 全过
 
 自测覆盖悬空引用、未用条目、跳号乱序、同 DOI 合并、冲突不合并、预印本误标、DOI 缺前缀、全角规范化、弱证据只提示、干净输入、文末列表错号、键式 `\cite{}`、小数点不切句，以及 v2 新增的**修订稿 status 判定、逐条 source_map、GB/T 7714/APA 渲染、论断句规则召回**。
 
-A/B 对照（同一批著录字段构造的草稿）：裸 Agent 改写后 10 处返工（悬空引用/跳号/重复条目/编号断裂/缺字段），本 Skill 修订后复核 0 处；status 从裸 Agent 的 `partial` 收敛到本 Skill 的 `ok`。逐条命令与哈希见 `references/evidence.md`（已进提交包，非模板）。
+A/B 对照（同一批著录字段构造的草稿）：裸 Agent 改写后 10 处引用问题（2 硬 8 警）+ 1 处数字漂移，本 Skill 修订后复核 1 处（0 硬 + 1 条 `weak_placement` 启发式误报，列人工确认）+ 0 数字漂移；status 从裸 Agent 的 `partial` 收敛到本 Skill 的 `review_warnings`。逐条命令与哈希见 `references/evidence.md`（已进提交包，非模板）。
 
 ## 8. 已知边界
 
 1. 不判定论断与文献的**语义**是否匹配，只做引用位置的启发式警告；语义匹配需人工确认。
-2. 弱证据去重**不自动合并**，冲突元数据保留两条，避免误合并同名作者的不同文献。
+2. 弱证据去重（题名+作者+年份一致但 DOI 不同）**不自动合并**；实质冲突（年份/第一作者姓/卷期页不同）保留两条，避免误合并同名作者的不同文献。版本标记差异（预印本 vs 正式版）判 `merge_version_variant` 自动合并并记 `version_note`。
 3. **不联网**核验 DOI 真实性与条目存在性，只核验给定文献库快照内部的一致性。
 4. 顺序编码制支持编号重排；键式引用只做双向核验；著者—出版年制和脚注制不做编号重排。
 5. 目标期刊的细则（作者缩写、文种分组、页码区间写法）需人工按规范处理，脚本不猜测。

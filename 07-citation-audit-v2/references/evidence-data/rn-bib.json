@@ -1,0 +1,5 @@
+[
+  {"key":"a","order":1,"type":"J","title":"Paper A","authors":["X Y"],"year":"2020","journal":"J1","doi":"https://doi.org/10.1000/a"},
+  {"key":"b","order":2,"type":"J","title":"Paper B","authors":["X Y"],"year":"2021","journal":"J2","doi":"https://doi.org/10.1000/b"},
+  {"key":"c","order":3,"type":"J","title":"Paper C","authors":["X Y"],"year":"2022","journal":"J3","doi":"https://doi.org/10.1000/c"}
+]

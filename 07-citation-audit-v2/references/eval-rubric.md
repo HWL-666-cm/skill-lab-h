@@ -8,16 +8,16 @@
 | 实际效果·结果正确性 | 15 | 所有判定带 `evidence`（行号/字段值/编号）；每条引用落到真实条目，`match_basis`（编号/键）+ `confidence` |
 | 实际效果·结果完整性 | 5 | 逐条 `source_map`（句/行号/条目/依据/置信度）+ `fact_map`；遗漏项列进 limitations |
 | 实际效果·可核验性 | 5 | 原稿快照、文献库快照、逐条 `source_map`、`change_log`、审计报告五件套 |
-| 使用增益·质量 | 15 | A/B 对照：同稿件同库，裸 Agent 10 处返工 / 本 Skill 1 处警告，机器可复算（`references/evidence.md`） |
+| 使用增益·质量 | 15 | A/B 对照：同稿件同库，裸 Agent 10 处引用问题 + 1 数字漂移 / 本 Skill 1 处警告 + 0 数字，机器可复算（`references/evidence.md`） |
 | 使用增益·效率 | 5 | 脚本一次跑完双向核验 + 重排 + 去重 + 渲染，无需逐条人眼对照 |
-| 使用增益·可验证性 | 5 | 审计 JSON + 自测 18 条 + 确定性哈希（evidence-data 附 sha256） |
-| 创新增益 | 15 | 双向闭包核验、按首次出现重排且排除悬空号、强弱分级去重且冲突不合并、论断句规则召回、GB/T 7714/APA 渲染 |
+| 使用增益·可验证性 | 5 | 审计 JSON + 自测 20 条 + 确定性哈希（evidence-data 附 sha256） |
+| 创新增益 | 15 | 双向闭包核验、按首次出现重排且排除悬空号、三级去重（完全一致合并/版本变体合并记 version_note/实质冲突不合并）、论断句规则召回、数字守恒、GB/T 7714/APA 渲染 |
 | 可靠体验 | 10 | 三种库形态、异常输入不崩、NFKC 规范化、警告与硬错误分级、64 请求预算账 |
-| 生态贡献 | 10 | 字段字典、判据说明、18 条自测、示例、A/B 证据、限制清单 |
+| 生态贡献 | 10 | 字段字典、判据说明、20 条自测、示例、A/B 证据、限制清单 |
 
 ## 二、交付前自查（每条都要真的做）
 
-- [ ] `python3 scripts/run_selftest.py` 输出 `18/18 passed`
+- [ ] `python3 scripts/run_selftest.py` 输出 `20/20 passed`
 - [ ] 审计报告的 `inputs.citation_style` 与实际稿件一致
 - [ ] `numbering.proposed` 不含悬空引用编号
 - [ ] `duplicate_decisions` 里没有任何 `merge` 是建立在冲突元数据上的

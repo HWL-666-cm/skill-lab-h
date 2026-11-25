@@ -74,8 +74,35 @@ def first_author_surname(entry: dict) -> str:
 
 def entry_year(entry: dict) -> str:
     y = entry.get("year", "")
-    m = re.search(r"(19|20)\d{2}", str(y))
+    # NFKC 归一化，让全角年份 "２０２６" 也能被解析
+    m = re.search(r"(19|20)\d{2}", norm(str(y)))
     return m.group(0) if m else ""
+
+
+# 版本标记：同一文献的预印本/正式版差异，只出现在题名里
+VERSION_MARK = re.compile(
+    r"\s*\(?\s*(?:pre-?print|preprint|working\s*paper|arxiv|manuscript|"
+    r"预印本|工作论文|手稿|初稿)\s*\)?\s*", re.I)
+
+
+def strip_version_mark(s: str) -> str:
+    return VERSION_MARK.sub("", s or "").strip()
+
+
+def has_version_mark(s: str) -> bool:
+    return bool(VERSION_MARK.search(s or ""))
+
+
+def norm_author_list(entry: dict) -> str:
+    """作者全表折叠（去掉标点/大小写/空格），用于判定"同作者不同写法"。
+
+    "Zhang S, Li S" 与 "Zhang, S., Li, S." 折叠后一致。
+    """
+    a = entry.get("authors") or entry.get("author") or []
+    if isinstance(a, str):
+        a = re.split(r";|,| and ", a)
+    s = " ".join(str(x) for x in a)
+    return norm_title(s)
 
 
 # ---------------- input parsing ----------------
@@ -257,13 +284,20 @@ def audit_entries(bib: list[dict]) -> list[dict]:
     return issues
 
 
+def _field_completeness(e: dict) -> int:
+    return sum(bool(norm(e.get(f))) for f in ("volume", "issue", "pages", "url", "access_date"))
+
+
 def find_duplicates(bib: list[dict]) -> tuple[list[dict], list[dict]]:
     """Return (issue dicts, duplicate decisions).
 
-    Rule: identical normalized DOI = strong evidence; title+surname+year = weak
-    evidence (warning only). Conflicting strong evidence keeps both entries and
-    asks for human review -- this is how we avoid merging different papers by
-    the same author.
+    三级判定（同 DOI 时）：
+      1. 题名/作者/年份完全一致 -> merge（同一条，警告）
+      2. 差异只来自版本标记（(Preprint)/arXiv/预印本、题名大小写、作者标点格式）
+         -> merge_version_variant（同一文献不同版本，保留正式版，记 version_note）
+      3. 年份/第一作者姓/卷期页等实质字段冲突 -> keep_both_needs_review（硬错误，不合并）
+
+    弱证据（题名+作者+年份一致但 DOI 不同/缺失）仍只提示不自动合并。
     """
     issues: list[dict] = []
     decisions: list[dict] = []
@@ -282,27 +316,21 @@ def find_duplicates(bib: list[dict]) -> tuple[list[dict], list[dict]]:
                 ki = str(bib[i].get("key") or i)
                 kj = str(bib[j].get("key") or j)
                 ti, tj = norm_title(bib[i].get("title")), norm_title(bib[j].get("title"))
+                tsi = norm_title(strip_version_mark(bib[i].get("title")))
+                tsj = norm_title(strip_version_mark(bib[j].get("title")))
                 si, sj = first_author_surname(bib[i]), first_author_surname(bib[j])
+                ai, aj = norm_author_list(bib[i]), norm_author_list(bib[j])
                 yi, yj = entry_year(bib[i]), entry_year(bib[j])
-                conflicting = bool(ti and tj and ti != tj) or bool(si and sj and si != sj) or bool(yi and yj and yi != yj)
-                if conflicting:
-                    decision = {
-                        "keys": [ki, kj], "basis": "same_doi_but_conflicting_metadata",
-                        "decision": "keep_both_needs_review", "doi": doi,
-                        "reason": "DOI 相同但题名/作者/年份冲突，可能是不同版本或 DOI 录错；不自动合并。",
-                        "evidence": {"titles": [bib[i].get("title"), bib[j].get("title")],
-                                     "years": [yi, yj]},
-                    }
-                    issues.append({
-                        "type": "duplicate_conflict", "severity": "error",
-                        "keys": [ki, kj],
-                        "detail": "同 DOI 但元数据冲突，合并会造成错配，已保留两条待人工确认。",
-                        "evidence": decision["evidence"],
-                        "suggestion": "核对出版社页面或 DOI 解析结果，确认是版本差异还是字段录错。",
-                    })
-                else:
-                    preferred = i if sum(bool(norm(bib[i].get(f))) for f in ("volume", "pages", "url", "access_date")) >= \
-                        sum(bool(norm(bib[j].get(f))) for f in ("volume", "pages", "url", "access_date")) else j
+
+                title_exact = bool(ti and tj and ti == tj)
+                title_version = (not title_exact) and bool(tsi and tsj and tsi == tsj)
+                author_full_same = bool(ai and aj and ai == aj)
+                surname_same = bool(si and sj and si == sj)
+                year_same = bool(yi and yj and yi == yj)
+
+                if title_exact and surname_same and year_same:
+                    # 完全一致 -> 合并
+                    preferred = i if _field_completeness(bib[i]) >= _field_completeness(bib[j]) else j
                     other = j if preferred == i else i
                     merged_fields = {
                         f: str(bib[preferred].get(f) or bib[other].get(f) or "")
@@ -315,6 +343,7 @@ def find_duplicates(bib: list[dict]) -> tuple[list[dict], list[dict]]:
                         "merged_fields": merged_fields,
                         "reason": "规范化 DOI 一致且题名/作者/年份无冲突；字段按更完整的一条保留。",
                     }
+                    decisions.append(decision)
                     strong_pairs.add(tuple(sorted((i, j))))
                     issues.append({
                         "type": "duplicate_same_doi", "severity": "warning",
@@ -323,7 +352,55 @@ def find_duplicates(bib: list[dict]) -> tuple[list[dict], list[dict]]:
                         "evidence": {"doi": doi, "keep": decision["keep"], "drop": decision["drop"]},
                         "suggestion": "合并为一条，正文两处引用统一指向保留键；在 change_log 记录判据。",
                     })
-        decisions.append({"doi": doi, "keys": [str(bib[i].get("key") or i) for i in idxs]})
+                elif title_version and author_full_same and year_same:
+                    # 版本差异（预印本 vs 正式版）-> 合并并记 version_note
+                    i_mark, j_mark = has_version_mark(bib[i].get("title")), has_version_mark(bib[j].get("title"))
+                    if i_mark and not j_mark:
+                        formal, preprint = j, i
+                    elif j_mark and not i_mark:
+                        formal, preprint = i, j
+                    else:
+                        formal = i if _field_completeness(bib[i]) >= _field_completeness(bib[j]) else j
+                        preprint = j if formal == i else i
+                    kf = str(bib[formal].get("key") or formal)
+                    kp = str(bib[preprint].get("key") or preprint)
+                    merged_fields = {
+                        f: str(bib[formal].get(f) or bib[preprint].get(f) or "")
+                        for f in ("title", "authors", "year", "venue", "volume", "issue", "pages", "doi", "url", "type")
+                    }
+                    decision = {
+                        "keys": [ki, kj], "basis": "same_doi_version_variant",
+                        "decision": "merge_version_variant", "keep": kf, "drop": kp, "doi": doi,
+                        "merged_fields": merged_fields,
+                        "version_note": "同一文献的预印本与正式版（题名仅差版本标记，作者标点差异）；保留正式版。",
+                        "reason": "DOI 相同，题名仅差版本标记（Preprint/arXiv/预印本），作者全表一致；保留无版本标记的正式版并记录字段来源。",
+                    }
+                    decisions.append(decision)
+                    strong_pairs.add(tuple(sorted((i, j))))
+                    issues.append({
+                        "type": "duplicate_same_doi", "severity": "warning",
+                        "keys": [ki, kj],
+                        "detail": "同一文献的预印本与正式版，判为同一条并保留正式版。",
+                        "evidence": {"doi": doi, "keep": kf, "drop": kp, "version_note": decision["version_note"]},
+                        "suggestion": "合并为一条（保留正式版），正文引用统一指向保留键；版本差异记进 version_note。",
+                    })
+                else:
+                    # 实质冲突（年份/第一作者姓/卷期页等）-> 不合并
+                    decision = {
+                        "keys": [ki, kj], "basis": "same_doi_but_conflicting_metadata",
+                        "decision": "keep_both_needs_review", "doi": doi,
+                        "reason": "DOI 相同但题名/作者/年份存在实质冲突（非版本标记差异），可能是不同文献或 DOI 录错；不自动合并。",
+                        "evidence": {"titles": [bib[i].get("title"), bib[j].get("title")],
+                                     "years": [yi, yj], "surnames": [si, sj]},
+                    }
+                    decisions.append(decision)
+                    issues.append({
+                        "type": "duplicate_conflict", "severity": "error",
+                        "keys": [ki, kj],
+                        "detail": "同 DOI 但元数据实质冲突，合并会造成错配，已保留两条待人工确认。",
+                        "evidence": decision["evidence"],
+                        "suggestion": "核对出版社页面或 DOI 解析结果，确认是不同文献、版本差异还是字段录错。",
+                    })
 
     # weak evidence: same title + surname + year, different/no DOI
     for i in range(len(bib)):

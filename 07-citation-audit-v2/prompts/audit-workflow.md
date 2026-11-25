@@ -23,7 +23,7 @@
    - `severity=error`：必须修。悬空引用要么补条目要么删引用；编号冲突必须重排；预印本误标必须改类型。
    - `severity=warning`：列进人工确认项，不擅自合并或删除。特别是 `duplicate_suspected`——题名作者年一致但 DOI 不同时，**不要自动合并**。
    - 用 `numbering.proposed` 做正文与文末列表的同步重排。悬空引用不在映射里，先处理它再重排。
-6. **产出可编辑稿**：保存修订后稿件为 `/app/output/edited_manuscript.md`，同时保留原始稿件快照。每条改动写进 change_log（改了什么、为什么、依据在哪）。
+6. **产出可编辑稿**：保存修订后稿件为 `/app/output/edited_manuscript.md`，同时保留原始稿件快照。每条改动写进 change_log（改了什么、为什么、依据在哪）。**改引用不动事实数字**——用 `number_audit.py` 对事实底稿与修订稿比对，报出的 `removed/added` 数字漂移要修回或写明原因。
 7. **格式转换（渲染）**：
    ```bash
    python3 scripts/render.py --bib <文献库> --style <gbt7714|apa> --out /app/output/references.txt
@@ -32,10 +32,11 @@
 8. **组装结果**：
    ```bash
    python3 scripts/make_result.py --case-id <ID> --case-json /input/case.json \
-     --manuscript <原稿> --revised <修订稿> --bib <文献库> --audit /app/work/audit.json \
-     --out /app/output/result.json
+     --manuscript <原稿> --revised <修订稿> --bib <整理后库> --bib-in <整理前库> \
+     --fact-base <事实底稿> --claims /app/work/claims.json --rendered /app/output/references.txt \
+     --audit /app/work/audit.json --out /app/output/result.json
    ```
-   脚本会对修订稿重跑审计，`status` 只依据修订稿复核结果；原稿问题数在 `issues_found_in_input`。
+   脚本会对修订稿重跑审计，`status` 只依据修订稿复核结果；原稿问题数在 `issues_found_in_input`。`dedup_decisions` 来自原稿审计的完整判据（keep/drop/version_note），`task_coverage.dedup_merge` 用 `--bib-in` 与整理后库 diff 判定。
 9. **自查**：见 `references/eval-rubric.md`。如果 `status=partial`，必须在 limitations 里说明哪些没做完。
 
 ## 红线
