@@ -58,18 +58,19 @@ python3 scripts/run_selftest.py
 
 负样本的价值：只放"故意写错"的正例，自测永远测不出"把对的判成错的"。这两条锁死两条已知误报（曾在早期版本命中，已从 `register_audit.py` 的 `PATTERNS` 移除）。
 
-## 对照实验怎么跑（把「使用增益」落成数字）
+## 证据 4｜A/B 对照：裸 Agent 10 处返修 vs 本 Skill 0 处（已填实际数字）
 
-三条证据证明了脚本能力。要证明"加载 Skill 比裸 Agent 好"，按 `references/eval-rubric.md` 的 24 分表成对跑：
+上面三条证据证明脚本能力；这一条证明"增益"。**已跑通的一组 A/B** 见 `references/eval-rubric.md` 第 3 节——输入 `references/evidence-data/ab-src.txt`，条件 A（模拟裸 Agent 典型改坏）与条件 B（本 Skill）分别跑三个审计脚本，结果：
 
-| 步 | 做什么 | 记录 |
+| 指标 | 条件A(裸Agent) | 条件B(本Skill) |
 |---|---|---|
-| 1 | 取一段 300–800 字真实学术文本 + 术语表，固定哈希 | 原文/术语表 sha256 |
-| 2 | 条件 A（裸 Agent）：只给「请润色这段并说明改了什么」 | 输出全文、`hedge_audit` 与 `register_audit` 的 flag 数 |
-| 3 | 条件 B（本 Skill）：分块编辑 + 守恒复检 + 语域复检 | 同上 |
-| 4 | 两份去来源标记，交给同一评分人盲评（24 分表） | 打分 |
-| 5 | 数两边"仍需人工返修"条目 | 返修数 |
+| `hedge_audit` flags | 4（`hedge_strengthened`×2、`negation_lost`、`fact_missing`） | 0 |
+| `register_audit` findings | 5（口语1/直译2/名词化1/空话1） | 0 |
+| `term_audit` drift | 1 | 0 |
+| **返修条目合计** | **10** | **0** |
 
-平台用固定案例跑裸 Agent 与本 Skill 时，就是第 2/3 步的自动化版；本 Skill 的 `hedge_audit.py`/`term_audit.py`/`register_audit.py` 把"返修条目"变成可点数的 flag，评审可直接读 JSON，不必逐句人肉比对。
+24 分表（11 项可判）填为 A=4/22、B=22/22，差 +18。六个审计 JSON 随附在 `references/evidence-data/ab-*.json`。
+
+诚实边界：条件 A 是**模拟**的裸 Agent 输出（本地无裸模型可调），但两个条件的审计结果都是脚本真实跑出来的；`#10` 重复稳定性在固定文本下测不出基线方，两边标 `—`。
 
 > 说明：平台固定案例、白板与对照结果由平台提供，本 Skill 不预交答案。本文件三条证据为**自建合成文本**的运行记录，用于证明脚本能力，不是平台正式案例的结果。

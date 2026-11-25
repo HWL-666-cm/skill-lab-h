@@ -1,0 +1,195 @@
+{
+  "tool": "hedge_audit",
+  "version": "2.0",
+  "original": "references/evidence-data/ab-src.txt",
+  "revised": "references/evidence-data/ab-skill.txt",
+  "verdict": "pass",
+  "flag_count": 0,
+  "hedge": {
+    "possibility": {
+      "before": {
+        "may": 1
+      },
+      "after": {
+        "may": 1
+      },
+      "strength_before": -1.0,
+      "strength_after": -1.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "evidential": {
+      "before": {},
+      "after": {},
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "certainty": {
+      "before": {},
+      "after": {},
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "scope": {
+      "before": {},
+      "after": {},
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "approximation": {
+      "before": {
+        "about": 1
+      },
+      "after": {
+        "approximately": 1
+      },
+      "strength_before": -1.0,
+      "strength_after": -1.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "negation": {
+      "before": {
+        "did not significantly differ": 1
+      },
+      "after": {
+        "did not differ": 1
+      },
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "ok",
+      "count_before": 1,
+      "count_after": 1
+    }
+  },
+  "numbers": {
+    "checked": "numeric_values",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "citations": {
+    "checked": "citations_and_refs",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "abbreviations": {
+    "checked": "abbrev_definitions",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "boundaries": {
+    "checked": "boundary_expressions",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "claim_anchors": {
+    "checked": "claim_anchors",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "attribution": {
+    "checked": "change_attribution",
+    "change_log_provided": false,
+    "total_blocks": 16,
+    "unjustified_count": 16,
+    "unjustified": [
+      {
+        "direction": "removed",
+        "block": "rapid development sea fog",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "there has lot",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "make analysis",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "about",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "sea-fog",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "differ",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "worth noting",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "Sea Fog",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "has advanced rapidly",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "many",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "now analyze",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "approximately",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "Sea Fog",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "differ",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": ",",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "between",
+        "explained": false
+      }
+    ],
+    "all_explained": false,
+    "note": "未提供 change_log 时仅列出待核对块，不判定；提供后每个实词改动块必须能在某条记录的 original/revised 侧找到。"
+  },
+  "limitations": [],
+  "flags": [],
+  "note": "三层守恒：①有限集合（数字/引用/缩写定义/边界）丢失即报；②词级 diff 的实词改动块须在 change_log 中留痕；③hedge 家族加权强度 delta>0.5 视为净强化、<-0.5 为净削弱。强度词表只作辅助，不再作为唯一防线——换文档出现表外词时，靠①②兜底。"
+}

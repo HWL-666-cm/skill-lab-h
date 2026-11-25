@@ -1,0 +1,57 @@
+{
+  "tool": "term_audit",
+  "version": "1.1",
+  "mode": "build",
+  "input": "references/evidence-data/ab-src.txt",
+  "verdict": "review",
+  "terms": [
+    {
+      "concept": "seafog",
+      "preferred": "Sea Fog",
+      "variants_found": [
+        "Sea Fog",
+        "sea fog",
+        "sea-fog"
+      ],
+      "count": 3,
+      "first_line": 1,
+      "status": "inconsistent"
+    },
+    {
+      "concept": "coastal",
+      "preferred": "coastal",
+      "variants_found": [
+        "coastal"
+      ],
+      "count": 2,
+      "first_line": 1,
+      "status": "single_form"
+    },
+    {
+      "concept": "prediction",
+      "preferred": "prediction",
+      "variants_found": [
+        "prediction"
+      ],
+      "count": 2,
+      "first_line": 1,
+      "status": "single_form"
+    },
+    {
+      "concept": "station",
+      "preferred": "stations",
+      "variants_found": [
+        "stations"
+      ],
+      "count": 2,
+      "first_line": 1,
+      "status": "single_form"
+    }
+  ],
+  "inconsistent_count": 1,
+  "zh_en_pairs": [],
+  "zh_en_issues": [],
+  "abbreviations": [],
+  "abbreviation_conflicts": [],
+  "note": "preferred 为按频次推荐的首选写法，需人工按学科惯例确认后再全篇替换。"
+}

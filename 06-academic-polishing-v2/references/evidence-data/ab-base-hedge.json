@@ -1,0 +1,172 @@
+{
+  "tool": "hedge_audit",
+  "version": "2.0",
+  "original": "references/evidence-data/ab-src.txt",
+  "revised": "references/evidence-data/ab-baseline.txt",
+  "verdict": "review",
+  "flag_count": 4,
+  "hedge": {
+    "possibility": {
+      "before": {
+        "may": 1
+      },
+      "after": {},
+      "strength_before": -1.0,
+      "strength_after": 0.0,
+      "delta": 1.0,
+      "status": "strengthened"
+    },
+    "evidential": {
+      "before": {},
+      "after": {},
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "certainty": {
+      "before": {},
+      "after": {},
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "scope": {
+      "before": {},
+      "after": {},
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "ok"
+    },
+    "approximation": {
+      "before": {
+        "about": 1
+      },
+      "after": {},
+      "strength_before": -1.0,
+      "strength_after": 0.0,
+      "delta": 1.0,
+      "status": "strengthened"
+    },
+    "negation": {
+      "before": {
+        "did not significantly differ": 1
+      },
+      "after": {},
+      "strength_before": 0.0,
+      "strength_after": 0.0,
+      "delta": 0.0,
+      "status": "flag",
+      "count_before": 1,
+      "count_after": 0
+    }
+  },
+  "numbers": {
+    "checked": "numeric_values",
+    "missing": {
+      "2779": 1
+    },
+    "added": {},
+    "ok": false
+  },
+  "citations": {
+    "checked": "citations_and_refs",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "abbreviations": {
+    "checked": "abbrev_definitions",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "boundaries": {
+    "checked": "boundary_expressions",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "claim_anchors": {
+    "checked": "claim_anchors",
+    "missing": {},
+    "added": {},
+    "ok": true
+  },
+  "attribution": {
+    "checked": "change_attribution",
+    "change_log_provided": false,
+    "total_blocks": 6,
+    "unjustified_count": 6,
+    "unjustified": [
+      {
+        "direction": "removed",
+        "block": "may reduce",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "about",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "did not significantly differ",
+        "explained": false
+      },
+      {
+        "direction": "removed",
+        "block": "2779",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "reduces",
+        "explained": false
+      },
+      {
+        "direction": "added",
+        "block": "similar",
+        "explained": false
+      }
+    ],
+    "all_explained": false,
+    "note": "未提供 change_log 时仅列出待核对块，不判定；提供后每个实词改动块必须能在某条记录的 original/revised 侧找到。"
+  },
+  "limitations": [],
+  "flags": [
+    {
+      "kind": "hedge_strengthened",
+      "family": "possibility",
+      "detail": "命题强度净增强 1.0，需回改或说明理由",
+      "removed": [
+        "may"
+      ],
+      "introduced": []
+    },
+    {
+      "kind": "hedge_strengthened",
+      "family": "approximation",
+      "detail": "命题强度净增强 1.0，需回改或说明理由",
+      "removed": [
+        "about"
+      ],
+      "introduced": []
+    },
+    {
+      "kind": "negation_lost",
+      "family": "negation",
+      "detail": "阴性/否定表述出现次数由 1 降为 0，需逐条恢复",
+      "removed_occurrences": 1
+    },
+    {
+      "kind": "fact_missing",
+      "family": "numeric_values",
+      "value": "2779",
+      "detail": "2779 在改后文本中缺失或减少，必须逐字恢复"
+    }
+  ],
+  "note": "三层守恒：①有限集合（数字/引用/缩写定义/边界）丢失即报；②词级 diff 的实词改动块须在 change_log 中留痕；③hedge 家族加权强度 delta>0.5 视为净强化、<-0.5 为净削弱。强度词表只作辅助，不再作为唯一防线——换文档出现表外词时，靠①②兜底。"
+}

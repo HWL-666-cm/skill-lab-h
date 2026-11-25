@@ -1,0 +1,65 @@
+{
+  "verdict": "issues",
+  "counts": {
+    "colloquial": 1,
+    "translationese": 2,
+    "nominalization": 1,
+    "filler": 1,
+    "error": 2,
+    "style": 3
+  },
+  "findings": [
+    {
+      "category": "translationese",
+      "severity": "style",
+      "text": "With the rapid development of",
+      "span": [
+        0,
+        29
+      ],
+      "suggestion": "删除开场白，直接陈述现象"
+    },
+    {
+      "category": "translationese",
+      "severity": "error",
+      "text": "there has a",
+      "span": [
+        50,
+        61
+      ],
+      "suggestion": "there is / there are（there be 句型的主谓一致）"
+    },
+    {
+      "category": "colloquial",
+      "severity": "style",
+      "text": "a lot of",
+      "span": [
+        60,
+        68
+      ],
+      "suggestion": "many / numerous / 具体数量"
+    },
+    {
+      "category": "nominalization",
+      "severity": "error",
+      "text": "make an analysis of",
+      "span": [
+        81,
+        100
+      ],
+      "suggestion": "analyze / compare / assess / evaluate（动词直接作谓语）"
+    },
+    {
+      "category": "filler",
+      "severity": "style",
+      "text": "It is worth noting that",
+      "span": [
+        326,
+        349
+      ],
+      "suggestion": "删除，或把真正值得强调的点写成主句"
+    }
+  ],
+  "chars": 390,
+  "mode": "single"
+}

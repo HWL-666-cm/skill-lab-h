@@ -1,0 +1,1 @@
+Sea Fog prediction has advanced rapidly, and many models now analyze visibility. This study may reduce the prediction error by approximately 12% in coastal areas [12]. The Sea Fog frequency did not differ significantly between inland and coastal stations (Fig. 3). In total, 14 stations recorded 2779 fog samples between 2015 and 2020. Sea Fog intensity varied by season.

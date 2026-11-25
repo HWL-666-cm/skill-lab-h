@@ -1,0 +1,14 @@
+{
+  "verdict": "clean",
+  "counts": {
+    "colloquial": 0,
+    "translationese": 0,
+    "nominalization": 0,
+    "filler": 0,
+    "error": 0,
+    "style": 0
+  },
+  "findings": [],
+  "chars": 372,
+  "mode": "single"
+}

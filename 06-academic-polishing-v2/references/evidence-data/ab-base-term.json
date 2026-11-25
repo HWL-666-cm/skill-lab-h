@@ -1,0 +1,65 @@
+{
+  "tool": "term_audit",
+  "version": "1.1",
+  "mode": "rescan",
+  "input": "references/evidence-data/ab-baseline.txt",
+  "glossary": "/tmp/ab-terms.json",
+  "verdict": "review",
+  "terms": [
+    {
+      "concept": "seafog",
+      "preferred": "Sea Fog",
+      "variants_found": [
+        "Sea Fog",
+        "sea fog",
+        "sea-fog"
+      ],
+      "drift": [
+        "sea fog",
+        "sea-fog"
+      ],
+      "count": 3,
+      "first_line": 1,
+      "status": "drift"
+    },
+    {
+      "concept": "coastal",
+      "preferred": "coastal",
+      "variants_found": [
+        "coastal"
+      ],
+      "drift": [],
+      "count": 2,
+      "first_line": 1,
+      "status": "ok"
+    },
+    {
+      "concept": "prediction",
+      "preferred": "prediction",
+      "variants_found": [
+        "prediction"
+      ],
+      "drift": [],
+      "count": 2,
+      "first_line": 1,
+      "status": "ok"
+    },
+    {
+      "concept": "station",
+      "preferred": "stations",
+      "variants_found": [
+        "stations"
+      ],
+      "drift": [],
+      "count": 2,
+      "first_line": 1,
+      "status": "ok"
+    }
+  ],
+  "drift_count": 1,
+  "zh_en_pairs": [],
+  "zh_en_issues": [],
+  "abbreviations": [],
+  "abbreviation_conflicts": [],
+  "note": "status=drift 表示出现术语表未登记的写法，应回改；missing 表示首选写法消失。"
+}
