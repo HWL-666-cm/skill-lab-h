@@ -1,996 +1,1309 @@
 {
-  "_note": "最小调用示例（示意输出，标为示例；20 条断言样例覆盖受控词表，非正式案例结果）",
-  "case_id": "example-case",
-  "answer": {},
-  "structured": {
-    "nanopubs": [
-      {
-        "id": "A01",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "achieves",
-          "object": "80.5 GLUE score",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT LARGE obtains a score of 80.5 on GLUE",
-          "location": {
-            "section": "4.1",
-            "page": 5,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 5
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A02",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "outperforms",
-          "object": "GPT",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "outperforming GPT",
-          "location": {
-            "section": "4.1",
-            "page": 5,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 5
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A03",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "achieves",
-          "object": "80.4 GLUE score",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT BASE obtains a score of 80.4",
-          "location": {
-            "section": "4.1",
-            "page": 5,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 5
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A04",
-        "assertion": {
-          "subject": "BERT",
-          "predicate": "is_a",
-          "object": "deep bidirectional Transformer",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT is a deep bidirectional Transformer model",
-          "location": {
-            "section": "4.1",
-            "page": 2,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 2
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A05",
-        "assertion": {
-          "subject": "BERT",
-          "predicate": "uses",
-          "object": "masked language model pre-training",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT uses masked language model (MLM) pre-training",
-          "location": {
-            "section": "4.1",
-            "page": 3,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 3
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A06",
-        "assertion": {
-          "subject": "BERT",
-          "predicate": "uses",
-          "object": "next sentence prediction",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT also uses a next sentence prediction (NSP) task",
-          "location": {
-            "section": "4.1",
-            "page": 3,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 3
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A07",
-        "assertion": {
-          "subject": "BERT",
-          "predicate": "trained_on",
-          "object": "BooksCorpus (800M words)",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "pre-trained on BooksCorpus (800M words)",
-          "location": {
-            "section": "4.1",
-            "page": 3,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 3
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A08",
-        "assertion": {
-          "subject": "BERT",
-          "predicate": "trained_on",
-          "object": "English Wikipedia (2500M words)",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "and English Wikipedia (2,500M words)",
-          "location": {
-            "section": "4.1",
-            "page": 3,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 3
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A09",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "fine_tuned_on",
-          "object": "GLUE benchmark",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "fine-tuned on the GLUE benchmark",
-          "location": {
-            "section": "4.1",
-            "page": 4,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 4
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A10",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "improves",
-          "object": "SQuAD v1.1 F1 to 93.2",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "improves the SQuAD v1.1 F1 to 93.2",
-          "location": {
-            "section": "4.1",
-            "page": 6,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 6
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A11",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "shows",
-          "object": "improvement with model size",
-          "condition": "",
-          "negation": false,
-          "modality": "claim"
-        },
-        "evidence": {
-          "quote": "larger models lead to better accuracy",
-          "location": {
-            "section": "4.1",
-            "page": 7,
-            "line": 12
-          },
-          "evidence_type": "inferred",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 7
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "共现推断",
-          "level": "medium"
-        }
-      },
-      {
-        "id": "A12",
-        "assertion": {
-          "subject": "masked LM",
-          "predicate": "prevents",
-          "object": "left-to-right conditioning",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "the masked LM prevents left-to-right conditioning",
-          "location": {
-            "section": "4.1",
-            "page": 3,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 3
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A13",
-        "assertion": {
-          "subject": "ablation without NSP",
-          "predicate": "reduces",
-          "object": "GLUE performance",
-          "condition": "",
-          "negation": false,
-          "modality": "claim"
-        },
-        "evidence": {
-          "quote": "removing NSP hurts performance on GLUE",
-          "location": {
-            "section": "4.1",
-            "page": 7,
-            "line": 12
-          },
-          "evidence_type": "inferred",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 7
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "共现推断",
-          "level": "medium"
-        }
-      },
-      {
-        "id": "A14",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "compared_with",
-          "object": "OpenAI GPT",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "compared to OpenAI GPT",
-          "location": {
-            "section": "4.1",
-            "page": 5,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 5
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A15",
-        "assertion": {
-          "subject": "BERT",
-          "predicate": "evaluates",
-          "object": "on GLUE tasks",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "we evaluate BERT on the GLUE benchmark",
-          "location": {
-            "section": "4.1",
-            "page": 4,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 4
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A16",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "reduces",
-          "object": "error by 7.7% on MultiNLI",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "improves MultiNLI accuracy by 4.6%, reducing error by 7.7%",
-          "location": {
-            "section": "4.1",
-            "page": 6,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 6
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A17",
-        "assertion": {
-          "subject": "BERT",
-          "predicate": "consists_of",
-          "object": "Transformer encoder layers",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT's architecture is a multi-layer bidirectional Transformer encoder",
-          "location": {
-            "section": "4.1",
-            "page": 2,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 2
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A18",
-        "assertion": {
-          "subject": "BERT LARGE",
-          "predicate": "outperforms",
-          "object": "human baseline on SWAG",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT LARGE surpasses the human baseline on SWAG",
-          "location": {
-            "section": "4.1",
-            "page": 6,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 6
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      },
-      {
-        "id": "A19",
-        "assertion": {
-          "subject": "word-piece tokens",
-          "predicate": "correlates_with",
-          "object": "subword coverage",
-          "condition": "",
-          "negation": false,
-          "modality": "claim"
-        },
-        "evidence": {
-          "quote": "word-piece tokenization improves subword coverage",
-          "location": {
-            "section": "4.1",
-            "page": 3,
-            "line": 12
-          },
-          "evidence_type": "inferred",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 3
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "共现推断",
-          "level": "low"
-        }
-      },
-      {
-        "id": "A20",
-        "assertion": {
-          "subject": "BERT BASE",
-          "predicate": "achieves",
-          "object": "93.5 F1 on SQuAD v2.0",
-          "condition": "",
-          "negation": false,
-          "modality": "fact"
-        },
-        "evidence": {
-          "quote": "BERT BASE obtains an F1 of 93.5 on SQuAD v2.0",
-          "location": {
-            "section": "4.1",
-            "page": 6,
-            "line": 12
-          },
-          "evidence_type": "direct",
-          "supports": true
-        },
-        "provenance": {
-          "wasDerivedFrom": {
-            "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-            "section": "4.1",
-            "page": 6
-          },
-          "method": "text-extraction"
-        },
-        "pubinfo": {
-          "paper": "BERT: Pre-training of Deep Bidirectional Transformers",
-          "authors": [
-            "Jacob Devlin",
-            "Ming-Wei Chang",
-            "Kenton Lee",
-            "Kristina Toutanova"
-          ],
-          "year": 2019,
-          "version": "v2",
-          "identifier": "arXiv:1810.04805"
-        },
-        "confidence": {
-          "basis": "直接引文",
-          "level": "high"
-        }
-      }
-    ],
-    "validation_summary": {
-      "total": 20,
-      "ok": 20,
-      "error": 0,
-      "warning": 0
-    },
-    "predicates": [
-      {
-        "type": "achieves",
-        "label": "achieves"
-      },
-      {
-        "type": "compared_with",
-        "label": "compared_with"
-      },
-      {
-        "type": "consists_of",
-        "label": "consists_of"
-      },
-      {
-        "type": "correlates_with",
-        "label": "correlates_with"
-      },
-      {
-        "type": "evaluates",
-        "label": "evaluates"
-      },
-      {
-        "type": "fine_tuned_on",
-        "label": "fine_tuned_on"
-      },
-      {
-        "type": "improves",
-        "label": "improves"
-      },
-      {
-        "type": "is_a",
-        "label": "is_a"
-      },
-      {
-        "type": "outperforms",
-        "label": "outperforms"
-      },
-      {
-        "type": "prevents",
-        "label": "prevents"
-      },
-      {
-        "type": "reduces",
-        "label": "reduces"
-      },
-      {
-        "type": "shows",
-        "label": "shows"
-      },
-      {
-        "type": "trained_on",
-        "label": "trained_on"
-      },
-      {
-        "type": "uses",
-        "label": "uses"
-      }
-    ],
-    "document": {
-      "title": "BERT: Pre-training of Deep Bidirectional Transformers",
-      "page_count": 16,
-      "ocr_used": false
-    }
+  "case_id": "demo-dt",
+  "status": "pass",
+  "task": "nanopublication-assertion-extraction",
+  "input": {
+    "file": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+    "pages": 21,
+    "paragraphs": 148,
+    "sentences": 565
   },
-  "evidence": [
+  "assertions": [
     {
-      "item": "断言 A01",
-      "value": "80.5 GLUE",
-      "source": "§4.1 p.5 L12"
+      "id": "A01",
+      "text": "Decision Transformer outperforms state-of-the-art model-free offline RL baselines.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "OUTPERFORMS",
+      "predicate_iri": "https://w3id.org/np/rel/OUTPERFORMS",
+      "object": {
+        "label": "state-of-the-art model-free offline RL baselines",
+        "type": "MODEL"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Despite its simplicity, Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL baselines on Atari, OpenAI Gym, and Key-to-Door tasks.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P004S06",
+        "char_span": [
+          1152,
+          1328
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A02",
+      "text": "Decision Transformer achieves the desired return.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "ACHIEVES",
+      "predicate_iri": "https://w3id.org/np/rel/ACHIEVES",
+      "object": {
+        "label": "the desired return",
+        "type": "METRIC"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P004S05",
+        "char_span": [
+          962,
+          1151
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A03",
+      "text": "Decision Transformer uses a causally masked Transformer.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "USES",
+      "predicate_iri": "https://w3id.org/np/rel/USES",
+      "object": {
+        "label": "a causally masked Transformer",
+        "type": "MODEL"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P004S04",
+        "char_span": [
+          777,
+          961
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "no_trigger",
+          "detail": "no cue for USES found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
+    },
+    {
+      "id": "A04",
+      "text": "a GPT architecture uses a causal self-attention mask.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "a GPT architecture",
+        "type": "METHOD"
+      },
+      "predicate": "USES",
+      "predicate_iri": "https://w3id.org/np/rel/USES",
+      "object": {
+        "label": "a causal self-attention mask",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Tokens are fed into a GPT architecture which predicts actions autoregressively using a causal self-attention mask.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P008S03",
+        "char_span": [
+          1609,
+          1723
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "no_trigger",
+          "detail": "no cue for USES found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
+    },
+    {
+      "id": "A05",
+      "text": "Decision Transformer uses the GPT architecture.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "USES",
+      "predicate_iri": "https://w3id.org/np/rel/USES",
+      "object": {
+        "label": "the GPT architecture",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Motivated by this observation, we propose Decision Transformer, where we use the GPT architecture to autoregressively model trajectories (shown in Figure 1).",
+        "quote_end": "",
+        "page": 4,
+        "sentence_id": "P027S01",
+        "char_span": [
+          8107,
+          8264
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A06",
+      "text": "Decision Transformer shows state-of-the-art model-free offline RL algorithms.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "SHOWS",
+      "predicate_iri": "https://w3id.org/np/rel/SHOWS",
+      "object": {
+        "label": "state-of-the-art model-free offline RL algorithms",
+        "type": "MODEL"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
+        "quote_end": "",
+        "page": 4,
+        "sentence_id": "P027S03",
+        "char_span": [
+          8459,
+          8628
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_mismatch",
+          "detail": "MODEL -> SHOWS -> MODEL fits neither direction",
+          "fix": "Expected ['MODEL', 'METHOD'] -> SHOWS -> ['METRIC', 'CONDITION']; retype the entities or downgrade to ASSOCIATED_WITH."
+        }
+      ]
+    },
+    {
+      "id": "A07",
+      "text": "Decision Transformer outperforms the RL baselines.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "OUTPERFORMS",
+      "predicate_iri": "https://w3id.org/np/rel/OUTPERFORMS",
+      "object": {
+        "label": "the RL baselines",
+        "type": "MODEL"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Furthermore, in tasks where long-term credit assignment is required, Decision Transformer capably outperforms the RL baselines.",
+        "quote_end": "",
+        "page": 4,
+        "sentence_id": "P027S04",
+        "char_span": [
+          8629,
+          8756
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A08",
+      "text": "autoregressive model reduces policy sampling.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "autoregressive model",
+        "type": "MODEL"
+      },
+      "predicate": "REDUCES",
+      "predicate_iri": "https://w3id.org/np/rel/REDUCES",
+      "object": {
+        "label": "policy sampling",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "By training an autoregressive model on sequences of states, actions, and returns, we reduce policy sampling to autoregressive generative modeling.",
+        "quote_end": "",
+        "page": 3,
+        "sentence_id": "P021S15",
+        "char_span": [
+          6528,
+          6674
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_mismatch",
+          "detail": "MODEL -> REDUCES -> METHOD fits neither direction",
+          "fix": "Expected ['METHOD', 'MODEL'] -> REDUCES -> ['METRIC']; retype the entities or downgrade to ASSOCIATED_WITH."
+        }
+      ]
+    },
+    {
+      "id": "A09",
+      "text": "Decision Transformer proposes conditional sequence modeling architecture.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "PROPOSES",
+      "predicate_iri": "https://w3id.org/np/rel/PROPOSES",
+      "object": {
+        "label": "conditional sequence modeling architecture",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "In particular, we present Decision Transformer, an architecture that casts the problem of RL as conditional sequence modeling.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P004S03",
+        "char_span": [
+          650,
+          776
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A10",
+      "text": "predicting the states or returns-to-go does not improves performance.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "predicting the states or returns-to-go",
+        "type": "METRIC"
+      },
+      "predicate": "IMPROVES",
+      "predicate_iri": "https://w3id.org/np/rel/IMPROVES",
+      "object": {
+        "label": "performance",
+        "type": "METRIC"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "We did not find predicting the states or returns-to-go to improve performance, although it is easily permissible within our framework (as shown in Section 5.4) and would be an interesting study for future work.",
+        "quote_end": "",
+        "page": 5,
+        "sentence_id": "P034S13",
+        "char_span": [
+          13473,
+          13683
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_mismatch",
+          "detail": "METRIC -> IMPROVES -> METRIC fits neither direction",
+          "fix": "Expected ['MODEL', 'METHOD'] -> IMPROVES -> ['METRIC', 'TASK']; retype the entities or downgrade to ASSOCIATED_WITH."
+        }
+      ]
+    },
+    {
+      "id": "A11",
+      "text": "sequence modeling improves policy improvement.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "sequence modeling",
+        "type": "METHOD"
+      },
+      "predicate": "IMPROVES",
+      "predicate_iri": "https://w3id.org/np/rel/IMPROVES",
+      "object": {
+        "label": "policy improvement",
+        "type": "MODEL"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Thus, by combining the tools of sequence modeling with hindsight return information, we achieve policy improvement without the need for dynamic programming.",
+        "quote_end": "",
+        "page": 3,
+        "sentence_id": "P021S22",
+        "char_span": [
+          7490,
+          7646
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_mismatch",
+          "detail": "METHOD -> IMPROVES -> MODEL fits neither direction",
+          "fix": "Expected ['MODEL', 'METHOD'] -> IMPROVES -> ['METRIC', 'TASK']; retype the entities or downgrade to ASSOCIATED_WITH."
+        }
+      ]
+    },
+    {
+      "id": "A12",
+      "text": "a GPT model is trained on next token.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "a GPT model",
+        "type": "MODEL"
+      },
+      "predicate": "TRAINED_ON",
+      "predicate_iri": "https://w3id.org/np/rel/TRAINED_ON",
+      "object": {
+        "label": "next token",
+        "type": "ENTITY"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "We train a GPT [9] model to predict next token in a sequence of returns-to-go (sum of future rewards), states, and actions.",
+        "quote_end": "",
+        "page": 3,
+        "sentence_id": "P021S20",
+        "char_span": [
+          7054,
+          7177
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_unresolved",
+          "detail": "TRAINED_ON was not checked against a signature because ['ENTITY'] carry no type",
+          "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
+        },
+        {
+          "code": "no_trigger",
+          "detail": "no cue for TRAINED_ON found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
+    },
+    {
+      "id": "A13",
+      "text": "models is fine-tuned on controllable text generation.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "models",
+        "type": "MODEL"
+      },
+      "predicate": "FINE_TUNED_ON",
+      "predicate_iri": "https://w3id.org/np/rel/FINE_TUNED_ON",
+      "object": {
+        "label": "controllable text generation",
+        "type": "TASK"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Several works [57, 58, 59, 60, 61, 62] have explored training or fine-tuning of models for controllable text generation.",
+        "quote_end": "",
+        "page": 12,
+        "sentence_id": "P106S02",
+        "char_span": [
+          37769,
+          37889
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A14",
+      "text": "Conservative Q-Learning (CQL) is a a state-of-the-art model-free method.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Conservative Q-Learning (CQL)",
+        "type": "ENTITY"
+      },
+      "predicate": "IS_A",
+      "predicate_iri": "https://w3id.org/np/rel/IS_A",
+      "object": {
+        "label": "a state-of-the-art model-free method",
+        "type": "MODEL"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "A state-of-the-art model-free method is Conservative Q-Learning (CQL) [14] which serves as our primary comparison.",
+        "quote_end": "",
+        "page": 6,
+        "sentence_id": "P045S06",
+        "char_span": [
+          16906,
+          17020
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_unresolved",
+          "detail": "IS_A was not checked against a signature because ['ENTITY'] carry no type",
+          "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
+        },
+        {
+          "code": "no_trigger",
+          "detail": "no cue for IS_A found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
+    },
+    {
+      "id": "A15",
+      "text": "stacked self-attention layers consists of residual connections.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "stacked self-attention layers",
+        "type": "METHOD"
+      },
+      "predicate": "CONSISTS_OF",
+      "predicate_iri": "https://w3id.org/np/rel/CONSISTS_OF",
+      "object": {
+        "label": "residual connections",
+        "type": "ENTITY"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "These models consist of stacked self-attention layers with residual connections.",
+        "quote_end": "",
+        "page": 4,
+        "sentence_id": "P031S02",
+        "char_span": [
+          10089,
+          10169
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_unresolved",
+          "detail": "CONSISTS_OF was not checked against a signature because ['ENTITY'] carry no type",
+          "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
+        }
+      ]
+    },
+    {
+      "id": "A16",
+      "text": "Decision Transformer prevents value functions.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "PREVENTS",
+      "predicate_iri": "https://w3id.org/np/rel/PREVENTS",
+      "object": {
+        "label": "value functions",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P004S04",
+        "char_span": [
+          777,
+          961
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_mismatch",
+          "detail": "MODEL -> PREVENTS -> METHOD fits neither direction",
+          "fix": "Expected ['METHOD', 'MODEL'] -> PREVENTS -> ['METRIC', 'CONDITION']; retype the entities or downgrade to ASSOCIATED_WITH."
+        },
+        {
+          "code": "no_trigger",
+          "detail": "no cue for PREVENTS found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
+    },
+    {
+      "id": "A17",
+      "text": "Decision Transformer uses the Transformer architecture.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "USES",
+      "predicate_iri": "https://w3id.org/np/rel/USES",
+      "object": {
+        "label": "the Transformer architecture",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "This allows us to draw upon the simplicity and scalability of the Transformer architecture, and associated advances in language modeling such as GPT-x and BERT.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P004S02",
+        "char_span": [
+          489,
+          649
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "no_trigger",
+          "detail": "no cue for USES found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
+    },
+    {
+      "id": "A18",
+      "text": "TD-learning based algorithms shows an approximate value function.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "TD-learning based algorithms",
+        "type": "MODEL"
+      },
+      "predicate": "SHOWS",
+      "predicate_iri": "https://w3id.org/np/rel/SHOWS",
+      "object": {
+        "label": "an approximate value function",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Our conjecture is that TD-learning based algorithms learn an approximate value function and improve the policy by optimizing this value function.",
+        "quote_end": "",
+        "page": 11,
+        "sentence_id": "P094S02",
+        "char_span": [
+          33002,
+          33147
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_mismatch",
+          "detail": "MODEL -> SHOWS -> METHOD fits neither direction",
+          "fix": "Expected ['MODEL', 'METHOD'] -> SHOWS -> ['METRIC', 'CONDITION']; retype the entities or downgrade to ASSOCIATED_WITH."
+        },
+        {
+          "code": "no_trigger",
+          "detail": "no cue for SHOWS found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
+    },
+    {
+      "id": "A19",
+      "text": "Decision Transformer outperforms state-of-the-art model-free offline RL algorithms.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "OUTPERFORMS",
+      "predicate_iri": "https://w3id.org/np/rel/OUTPERFORMS",
+      "object": {
+        "label": "state-of-the-art model-free offline RL algorithms",
+        "type": "MODEL"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
+        "quote_end": "",
+        "page": 4,
+        "sentence_id": "P027S03",
+        "char_span": [
+          8459,
+          8628
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
+    },
+    {
+      "id": "A20",
+      "text": "Decision Transformer achieves future actions.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Decision Transformer",
+        "type": "MODEL"
+      },
+      "predicate": "ACHIEVES",
+      "predicate_iri": "https://w3id.org/np/rel/ACHIEVES",
+      "object": {
+        "label": "future actions",
+        "type": "ENTITY"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+        "quote_end": "",
+        "page": 1,
+        "sentence_id": "P004S05",
+        "char_span": [
+          962,
+          1151
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "warning",
+      "issues": [
+        {
+          "code": "type_unresolved",
+          "detail": "ACHIEVES was not checked against a signature because ['ENTITY'] carry no type",
+          "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
+        }
+      ]
     }
   ],
-  "status": "success",
-  "status_detail": "示例，仅说明输出格式（20 条断言样例）",
-  "uncertainty": [],
-  "warnings": [],
-  "changes": [
+  "sources": [
     {
-      "time": "2026-11-25T00:00:00Z",
-      "action": "示例生成",
-      "detail": "标为示例，非正式结果"
+      "name": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "iri": "arXiv:2106.01345",
+      "doi": "",
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "year": 2021
     }
-  ]
+  ],
+  "validation": {
+    "status": "pass",
+    "counts": {
+      "pass": 7,
+      "warn": 13,
+      "fail": 0
+    },
+    "top_failures": [
+      {
+        "code": "no_trigger",
+        "n": 7
+      },
+      {
+        "code": "type_mismatch",
+        "n": 6
+      },
+      {
+        "code": "type_unresolved",
+        "n": 4
+      }
+    ],
+    "structure": {
+      "ok": true,
+      "n_nanopubs": 20,
+      "issues": []
+    }
+  },
+  "uncertainty": [],
+  "source_metadata": [
+    {
+      "name": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "iri": "arXiv:2106.01345",
+      "doi": "",
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "year": 2021
+    }
+  ],
+  "evidence": [
+    {
+      "assertion_id": "A01",
+      "quote": "Despite its simplicity, Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL baselines on Atari, OpenAI Gym, and Key-to-Door tasks.",
+      "page": 1,
+      "char_span": [
+        1152,
+        1328
+      ],
+      "sentence_id": "P004S06"
+    },
+    {
+      "assertion_id": "A02",
+      "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+      "page": 1,
+      "char_span": [
+        962,
+        1151
+      ],
+      "sentence_id": "P004S05"
+    },
+    {
+      "assertion_id": "A03",
+      "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
+      "page": 1,
+      "char_span": [
+        777,
+        961
+      ],
+      "sentence_id": "P004S04"
+    },
+    {
+      "assertion_id": "A04",
+      "quote": "Tokens are fed into a GPT architecture which predicts actions autoregressively using a causal self-attention mask.",
+      "page": 1,
+      "char_span": [
+        1609,
+        1723
+      ],
+      "sentence_id": "P008S03"
+    },
+    {
+      "assertion_id": "A05",
+      "quote": "Motivated by this observation, we propose Decision Transformer, where we use the GPT architecture to autoregressively model trajectories (shown in Figure 1).",
+      "page": 4,
+      "char_span": [
+        8107,
+        8264
+      ],
+      "sentence_id": "P027S01"
+    },
+    {
+      "assertion_id": "A06",
+      "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
+      "page": 4,
+      "char_span": [
+        8459,
+        8628
+      ],
+      "sentence_id": "P027S03"
+    },
+    {
+      "assertion_id": "A07",
+      "quote": "Furthermore, in tasks where long-term credit assignment is required, Decision Transformer capably outperforms the RL baselines.",
+      "page": 4,
+      "char_span": [
+        8629,
+        8756
+      ],
+      "sentence_id": "P027S04"
+    },
+    {
+      "assertion_id": "A08",
+      "quote": "By training an autoregressive model on sequences of states, actions, and returns, we reduce policy sampling to autoregressive generative modeling.",
+      "page": 3,
+      "char_span": [
+        6528,
+        6674
+      ],
+      "sentence_id": "P021S15"
+    },
+    {
+      "assertion_id": "A09",
+      "quote": "In particular, we present Decision Transformer, an architecture that casts the problem of RL as conditional sequence modeling.",
+      "page": 1,
+      "char_span": [
+        650,
+        776
+      ],
+      "sentence_id": "P004S03"
+    },
+    {
+      "assertion_id": "A10",
+      "quote": "We did not find predicting the states or returns-to-go to improve performance, although it is easily permissible within our framework (as shown in Section 5.4) and would be an interesting study for future work.",
+      "page": 5,
+      "char_span": [
+        13473,
+        13683
+      ],
+      "sentence_id": "P034S13"
+    },
+    {
+      "assertion_id": "A11",
+      "quote": "Thus, by combining the tools of sequence modeling with hindsight return information, we achieve policy improvement without the need for dynamic programming.",
+      "page": 3,
+      "char_span": [
+        7490,
+        7646
+      ],
+      "sentence_id": "P021S22"
+    },
+    {
+      "assertion_id": "A12",
+      "quote": "We train a GPT [9] model to predict next token in a sequence of returns-to-go (sum of future rewards), states, and actions.",
+      "page": 3,
+      "char_span": [
+        7054,
+        7177
+      ],
+      "sentence_id": "P021S20"
+    },
+    {
+      "assertion_id": "A13",
+      "quote": "Several works [57, 58, 59, 60, 61, 62] have explored training or fine-tuning of models for controllable text generation.",
+      "page": 12,
+      "char_span": [
+        37769,
+        37889
+      ],
+      "sentence_id": "P106S02"
+    },
+    {
+      "assertion_id": "A14",
+      "quote": "A state-of-the-art model-free method is Conservative Q-Learning (CQL) [14] which serves as our primary comparison.",
+      "page": 6,
+      "char_span": [
+        16906,
+        17020
+      ],
+      "sentence_id": "P045S06"
+    },
+    {
+      "assertion_id": "A15",
+      "quote": "These models consist of stacked self-attention layers with residual connections.",
+      "page": 4,
+      "char_span": [
+        10089,
+        10169
+      ],
+      "sentence_id": "P031S02"
+    },
+    {
+      "assertion_id": "A16",
+      "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
+      "page": 1,
+      "char_span": [
+        777,
+        961
+      ],
+      "sentence_id": "P004S04"
+    },
+    {
+      "assertion_id": "A17",
+      "quote": "This allows us to draw upon the simplicity and scalability of the Transformer architecture, and associated advances in language modeling such as GPT-x and BERT.",
+      "page": 1,
+      "char_span": [
+        489,
+        649
+      ],
+      "sentence_id": "P004S02"
+    },
+    {
+      "assertion_id": "A18",
+      "quote": "Our conjecture is that TD-learning based algorithms learn an approximate value function and improve the policy by optimizing this value function.",
+      "page": 11,
+      "char_span": [
+        33002,
+        33147
+      ],
+      "sentence_id": "P094S02"
+    },
+    {
+      "assertion_id": "A19",
+      "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
+      "page": 4,
+      "char_span": [
+        8459,
+        8628
+      ],
+      "sentence_id": "P027S03"
+    },
+    {
+      "assertion_id": "A20",
+      "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+      "page": 1,
+      "char_span": [
+        962,
+        1151
+      ],
+      "sentence_id": "P004S05"
+    }
+  ],
+  "contract_report": {
+    "declared": [
+      "assertions",
+      "source_metadata",
+      "evidence",
+      "status"
+    ],
+    "native": [
+      "assertions",
+      "status"
+    ],
+    "aliased": {
+      "source_metadata": "sources"
+    },
+    "derived": {
+      "evidence": "evidence_index"
+    },
+    "missing": [],
+    "source": "case.json:output_contract"
+  },
+  "answer": {
+    "assertions": [
+      {
+        "id": "A01",
+        "text": "Decision Transformer outperforms state-of-the-art model-free offline RL baselines.",
+        "aida": {
+          "atomic": true,
+          "independent": true,
+          "declarative": true,
+          "absolute": true
+        },
+        "subject": {
+          "label": "Decision Transformer",
+          "type": "MODEL"
+        },
+        "predicate": "OUTPERFORMS",
+        "predicate_iri": "https://w3id.org/np/rel/OUTPERFORMS",
+        "object": {
+          "label": "state-of-the-art model-free offline RL baselines",
+          "type": "MODEL"
+        },
+        "qualifiers": {
+          "scope": [],
+          "polarity": null,
+          "population": null
+        },
+        "evidence": {
+          "quote": "Despite its simplicity, Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL baselines on Atari, OpenAI Gym, and Key-to-Door tasks.",
+          "quote_end": "",
+          "page": 1,
+          "sentence_id": "P004S06",
+          "char_span": [
+            1152,
+            1328
+          ]
+        },
+        "provenance": {
+          "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "doi": "arXiv:2106.01345"
+        },
+        "confidence_basis": "直接引文",
+        "relation_type": "direct",
+        "status": "verified",
+        "issues": []
+      }
+    ],
+    "source_metadata": [
+      {
+        "name": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "iri": "arXiv:2106.01345",
+        "doi": "",
+        "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "year": 2021
+      }
+    ],
+    "evidence": [
+      {
+        "assertion_id": "A01",
+        "quote": "Despite its simplicity, Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL baselines on Atari, OpenAI Gym, and Key-to-Door tasks.",
+        "page": 1
+      },
+      {
+        "assertion_id": "A02",
+        "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+        "page": 1
+      }
+    ],
+    "status": "pass"
+  },
+  "_note": "最小调用示例（标为示例；20 条断言均逐字引用 Decision Transformer 原文，页号真实，非正式案例结果）"
 }

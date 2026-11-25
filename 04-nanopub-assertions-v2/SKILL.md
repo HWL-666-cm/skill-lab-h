@@ -155,16 +155,16 @@ python3 scripts/run.py
 
 ## 9. 最小调用示例
 
-输入：BERT 论文第 5 页一句 "BERT LARGE obtains a score of 80.5 on GLUE, outperforming GPT."
+完整示例见 `example/` 两个文件：`nanopubs.json`（Agent 填写的嵌套输入，20 条）+ `demo_result.json`（run.py 阶段 B 的输出，顶层 `assertions[]` + 填好的 `answer`）。20 条断言全部**逐字引用** Decision Transformer 原文（页号真实，`sentence_id`/`char_span` 由 validate 回填），覆盖 12 个受控谓词。
 
-拆解（示意，标为示例）：
+输入（`nanopubs.json` 一条）：
 ```json
-{"id":"np-1","assertion":{"subject":"BERT LARGE","predicate":"achieves","object":"80.5 GLUE score","condition":"on GLUE"},
- "evidence":{"quote":"BERT LARGE obtains a score of 80.5 on GLUE","location":{"section":"4.1","page":5,"line":12},"evidence_type":"direct"},
- "pubinfo":{"paper":"BERT: Pre-training of...","authors":["Devlin et al."],"year":2019,"identifier":"arXiv:1810.04805"}}
-{"id":"np-2","assertion":{"subject":"BERT LARGE","predicate":"outperforms","object":"GPT","condition":"on GLUE"},
- "evidence":{"quote":"...outperforming GPT","location":{"section":"4.1","page":5,"line":12},"evidence_type":"direct"},
- "pubinfo":{}}
+{"id":"A01",
+ "assertion":{"subject":"Decision Transformer","predicate":"outperforms",
+              "object":"state-of-the-art model-free offline RL baselines","negation":false},
+ "evidence":{"quote":"Despite its simplicity, Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL baselines...",
+             "location":{"page":1,"line":null},"evidence_type":"direct"},
+ "pubinfo":{"paper":"Decision Transformer: Reinforcement Learning via Sequence Modeling","year":2021,"identifier":"arXiv:2106.01345"}}
 ```
 
-> 以上为示意输出，标为示例；正式案例断言由平台实际运行产生。
+> `example/` 为示意输出，标为示例；正式案例断言由平台实际运行产生。

@@ -18,7 +18,14 @@
         "bart",
         "t5",
         "resnet",
-        "模型"
+        "模型",
+        "baseline",
+        "agent",
+        "learner",
+        "policy",
+        "algorithm",
+        "method",
+        "decision"
       ]
     },
     "DATASET": {
@@ -34,7 +41,9 @@
         "documents",
         "tokens",
         "数据",
-        "语料"
+        "语料",
+        "trajectories",
+        "d4rl"
       ]
     },
     "TASK": {
@@ -54,7 +63,13 @@
         "任务",
         "问答",
         "分类",
-        "翻译"
+        "翻译",
+        "atari",
+        "gym",
+        "d4rl",
+        "key-to-door",
+        "game",
+        "control"
       ]
     },
     "METRIC": {
@@ -74,7 +89,10 @@
         "accuracy",
         "指标",
         "精度",
-        "分数"
+        "分数",
+        "return",
+        "reward",
+        "performance"
       ]
     },
     "METHOD": {
@@ -94,7 +112,19 @@
         "loss function",
         "layer",
         "方法",
-        "机制"
+        "机制",
+        "architecture",
+        "mask",
+        "sampling",
+        "bootstrapping",
+        "trajectory",
+        "layer",
+        "sequence modeling",
+        "value function",
+        "framework",
+        "conditioning",
+        "dynamic programming",
+        "token prediction"
       ]
     },
     "BENCHMARK": {
@@ -106,7 +136,11 @@
         "test set",
         "dev set",
         "基准",
-        "评测集"
+        "评测集",
+        "atari",
+        "gym",
+        "d4rl",
+        "key-to-door"
       ]
     },
     "ENTITY": {
@@ -308,7 +342,9 @@
         "fine-tuned on",
         "finetune on",
         "finetuned on",
-        "微调"
+        "微调",
+        "fine-tuning",
+        "finetuning"
       ]
     },
     "CAUSES": {
@@ -378,7 +414,8 @@
         "versus",
         "vs.",
         "对比",
-        "相比"
+        "相比",
+        "competitive"
       ]
     },
     "SHOWS": {

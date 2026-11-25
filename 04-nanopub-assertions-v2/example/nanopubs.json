@@ -1,0 +1,1005 @@
+{
+  "case_id": "demo-dt",
+  "nanopubs": [
+    {
+      "id": "A01",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "outperforms",
+        "object": "state-of-the-art model-free offline RL baselines",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Despite its simplicity, Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL baselines on Atari, OpenAI Gym, and Key-to-Door tasks.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A02",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "achieves",
+        "object": "the desired return",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A03",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "uses",
+        "object": "a causally masked Transformer",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A04",
+      "assertion": {
+        "subject": "a GPT architecture",
+        "predicate": "uses",
+        "object": "a causal self-attention mask",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Tokens are fed into a GPT architecture which predicts actions autoregressively using a causal self-attention mask.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A05",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "uses",
+        "object": "the GPT architecture",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Motivated by this observation, we propose Decision Transformer, where we use the GPT architecture to autoregressively model trajectories (shown in Figure 1).",
+        "location": {
+          "section": "",
+          "page": 4,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 4
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A06",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "shows",
+        "object": "state-of-the-art model-free offline RL algorithms",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
+        "location": {
+          "section": "",
+          "page": 4,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 4
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A07",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "outperforms",
+        "object": "the RL baselines",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Furthermore, in tasks where long-term credit assignment is required, Decision Transformer capably outperforms the RL baselines.",
+        "location": {
+          "section": "",
+          "page": 4,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 4
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A08",
+      "assertion": {
+        "subject": "autoregressive model",
+        "predicate": "reduces",
+        "object": "policy sampling",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "By training an autoregressive model on sequences of states, actions, and returns, we reduce policy sampling to autoregressive generative modeling.",
+        "location": {
+          "section": "",
+          "page": 3,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 3
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A09",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "proposes",
+        "object": "conditional sequence modeling architecture",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "In particular, we present Decision Transformer, an architecture that casts the problem of RL as conditional sequence modeling.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A10",
+      "assertion": {
+        "subject": "predicting the states or returns-to-go",
+        "predicate": "improves",
+        "object": "performance",
+        "condition": "",
+        "negation": true,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "We did not find predicting the states or returns-to-go to improve performance, although it is easily permissible within our framework (as shown in Section 5.4) and would be an interesting study for future work.",
+        "location": {
+          "section": "",
+          "page": 5,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 5
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A11",
+      "assertion": {
+        "subject": "sequence modeling",
+        "predicate": "improves",
+        "object": "policy improvement",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Thus, by combining the tools of sequence modeling with hindsight return information, we achieve policy improvement without the need for dynamic programming.",
+        "location": {
+          "section": "",
+          "page": 3,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 3
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A12",
+      "assertion": {
+        "subject": "a GPT model",
+        "predicate": "trained_on",
+        "object": "next token",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "We train a GPT [9] model to predict next token in a sequence of returns-to-go (sum of future rewards), states, and actions.",
+        "location": {
+          "section": "",
+          "page": 3,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 3
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A13",
+      "assertion": {
+        "subject": "models",
+        "predicate": "fine_tuned_on",
+        "object": "controllable text generation",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Several works [57, 58, 59, 60, 61, 62] have explored training or fine-tuning of models for controllable text generation.",
+        "location": {
+          "section": "",
+          "page": 12,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 12
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A14",
+      "assertion": {
+        "subject": "Conservative Q-Learning (CQL)",
+        "predicate": "is_a",
+        "object": "a state-of-the-art model-free method",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "A state-of-the-art model-free method is Conservative Q-Learning (CQL) [14] which serves as our primary comparison.",
+        "location": {
+          "section": "",
+          "page": 6,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 6
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A15",
+      "assertion": {
+        "subject": "stacked self-attention layers",
+        "predicate": "consists_of",
+        "object": "residual connections",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "These models consist of stacked self-attention layers with residual connections.",
+        "location": {
+          "section": "",
+          "page": 4,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 4
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A16",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "prevents",
+        "object": "value functions",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A17",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "uses",
+        "object": "the Transformer architecture",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "This allows us to draw upon the simplicity and scalability of the Transformer architecture, and associated advances in language modeling such as GPT-x and BERT.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A18",
+      "assertion": {
+        "subject": "TD-learning based algorithms",
+        "predicate": "shows",
+        "object": "an approximate value function",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "Our conjecture is that TD-learning based algorithms learn an approximate value function and improve the policy by optimizing this value function.",
+        "location": {
+          "section": "",
+          "page": 11,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 11
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A19",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "outperforms",
+        "object": "state-of-the-art model-free offline RL algorithms",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
+        "location": {
+          "section": "",
+          "page": 4,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 4
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    },
+    {
+      "id": "A20",
+      "assertion": {
+        "subject": "Decision Transformer",
+        "predicate": "achieves",
+        "object": "future actions",
+        "condition": "",
+        "negation": false,
+        "modality": "fact"
+      },
+      "evidence": {
+        "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+        "location": {
+          "section": "",
+          "page": 1,
+          "line": null
+        },
+        "evidence_type": "direct",
+        "supports": true
+      },
+      "provenance": {
+        "wasDerivedFrom": {
+          "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+          "section": "",
+          "page": 1
+        },
+        "method": "text-extraction"
+      },
+      "pubinfo": {
+        "paper": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "authors": [
+          "Lili Chen",
+          "Kevin Lu",
+          "Aravind Rajeswaran",
+          "Kimin Lee",
+          "Aditya Grover",
+          "Michael Laskin",
+          "Pieter Abbeel",
+          "Aravind Srinivas",
+          "Igor Mordatch"
+        ],
+        "year": 2021,
+        "version": "v1",
+        "identifier": "arXiv:2106.01345"
+      },
+      "confidence": {
+        "basis": "直接引文",
+        "level": "high"
+      }
+    }
+  ]
+}
