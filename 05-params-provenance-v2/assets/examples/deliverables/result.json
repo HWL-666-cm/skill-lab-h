@@ -12,7 +12,7 @@
       "result.json"
     ]
   },
-  "methods_markdown": "## 3.1 Procedure\n\nFirst we set a learning rate of 1e-4, then a batch size of 256, and train 100 epochs.\n\n## 3.2 Setup and data\n\nWe use 8 GPUs with the seed 42 and resize every image to a resolution of 512.\n\n## 3.3 Baseline\n\nCompared with the released checkpoint at the same budget.\n\n## 3.4 Limitations\n\nIt fails when the batch is smaller than 8, because the gradient estimate becomes too noisy.\n\n---\n\n## 数值出处对照\n\n正文共 7 个数字：6 个已对上台账，0 个与台账不符，0 个在材料中找不到，0 个存在但归属未定，1 个按规则不计（年份、图表号、指标名后缀、边界条件等）。\n\n| 段 | 数值 | 参数 | 材料位置 |\n|---|---|---|---|\n| 1 | `1e-4` | learning_rate | material/config.yaml:L2 |\n| 1 | `256` | batch_size | material/config.yaml:L3 |\n| 1 | `100` | epochs | material/README.md:L3 |\n| 2 | `8` | gpus | material/config.yaml:L10 |\n| 2 | `42` | seed | material/config.yaml:L9 |\n| 2 | `512` | image_size | material/config.yaml:L6 |\n",
+  "methods_markdown": "## 3.1 Procedure\n\nFirst we set a learning rate of 1e-4, then a batch size of 256, and train 100 epochs.\n\n## 3.2 Setup and data\n\nWe use 8 GPUs with the seed 42 and resize every image to a resolution of 512.\n\n## 3.3 Baseline\n\nCompared with the released checkpoint at the same budget.\n\n## 3.4 Reproducibility\n\nWe run in Python 3 with the environment, launched by `python train.py`; the data is downloaded from the official site.\n\n## 3.5 Limitations\n\nIt fails when the batch is smaller than 8, because the gradient estimate becomes too noisy.\n\n---\n\n## 数值出处对照\n\n正文共 8 个数字：6 个已对上台账，0 个与台账不符，0 个在材料中找不到，0 个存在但归属未定，2 个按规则不计（年份、图表号、指标名后缀、边界条件等）。\n\n| 段 | 数值 | 参数 | 材料位置 |\n|---|---|---|---|\n| 1 | `1e-4` | learning_rate | material/config.yaml:L2 |\n| 1 | `256` | batch_size | material/config.yaml:L3 |\n| 1 | `100` | epochs | material/README.md:L3 |\n| 2 | `8` | gpus | material/config.yaml:L10 |\n| 2 | `42` | seed | material/config.yaml:L9 |\n| 2 | `512` | image_size | material/config.yaml:L6 |\n",
   "ledger": {
     "entries": [
       {
@@ -382,8 +382,8 @@
     }
   },
   "alignment": {
-    "paragraphs": 4,
-    "text_numbers": 7,
+    "paragraphs": 5,
+    "text_numbers": 8,
     "forward": {
       "traced": [
         {
@@ -472,12 +472,22 @@
       "mismatch": [],
       "ignored": [
         {
+          "raw": "3",
+          "value": 3.0,
+          "unit": "",
+          "family": "none",
+          "paragraph": 4,
+          "heading": "3.4 Reproducibility",
+          "context": "We run in Python [3] with the environment, launched by `python tra",
+          "reason": "software version number, not a setting"
+        },
+        {
           "raw": "8",
           "value": 8.0,
           "unit": "",
           "family": "none",
-          "paragraph": 4,
-          "heading": "3.4 Limitations",
+          "paragraph": 5,
+          "heading": "3.5 Limitations",
           "context": "It fails when the batch is smaller than [8], because the gradient estimate becomes too no",
           "reason": "boundary of the validity domain, not the value of a setting"
         }
@@ -570,6 +580,15 @@
         "written": 0,
         "mentioned_without_value": 0,
         "not_written": 0,
+        "items": {
+          "version": 1,
+          "environment": 1,
+          "command": 1,
+          "data": 1,
+          "seed": 1
+        },
+        "n_present": 5,
+        "missing": [],
         "text_signal": 1,
         "checked_by": "text signal only, not machine-checked"
       }
@@ -603,7 +622,13 @@
       },
       {
         "index": 4,
-        "heading": "3.4 Limitations",
+        "heading": "3.4 Reproducibility",
+        "params": [],
+        "chars": 118
+      },
+      {
+        "index": 5,
+        "heading": "3.5 Limitations",
         "params": [
           "batch_size"
         ],
@@ -738,6 +763,15 @@
       "written": 0,
       "mentioned_without_value": 0,
       "not_written": 0,
+      "items": {
+        "version": 1,
+        "environment": 1,
+        "command": 1,
+        "data": 1,
+        "seed": 1
+      },
+      "n_present": 5,
+      "missing": [],
       "text_signal": 1,
       "checked_by": "text signal only, not machine-checked"
     }
@@ -826,7 +860,7 @@
       {
         "code": "ambiguity_rate",
         "status": "pass",
-        "detail": "0/7 numbers match more than one parameter",
+        "detail": "0/8 numbers match more than one parameter",
         "fix": "name the parameter next to the value so the row is unambiguous"
       },
       {
@@ -853,8 +887,16 @@
       {
         "code": "repro_checklist",
         "status": "pass",
-        "detail": "reproducibility signals found",
-        "fix": "give the version, environment, commands and data acquisition so the section is redoable"
+        "detail": "5/5 repro items present; missing []",
+        "fix": "give the code version, environment, commands, data acquisition and random seed so the section is redoable",
+        "missing": [],
+        "items": {
+          "version": 1,
+          "environment": 1,
+          "command": 1,
+          "data": 1,
+          "seed": 1
+        }
       },
       {
         "code": "steps_signal",
@@ -962,13 +1004,13 @@
     "units": 13,
     "ledger_rows": 9,
     "conflicts": 0,
-    "draft_numbers": 7,
+    "draft_numbers": 8,
     "trace_rate": 1.0,
     "written_rate": 0.6667
   },
   "example": true,
   "example_note": "示例产物：路径与字段形状演示，不是平台固定案例的答案。",
-  "methods": "## 3.1 Procedure\n\nFirst we set a learning rate of 1e-4, then a batch size of 256, and train 100 epochs.\n\n## 3.2 Setup and data\n\nWe use 8 GPUs with the seed 42 and resize every image to a resolution of 512.\n\n## 3.3 Baseline\n\nCompared with the released checkpoint at the same budget.\n\n## 3.4 Limitations\n\nIt fails when the batch is smaller than 8, because the gradient estimate becomes too noisy.\n\n---\n\n## 数值出处对照\n\n正文共 7 个数字：6 个已对上台账，0 个与台账不符，0 个在材料中找不到，0 个存在但归属未定，1 个按规则不计（年份、图表号、指标名后缀、边界条件等）。\n\n| 段 | 数值 | 参数 | 材料位置 |\n|---|---|---|---|\n| 1 | `1e-4` | learning_rate | material/config.yaml:L2 |\n| 1 | `256` | batch_size | material/config.yaml:L3 |\n| 1 | `100` | epochs | material/README.md:L3 |\n| 2 | `8` | gpus | material/config.yaml:L10 |\n| 2 | `42` | seed | material/config.yaml:L9 |\n| 2 | `512` | image_size | material/config.yaml:L6 |\n",
+  "methods": "## 3.1 Procedure\n\nFirst we set a learning rate of 1e-4, then a batch size of 256, and train 100 epochs.\n\n## 3.2 Setup and data\n\nWe use 8 GPUs with the seed 42 and resize every image to a resolution of 512.\n\n## 3.3 Baseline\n\nCompared with the released checkpoint at the same budget.\n\n## 3.4 Reproducibility\n\nWe run in Python 3 with the environment, launched by `python train.py`; the data is downloaded from the official site.\n\n## 3.5 Limitations\n\nIt fails when the batch is smaller than 8, because the gradient estimate becomes too noisy.\n\n---\n\n## 数值出处对照\n\n正文共 8 个数字：6 个已对上台账，0 个与台账不符，0 个在材料中找不到，0 个存在但归属未定，2 个按规则不计（年份、图表号、指标名后缀、边界条件等）。\n\n| 段 | 数值 | 参数 | 材料位置 |\n|---|---|---|---|\n| 1 | `1e-4` | learning_rate | material/config.yaml:L2 |\n| 1 | `256` | batch_size | material/config.yaml:L3 |\n| 1 | `100` | epochs | material/README.md:L3 |\n| 2 | `8` | gpus | material/config.yaml:L10 |\n| 2 | `42` | seed | material/config.yaml:L9 |\n| 2 | `512` | image_size | material/config.yaml:L6 |\n",
   "parameters": {
     "entries": [
       {

@@ -10,6 +10,10 @@ We use 8 GPUs with the seed 42 and resize every image to a resolution of 512. We
 
 Compared with the released checkpoint at the same budget.
 
-## 3.4 Limitations
+## 3.4 Reproducibility
+
+We run in Python 3 with the environment, launched by `python train.py`; the data is downloaded from the official site.
+
+## 3.5 Limitations
 
 It fails when the batch is smaller than 8, because the gradient estimate becomes too noisy.

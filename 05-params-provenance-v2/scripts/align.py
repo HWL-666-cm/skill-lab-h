@@ -55,6 +55,20 @@ _SEQ_MARKERS = (
     ("finally", re.compile(r"\b(finally|last|lastly|in\s+the\s+end)\b|最后", re.I)),
 )
 
+# 复现清单五项（做得着）：题面点名"版本、环境、随机种子和命令"（四个问题）
+# 与"代码版本、环境、命令、数据获取方式"（可复现方向）的并集。逐项判，不是任一命中。
+_REPRO_ITEMS = (
+    ("version", re.compile(r"\bversion\b|python\s*3|pytorch|tensorflow"
+                           r"|版本|代码版本", re.I)),
+    ("environment", re.compile(r"\benvironment\b|conda|pip\s+install|requirements"
+                               r"|docker|环境|依赖", re.I)),
+    ("command", re.compile(r"\bcommand\b|python\s+(?:-m|scripts|train|run)|bash"
+                           r"|命令|运行", re.I)),
+    ("data", re.compile(r"download(?:ed|ing)?|data\s+(?:source|acquisition|url)|dataset"
+                        r"|数据获取|下载|获取", re.I)),
+    ("seed", re.compile(r"\bseed\b|random\s+seed|随机种子|种子", re.I)),
+)
+
 
 def split_paragraphs(text: str) -> list[dict]:
     """Markdown-ish draft into paragraphs, remembering the heading each sits under."""
@@ -358,6 +372,8 @@ def _ignore_reason(num: dict, ctx: str, present: dict) -> str:
         return "metric label suffix, not a setting"
     if re.search(r"[A-Za-z]/\s*$", left[-3:]):
         return "model name suffix (XL/2, B/4), not a value"
+    if re.search(r"(python|pytorch|tensorflow|numpy|version)\s*$", left[-24:], re.I):
+        return "software version number, not a setting"
     if num.get("percent_converted") and RELATIVE.search(left[-40:] + right[:20]):
         return "relative improvement, not a setting"
     if BOUND_WORDS.search(left[-28:]) or BOUND_SIGN.search(left[-6:]) or BOUND_CJK.search(left[-8:]):
@@ -481,20 +497,26 @@ def _coverage(entries: list[dict], paras: list[dict], written: list[dict],
 
     # elements that are not made of parameters need a text-level judgement
     seq_kinds = [name for name, rx in _SEQ_MARKERS if rx.search(text)]
+    repro_items = {name: bool(rx.search(text)) for name, rx in _REPRO_ITEMS}
     heuristics = {
         # two or more distinct sequence markers: a procedure has to be ordered,
         # and one "first" on its own is not an order
         "steps": len(seq_kinds) >= 2,
         "baseline": bool(re.search(r"(baseline|compared with|compared to|对照|基线|相比)", text, re.I)),
         "limits": bool(re.search(r"(limitation|limited to|does not apply|fails when|constraint|局限|限制|不适用于)", text, re.I)),
-        # 复现清单：代码版本/环境/命令/数据获取（做得着）
-        "repro": bool(re.search(r"(version|python|pytorch|tensorflow|environment|conda|"
-                                r"pip install|git|commit|seed|random seed|command|"
-                                r"download|环境|版本|命令|种子|复现)", text, re.I)),
     }
     for el in ("steps", "setup", "params", "data", "baseline", "limits", "repro"):
         st = counts.setdefault(el, {"written": 0, "mentioned_without_value": 0, "not_written": 0})
-        if el in heuristics:
+        if el == "repro":
+            # 五项逐项判：text_signal 只表达"提到过复现（任一项）"，用于"要素是否 reported"；
+            # 完整性由 validate.py 按 items 的缺失数另判，不给假 pass
+            present = [k for k, v in repro_items.items() if v]
+            st["items"] = {k: int(v) for k, v in repro_items.items()}
+            st["n_present"] = len(present)
+            st["missing"] = [k for k, _ in _REPRO_ITEMS if k not in present]
+            st["text_signal"] = 1 if present else 0
+            st["checked_by"] = "text signal only, not machine-checked"
+        elif el in heuristics:
             # no ledger rows exist for these elements, so the only honest state
             # is a text-level signal plus a clear 'not machine-checked' flag
             st["text_signal"] = 1 if heuristics[el] else 0

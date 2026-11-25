@@ -175,12 +175,24 @@ def validate(ledger: dict, alignment: dict, gaps: dict, pack: dict,
                      "cover the element or state in the draft that the material lacks it",
                      missing=missing))
 
-    # 复现清单（做得着）：版本/环境/命令/数据获取至少给到一个，否则读者照文复现会踩空
-    repro_ok = cov.get("repro", {}).get("text_signal") == 1
-    checks.append(_c("repro_checklist", PASS if repro_ok else WARN,
-                     "reproducibility signals found" if repro_ok
-                     else "no code version / environment / command / data acquisition given",
-                     "give the version, environment, commands and data acquisition so the section is redoable"))
+    # 复现清单（做得着）：五项逐项判，缺 0/1-2/≥3 → PASS/WARN/FAIL。
+    # 旧实现是"任一项命中即 pass"，写个 seed 就过；那等于把"参数写全"又数了一遍。
+    repro = cov.get("repro") or {}
+    repro_items = repro.get("items") or {}
+    if not repro_items:
+        checks.append(_c("repro_checklist", UNCHECKED,
+                         "repro element not computed (no coverage entry)",
+                         "provide material so the coverage can be computed"))
+    else:
+        missing = [k for k, v in repro_items.items() if not v]
+        n = len(missing)
+        state = PASS if n == 0 else (WARN if n <= 2 else FAIL)
+        checks.append(_c("repro_checklist", state,
+                         f"{len(repro_items) - n}/{len(repro_items)} repro items present; "
+                         f"missing {missing}",
+                         "give the code version, environment, commands, data acquisition "
+                         "and random seed so the section is redoable",
+                         missing=missing, items=repro_items))
 
     steps_ok = cov.get("steps", {}).get("text_signal") == 1
     checks.append(_c("steps_signal", PASS if steps_ok else WARN,

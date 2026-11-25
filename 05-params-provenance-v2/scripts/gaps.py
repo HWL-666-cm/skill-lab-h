@@ -52,7 +52,7 @@ SEVERITY = {"invented_number": "blocking", "conflicting": "blocking",
             "manuscript_only": "major", "value_mismatch": "major",
             "ambiguous_value": "minor",
             "weak_source": "minor", "missing_element": "major",
-            "boilerplate_limit": "major"}
+            "repro_missing": "major", "boilerplate_limit": "major"}
 
 BOILERPLATE = (
     "limited by data quality", "due to limited time", "further work is needed",
@@ -273,6 +273,18 @@ def build(ledger: dict, alignment: dict, pack: dict | None = None,
                     }[el],
                     element=el,
                 ))
+
+    # 复现清单缺项：逐项写成 major 缺口，回改回路才有具体目标
+    repro_st = (alignment.get("coverage") or {}).get("repro") or {}
+    for item in repro_st.get("missing") or []:
+        gaps.append(_gap(
+            "repro_missing",
+            f"reproducibility item '{item}' is not given",
+            "draft body",
+            f"without {item} the reader cannot redo the run",
+            f"which {item} produced the reported result? state the concrete {item}",
+            item=item,
+        ))
 
     for line in _boilerplate_limits(draft_text):
         gaps.append(_gap(

@@ -42,7 +42,7 @@ agent_created: true
 
 | 文件 | 内容 | 给谁看 |
 |---|---|---|
-| `methods.md` | 原稿逐字保留 + 末尾「数值出处对照」表（每值 → 参数 → 文件:行） | 作者自查、审稿人抽查 |
+| `methods.md` | 起草阶段=证据先行写成的成稿；finish 阶段=输入稿逐字保留 + 末尾「数值出处对照」表（每值 → 参数 → 文件:行） | 作者自查、审稿人抽查 |
 | `parameter_ledger.csv` | 一行一个值：参数名、作用域、值、状态、来源分级、路径、行号、原文 | 复现包附录 |
 | `gaps.md` | 缺口与追问，分阻断/重要/次要，每条含「缺了会怎样」+「要问作者什么」 | 作者、合作者 |
 | `validation.json` | 24 项门禁的四态结果（pass/warn/fail/not_checked） | 交付前自检 |
@@ -127,7 +127,7 @@ python scripts/revision_log.py --before /app/work/round1/result.json \
 python scripts/run_case.py --case /input --lexicon assets/lexicon.json \
     --schema assets/schema.json --out /app/output --stage recheck
 
-# 自测（不需要任何材料，76 项断言）
+# 自测（不需要任何材料，78 项断言）
 python assets/tests/run_selftest.py
 ```
 

@@ -293,7 +293,9 @@ def t_gate() -> None:
             "## 3.2 Setup and data\n\nWe use 8 GPUs with the seed 42, and resize every image "
             "to a resolution of 512.\n\n"
             "## 3.3 Baseline\n\nCompared with the baseline at the same budget.\n\n"
-            "## 3.4 Limitations\n\nIt fails when the batch is smaller than 8 because the "
+            "## 3.4 Reproducibility\n\nWe run in Python 3 with the environment, "
+            "launched by `python train.py`; the data is downloaded from the official site.\n\n"
+            "## 3.5 Limitations\n\nIt fails when the batch is smaller than 8 because the "
             "gradient estimate becomes too noisy to converge.\n")
     _, _, _, _, rep = run(files, good)
     eq("gate.pass_on_clean_draft", rep["status"], "pass")
@@ -470,13 +472,26 @@ def t_material() -> None:
 
 
 def t_v2() -> None:
-    """v2 increments: repro element, revision delta, example flag."""
+    """v2 increments: repro five-item checklist, revision delta, example flag."""
     files = {"config.yaml": y("train:", "  learning_rate: 1e-4",
                               "setup:", "  seed: 42")}
-    _, _, al1, _, _ = run(files, "## Setup\n\nWe train with learning rate 1e-4 and seed 42 in Python 3.10.\n")
-    eq("v2.repro_element_reported", al1["coverage"]["repro"]["text_signal"], 1)
-    _, _, al2, _, _ = run(files, "## Setup\n\nWe train with learning rate 1e-4.\n")
-    eq("v2.repro_absent_flagged", al2["coverage"]["repro"]["text_signal"], 0)
+
+    # 五项齐全（版本/环境/命令/数据/种子）→ repro_checklist PASS
+    full = ("## Setup\n\nWe train with learning rate 1e-4 and seed 42, in Python 3, "
+            "with the environment, run by `python train.py`, data downloaded from the site.\n")
+    _, _, al1, _, rep1 = run(files, full)
+    eq("v2.repro_all_items_present", al1["coverage"]["repro"]["n_present"], 5)
+    check("v2.repro_checklist_pass",
+          any(c["code"] == "repro_checklist" and c["status"] == "pass" for c in rep1["checks"]),
+          f"checks={[c['status'] for c in rep1['checks'] if c['code'] == 'repro_checklist']}")
+
+    # 只有 seed 没有其余四项 → 必须 FAIL，不能给假 pass（v2 核心修复）
+    seed_only = "## Setup\n\nWe train with learning rate 1e-4 and seed 42.\n"
+    _, _, al2, _, rep2 = run(files, seed_only)
+    eq("v2.repro_seed_only_n_present", al2["coverage"]["repro"]["n_present"], 1)
+    check("v2.repro_seed_only_fails",
+          any(c["code"] == "repro_checklist" and c["status"] == "fail" for c in rep2["checks"]),
+          f"checks={[c['status'] for c in rep2['checks'] if c['code'] == 'repro_checklist']}")
 
     before = {"alignment": {"forward": {"invented": [1, 2], "trace_rate": 0.5},
                             "backward": {"not_written": [1, 2, 3]}},
