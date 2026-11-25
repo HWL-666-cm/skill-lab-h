@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "status_values": ["pass", "warn", "fail", "not_checked"],
+  "note": "四态门禁。not_checked 不等于通过；fail 阻断 complete，warn 可 complete 但列 limits。",
+  "gate_checks": [
+    {"id": "material_readable", "severity": "blocking", "desc": "至少有一个可读材料文件"},
+    {"id": "four_sections_present", "severity": "major", "desc": "成稿含背景/相关工作/空白/贡献四部分"},
+    {"id": "no_evidence_for_claim", "severity": "major", "desc": "成稿断言无任何证据锚点"},
+    {"id": "citation_metadata_mismatch", "severity": "major", "desc": "引用元数据与材料文献表逐字段不一致"},
+    {"id": "citation_unverifiable", "severity": "warn", "desc": "引用在材料中找不到对应条目"},
+    {"id": "gap_without_citation", "severity": "major", "desc": "空白断言未挂到具体文献锚点"},
+    {"id": "contribution_without_figure", "severity": "major", "desc": "贡献断言未定位到图表/章节/结果"},
+    {"id": "hedge_overclaim", "severity": "warn", "desc": "强断言词无 hedge 且无证据"},
+    {"id": "cliche_background", "severity": "warn", "desc": "背景段出现空转套话"},
+    {"id": "related_work_no_grouping", "severity": "warn", "desc": "相关工作无分组维度信号"},
+    {"id": "key_work_not_written", "severity": "warn", "desc": "材料关键工作未在成稿出现"},
+    {"id": "contract_fields_filled", "severity": "major", "desc": "output_contract 声明字段均有值或显式 null"},
+    {"id": "partial_has_limits", "severity": "blocking", "desc": "partial 状态必带 limits[]"},
+    {"id": "no_prepared_answer", "severity": "blocking", "desc": "包内无预制正式答案"}
+  ],
+  "claim_types": ["background", "related_work", "gap", "contribution", "citation"],
+  "claim_status": ["anchored", "loose", "unanchored", "unverified", "overclaimed"],
+  "backward_status": ["written", "mentioned_without_anchor", "not_written"],
+  "scope_levels": ["direction", "magnitude", "certainty", "causality", "generalization"],
+  "coverage_state": ["written", "material_only", "missing"]
+}

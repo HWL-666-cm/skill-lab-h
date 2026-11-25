@@ -1,2 +1,1 @@
 https://github.com/HWL-666-cm/skill-lab-h/tree/main/10-knowledge-graph
-10-knowledge-graph/SKILL.md

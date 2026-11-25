@@ -47,3 +47,23 @@ _stage04/
 # 10 制作暂存：下载的 JATS 原文、语料转换脚本、A/B 对照产物（论文全文不入库）
 _stage10/
 10-knowledge-graph.zip
+
+# 05 制作暂存：下载的 GitHub 源码、A/B/C 对照产物、异常用例输出（第三方源码不入库）
+_stage05/
+
+# 08 制作暂存：arXiv 论文源码包与真实论文产物（第三方全文不入库）
+08-claim-evidence-binding/_dev/
+
+# 13 编译验证临时目录（每次编译都变）
+13-latex-compile-repro/_devtest/
+_devtest/
+
+# 平台协议抓取的临时文件
+_protocol_pretty.txt
+_protocol_tmp.json
+_pa_tmp.json
+
+# 提交包副本：内容与各题源目录（01-/02-/…）逐字节相同，仓库只放 Skill 源码本体，不放副本
+submission/*-outputs-fixed/
+submission/*-outputs-clean/
+submission/*-outputs-final/

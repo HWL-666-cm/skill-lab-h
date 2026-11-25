@@ -1,0 +1,49 @@
+{
+  "example": true,
+  "example_note": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+  "case_id": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+  "status": "complete",
+  "source": [
+    {
+      "path": "main.tex",
+      "role": "root document"
+    },
+    {
+      "path": "refs.bib",
+      "role": "bibliography"
+    }
+  ],
+  "error_ledger": {
+    "status": "pass",
+    "build_ok": true,
+    "counts": {
+      "blocking": 0,
+      "major": 0,
+      "minor": 0
+    },
+    "findings": []
+  },
+  "build_manifest": {
+    "engine": "pdflatex",
+    "strategy": "sequence",
+    "rounds": 4,
+    "commands": [
+      {
+        "command": [
+          "pdflatex",
+          "-output-directory=<build>",
+          "main.tex"
+        ],
+        "returncode": 0
+      }
+    ],
+    "source_hashes": [
+      {
+        "path": "main.tex",
+        "sha256": "<sha256-of-example-source>"
+      }
+    ]
+  },
+  "uncertainty": [],
+  "note": "示意输出，字段结构来自一次真实示例编译，但哈希为占位；正式结果由运行时生成。"
+}

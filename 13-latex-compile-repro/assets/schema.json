@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "checks": [
+    {
+      "name": "has_case_id",
+      "severity": "fail",
+      "desc": "result.json 含非空 case_id"
+    },
+    {
+      "name": "has_sources",
+      "severity": "fail",
+      "desc": "sources 列出实际读取的输入文件"
+    },
+    {
+      "name": "has_artifacts",
+      "severity": "fail",
+      "desc": "artifacts 列出可编辑源码（.tex/.bib/.cls），且文件真实存在"
+    },
+    {
+      "name": "has_build_manifest",
+      "severity": "fail",
+      "desc": "build_manifest 含引擎、发行版、命令、轮次、sha256"
+    },
+    {
+      "name": "has_error_ledger",
+      "severity": "fail",
+      "desc": "error_ledger 每条含 location/root_cause/fix/reverify"
+    },
+    {
+      "name": "has_changes",
+      "severity": "warn",
+      "desc": "changes 记录每处副本修复"
+    },
+    {
+      "name": "has_uncertainty",
+      "severity": "warn",
+      "desc": "uncertainty 列出需人工确认/材料缺口"
+    },
+    {
+      "name": "compiled",
+      "severity": "fail",
+      "desc": "最终编译退出码 0 且日志有 Output written on"
+    },
+    {
+      "name": "reproduced",
+      "severity": "warn",
+      "desc": "独立临时目录按 manifest 重编，主产物 sha256 一致"
+    },
+    {
+      "name": "no_fabrication",
+      "severity": "fail",
+      "desc": "不编造编译成功、不伪造题目数据、不填无依据的 output_contract 字段"
+    }
+  ]
+}

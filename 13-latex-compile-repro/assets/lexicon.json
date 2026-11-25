@@ -1,0 +1,211 @@
+{
+  "version": "1.0",
+  "description": "LaTeX log line patterns -> category / severity / safe fix hint. Regex is case-insensitive unless noted.",
+  "categories": {
+    "engine_encoding": {
+      "label": "引擎与编码",
+      "patterns": [
+        {
+          "re": "Unicode character .* not set up for use with LaTeX",
+          "hint": "改用 Unicode 引擎（xelatex）",
+          "severity": "blocking"
+        },
+        {
+          "re": "LaTeX Error: Unicode character",
+          "hint": "改用 xelatex/lualatex，或为该字符 \\DeclareUnicodeCharacter",
+          "severity": "blocking"
+        },
+        {
+          "re": "Package inputenc Error: Unicode character",
+          "hint": "改用 xelatex/lualatex，或为该字符 \\DeclareUnicodeCharacter",
+          "severity": "blocking"
+        },
+        {
+          "re": "! LaTeX Error: Unicode character .* not set up",
+          "hint": "改用 Unicode 引擎（xelatex）",
+          "severity": "blocking"
+        },
+        {
+          "re": "! I can't find file `.*'",
+          "hint": "检查文件名与路径；区分大小写",
+          "severity": "blocking"
+        },
+        {
+          "re": "Font .* not found|! Font \\\\|The font .* cannot be found",
+          "hint": "缺字体：安装字体或改用系统已有字体，manifest 记字体版本",
+          "severity": "major"
+        }
+      ]
+    },
+    "package": {
+      "label": "宏包与加载顺序",
+      "patterns": [
+        {
+          "re": "LaTeX Error: File `.*\\.sty' not found",
+          "hint": "安装宏包（tlmgr install）或删除不必要的 \\usepackage；不要伪造宏包",
+          "severity": "blocking"
+        },
+        {
+          "re": "! LaTeX Error: File `.*\\.cls' not found",
+          "hint": "模板类缺失：补 .cls 文件或切换到可用文档类，勿伪造",
+          "severity": "blocking"
+        },
+        {
+          "re": "Option clash for package",
+          "hint": "同一宏包被重复加载且选项冲突：合并到一处 \\usepackage",
+          "severity": "major"
+        },
+        {
+          "re": "! Undefined control sequence\\\\",
+          "hint": "宏未定义：补对应宏包或修正拼写；检查是否 biblatex/natbib 混用残留",
+          "severity": "major"
+        },
+        {
+          "re": "! Package .* Error:",
+          "hint": "读宏包自带的错误说明，按其要求修正参数",
+          "severity": "major"
+        }
+      ]
+    },
+    "reference": {
+      "label": "引用与参考文献",
+      "patterns": [
+        {
+          "re": "Reference .* undefined on input line",
+          "hint": "补 \\label 或修正 \\ref 键；多遍编译后复验",
+          "severity": "major"
+        },
+        {
+          "re": "Citation .* undefined on input line",
+          "hint": "补 \\cite 键到 .bib，或跑 bibtex/biber 再多编两遍；只在最后一轮判定",
+          "severity": "major"
+        },
+        {
+          "re": "Citation `.*' undefined",
+          "hint": "补 \\cite 键到 .bib，或跑 bibtex/biber 再多编两遍；只在最后一轮判定",
+          "severity": "major"
+        },
+        {
+          "re": "Reference `.*' undefined",
+          "hint": "补 \\label 或修正 \\ref 键；多遍编译后复验",
+          "severity": "major"
+        },
+        {
+          "re": "! I couldn't open bibliography file|No file .*\\.bbl",
+          "hint": "补 .bib 并运行 bibtex/biber",
+          "severity": "major"
+        },
+        {
+          "re": "Empty bibliography|There were undefined references",
+          "hint": "参考文献未收敛：确认 bbl 生成并多编两遍",
+          "severity": "minor"
+        }
+      ]
+    },
+    "math": {
+      "label": "数学公式",
+      "patterns": [
+        {
+          "re": "! Missing \\$ inserted",
+          "hint": "正文里出现了数学符号未进数学环境：补 $...$ 或 \\(...\\)",
+          "severity": "major"
+        },
+        {
+          "re": "! Extra } or forgotten \\$|! Missing \\} inserted",
+          "hint": "数学环境定界符不匹配：核对 $ / \\begin{} / \\end{}",
+          "severity": "major"
+        },
+        {
+          "re": "! Misplaced \\\\omit|! Illegal unit of measure",
+          "hint": "数组/公式列格式或长度单位错误：补合法单位（pt/em）",
+          "severity": "major"
+        },
+        {
+          "re": "! Argument of .* has an extra }",
+          "hint": "宏参数括号不匹配",
+          "severity": "major"
+        }
+      ]
+    },
+    "table_overflow": {
+      "label": "表格与溢出",
+      "patterns": [
+        {
+          "re": "Overfull \\\\hbox \\((\\d+(\\.\\d+)?)pt too wide\\)",
+          "hint": "宽表/长行溢出：用 tabularx 的 X 列、p{} 定宽列、减小 \\tabcolsep 或统一小字号；不要用 \\resizebox 硬缩放",
+          "severity": "minor"
+        },
+        {
+          "re": "Overfull \\\\vbox",
+          "hint": "垂直溢出：调整浮动体位置或分页，勿强行 [H]",
+          "severity": "minor"
+        },
+        {
+          "re": "! Misplaced \\\\noalign|! Illegal alignment in array",
+          "hint": "表格列数与 \\multicolumn/& 不匹配：逐行核对列数",
+          "severity": "major"
+        }
+      ]
+    },
+    "template": {
+      "label": "模板与必填项",
+      "patterns": [
+        {
+          "re": "! LaTeX Error: File `.*\\.sty' not found",
+          "hint": "模板依赖的宏包缺失",
+          "severity": "blocking"
+        },
+        {
+          "re": "! Emergency stop",
+          "hint": "致命错误：看前一条 ! 行定位真正根因",
+          "severity": "blocking"
+        }
+      ]
+    },
+    "stale_aux": {
+      "label": "陈旧辅助文件",
+      "patterns": [
+        {
+          "re": "Undefined control sequence\\\\.*abx@aux|\\\\abx@aux@refcontext",
+          "hint": "残留 .aux/.bbl/.bcf 导致假错误：清理中间文件从头全量重编",
+          "severity": "major"
+        },
+        {
+          "re": "! LaTeX Error: Something's wrong--perhaps a missing \\\\item",
+          "hint": "列表环境残缺：补 \\item 或修正环境",
+          "severity": "major"
+        }
+      ]
+    }
+  },
+  "success_markers": [
+    "Output written on"
+  ],
+  "final_warnings_only": [
+    "Citation .* undefined",
+    "Reference .* undefined",
+    "There were undefined references"
+  ],
+  "safe_fixes": {
+    "stale_aux_cleanup": [
+      ".aux",
+      ".bbl",
+      ".bcf",
+      ".blg",
+      ".out",
+      ".toc",
+      ".lof",
+      ".lot"
+    ],
+    "resizebox_to_tabularx": true,
+    "engine_switches": {
+      "unicode_or_cjk": "xelatex",
+      "plain_ascii": "pdflatex"
+    },
+    "never_auto_edit": [
+      "numeric values in tables",
+      "math symbol semantics",
+      "claim text / scientific content"
+    ]
+  }
+}

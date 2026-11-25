@@ -1,0 +1,654 @@
+{
+  "version": "1",
+  "_comment": "Parameter name lexicon. Only used to propose candidates and to group them; it never decides whether a value is correct. Extend 'params' for a new field instead of editing the scripts.",
+  "elements": {
+    "steps": "ordered, executable procedure: input, action, output, decision condition",
+    "setup": "hardware, software versions, environment, random seed, repeat count",
+    "params": "named values with unit, target object and source",
+    "data": "dataset name, version, size, preprocessing, split ratio and split method",
+    "baseline": "baseline object and version, matched budget, metric and statistics",
+    "limits": "named gap plus the concrete failure scenario it produces"
+  },
+  "params": [
+    {
+      "canonical": "learning_rate",
+      "family": "optim",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "lr",
+        "learning_rate",
+        "learning rate",
+        "base_lr",
+        "lr0",
+        "initial_lr",
+        "peak_lr",
+        "max_lr",
+        "学习率",
+        "初始学习率"
+      ]
+    },
+    {
+      "canonical": "batch_size",
+      "family": "optim",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "batch",
+        "batch_size",
+        "batch size",
+        "bs",
+        "global_batch_size",
+        "per_gpu_batch_size",
+        "micro_batch_size",
+        "批大小",
+        "批尺寸",
+        "批次大小"
+      ]
+    },
+    {
+      "canonical": "epochs",
+      "family": "schedule",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "epoch",
+        "epochs",
+        "num_epochs",
+        "n_epochs",
+        "轮数",
+        "训练轮数",
+        "迭代轮数"
+      ]
+    },
+    {
+      "canonical": "steps",
+      "family": "schedule",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "step",
+        "steps",
+        "train_steps",
+        "max_steps",
+        "iterations",
+        "iters",
+        "num_steps",
+        "训练步数",
+        "迭代次数"
+      ]
+    },
+    {
+      "canonical": "ckpt_every",
+      "family": "schedule",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "ckpt_every",
+        "ckpt-every",
+        "checkpoint",
+        "checkpoints",
+        "save_every",
+        "checkpoint_interval",
+        "保存间隔"
+      ]
+    },
+    {
+      "canonical": "seed",
+      "family": "reproducibility",
+      "tier": "core",
+      "element": "setup",
+      "aliases": [
+        "seed",
+        "random_seed",
+        "random_state",
+        "global_seed",
+        "manual_seed",
+        "种子",
+        "随机种子",
+        "seeded",
+        "seeding",
+        "seeds"
+      ]
+    },
+    {
+      "canonical": "weight_decay",
+      "family": "optim",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "weight_decay",
+        "wd",
+        "l2",
+        "weight decay",
+        "权重衰减"
+      ]
+    },
+    {
+      "canonical": "warmup",
+      "family": "schedule",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "warmup",
+        "warmup_steps",
+        "warmup_ratio",
+        "warmup_epochs",
+        "预热"
+      ]
+    },
+    {
+      "canonical": "dropout",
+      "family": "model",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "dropout",
+        "drop_rate",
+        "drop_path",
+        "p_drop",
+        "丢弃率",
+        "dropout率"
+      ]
+    },
+    {
+      "canonical": "optimizer",
+      "family": "optim",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "optimizer",
+        "optim",
+        "优化器"
+      ]
+    },
+    {
+      "canonical": "scheduler",
+      "family": "schedule",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "scheduler",
+        "lr_scheduler",
+        "lr scheduler",
+        "调度器",
+        "学习率调度"
+      ]
+    },
+    {
+      "canonical": "momentum",
+      "family": "optim",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "momentum",
+        "beta1",
+        "beta2",
+        "betas",
+        "动量"
+      ]
+    },
+    {
+      "canonical": "ema_decay",
+      "family": "optim",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "ema",
+        "ema_decay",
+        "ema decay",
+        "moving_average_decay"
+      ]
+    },
+    {
+      "canonical": "grad_clip",
+      "family": "optim",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "grad_clip",
+        "clip_grad",
+        "gradient_clipping",
+        "max_grad_norm",
+        "梯度裁剪"
+      ]
+    },
+    {
+      "canonical": "precision",
+      "family": "runtime",
+      "tier": "core",
+      "element": "setup",
+      "aliases": [
+        "amp",
+        "fp16",
+        "bf16",
+        "fp32",
+        "mixed_precision",
+        "precision",
+        "混合精度",
+        "精度"
+      ]
+    },
+    {
+      "canonical": "image_size",
+      "family": "data",
+      "tier": "core",
+      "element": "data",
+      "aliases": [
+        "imgsz",
+        "image_size",
+        "img_size",
+        "input_size",
+        "resolution",
+        "分辨率",
+        "图像尺寸",
+        "image resolution"
+      ]
+    },
+    {
+      "canonical": "patch_size",
+      "family": "model",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "patch_size",
+        "patch size",
+        "crop_size",
+        "kernel_size",
+        "窗口大小",
+        "块大小"
+      ]
+    },
+    {
+      "canonical": "throughput",
+      "family": "eval",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "throughput",
+        "steps/sec",
+        "steps per second",
+        "it/s",
+        "samples/s",
+        "tokens/s",
+        "吞吐率",
+        "训练速度"
+      ]
+    },
+    {
+      "canonical": "num_classes",
+      "family": "data",
+      "tier": "likely",
+      "element": "data",
+      "aliases": [
+        "num_classes",
+        "n_classes",
+        "classes",
+        "类别数",
+        "class count",
+        "number of classes"
+      ]
+    },
+    {
+      "canonical": "num_samples",
+      "family": "data",
+      "tier": "likely",
+      "element": "data",
+      "aliases": [
+        "num_samples",
+        "dataset_size",
+        "n_samples",
+        "train_size",
+        "样本数",
+        "数据量",
+        "训练样本"
+      ]
+    },
+    {
+      "canonical": "split_ratio",
+      "family": "data",
+      "tier": "core",
+      "element": "data",
+      "aliases": [
+        "split",
+        "split_ratio",
+        "train_ratio",
+        "val_ratio",
+        "test_ratio",
+        "train_test_split",
+        "划分比例",
+        "训练集比例",
+        "验证集比例"
+      ]
+    },
+    {
+      "canonical": "folds",
+      "family": "eval",
+      "tier": "core",
+      "element": "data",
+      "aliases": [
+        "fold",
+        "folds",
+        "kfold",
+        "k_fold",
+        "cv",
+        "cross_validation",
+        "交叉验证",
+        "折数"
+      ]
+    },
+    {
+      "canonical": "repeats",
+      "family": "eval",
+      "tier": "core",
+      "element": "setup",
+      "aliases": [
+        "repeat",
+        "repeats",
+        "runs",
+        "n_runs",
+        "trials",
+        "n_trials",
+        "num_seeds",
+        "重复次数",
+        "重复实验次数"
+      ]
+    },
+    {
+      "canonical": "patience",
+      "family": "schedule",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "patience",
+        "early_stop",
+        "early_stopping",
+        "早停"
+      ]
+    },
+    {
+      "canonical": "workers",
+      "family": "runtime",
+      "tier": "likely",
+      "element": "setup",
+      "aliases": [
+        "workers",
+        "num_workers",
+        "dataloader_workers",
+        "线程数",
+        "工作进程",
+        "dataloader workers",
+        "num workers",
+        "worker processes"
+      ]
+    },
+    {
+      "canonical": "gpus",
+      "family": "runtime",
+      "tier": "core",
+      "element": "setup",
+      "aliases": [
+        "gpu",
+        "gpus",
+        "num_gpus",
+        "n_gpu",
+        "world_size",
+        "device",
+        "devices",
+        "显卡数",
+        "显卡",
+        "设备"
+      ]
+    },
+    {
+      "canonical": "cuda_version",
+      "family": "runtime",
+      "tier": "core",
+      "element": "setup",
+      "aliases": [
+        "cuda",
+        "cuda_version",
+        "cudnn",
+        "nvidia",
+        "cuda版本"
+      ]
+    },
+    {
+      "canonical": "framework_version",
+      "family": "runtime",
+      "tier": "core",
+      "element": "setup",
+      "aliases": [
+        "torch",
+        "pytorch",
+        "tensorflow",
+        "version",
+        "framework",
+        "框架版本"
+      ]
+    },
+    {
+      "canonical": "threshold",
+      "family": "eval",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "threshold",
+        "conf",
+        "confidence",
+        "conf_thres",
+        "cutoff",
+        "阈值",
+        "置信度"
+      ]
+    },
+    {
+      "canonical": "learning_rate_decay",
+      "family": "schedule",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "lr_decay",
+        "decay_rate",
+        "gamma",
+        "lr_gamma",
+        "学习率衰减"
+      ]
+    },
+    {
+      "canonical": "diffusion_steps",
+      "family": "model",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "diffusion_steps",
+        "timesteps",
+        "num_timesteps",
+        "T",
+        "扩散步数"
+      ]
+    },
+    {
+      "canonical": "noise_schedule",
+      "family": "model",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "noise_schedule",
+        "beta_schedule",
+        "schedule_type",
+        "噪声调度"
+      ]
+    },
+    {
+      "canonical": "layers",
+      "family": "model",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "layers",
+        "depth",
+        "n_layers",
+        "num_layers",
+        "层数"
+      ]
+    },
+    {
+      "canonical": "hidden_size",
+      "family": "model",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "hidden_size",
+        "hidden_dim",
+        "d_model",
+        "width",
+        "隐层维度",
+        "维度"
+      ]
+    },
+    {
+      "canonical": "heads",
+      "family": "model",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "heads",
+        "n_heads",
+        "num_heads",
+        "attention_heads",
+        "注意力头数"
+      ]
+    },
+    {
+      "canonical": "params_total",
+      "family": "model",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "params",
+        "parameters",
+        "num_params",
+        "param_count",
+        "model_size",
+        "参数量"
+      ]
+    },
+    {
+      "canonical": "flops",
+      "family": "eval",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "flops",
+        "gflops",
+        "tflops",
+        "macs",
+        "计算量"
+      ]
+    },
+    {
+      "canonical": "latency",
+      "family": "eval",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "latency",
+        "runtime",
+        "time",
+        "speed",
+        "throughput",
+        "延迟",
+        "耗时",
+        "吞吐"
+      ]
+    },
+    {
+      "canonical": "temperature",
+      "family": "model",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "temperature",
+        "temp",
+        "tau",
+        "温度"
+      ]
+    },
+    {
+      "canonical": "fid",
+      "family": "eval",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "fid",
+        "fid-50k",
+        "fid50k",
+        "fid_50k",
+        "frechet inception distance",
+        "FID"
+      ]
+    },
+    {
+      "canonical": "inception_score",
+      "family": "eval",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "inception score",
+        "inception_score",
+        "is_score"
+      ]
+    },
+    {
+      "canonical": "accuracy",
+      "family": "eval",
+      "tier": "core",
+      "element": "params",
+      "aliases": [
+        "accuracy",
+        "acc",
+        "top-1",
+        "top1",
+        "准确率",
+        "精度"
+      ]
+    },
+    {
+      "canonical": "f1",
+      "family": "eval",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "f1",
+        "f1-score",
+        "f1_score",
+        "f1值"
+      ]
+    },
+    {
+      "canonical": "rmse",
+      "family": "eval",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "rmse",
+        "mae",
+        "mse",
+        "均方根误差"
+      ]
+    },
+    {
+      "canonical": "loss",
+      "family": "eval",
+      "tier": "likely",
+      "element": "params",
+      "aliases": [
+        "loss",
+        "train_loss",
+        "val_loss",
+        "损失"
+      ]
+    }
+  ]
+}

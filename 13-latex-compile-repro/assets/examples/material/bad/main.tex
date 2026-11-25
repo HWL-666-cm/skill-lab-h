@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+
+\begin{document}
+\section{An intentionally broken example}
+
+The Greek character β in running text forces a unicode-aware engine;
+under pdflatex this produces an inputenc error.  See the missing
+reference~\ref{eq:does-not-exist} for the warning class.
+
+\begin{equation}
+  y = \alpha + \beta
+\end{equation}
+
+\end{document}

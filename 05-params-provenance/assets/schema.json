@@ -1,0 +1,136 @@
+{
+  "version": "1",
+  "_comment": "Machine-readable contract for the ledger, provenance grades and statuses. Scripts read this; a new field only needs a new entry in lexicon.json, and a new domain only needs a new family here.",
+  "elements": {
+    "steps": {
+      "question": "can a reader execute the procedure in order?",
+      "checked_by": "text signal only, not machine-checked",
+      "failure": "the reader has to reverse-engineer the pipeline from the parameters alone"
+    },
+    "setup": {
+      "question": "hardware, software versions, environment, seed, repeat count",
+      "checked_by": "ledger rows with family runtime or reproducibility",
+      "failure": "a run that works here may fail or silently change precision elsewhere"
+    },
+    "params": {
+      "question": "named values with unit, target object and source",
+      "checked_by": "ledger rows with family optim / schedule / model / eval",
+      "failure": "differences between runs cannot be attributed to the method"
+    },
+    "data": {
+      "question": "dataset name, version, size, preprocessing, split ratio and method",
+      "checked_by": "ledger rows with family data",
+      "failure": "the reader cannot tell whether the result comes from the method or the data"
+    },
+    "baseline": {
+      "question": "baseline object and version, matched budget, metric",
+      "checked_by": "text signal only, not machine-checked",
+      "failure": "a comparison reads as an assertion instead of a result"
+    },
+    "limits": {
+      "question": "named gap plus the concrete failure scenario",
+      "checked_by": "text signal plus boilerplate detection",
+      "failure": "the reader cannot tell which regime the conclusion does not cover"
+    }
+  },
+  "source_kinds": {
+    "config": {
+      "weight": 5,
+      "definition": "a configuration file that a runner reads: yaml, json, ini, toml",
+      "can_settle_a_conflict": true
+    },
+    "log": {
+      "weight": 4,
+      "definition": "output of a run: stdout log, results csv, metrics json",
+      "can_settle_a_conflict": true
+    },
+    "code": {
+      "weight": 3,
+      "definition": "source code defaults, argparse defaults, function signatures",
+      "can_settle_a_conflict": true
+    },
+    "manuscript": {
+      "weight": 2,
+      "definition": "prose in a paper, README or note: evidence about what was claimed",
+      "can_settle_a_conflict": false
+    },
+    "author_confirmed": {
+      "weight": 6,
+      "definition": "a value the author states when asked",
+      "can_settle_a_conflict": true
+    },
+    "other": {
+      "weight": 1,
+      "definition": "readable but of no evidential class",
+      "can_settle_a_conflict": false
+    },
+    "none": {
+      "weight": 0,
+      "definition": "no source at all; must appear in the gap list",
+      "can_settle_a_conflict": false
+    }
+  },
+  "ledger_status": {
+    "confirmed": "有配置/日志/代码/作者确认作为来源，且无冲突",
+    "manuscript_only": "只有论文/README 作为来源",
+    "conflicting": "不同文件对同一参数给出不同值，两值并列保留",
+    "prose_multi_value": "散文描述多个实例，需作者指出哪个适用",
+    "weak_source": "来源等级不足以核对"
+  },
+  "validation_status": {
+    "pass": "every check ran and passed",
+    "warn": "no failures, something a reviewer should see",
+    "fail": "at least one blocking problem",
+    "incomplete": "nothing failed, but at least one check could not run; this is NOT a pass"
+  },
+  "conflict_rule": {
+    "key": [
+      "name"
+    ],
+    "same_file_never_conflicts": "一个文件里的不同作用域是作者自己做的区分（train/infer 分节、表格两行），不判冲突",
+    "cross_file_compares_by_name": "跨文件按参数名比较，不看作用域字面：配置的 scope 是分节名，日志的 scope 是行位置，两者永远撞不上",
+    "same_value": "数值按 numbers.py 归一后判等；比例类名字允许 10% 与 0.1 判等",
+    "different_scope": "不同文件之间即使作用域不同也参与比较",
+    "prose_is_one_directional": "硬来源的每个值都必须出现在散文里；散文多提到的实例不算矛盾",
+    "severity": {
+      "two_hard_sources": "blocking",
+      "hard_vs_prose": "major"
+    }
+  },
+  "locator_convention": {
+    "line": "L<number>, 1-based, within the named file",
+    "key": "key:<dotted.path> for structured files",
+    "row": "row<number> for csv",
+    "forbidden": "page numbers are not produced by this tool: no reliable page mapping exists for text-wrapped materials, and an invented page number is exactly the failure this task punishes"
+  },
+  "draft_format": {
+    "markdown": "plain markdown; headings become sections, blank lines split paragraphs",
+    "json": "{'markdown': str} or {'sections': [{'heading': str, 'paragraphs': [str]}]}",
+    "rule": "the tool never rewrites the draft; it only maps numbers to sources and reports gaps"
+  },
+  "gate_checks": [
+    "ledger_has_rows",
+    "row_source_present",
+    "locator_resolves",
+    "quote_verbatim",
+    "value_parseable",
+    "no_dangling_pointer",
+    "no_invented_number",
+    "no_false_attribution",
+    "in_material_not_ledger",
+    "no_value_mismatch",
+    "trace_rate",
+    "ambiguity_rate",
+    "conflict_disclosed",
+    "boilerplate_absent",
+    "elements_reported",
+    "steps_signal",
+    "limits_specific",
+    "uncertainty_present",
+    "change_log_present",
+    "status_consistent",
+    "status_not_overstated",
+    "ids_content_hashed",
+    "no_timestamp_in_draft"
+  ]
+}

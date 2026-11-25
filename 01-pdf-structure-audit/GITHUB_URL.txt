@@ -1,2 +1,1 @@
 https://github.com/HWL-666-cm/skill-lab-h/tree/main/01-pdf-structure-audit
-01-pdf-structure-audit/SKILL.md

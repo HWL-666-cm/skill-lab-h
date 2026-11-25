@@ -7,18 +7,20 @@
 
 ## 赛题清单
 
-| # | 题目 | challenge id | 目录 |
+> **目录编号为开发顺序，与平台题号不一致**，对外沟通请以 `challenge id` 或「平台题号」列为准。
+
+| 目录 | 平台题号 | 官方题名 | challenge id |
 |---|---|---|---|
-| 01 | 文献文档解析 | `product-arena-08-3027d350` | `01-pdf-structure-audit/` |
-| 02 | 文献翻译 | `product-arena-01-5a9928c1` | `02-translation-audit/` |
-| 03 | 文献总结与结构化笔记 | `product-arena-06-6d8cf72b` | `03-structured-notes/` |
-| 04 | Nanopublication | `product-arena-09-0e8befd4` | `04-nanopublication/` |
-| 05 | 文献知识图谱构建 | `product-arena-10-760d1a0b` | `05-knowledge-graph/` |
-| 06 | 学术语言润色 | `product-arena-02-7051d92d` | `06-academic-polishing/` |
-| 07 | 参考文献与引用管理 | `product-arena-03-429cc14d` | `07-citation-audit/` |
-| 08 | 引言与相关工作写作 | `product-arena-04-4b82ad21` | `08-intro-related-work/` |
-| 09 | 方法与实验章节写作 | `product-arena-05-64faa4a2` | `09-methods-experiments/` |
-| 10 | LaTeX 写作与编译 | `product-arena-07-865de7e4` | `10-latex-writing/` |
+| `01-pdf-structure-audit/` | 阅读01 | 文献文档解析 | `product-arena-08-3027d350` |
+| `02-translation-audit/` | 阅读03 | 文献翻译 | `product-arena-01-5a9928c1` |
+| `03-structured-notes/` | 阅读10 | 文献总结与结构化笔记 | `product-arena-06-6d8cf72b` |
+| `04-nanopub-assertions/` | 阅读14 | Nanopublication | `product-arena-09-0e8befd4` |
+| `05-params-provenance/` | 写作09 | 方法与实验章节写作 | `product-arena-05-64faa4a2` |
+| `06-academic-polishing/` | 写作02 | 学术语言润色 | `product-arena-02-7051d92d` |
+| `07-citation-audit/` | 写作04 | 参考文献与引用管理 | `product-arena-03-429cc14d` |
+| `08-claim-evidence-binding/` | 写作08 | 引言与相关工作写作 | `product-arena-04-4b82ad21` |
+| `10-knowledge-graph/` | 阅读15 | 文献知识图谱构建 | `product-arena-10-760d1a0b` |
+| `13-latex-compile-repro/` | 写作13 | LaTeX 写作与编译 | `product-arena-07-865de7e4` |
 
 ## 目录约定
 
@@ -27,10 +29,11 @@
 ```
 <NN>-<slug>/
 ├── SKILL.md              # 必需：YAML frontmatter（name / description）+ 完整说明
-├── scripts/              # 实际依赖的脚本
-├── resources/            # 词表、模板、配置等
-├── examples/             # 最小调用示例（标明为示例，不是正式结果）
-└── GITHUB_URL.txt        # 提交用：第一行本仓库该题目录的公开链接
+├── scripts/              # 实际依赖的脚本（含主流程入口与自测）
+├── references/           # 错误分类、方法、口径、输出契约等判断依据
+├── assets/               # 词表、schema、示例输入（示例均标 example: true）
+├── requirements.txt      # 第三方依赖声明
+└── GITHUB_URL.txt        # 提交用：本仓库该题目录的公开链接
 ```
 
 ## Skill 编写要求（平台评分口径）
@@ -38,27 +41,47 @@
 - `SKILL.md` 需有合法的 `name` / `description` YAML frontmatter
 - 写清：用途、适用条件、调用方式、输入输出、异常处理、限制
 - 不提交预制答案，平台用固定案例实际运行 Skill
-- 输出结构化结果，保留证据定位（页码 / 段落 / 字段）与不确定项标注
+- 输出结构化结果，保留证据定位（页码 / 段落 / 字段 / 文件行号）与不确定项标注
 - 资源限制：最多 50 个 UTF-8 文本文件，单文件 ≤ 500KB，总计 ≤ 2MB
+- 提交包内只保留文本类后缀（`.md .txt .py .json .yaml .yml .toml .csv .tex .bib .svg .html .css .sh` 与 `LICENSE`），不随包附带 `.pdf` / `.png` / `.log` 等，需要时由包内脚本现场生成
 
 ## 提交
 
-每题通过 Playground CLI 提交，并在提交目录根路径放置 `GITHUB_URL.txt`：
+每题通过 Playground CLI 提交，`outputs` 目录根路径放置 `SKILL.md` 与 `GITHUB_URL.txt`：
 
 ```
-playground submit --challenge-id <ID> --skill <目录> --trace <原生会话日志>
+playground submit --challenge-id <ID> --outputs <目录> --trace <原生会话日志>
 ```
 
 ## 进度
 
-| 题目 | 状态 | 说明 |
+| 平台题号 | 目录 | 状态 |
 |---|---|---|
-| 01 文献文档解析 | ✅ 已提交 attempt 104326 | `01-pdf-structure-audit/`：六步流水线（分诊→版面→结构→表格→公式→锚点）+ 7 个合成自测件 + 两篇真实论文实测（锚点 0.993 / 0.995），详见该目录 `references/benchmark.md` |
-| 02 文献翻译 | ✅ 已提交 attempt 104327 | `02-translation-audit/` |
-| 03 文献总结与结构化笔记 | ✅ 已提交 attempt 104328 | `03-structured-notes/` |
-| 06 学术语言润色 | ✅ 已提交 attempt 103624 / 104330（补齐 requirements 后重提） | `06-academic-polishing/`：双审计脚本 + 两份提示词 + 4 条自测用例，`run_selftest.py` 全 PASS |
-| 07 参考文献与引用管理 | ✅ 已提交 attempt 104329 | `07-citation-audit/` |
-| 其余四题 | ⬜ 待做 | 复用已有骨架（SKILL.md 结构 / result.json 契约 / 自测方式） |
+| 阅读01 文献文档解析 | `01-pdf-structure-audit/` | 已提交（attempt 106279，干净包重交 106838） |
+| 阅读03 文献翻译 | `02-translation-audit/` | 已提交（attempt 106280） |
+| 阅读10 文献总结与结构化笔记 | `03-structured-notes/` | 已提交（attempt 106281） |
+| 阅读14 Nanopublication | `04-nanopub-assertions/` | 已提交（attempt 106282，干净包重交 106840） |
+| 写作09 方法与实验章节写作 | `05-params-provenance/` | 已提交（attempt 106284） |
+| 写作02 学术语言润色 | `06-academic-polishing/` | 已提交（attempt 106276） |
+| 写作04 参考文献与引用管理 | `07-citation-audit/` | 已提交（attempt 106286） |
+| 写作08 引言与相关工作写作 | `08-claim-evidence-binding/` | 已提交（attempt 106837） |
+| 阅读15 文献知识图谱构建 | `10-knowledge-graph/` | 已提交（attempt 106288） |
+| 写作13 LaTeX 写作与编译 | `13-latex-compile-repro/` | 已提交（attempt 106999） |
+
+## 各题技术要点
+
+| 目录 | 核心做法 |
+|---|---|
+| `01-pdf-structure-audit/` | 六步流水线（分诊→版面→结构→表格→公式→锚点），7 个合成自测件 + 两篇真实论文实测 |
+| `02-translation-audit/` | 术语表约束 + 逐段回译审计，数字/公式/引用零漂移检查 |
+| `03-structured-notes/` | 结构化笔记模板 + 覆盖度与出处核对 |
+| `04-nanopub-assertions/` | 断言四图（Assoc/Provenance/PubInfo 等）生成与校验 |
+| `05-params-provenance/` | 参数与实验设置的来源追溯，逐项绑定到原文位置 |
+| `06-academic-polishing/` | 双审计脚本（语言 + 事实）+ 两份提示词 + 自测用例 |
+| `07-citation-audit/` | 引用元数据逐字段核对，捕获年份/作者/标题混合幻觉 |
+| `08-claim-evidence-binding/` | 断言—证据绑定，anchored/loose/overclaimed 四态判定 |
+| `10-knowledge-graph/` | 文献实体与关系抽取，证据约束的图构建 |
+| `13-latex-compile-repro/` | 工程画像 → 多遍真编译 → 7 类错误分类（文件:行号）→ 副本修复 → 独立目录复现 |
 
 ## 许可
 

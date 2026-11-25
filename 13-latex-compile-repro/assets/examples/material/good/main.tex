@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,booktabs,graphicx}
+\usepackage{natbib}
+
+\title{A Minimal Reproducible Build Example}
+\author{Example Author}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+We examine a simple relation \eqref{eq:main} and summarise the values in
+Table~\ref{tab:result}.  The claim follows \citet{doe2020}.
+
+\begin{equation}
+  E = m c^{2}
+  \label{eq:main}
+\end{equation}
+
+\begin{table}[ht]
+  \centering
+  \caption{Example values.}
+  \label{tab:result}
+  \begin{tabular}{lr}
+    \toprule
+    Method & Score \\
+    \midrule
+    Baseline & 1.0 \\
+    Proposed & 2.0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

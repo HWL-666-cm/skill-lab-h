@@ -1,0 +1,15 @@
+{
+  "case_id": "EXAMPLE-NOT-A-OFFICIAL-CASE",
+  "example": true,
+  "task": "示例：编译 assets/examples/material/good 下的最小 LaTeX 工程。",
+  "material_dir": "material/good",
+  "output_contract": [
+    "case_id",
+    "status",
+    "source",
+    "error_ledger",
+    "build_manifest",
+    "uncertainty"
+  ],
+  "note": "这是接口示例输入，不是平台固定案例。"
+}

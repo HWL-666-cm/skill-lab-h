@@ -1,0 +1,1347 @@
+{
+  "example": true,
+  "example_note": "示例产物：路径与字段形状演示，不是平台固定案例的答案。",
+  "case_id": "examples",
+  "status": "complete",
+  "limits": [],
+  "task": {
+    "direction": "parameter provenance: build a sourced ledger, then check the draft in both directions",
+    "deliverables": [
+      "methods.md",
+      "parameter_ledger.csv",
+      "gaps.md",
+      "validation.json",
+      "result.json"
+    ]
+  },
+  "methods_markdown": "## 3.1 Procedure\n\nFirst we set a learning rate of 1e-4, then a batch size of 256, and train 100 epochs.\n\n## 3.2 Setup and data\n\nWe use 8 GPUs with the seed 42 and resize every image to a resolution of 512.\n\n## 3.3 Baseline\n\nCompared with the released checkpoint at the same budget.\n\n## 3.4 Limitations\n\nIt fails when the batch is smaller than 8, because the gradient estimate becomes too noisy.\n\n---\n\n## 数值出处对照\n\n正文共 7 个数字：6 个已对上台账，0 个与台账不符，0 个在材料中找不到，0 个存在但归属未定，1 个按规则不计（年份、图表号、指标名后缀、边界条件等）。\n\n| 段 | 数值 | 参数 | 材料位置 |\n|---|---|---|---|\n| 1 | `1e-4` | learning_rate | material/config.yaml:L2 |\n| 1 | `256` | batch_size | material/config.yaml:L3 |\n| 1 | `100` | epochs | material/README.md:L3 |\n| 2 | `8` | gpus | material/config.yaml:L10 |\n| 2 | `42` | seed | material/config.yaml:L9 |\n| 2 | `512` | image_size | material/config.yaml:L6 |\n",
+  "ledger": {
+    "entries": [
+      {
+        "entry_id": "e84611b8b66",
+        "name": "batch_size",
+        "scope": "train",
+        "family": "optim",
+        "element": "params",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "256",
+            "value": 256.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L3",
+            "quote": "batch_size: 256",
+            "tier": "core",
+            "param_id": "p534148c920e7",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e263a230325",
+        "name": "epochs",
+        "scope": "cmd:train",
+        "family": "schedule",
+        "element": "params",
+        "unit": "",
+        "status": "manuscript_only",
+        "source_kinds": [
+          "manuscript"
+        ],
+        "best_source_kind": "manuscript",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "100",
+            "value": 100.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L3",
+            "quote": "Quick start: `python train.py --epochs 100`.",
+            "tier": "core",
+            "param_id": "pce03a6fac598",
+            "shape": "prose"
+          }
+        ]
+      },
+      {
+        "entry_id": "ec964feb8a2",
+        "name": "epochs",
+        "scope": "train",
+        "family": "schedule",
+        "element": "params",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "100",
+            "value": 100.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L4",
+            "quote": "epochs: 100",
+            "tier": "core",
+            "param_id": "p6acf7bf2ece8",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e80040d6b16",
+        "name": "gpus",
+        "scope": "setup",
+        "family": "runtime",
+        "element": "setup",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "8",
+            "value": 8.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L10",
+            "quote": "gpus: 8",
+            "tier": "core",
+            "param_id": "p7d6ec1706e72",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "ef8637690e5",
+        "name": "gpus",
+        "scope": "text",
+        "family": "runtime",
+        "element": "setup",
+        "unit": "",
+        "status": "prose_multi_value",
+        "source_kinds": [
+          "manuscript"
+        ],
+        "best_source_kind": "manuscript",
+        "n_values": 3,
+        "n_distinct": 3,
+        "values": [
+          {
+            "raw": "8",
+            "value": 8.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L5",
+            "quote": "We train on 8 GPUs at a resolution of 512 for 100 epochs.",
+            "tier": "core",
+            "param_id": "p2c7c55448d79",
+            "shape": "prose"
+          },
+          {
+            "raw": "512",
+            "value": 512.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L5",
+            "quote": "We train on 8 GPUs at a resolution of 512 for 100 epochs.",
+            "tier": "core",
+            "param_id": "p5601bff3fafe",
+            "shape": "prose"
+          },
+          {
+            "raw": "100",
+            "value": 100.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L5",
+            "quote": "We train on 8 GPUs at a resolution of 512 for 100 epochs.",
+            "tier": "core",
+            "param_id": "p2b38b3409f24",
+            "shape": "prose"
+          }
+        ]
+      },
+      {
+        "entry_id": "e1d5581b563",
+        "name": "image_size",
+        "scope": "data",
+        "family": "data",
+        "element": "data",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "512",
+            "value": 512.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L6",
+            "quote": "image_size: 512",
+            "tier": "core",
+            "param_id": "pe55801fe50b9",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e06e5e523cb",
+        "name": "learning_rate",
+        "scope": "train",
+        "family": "optim",
+        "element": "params",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "1e-4",
+            "value": 0.0001,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L2",
+            "quote": "learning_rate: 1e-4",
+            "tier": "core",
+            "param_id": "p7208407e3304",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e24dedc8bc7",
+        "name": "seed",
+        "scope": "setup",
+        "family": "reproducibility",
+        "element": "setup",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "42",
+            "value": 42.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L9",
+            "quote": "seed: 42",
+            "tier": "core",
+            "param_id": "p990e9aeb9255",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e2f407906c3",
+        "name": "split_ratio",
+        "scope": "data",
+        "family": "data",
+        "element": "data",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "0.9",
+            "value": 0.9,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L7",
+            "quote": "split_ratio: 0.9",
+            "tier": "core",
+            "param_id": "p6b296f58e26c",
+            "shape": "key_value"
+          }
+        ]
+      }
+    ],
+    "conflicts": [],
+    "percent_form_notes": [],
+    "multi_scope": [
+      {
+        "name": "epochs",
+        "scopes": [
+          "cmd:train",
+          "train"
+        ],
+        "values": [
+          "100",
+          "100"
+        ],
+        "note": "same parameter in several scopes; not a conflict, and not merged"
+      },
+      {
+        "name": "gpus",
+        "scopes": [
+          "setup",
+          "text"
+        ],
+        "values": [
+          "8",
+          "8",
+          "512",
+          "100"
+        ],
+        "note": "same parameter in several scopes; not a conflict, and not merged"
+      }
+    ],
+    "stats": {
+      "entries": 9,
+      "values": 11,
+      "conflicting": 0,
+      "conflicting_names": [],
+      "manuscript_only": 1,
+      "prose_multi_value": 1,
+      "weak_source": 0,
+      "multi_scope_names": 2,
+      "held_back_other_tier": 0,
+      "by_element": {
+        "params": 4,
+        "setup": 3,
+        "data": 2
+      },
+      "by_family": {
+        "optim": 2,
+        "schedule": 2,
+        "runtime": 2,
+        "data": 2,
+        "reproducibility": 1
+      },
+      "by_best_kind": {
+        "config": 7,
+        "manuscript": 2
+      }
+    }
+  },
+  "alignment": {
+    "paragraphs": 4,
+    "text_numbers": 7,
+    "forward": {
+      "traced": [
+        {
+          "raw": "1e-4",
+          "value": 0.0001,
+          "unit": "",
+          "family": "none",
+          "paragraph": 1,
+          "heading": "3.1 Procedure",
+          "context": "First we set a learning rate of [1e-4], then a batch size of 256, and train 100 epoc",
+          "entry_id": "e06e5e523cb",
+          "entry_name": "learning_rate",
+          "distance": 4,
+          "evidence": "material/config.yaml:L2"
+        },
+        {
+          "raw": "256",
+          "value": 256.0,
+          "unit": "",
+          "family": "none",
+          "paragraph": 1,
+          "heading": "3.1 Procedure",
+          "context": "a learning rate of 1e-4, then a batch size of [256], and train 100 epochs.",
+          "entry_id": "e84611b8b66",
+          "entry_name": "batch_size",
+          "distance": 4,
+          "evidence": "material/config.yaml:L3"
+        },
+        {
+          "raw": "100",
+          "value": 100.0,
+          "unit": "epochs",
+          "family": "count",
+          "paragraph": 1,
+          "heading": "3.1 Procedure",
+          "context": " of 1e-4, then a batch size of 256, and train [100] epochs.",
+          "entry_id": "e263a230325",
+          "entry_name": "epochs",
+          "distance": 1,
+          "evidence": "material/README.md:L3"
+        },
+        {
+          "raw": "8",
+          "value": 8.0,
+          "unit": "",
+          "family": "none",
+          "paragraph": 2,
+          "heading": "3.2 Setup and data",
+          "context": "We use [8] GPUs with the seed 42 and resize every image ",
+          "entry_id": "e80040d6b16",
+          "entry_name": "gpus",
+          "distance": 1,
+          "evidence": "material/config.yaml:L10"
+        },
+        {
+          "raw": "42",
+          "value": 42.0,
+          "unit": "",
+          "family": "none",
+          "paragraph": 2,
+          "heading": "3.2 Setup and data",
+          "context": "We use 8 GPUs with the seed [42] and resize every image to a resolution of 512",
+          "entry_id": "e24dedc8bc7",
+          "entry_name": "seed",
+          "distance": 1,
+          "evidence": "material/config.yaml:L9"
+        },
+        {
+          "raw": "512",
+          "value": 512.0,
+          "unit": "",
+          "family": "none",
+          "paragraph": 2,
+          "heading": "3.2 Setup and data",
+          "context": " 42 and resize every image to a resolution of [512].",
+          "entry_id": "e1d5581b563",
+          "entry_name": "image_size",
+          "distance": 4,
+          "evidence": "material/config.yaml:L6"
+        }
+      ],
+      "value_only": [],
+      "in_material": [],
+      "invented": [],
+      "ambiguous": [],
+      "mismatch": [],
+      "ignored": [
+        {
+          "raw": "8",
+          "value": 8.0,
+          "unit": "",
+          "family": "none",
+          "paragraph": 4,
+          "heading": "3.4 Limitations",
+          "context": "It fails when the batch is smaller than [8], because the gradient estimate becomes too no",
+          "reason": "boundary of the validity domain, not the value of a setting"
+        }
+      ],
+      "trace_rate": 1.0,
+      "material_rate": 1.0
+    },
+    "backward": {
+      "written": [
+        "e84611b8b66",
+        "e263a230325",
+        "e80040d6b16",
+        "e1d5581b563",
+        "e06e5e523cb",
+        "e24dedc8bc7"
+      ],
+      "mentioned_without_value": [
+        {
+          "entry_id": "ec964feb8a2",
+          "name": "epochs",
+          "scope": "train",
+          "ledger_value": "100"
+        },
+        {
+          "entry_id": "ef8637690e5",
+          "name": "gpus",
+          "scope": "text",
+          "ledger_value": "8"
+        }
+      ],
+      "not_written": [
+        {
+          "entry_id": "e2f407906c3",
+          "name": "split_ratio",
+          "scope": "data",
+          "ledger_value": "0.9",
+          "source_kind": "config",
+          "status": "confirmed",
+          "path": "material/config.yaml",
+          "locator": "L7"
+        }
+      ],
+      "written_rate": 0.6667
+    },
+    "coverage": {
+      "params": {
+        "written": 3,
+        "mentioned_without_value": 1,
+        "not_written": 0,
+        "checked_by": "ledger rows traced to the draft"
+      },
+      "setup": {
+        "written": 2,
+        "mentioned_without_value": 1,
+        "not_written": 0,
+        "checked_by": "ledger rows traced to the draft"
+      },
+      "data": {
+        "written": 1,
+        "mentioned_without_value": 0,
+        "not_written": 1,
+        "checked_by": "ledger rows traced to the draft"
+      },
+      "steps": {
+        "written": 0,
+        "mentioned_without_value": 0,
+        "not_written": 0,
+        "text_signal": 1,
+        "checked_by": "text signal only, not machine-checked",
+        "sequence_markers": [
+          "first",
+          "then"
+        ]
+      },
+      "baseline": {
+        "written": 0,
+        "mentioned_without_value": 0,
+        "not_written": 0,
+        "text_signal": 1,
+        "checked_by": "text signal only, not machine-checked"
+      },
+      "limits": {
+        "written": 0,
+        "mentioned_without_value": 0,
+        "not_written": 0,
+        "text_signal": 1,
+        "checked_by": "text signal only, not machine-checked"
+      }
+    },
+    "paragraph_index": [
+      {
+        "index": 1,
+        "heading": "3.1 Procedure",
+        "params": [
+          "batch_size",
+          "epochs",
+          "learning_rate"
+        ],
+        "chars": 85
+      },
+      {
+        "index": 2,
+        "heading": "3.2 Setup and data",
+        "params": [
+          "gpus",
+          "image_size",
+          "seed"
+        ],
+        "chars": 77
+      },
+      {
+        "index": 3,
+        "heading": "3.3 Baseline",
+        "params": [],
+        "chars": 57
+      },
+      {
+        "index": 4,
+        "heading": "3.4 Limitations",
+        "params": [
+          "batch_size"
+        ],
+        "chars": 91
+      }
+    ]
+  },
+  "gaps": {
+    "gaps": [
+      {
+        "gap_id": "gcc8c7ee133",
+        "kind": "manuscript_only",
+        "severity": "major",
+        "what": "gpus carries 3 different values in prose (8, 512, 100)",
+        "where": "material/README.md:L5",
+        "why": "one sentence describes several instances; without saying which value belongs to which model or dataset, a reader reproducing one of them cannot tell which number applies",
+        "ask": "which value applies to the configuration you report?",
+        "entry_id": "ef8637690e5",
+        "name": "gpus",
+        "values": [
+          "8",
+          "512",
+          "100"
+        ]
+      },
+      {
+        "gap_id": "g98306cf7bc",
+        "kind": "not_written",
+        "severity": "major",
+        "what": "epochs is mentioned but no value is given",
+        "where": "draft body",
+        "why": "naming a setting without its value reads as disclosure but gives the reader nothing to reproduce with",
+        "ask": "please confirm the value and where it comes from",
+        "entry_id": "ec964feb8a2",
+        "name": "epochs",
+        "scope": "train",
+        "value": "100",
+        "shape": "mentioned_no_value"
+      },
+      {
+        "gap_id": "g1ffb67cb64",
+        "kind": "not_written",
+        "severity": "major",
+        "what": "gpus is mentioned but no value is given",
+        "where": "draft body",
+        "why": "naming a setting without its value reads as disclosure but gives the reader nothing to reproduce with",
+        "ask": "please confirm the value and where it comes from",
+        "entry_id": "ef8637690e5",
+        "name": "gpus",
+        "scope": "text",
+        "value": "8",
+        "shape": "mentioned_no_value"
+      },
+      {
+        "gap_id": "g2e482e16e2",
+        "kind": "not_written",
+        "severity": "major",
+        "what": "split_ratio = 0.9 has a source but is absent from the draft",
+        "where": "material/config.yaml:L7",
+        "why": "the data regime is undefined, so a reader cannot tell whether your result comes from the method or from a larger or cleaner dataset",
+        "ask": "which dataset version and split produced the reported result?",
+        "entry_ids": [
+          "e2f407906c3"
+        ],
+        "name": "split_ratio",
+        "scope": [
+          "data"
+        ],
+        "value": [
+          "0.9"
+        ],
+        "source_kind": "config"
+      }
+    ],
+    "counts": {
+      "manuscript_only": 1,
+      "not_written": 3
+    },
+    "by_severity": {
+      "blocking": 0,
+      "major": 4,
+      "minor": 0
+    },
+    "blocking": []
+  },
+  "conflicts": [],
+  "coverage": {
+    "params": {
+      "written": 3,
+      "mentioned_without_value": 1,
+      "not_written": 0,
+      "checked_by": "ledger rows traced to the draft"
+    },
+    "setup": {
+      "written": 2,
+      "mentioned_without_value": 1,
+      "not_written": 0,
+      "checked_by": "ledger rows traced to the draft"
+    },
+    "data": {
+      "written": 1,
+      "mentioned_without_value": 0,
+      "not_written": 1,
+      "checked_by": "ledger rows traced to the draft"
+    },
+    "steps": {
+      "written": 0,
+      "mentioned_without_value": 0,
+      "not_written": 0,
+      "text_signal": 1,
+      "checked_by": "text signal only, not machine-checked",
+      "sequence_markers": [
+        "first",
+        "then"
+      ]
+    },
+    "baseline": {
+      "written": 0,
+      "mentioned_without_value": 0,
+      "not_written": 0,
+      "text_signal": 1,
+      "checked_by": "text signal only, not machine-checked"
+    },
+    "limits": {
+      "written": 0,
+      "mentioned_without_value": 0,
+      "not_written": 0,
+      "text_signal": 1,
+      "checked_by": "text signal only, not machine-checked"
+    }
+  },
+  "validation": {
+    "status": "pass",
+    "counts": {
+      "pass": 23,
+      "warn": 0,
+      "fail": 0,
+      "not_checked": 0
+    },
+    "checks": [
+      {
+        "code": "ledger_has_rows",
+        "status": "pass",
+        "detail": "9 rows",
+        "fix": ""
+      },
+      {
+        "code": "row_source_present",
+        "status": "pass",
+        "detail": "0 rows without path/locator",
+        "fix": "every value needs a position a human can open"
+      },
+      {
+        "code": "locator_resolves",
+        "status": "pass",
+        "detail": "0 values point nowhere",
+        "fix": "a locator that does not resolve cannot be checked by a reviewer"
+      },
+      {
+        "code": "quote_verbatim",
+        "status": "pass",
+        "detail": "0 quotes are not verbatim",
+        "fix": "a paraphrase in the quote field cannot prove the value was read"
+      },
+      {
+        "code": "value_parseable",
+        "status": "pass",
+        "detail": "0 rows are categorical or unparsed",
+        "fix": "a categorical setting is fine; an unparsed number is not",
+        "rows": []
+      },
+      {
+        "code": "no_dangling_pointer",
+        "status": "pass",
+        "detail": "0 conflicts declared without distinct values",
+        "fix": "a conflict flag with no second value would mislead the author"
+      },
+      {
+        "code": "no_invented_number",
+        "status": "pass",
+        "detail": "0 numbers have no material source",
+        "fix": "either cite the file and line, or remove the number",
+        "examples": []
+      },
+      {
+        "code": "no_false_attribution",
+        "status": "pass",
+        "detail": "0 values match a ledger row whose parameter is not named nearby",
+        "fix": "name the parameter next to the value, or confirm the attribution",
+        "examples": []
+      },
+      {
+        "code": "in_material_not_ledger",
+        "status": "pass",
+        "detail": "0 numbers exist in the material but not in the ledger",
+        "fix": "add them to the ledger so the text value has a parameter name",
+        "examples": []
+      },
+      {
+        "code": "no_value_mismatch",
+        "status": "pass",
+        "detail": "0 numbers disagree with the ledger value of the parameter named next to them",
+        "fix": "fix the number, or name the parameter the number actually belongs to",
+        "examples": []
+      },
+      {
+        "code": "trace_rate",
+        "status": "pass",
+        "detail": "1.000 of draft numbers traced to the ledger",
+        "fix": "above 0.75 most numbers carry their own source; between 0.40 and 0.75 work through the untraced list; below 0.40 the section is mostly numbers without a source",
+        "value": 1.0
+      },
+      {
+        "code": "ambiguity_rate",
+        "status": "pass",
+        "detail": "0/7 numbers match more than one parameter",
+        "fix": "name the parameter next to the value so the row is unambiguous"
+      },
+      {
+        "code": "conflict_disclosed",
+        "status": "pass",
+        "detail": "0 conflicts are not shown in the draft",
+        "fix": "show both values, or say which one applies and why",
+        "names": []
+      },
+      {
+        "code": "boilerplate_absent",
+        "status": "pass",
+        "detail": "0 boilerplate limitations",
+        "fix": "name the input or condition that makes the method fail",
+        "examples": []
+      },
+      {
+        "code": "elements_reported",
+        "status": "pass",
+        "detail": "6/6 elements have a signal; missing []",
+        "fix": "cover the element or state in the draft that the material lacks it",
+        "missing": []
+      },
+      {
+        "code": "steps_signal",
+        "status": "pass",
+        "detail": "ordered procedure detected",
+        "fix": "write the steps as a sequence with input, action, output"
+      },
+      {
+        "code": "limits_specific",
+        "status": "pass",
+        "detail": "limitations name a failure scenario",
+        "fix": "state the condition under which the method fails"
+      },
+      {
+        "code": "uncertainty_present",
+        "status": "pass",
+        "detail": "3 uncertainty notes",
+        "fix": "state what could not be checked and why"
+      },
+      {
+        "code": "change_log_present",
+        "status": "pass",
+        "detail": "5 change records",
+        "fix": "record what was written, aligned and left open"
+      },
+      {
+        "code": "status_consistent",
+        "status": "pass",
+        "detail": "status=complete, limits=0",
+        "fix": "a partial result must list what is missing"
+      },
+      {
+        "code": "status_not_overstated",
+        "status": "pass",
+        "detail": "0 checks skipped, declared status=complete",
+        "fix": "do not declare complete while checks were skipped",
+        "unchecked": []
+      },
+      {
+        "code": "ids_content_hashed",
+        "status": "pass",
+        "detail": "0 ids are not content hashes",
+        "fix": "ids must not depend on run order"
+      },
+      {
+        "code": "no_timestamp_in_draft",
+        "status": "pass",
+        "detail": "draft has no timestamp",
+        "fix": "a timestamp makes repeated runs differ byte for byte"
+      }
+    ],
+    "top_failures": []
+  },
+  "sources": [
+    {
+      "path": "material/config.yaml",
+      "kind": "config",
+      "reader": "yaml-subset",
+      "units": 10,
+      "note": ""
+    },
+    {
+      "path": "material/README.md",
+      "kind": "manuscript",
+      "reader": "text/utf-8",
+      "units": 3,
+      "note": ""
+    }
+  ],
+  "uncertainty": [
+    "1 values are stated only in prose (epochs ...); prose is evidence about the paper, not about the run",
+    "1 ledger rows have no counterpart in the draft; they are listed as gaps, not silently dropped",
+    "this tool checks whether a value has a source in the material; it does not verify that the material describes a run that actually happened"
+  ],
+  "change_log": [
+    {
+      "grade": "B",
+      "what": "parameter ledger built",
+      "detail": "9 rows, 11 values, 0 conflicts"
+    },
+    {
+      "grade": "B",
+      "what": "draft aligned in both directions",
+      "detail": "6 traced, 0 unsourced, 0 mismatched, 1 not written"
+    },
+    {
+      "grade": "C",
+      "what": "sources recorded",
+      "detail": "config, manuscript"
+    },
+    {
+      "grade": "A",
+      "what": "gaps raised for author confirmation",
+      "detail": "4 gaps, 0 blocking"
+    },
+    {
+      "grade": "D",
+      "what": "draft text preserved verbatim",
+      "detail": "the tool does not rewrite sentences; only the value/source mapping is added"
+    }
+  ],
+  "stats": {
+    "files": 2,
+    "unreadable": 0,
+    "units": 13,
+    "ledger_rows": 9,
+    "conflicts": 0,
+    "draft_numbers": 7,
+    "trace_rate": 1.0,
+    "written_rate": 0.6667
+  },
+  "methods": "## 3.1 Procedure\n\nFirst we set a learning rate of 1e-4, then a batch size of 256, and train 100 epochs.\n\n## 3.2 Setup and data\n\nWe use 8 GPUs with the seed 42 and resize every image to a resolution of 512.\n\n## 3.3 Baseline\n\nCompared with the released checkpoint at the same budget.\n\n## 3.4 Limitations\n\nIt fails when the batch is smaller than 8, because the gradient estimate becomes too noisy.\n\n---\n\n## 数值出处对照\n\n正文共 7 个数字：6 个已对上台账，0 个与台账不符，0 个在材料中找不到，0 个存在但归属未定，1 个按规则不计（年份、图表号、指标名后缀、边界条件等）。\n\n| 段 | 数值 | 参数 | 材料位置 |\n|---|---|---|---|\n| 1 | `1e-4` | learning_rate | material/config.yaml:L2 |\n| 1 | `256` | batch_size | material/config.yaml:L3 |\n| 1 | `100` | epochs | material/README.md:L3 |\n| 2 | `8` | gpus | material/config.yaml:L10 |\n| 2 | `42` | seed | material/config.yaml:L9 |\n| 2 | `512` | image_size | material/config.yaml:L6 |\n",
+  "parameters": {
+    "entries": [
+      {
+        "entry_id": "e84611b8b66",
+        "name": "batch_size",
+        "scope": "train",
+        "family": "optim",
+        "element": "params",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "256",
+            "value": 256.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L3",
+            "quote": "batch_size: 256",
+            "tier": "core",
+            "param_id": "p534148c920e7",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e263a230325",
+        "name": "epochs",
+        "scope": "cmd:train",
+        "family": "schedule",
+        "element": "params",
+        "unit": "",
+        "status": "manuscript_only",
+        "source_kinds": [
+          "manuscript"
+        ],
+        "best_source_kind": "manuscript",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "100",
+            "value": 100.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L3",
+            "quote": "Quick start: `python train.py --epochs 100`.",
+            "tier": "core",
+            "param_id": "pce03a6fac598",
+            "shape": "prose"
+          }
+        ]
+      },
+      {
+        "entry_id": "ec964feb8a2",
+        "name": "epochs",
+        "scope": "train",
+        "family": "schedule",
+        "element": "params",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "100",
+            "value": 100.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L4",
+            "quote": "epochs: 100",
+            "tier": "core",
+            "param_id": "p6acf7bf2ece8",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e80040d6b16",
+        "name": "gpus",
+        "scope": "setup",
+        "family": "runtime",
+        "element": "setup",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "8",
+            "value": 8.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L10",
+            "quote": "gpus: 8",
+            "tier": "core",
+            "param_id": "p7d6ec1706e72",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "ef8637690e5",
+        "name": "gpus",
+        "scope": "text",
+        "family": "runtime",
+        "element": "setup",
+        "unit": "",
+        "status": "prose_multi_value",
+        "source_kinds": [
+          "manuscript"
+        ],
+        "best_source_kind": "manuscript",
+        "n_values": 3,
+        "n_distinct": 3,
+        "values": [
+          {
+            "raw": "8",
+            "value": 8.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L5",
+            "quote": "We train on 8 GPUs at a resolution of 512 for 100 epochs.",
+            "tier": "core",
+            "param_id": "p2c7c55448d79",
+            "shape": "prose"
+          },
+          {
+            "raw": "512",
+            "value": 512.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L5",
+            "quote": "We train on 8 GPUs at a resolution of 512 for 100 epochs.",
+            "tier": "core",
+            "param_id": "p5601bff3fafe",
+            "shape": "prose"
+          },
+          {
+            "raw": "100",
+            "value": 100.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "manuscript",
+            "path": "material/README.md",
+            "locator": "L5",
+            "quote": "We train on 8 GPUs at a resolution of 512 for 100 epochs.",
+            "tier": "core",
+            "param_id": "p2b38b3409f24",
+            "shape": "prose"
+          }
+        ]
+      },
+      {
+        "entry_id": "e1d5581b563",
+        "name": "image_size",
+        "scope": "data",
+        "family": "data",
+        "element": "data",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "512",
+            "value": 512.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L6",
+            "quote": "image_size: 512",
+            "tier": "core",
+            "param_id": "pe55801fe50b9",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e06e5e523cb",
+        "name": "learning_rate",
+        "scope": "train",
+        "family": "optim",
+        "element": "params",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "1e-4",
+            "value": 0.0001,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L2",
+            "quote": "learning_rate: 1e-4",
+            "tier": "core",
+            "param_id": "p7208407e3304",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e24dedc8bc7",
+        "name": "seed",
+        "scope": "setup",
+        "family": "reproducibility",
+        "element": "setup",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "42",
+            "value": 42.0,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L9",
+            "quote": "seed: 42",
+            "tier": "core",
+            "param_id": "p990e9aeb9255",
+            "shape": "key_value"
+          }
+        ]
+      },
+      {
+        "entry_id": "e2f407906c3",
+        "name": "split_ratio",
+        "scope": "data",
+        "family": "data",
+        "element": "data",
+        "unit": "",
+        "status": "confirmed",
+        "source_kinds": [
+          "config"
+        ],
+        "best_source_kind": "config",
+        "n_values": 1,
+        "n_distinct": 1,
+        "values": [
+          {
+            "raw": "0.9",
+            "value": 0.9,
+            "unit": "",
+            "family": "none",
+            "magnitude_suffix": null,
+            "source_kind": "config",
+            "path": "material/config.yaml",
+            "locator": "L7",
+            "quote": "split_ratio: 0.9",
+            "tier": "core",
+            "param_id": "p6b296f58e26c",
+            "shape": "key_value"
+          }
+        ]
+      }
+    ],
+    "conflicts": [],
+    "percent_form_notes": [],
+    "multi_scope": [
+      {
+        "name": "epochs",
+        "scopes": [
+          "cmd:train",
+          "train"
+        ],
+        "values": [
+          "100",
+          "100"
+        ],
+        "note": "same parameter in several scopes; not a conflict, and not merged"
+      },
+      {
+        "name": "gpus",
+        "scopes": [
+          "setup",
+          "text"
+        ],
+        "values": [
+          "8",
+          "8",
+          "512",
+          "100"
+        ],
+        "note": "same parameter in several scopes; not a conflict, and not merged"
+      }
+    ],
+    "stats": {
+      "entries": 9,
+      "values": 11,
+      "conflicting": 0,
+      "conflicting_names": [],
+      "manuscript_only": 1,
+      "prose_multi_value": 1,
+      "weak_source": 0,
+      "multi_scope_names": 2,
+      "held_back_other_tier": 0,
+      "by_element": {
+        "params": 4,
+        "setup": 3,
+        "data": 2
+      },
+      "by_family": {
+        "optim": 2,
+        "schedule": 2,
+        "runtime": 2,
+        "data": 2,
+        "reproducibility": 1
+      },
+      "by_best_kind": {
+        "config": 7,
+        "manuscript": 2
+      }
+    }
+  },
+  "contract_report": {
+    "declared": [
+      "methods",
+      "parameters",
+      "gaps",
+      "uncertainty",
+      "change_log"
+    ],
+    "satisfied": [
+      "gaps",
+      "uncertainty",
+      "change_log"
+    ],
+    "aliased": [
+      {
+        "field": "methods",
+        "from": "methods_markdown"
+      },
+      {
+        "field": "parameters",
+        "from": "ledger"
+      }
+    ],
+    "derived": [],
+    "missing": [],
+    "note": ""
+  }
+}

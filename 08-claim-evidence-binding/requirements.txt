@@ -1,0 +1,13 @@
+# Core: Python 3.10+ standard library only (json, re, pathlib, argparse, sys).
+# No network access, no paid API, no model calls from the scripts.
+
+# Optional: PDF text extraction (pick any one; scan/finish works without them)
+# pymupdf>=1.23
+# pypdf>=3.0
+# pdftotext (poppler-utils system binary)
+
+# Optional: DOCX text extraction
+# python-docx>=1.0
+
+# Optional: YAML material parsing / frontmatter checks
+# PyYAML>=6.0

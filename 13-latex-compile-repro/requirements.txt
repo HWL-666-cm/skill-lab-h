@@ -1,0 +1,12 @@
+# Python 3.10+ standard library only (json, re, pathlib, argparse, subprocess,
+# shutil, os, sys, time, hashlib, tempfile).  No third-party Python packages,
+# no network access, no paid API, no model calls from the scripts.
+
+# System requirement: a working TeX distribution with the binaries actually
+# used by the case.  Versions are recorded at runtime in build_manifest.json.
+#   pdflatex   (required for ASCII sources)
+#   xelatex    (required for Unicode/CJK sources)
+#   latexmk    (optional; auto-detected, falls back to an explicit sequence)
+#   bibtex     (natbib backend)
+#   biber      (biblatex backend)
+# Reference environment used during validation:/n#   TeX Live 2026, pdfTeX 3.141592653-2.6-1.40.29.

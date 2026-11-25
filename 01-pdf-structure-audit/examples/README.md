@@ -3,13 +3,16 @@
 > **这是示例，不是正式案例结果。** 输入是用 `tests/make_cases.py` 现场合成的 3 页双栏 PDF
 > （内容为占位文字，不是任何真实论文），case_id 故意写成 `EXAMPLE-NOT-A-OFFICIAL-CASE`。
 > 这里放它的目的只有一个：让人一眼看清"输入长什么样、命令怎么写、输出有哪些文件"。
+>
+> 注意：为了让提交包只保留白名单内后缀，合成的 `two_column.pdf` 不随包附带，
+> 运行示例前先执行 `python tests/make_cases.py --out examples/in --only two_column` 现场生成。
 
 ## 1 输入
 
 ```
 examples/in/
 ├── case.json        # case_id + 文件清单 + output_contract（字段名由平台给，这里照抄一份）
-└── two_column.pdf   # 3 页、通栏标题+摘要、正文两栏（合成件）
+└── two_column.pdf   # 运行上面的 make_cases.py 后生成（3 页、通栏标题+摘要、正文两栏）
 ```
 
 `case.json` 里的 `output_contract` 是**字段名清单**，本 Skill 会按这些名字逐个填：
