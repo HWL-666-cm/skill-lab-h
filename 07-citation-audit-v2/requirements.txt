@@ -1,0 +1,11 @@
+# 本题 Skill 没有第三方依赖，全部走 Python 标准库。
+# 安装步骤：无需安装。pip install -r requirements.txt 合法但什么都不会装。
+#
+# 实测环境：Python 3.12.10（Windows）。下限 3.10（内建泛型与联合类型标注）。
+#
+# 用到的标准库：argparse csv hashlib json os re sys unicodedata collections pathlib
+#
+# 刻意不依赖：
+#   bibtexparser / pybtex   参考文献按正则+字段表解析，覆盖常见 APA / GB/T 7714 / IEEE 写法，
+#                            避免第三方解析器在条目残缺时整段抛错
+#   requests                全部离线校验，不联网查 DOI / Crossref（联网会让结果不可复现）

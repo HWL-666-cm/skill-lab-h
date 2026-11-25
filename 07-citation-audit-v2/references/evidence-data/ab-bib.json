@@ -1,0 +1,6 @@
+[
+  {"key":"wrf2018","order":1,"type":"J","title":"Sea fog prediction with WRF model","authors":["Zhang S","Li S","Wang W","Zhao L"],"year":"2018","journal":"Journal of Marine Science","volume":"45","issue":"3","pages":"200-210","doi":"10.1000/jms.2018.001"},
+  {"key":"cnn2020","order":2,"type":"J","title":"Deep learning for visibility nowcasting","authors":["Smith A","Jones B"],"year":"2020","journal":"Weather and Forecasting","volume":"35","issue":"4","pages":"800-815","doi":"10.1000/waf.2020.002"},
+  {"key":"hybrid2021","order":3,"type":"J","title":"Hybrid CNN-LSTM for visibility forecast","authors":["Wang M","Chen X"],"year":"2021","journal":"Atmospheric Research","volume":"250","pages":"105390","doi":"10.1000/atmos.2021.003"},
+  {"key":"wrf2018-preprint","order":4,"type":"J","title":"Sea Fog Prediction with WRF Model (Preprint)","authors":["Zhang, S.","Li, S.","Wang, W.","Zhao, L."],"year":"2018","journal":"arXiv preprint","doi":"10.1000/jms.2018.001"}
+]
