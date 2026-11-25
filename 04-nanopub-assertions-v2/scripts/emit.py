@@ -146,7 +146,12 @@ def to_legacy_claim(np: dict, lexicon: dict | None = None) -> dict:
     verb = _verb_form(pred, lexicon)
     parts = [subj_label, verb, obj_label]
     if negation:
-        parts[1] = "does not " + parts[1]
+        base = verb
+        if base.endswith("es"):
+            base = base[:-2]
+        elif base.endswith("s") and not base.endswith("ss"):
+            base = base[:-1]
+        parts[1] = "does not " + base
     if condition:
         parts.append(condition)
     text = " ".join(p for p in parts if p)

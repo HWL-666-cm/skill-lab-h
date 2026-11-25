@@ -422,7 +422,7 @@
     },
     {
       "id": "A10",
-      "text": "predicting the states or returns-to-go does not improves performance.",
+      "text": "Decision Transformer achieves the highest scores.",
       "aida": {
         "atomic": true,
         "independent": true,
@@ -430,13 +430,13 @@
         "absolute": true
       },
       "subject": {
-        "label": "predicting the states or returns-to-go",
-        "type": "METRIC"
+        "label": "Decision Transformer",
+        "type": "MODEL"
       },
-      "predicate": "IMPROVES",
-      "predicate_iri": "https://w3id.org/np/rel/IMPROVES",
+      "predicate": "ACHIEVES",
+      "predicate_iri": "https://w3id.org/np/rel/ACHIEVES",
       "object": {
-        "label": "performance",
+        "label": "the highest scores",
         "type": "METRIC"
       },
       "qualifiers": {
@@ -445,13 +445,13 @@
         "population": null
       },
       "evidence": {
-        "quote": "We did not find predicting the states or returns-to-go to improve performance, although it is easily permissible within our framework (as shown in Section 5.4) and would be an interesting study for future work.",
+        "quote": "Decision Transformer achieves the highest scores in a majority of the tasks and is competitive with the state of the art in the remaining tasks.",
         "quote_end": "",
-        "page": 5,
-        "sentence_id": "P034S13",
+        "page": 7,
+        "sentence_id": "P055S06",
         "char_span": [
-          13473,
-          13683
+          20936,
+          21080
         ]
       },
       "provenance": {
@@ -460,14 +460,8 @@
       },
       "confidence_basis": "直接引文",
       "relation_type": "direct",
-      "status": "warning",
-      "issues": [
-        {
-          "code": "type_mismatch",
-          "detail": "METRIC -> IMPROVES -> METRIC fits neither direction",
-          "fix": "Expected ['MODEL', 'METHOD'] -> IMPROVES -> ['METRIC', 'TASK']; retype the entities or downgrade to ASSOCIATED_WITH."
-        }
-      ]
+      "status": "verified",
+      "issues": []
     },
     {
       "id": "A11",
@@ -720,7 +714,7 @@
     },
     {
       "id": "A16",
-      "text": "Decision Transformer prevents value functions.",
+      "text": "Decision Transformer is compared with CQL.",
       "aida": {
         "atomic": true,
         "independent": true,
@@ -731,11 +725,11 @@
         "label": "Decision Transformer",
         "type": "MODEL"
       },
-      "predicate": "PREVENTS",
-      "predicate_iri": "https://w3id.org/np/rel/PREVENTS",
+      "predicate": "COMPARED_WITH",
+      "predicate_iri": "https://w3id.org/np/rel/COMPARED_WITH",
       "object": {
-        "label": "value functions",
-        "type": "METHOD"
+        "label": "CQL",
+        "type": "ENTITY"
       },
       "qualifiers": {
         "scope": [],
@@ -743,13 +737,13 @@
         "population": null
       },
       "evidence": {
-        "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
+        "quote": "Decision Transformer (DT) performs comparably to CQL on 3 out of 4 games, and outperforms other baselines in most games.",
         "quote_end": "",
-        "page": 1,
-        "sentence_id": "P004S04",
+        "page": 7,
+        "sentence_id": "P049S04",
         "char_span": [
-          777,
-          961
+          19488,
+          19608
         ]
       },
       "provenance": {
@@ -761,14 +755,9 @@
       "status": "warning",
       "issues": [
         {
-          "code": "type_mismatch",
-          "detail": "MODEL -> PREVENTS -> METHOD fits neither direction",
-          "fix": "Expected ['METHOD', 'MODEL'] -> PREVENTS -> ['METRIC', 'CONDITION']; retype the entities or downgrade to ASSOCIATED_WITH."
-        },
-        {
-          "code": "no_trigger",
-          "detail": "no cue for PREVENTS found in the quote",
-          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+          "code": "type_unresolved",
+          "detail": "COMPARED_WITH was not checked against a signature because ['ENTITY'] carry no type",
+          "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
         }
       ]
     },
@@ -877,7 +866,7 @@
     },
     {
       "id": "A19",
-      "text": "Decision Transformer outperforms state-of-the-art model-free offline RL algorithms.",
+      "text": "The MDP tuple consists of states, actions, transition dynamics, and a reward function.",
       "aida": {
         "atomic": true,
         "independent": true,
@@ -885,71 +874,28 @@
         "absolute": true
       },
       "subject": {
-        "label": "Decision Transformer",
-        "type": "MODEL"
-      },
-      "predicate": "OUTPERFORMS",
-      "predicate_iri": "https://w3id.org/np/rel/OUTPERFORMS",
-      "object": {
-        "label": "state-of-the-art model-free offline RL algorithms",
-        "type": "MODEL"
-      },
-      "qualifiers": {
-        "scope": [],
-        "polarity": null,
-        "population": null
-      },
-      "evidence": {
-        "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
-        "quote_end": "",
-        "page": 4,
-        "sentence_id": "P027S03",
-        "char_span": [
-          8459,
-          8628
-        ]
-      },
-      "provenance": {
-        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
-        "doi": "arXiv:2106.01345"
-      },
-      "confidence_basis": "直接引文",
-      "relation_type": "direct",
-      "status": "verified",
-      "issues": []
-    },
-    {
-      "id": "A20",
-      "text": "Decision Transformer achieves future actions.",
-      "aida": {
-        "atomic": true,
-        "independent": true,
-        "declarative": true,
-        "absolute": true
-      },
-      "subject": {
-        "label": "Decision Transformer",
-        "type": "MODEL"
-      },
-      "predicate": "ACHIEVES",
-      "predicate_iri": "https://w3id.org/np/rel/ACHIEVES",
-      "object": {
-        "label": "future actions",
+        "label": "The MDP tuple",
         "type": "ENTITY"
       },
+      "predicate": "CONSISTS_OF",
+      "predicate_iri": "https://w3id.org/np/rel/CONSISTS_OF",
+      "object": {
+        "label": "states, actions, transition dynamics, and a reward function",
+        "type": "METRIC"
+      },
       "qualifiers": {
         "scope": [],
         "polarity": null,
         "population": null
       },
       "evidence": {
-        "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
+        "quote": "The MDP tuple consists of states s ∈ S, actions a ∈ A, transition dynamics P (s0 |s, a), and a reward function r = R(s, a).",
         "quote_end": "",
-        "page": 1,
-        "sentence_id": "P004S05",
+        "page": 4,
+        "sentence_id": "P029S02",
         "char_span": [
-          962,
-          1151
+          9059,
+          9182
         ]
       },
       "provenance": {
@@ -962,10 +908,53 @@
       "issues": [
         {
           "code": "type_unresolved",
-          "detail": "ACHIEVES was not checked against a signature because ['ENTITY'] carry no type",
+          "detail": "CONSISTS_OF was not checked against a signature because ['ENTITY'] carry no type",
           "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
         }
       ]
+    },
+    {
+      "id": "A20",
+      "text": "Transformers proposes architecture to efficiently model sequential data.",
+      "aida": {
+        "atomic": true,
+        "independent": true,
+        "declarative": true,
+        "absolute": true
+      },
+      "subject": {
+        "label": "Transformers",
+        "type": "MODEL"
+      },
+      "predicate": "PROPOSES",
+      "predicate_iri": "https://w3id.org/np/rel/PROPOSES",
+      "object": {
+        "label": "architecture to efficiently model sequential data",
+        "type": "METHOD"
+      },
+      "qualifiers": {
+        "scope": [],
+        "polarity": null,
+        "population": null
+      },
+      "evidence": {
+        "quote": "Transformers were proposed by Vaswani et al. [1] as an architecture to efficiently model sequential data.",
+        "quote_end": "",
+        "page": 4,
+        "sentence_id": "P031S01",
+        "char_span": [
+          9983,
+          10088
+        ]
+      },
+      "provenance": {
+        "source": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+        "doi": "arXiv:2106.01345"
+      },
+      "confidence_basis": "直接引文",
+      "relation_type": "direct",
+      "status": "verified",
+      "issues": []
     }
   ],
   "sources": [
@@ -980,21 +969,21 @@
   "validation": {
     "status": "pass",
     "counts": {
-      "pass": 7,
-      "warn": 13,
+      "pass": 8,
+      "warn": 12,
       "fail": 0
     },
     "top_failures": [
       {
         "code": "no_trigger",
-        "n": 7
-      },
-      {
-        "code": "type_mismatch",
         "n": 6
       },
       {
         "code": "type_unresolved",
+        "n": 5
+      },
+      {
+        "code": "type_mismatch",
         "n": 4
       }
     ],
@@ -1107,13 +1096,13 @@
     },
     {
       "assertion_id": "A10",
-      "quote": "We did not find predicting the states or returns-to-go to improve performance, although it is easily permissible within our framework (as shown in Section 5.4) and would be an interesting study for future work.",
-      "page": 5,
+      "quote": "Decision Transformer achieves the highest scores in a majority of the tasks and is competitive with the state of the art in the remaining tasks.",
+      "page": 7,
       "char_span": [
-        13473,
-        13683
+        20936,
+        21080
       ],
-      "sentence_id": "P034S13"
+      "sentence_id": "P055S06"
     },
     {
       "assertion_id": "A11",
@@ -1167,13 +1156,13 @@
     },
     {
       "assertion_id": "A16",
-      "quote": "Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer.",
-      "page": 1,
+      "quote": "Decision Transformer (DT) performs comparably to CQL on 3 out of 4 games, and outperforms other baselines in most games.",
+      "page": 7,
       "char_span": [
-        777,
-        961
+        19488,
+        19608
       ],
-      "sentence_id": "P004S04"
+      "sentence_id": "P049S04"
     },
     {
       "assertion_id": "A17",
@@ -1197,23 +1186,23 @@
     },
     {
       "assertion_id": "A19",
-      "quote": "We show that – without using dynamic programming – Decision Transformer matches or exceeds the performance of state-of-the-art model-free offline RL algorithms [13, 14].",
+      "quote": "The MDP tuple consists of states s ∈ S, actions a ∈ A, transition dynamics P (s0 |s, a), and a reward function r = R(s, a).",
       "page": 4,
       "char_span": [
-        8459,
-        8628
+        9059,
+        9182
       ],
-      "sentence_id": "P027S03"
+      "sentence_id": "P029S02"
     },
     {
       "assertion_id": "A20",
-      "quote": "By conditioning an autoregressive model on the desired return (reward), past states, and actions, our Decision Transformer model can generate future actions that achieve the desired return.",
-      "page": 1,
+      "quote": "Transformers were proposed by Vaswani et al. [1] as an architecture to efficiently model sequential data.",
+      "page": 4,
       "char_span": [
-        962,
-        1151
+        9983,
+        10088
       ],
-      "sentence_id": "P004S05"
+      "sentence_id": "P031S01"
     }
   ],
   "contract_report": {

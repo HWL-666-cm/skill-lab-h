@@ -274,7 +274,8 @@
         "design",
         "designs",
         "提出",
-        "引入"
+        "引入",
+        "proposed"
       ]
     },
     "EVALUATES": {
@@ -415,7 +416,9 @@
         "vs.",
         "对比",
         "相比",
-        "competitive"
+        "competitive",
+        "comparably",
+        "comparison"
       ]
     },
     "SHOWS": {

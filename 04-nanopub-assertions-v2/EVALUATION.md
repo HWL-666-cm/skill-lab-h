@@ -45,10 +45,11 @@
 | 验证点 | 结果 |
 |-|-|
 | evidence_drift（quote 非逐字） | **0**（20 条 quote 全部在原文逐字命中） |
-| 页号 | 真实分布 p1–p12，无占位 |
+| 唯一句子 | **20**（无重复句；A06/A19、A02/A20、A03/A16 的共用句已拆开） |
+| 页号 | 真实分布 p1/p3/p4/p6/p7/p11/p12，无占位 |
 | 回填 sentence_id / char_span | `validate.py` 命中后回填（如 `P004S06`、`[1152,1328]`） |
-| 覆盖谓词 | 12/16（ACHIEVES/OUTPERFORMS/USES/SHOWS/REDUCES/PROPOSES/IMPROVES/TRAINED_ON/FINE_TUNED_ON/IS_A/CONSISTS_OF/PREVENTS） |
-| 整体判定 | **pass**（0 fail、0 drift；13 条 warn 为类型签名/触发词严格性，非证据错误） |
+| 覆盖谓词 | 12/16（ACHIEVES/OUTPERFORMS/USES/SHOWS/REDUCES/PROPOSES/IMPROVES/TRAINED_ON/FINE_TUNED_ON/IS_A/CONSISTS_OF/COMPARED_WITH） |
+| 整体判定 | **pass**（0 fail、0 drift；12 条 warn 为类型签名/触发词严格性，非证据错误） |
 
 **结构与词表校验**（`nanopub_schema.py` 实测，只判结构/词表，不判语义）：
 
@@ -73,9 +74,9 @@
 ## 4. 诚实标注的不足
 
 1. **断言内容质量**取决于运行时模型（SPO 拆分、证据片段选择），本地无法测真实断言（无 LLM API），不虚构评分。
-2. **受控词表 16 谓词**覆盖常见科研关系，但特定领域（生物医学基因-疾病关联等）可能需要扩展词表，已声明维护方式。20 条样例覆盖 12/16，CAUSES/COMPARED_WITH/CORRELATES_WITH/EVALUATES 因 DT 原文多用第一人称（we/our）无干净逐字主体，未强行凑。
+2. **受控词表 16 谓词**覆盖常见科研关系，但特定领域（生物医学基因-疾病关联等）可能需要扩展词表，已声明维护方式。20 条样例覆盖 12/16，CAUSES/CORRELATES_WITH/EVALUATES/PREVENTS 因 DT 原文多用第一人称（we/our）或无干净逐字主体，未强行凑。
 3. **证据跨图表**（证据在表格/图注）时定位粒度依赖 extractor 的图表检测，复杂版面需 Agent 用渲染页图核对。
-4. **20 条样例有 13 条 warn**（type_mismatch / type_unresolved / no_trigger）：这是类型签名与触发词校验的严格性所致（如 SHOWS 签名 [MODEL]→[METRIC] 而对象是 MODEL），非证据错误；已如实标注，不冒充 20/20 全 pass。
+4. **20 条样例有 12 条 warn**（type_mismatch / type_unresolved / no_trigger）：这是类型签名与触发词校验的严格性所致（如 SHOWS 签名 [MODEL]→[METRIC] 而对象是 MODEL），非证据错误；已如实标注，不冒充 20/20 全 pass。
 
 ## 5. 结论
 
