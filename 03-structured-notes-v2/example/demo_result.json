@@ -1,0 +1,33 @@
+{
+  "_note": "最小调用示例（示意输出，标为示例；非正式案例结果）",
+  "case_id": "example-case",
+  "answer": {},
+  "structured": {
+    "paper_card": {
+      "title": "示例论文", "authors": "示例作者", "year": "2026", "source": "example.pdf",
+      "research_question": "如何训练深度双向 Transformer 语言模型并在多任务取得 SOTA",
+      "objectives": ["提出双向预训练方法"],
+      "data": "BooksCorpus(800M词) + English Wikipedia(2500M词)",
+      "method": "Masked LM + Next Sentence Prediction 预训练，再逐任务 fine-tuning",
+      "method_conditions": ["15% token 掩码", "预训练语料规模 3.3B 词"],
+      "main_findings": [{"claim": "模型在 GLUE 达 80.5 分", "anchor": "Table 1", "evidence_marker": "文中证据"}],
+      "key_numbers": [{"value": "80.5", "unit": "GLUE score", "baseline": "GPT", "condition": "BERT LARGE", "anchor": "Table 1"}],
+      "limitations": ["领域外泛化未充分评估"],
+      "unreported": ["训练能耗", "推理延迟"]
+    },
+    "section_notes": [
+      {"section_path": "3.1", "heading": "Pre-training BERT", "purpose": "说明双向预训练任务", "content": "MLM 与 NSP 两个任务", "results": "预训练得到双向表征", "bridge": "承接 3 章的模型结构", "anchor": {"page": 3, "page_range": [3, 4]}}
+    ],
+    "knowledge_points": [
+      {"id": "kp-1", "term": "masked language model", "type": "concept", "definition": "随机掩码部分 token 并预测", "evidence_marker": "论文定义", "concept_source": "论文定义", "anchor": {"section": "3.1", "page": 4, "paragraph": 15}}
+    ],
+    "section_tree": [{"heading": "1 Introduction", "level": 1, "page": 1, "path": "1"}],
+    "document": {"title": "示例论文", "page_count": 1, "ocr_used": false}
+  },
+  "evidence": [{"item": "主要发现", "value": "80.5 GLUE", "source": "Table 1"}],
+  "status": "success",
+  "status_detail": "示例，仅说明输出格式",
+  "uncertainty": [],
+  "warnings": [],
+  "changes": [{"time": "2026-11-25T00:00:00Z", "action": "示例生成", "detail": "标为示例，非正式结果"}]
+}
