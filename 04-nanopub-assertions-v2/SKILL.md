@@ -29,33 +29,33 @@ description: Nanopublication 结构化抽取 Skill。把论文结论拆成原子
 ### 阶段一：确定性准备（0 次模型请求）
 
 ```bash
-python3 scripts/extract_document.py <paper.pdf> /app/work/extracted.json --workdir /app/work/ext
+python3 scripts/run.py
 ```
 
-产出章节/段落（带 `id/page/column/section`）、标题/作者（供 `pubinfo` 与证据定位）。
+`run.py` 一次跑两条提取线：`extract_document.py`（章节/标题/作者，供 pubinfo 与证据定位）+ `pdf_text.py`（句子级 char_span 与 normal_text，供 validate 逐字核对）。产出骨架 `result.json`（status=partial，附章节、受控词表、空模板），并提示写入 `/app/work/nanopubs.json`。
 
 ### 阶段二：模型拆断言（预算内）
 
-1. **读骨架 + 受控词表**：`predicate` 只能从 `resources/predicates.json` 的 16 个谓词中选择（`achieves/improves/reduces/uses/proposes/evaluates/trained_on/fine_tuned_on/causes/is_a/compared_with/shows/outperforms/consists_of/correlates_with/prevents`）。
-2. **逐段拆断言（分批，每批 3–5 段）**：按 §4 拆解规则生成 `subject-predicate-object`，每条绑定证据。
-3. **结构与词表校验（0 次请求）**：把断言写成 `nanopubs.json`，运行：
+1. **读骨架 + 受控词表**：`predicate` 只能从 `resources/predicates.json` 的 `relations` 键选（16 个：`ACHIEVES/IMPROVES/REDUCES/USES/PROPOSES/EVALUATES/TRAINED_ON/FINE_TUNED_ON/CAUSES/IS_A/COMPARED_WITH/SHOWS/OUTPERFORMS/CONSISTS_OF/CORRELATES_WITH/PREVENTS`）。
+2. **逐段拆断言（分批，每批 3–5 段）**：按 §4 拆解规则生成 `subject-predicate-object`，每条绑定证据（quote 逐字复制自原文，供 `validate` 的 `evidence_drift` 核对）。
+3. **写断言**：按 §6 嵌套字段写 `/app/work/nanopubs.json`（每条一个对象，`assertion/evidence/provenance/pubinfo/confidence`）。
+4. **重跑 run.py 完成 emit + validate（0 次请求）**：
    ```bash
-   python3 scripts/nanopub_schema.py /app/work/nanopubs.json
+   python3 scripts/run.py
    ```
-   校验器确定性检查：字段缺失、词表越界、主体混淆线索、来源缺失（§5.1）。
-4. **带违规修正**：对 `error` 级断言，把具体违规回传模型修正一次；仍失败写入 `uncertainty`。
-5. **去重与归并**：同一 subject-predicate-object 的重复断言合并，冲突断言都保留并标注冲突。
+   此时 run.py 检测到 nanopubs.json，执行：`emit.to_legacy_claim`（嵌套→四图）→ `emit.build_trig`（出 `/app/output/assertions.trig`）→ `validate.validate`（逐条 AIDA/quote/entities/relation/trigger/scope/paste/confidence 校验，出 `validation.json`）→ `emit.build_result`（顶层 `assertions[]`）→ `contract.apply`（补 output_contract）。返回每条的 pass/warn/fail 与修复提示。
+5. **带违规修正**：按 `validation.json` 的 `fix` 修正 `error` 级断言，重写 nanopubs.json，重跑 run.py；仍失败写 `uncertainty`，不硬造证据。
 
 ### 模型请求预算（64 次上限）
 
 | 阶段 | 请求数 |
 |-|-:|
 | 读骨架 + 确定抽取范围 | 1 |
-| 逐段拆断言（每批 3–5 段，约 100 段 → 20–33 批） | ≤ 35 |
+| 逐段拆断言（每批 3–5 段） | ≤ 35 |
 | 带违规修正 | ≤ 5 |
 | **合计** | **≤ 41**，留 ≥23 次余量 |
 
-超长兜底：先交已拆的前 N 段 + `status=partial`，未拆段号写入 `uncertainty`，不留空断言冒充完整。
+超长兜底：先交已拆的前 N 段 + `status=partial`，未拆段号写入 `uncertainty`；`assertions` 为空或 `assertions.trig` 为空时绝不写 `success`。
 
 ## 4. 断言拆解规则（拆得细）
 
@@ -116,26 +116,32 @@ python3 scripts/extract_document.py <paper.pdf> /app/work/extracted.json --workd
 
 四图对应：`assertion`（主断言 SPO）+ `provenance`（断言来源：wasDerivedFrom）+ `pubinfo`（发布信息：作者/年份/版本/标识符）+ `head`（id 链接各图）。
 
-## 7. 输出格式（/app/output/result.json）
+## 7. 输出格式（三份产物）
+
+`run.py` 阶段 B 产出三份：`/app/output/result.json`（主结果，**顶层 `assertions[]`**）、`/app/output/assertions.trig`（四图 RDF）、`/app/output/validation.json`（逐条检查）。字段字典见 `references/output-contract.md`。
 
 ```json
 {
   "case_id": "来自 case.json",
-  "answer": { "output_contract 声明的每个字段": "真实断言结果" },
-  "structured": {
-    "nanopubs": [ { "id":"","assertion":{},"evidence":{},"provenance":{},"pubinfo":{},"confidence":{} } ],
-    "validation_summary": {"total":0,"ok":0,"error":0,"warning":0},
-    "predicates": [{"type":"achieves","label":"达到/取得","verbs":["achieve"]}],
-    "document": {"title":"","page_count":0,"ocr_used":false}
-  },
-  "evidence": [{"item":"断言","value":"依据","source":"§/页/行"}],
-  "status": "success | partial | failed | refused | unable_to_judge",
-  "status_detail": "一句话",
-  "uncertainty": [{"item":"","reason":""}],
-  "warnings": [],
-  "changes": [{"time":"","action":"","detail":""}]
+  "status": "pass | partial | fail | blocked",
+  "task": "nanopublication-assertion-extraction",
+  "input": {"file":"","pages":0,"paragraphs":0,"sentences":0},
+  "assertions": [
+    { "id":"A01", "text":"BERT LARGE achieves 80.5 GLUE score.",
+      "aida": {"atomic":true,"independent":true,"declarative":true,"absolute":true},
+      "subject":{"label":"BERT LARGE","type":"MODEL"}, "predicate":"ACHIEVES",
+      "object":{"label":"80.5 GLUE score","type":"METRIC"},
+      "evidence":{"quote":"...","page":5,"sentence_id":"P023S01","char_span":[0,10]},
+      "confidence_basis":"直接引文","relation_type":"direct","status":"verified" }
+  ],
+  "sources": [{"name":"","iri":"","doi":"","title":"","year":0}],
+  "validation": {"status":"","counts":{"pass":0,"warn":0,"fail":0},"structure":{"n_nanopubs":0}},
+  "uncertainty": [],
+  "contract_report": {"declared":[],"native":[],"aliased":{},"derived":{},"missing":[]}
 }
 ```
+
+`output_contract` 声明的字段由 `contract.py` 在顶层补齐（同义词别名 / 证据索引派生 / 无法映射写 null）。**不变量：`assertions` 为空或 `assertions.trig` 为空时，`status` 绝不写 `pass`。**
 
 ## 8. 异常处理
 

@@ -27,16 +27,21 @@ PREDICATES_PATH = os.path.join(HERE, "..", "resources", "predicates.json")
 
 
 def load_predicates(path=PREDICATES_PATH):
+    """返回受控关系名列表。新版 predicates.json 用 relations 字典（键即关系名），
+    旧版用 predicates 列表；两者都兼容。"""
     try:
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
-        return data.get("predicates", [])
+        if "relations" in data:
+            return sorted(data["relations"].keys())
+        return [p.get("type") for p in data.get("predicates", [])]
     except Exception:
         return []
 
 
 def predicate_types(predicates):
-    return {p["type"] for p in predicates}
+    return {p.upper() if isinstance(p, str) else (p.get("type") or "").upper()
+            for p in predicates}
 
 
 def _empty(s):
@@ -49,7 +54,7 @@ def validate_nanopub(np, predicates):
     每个 issue: {"check": 检查项, "severity": "error|warning", "detail": 说明}
     """
     issues = []
-    valid_types = {p["type"] for p in predicates}
+    valid_types = predicate_types(predicates)
 
     a = np.get("assertion", {}) or {}
     e = np.get("evidence", {}) or {}
@@ -71,12 +76,12 @@ def validate_nanopub(np, predicates):
         issues.append({"check": "subject_conjunction", "severity": "warning",
                        "detail": "subject 含 and/or 并列连词，可能多主体，需复核是否拆多条"})
 
-    # 2) 关系类型：predicate 必须在受控词表
+    # 2) 关系类型：predicate 必须在受控词表（大小写不敏感）
     pred = a.get("predicate", "")
     if not pred:
         issues.append({"check": "predicate_missing", "severity": "error",
                        "detail": "断言缺 predicate"})
-    elif pred not in valid_types:
+    elif pred.upper() not in valid_types:
         issues.append({"check": "predicate_out_of_vocab", "severity": "error",
                        "detail": "predicate '%s' 不在受控词表，须从 predicates.json 选择" % pred})
 

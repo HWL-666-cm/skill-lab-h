@@ -1,21 +1,504 @@
 {
-  "_note": "受控关系词表：把自然语言关系映射到标准谓词。断言拆解时 predicate 必须取自本表，禁止自由发挥，保证下游程序可直接解析（读得懂）。",
-  "predicates": [
-    {"type": "achieves", "label": "达到/取得", "verbs": ["achieve", "obtain", "reach", "attain", "score", "get", "report"]},
-    {"type": "improves", "label": "提升/优于", "verbs": ["improve", "outperform", "exceed", "surpass", "beat", "better", "boost"]},
-    {"type": "reduces", "label": "降低/减少", "verbs": ["reduce", "decrease", "lower", "mitigate", "alleviate", "shrink"]},
-    {"type": "uses", "label": "使用/采用", "verbs": ["use", "employ", "apply", "leverage", "adopt", "utilize", "rely on"]},
-    {"type": "proposes", "label": "提出/引入", "verbs": ["propose", "introduce", "present", "design", "develop", "present"]},
-    {"type": "evaluates", "label": "评估/测试", "verbs": ["evaluate", "test", "benchmark", "assess", "measure", "examine"]},
-    {"type": "trained_on", "label": "在…上训练", "verbs": ["train on", "pretrain on", "pre-train on", "fit on"]},
-    {"type": "fine_tuned_on", "label": "在…上微调", "verbs": ["fine-tune on", "finetune on", "fine tune on"]},
-    {"type": "causes", "label": "导致/引起", "verbs": ["cause", "lead to", "result in", "induce", "yield", "give rise to"]},
-    {"type": "is_a", "label": "是…的一种", "verbs": ["is a", "is an", "is a type of", "belongs to", "consists of"]},
-    {"type": "compared_with", "label": "与…比较", "verbs": ["compare with", "compared with", "compared to", "versus", "vs."]},
-    {"type": "shows", "label": "表明/显示", "verbs": ["show", "demonstrate", "indicate", "reveal", "suggest", "find"]},
-    {"type": "outperforms", "label": "胜过基线", "verbs": ["outperform", "beat the baseline", "surpass the baseline", "exceed the baseline"]},
-    {"type": "consists_of", "label": "由…组成", "verbs": ["consist of", "comprise", "composed of", "made of", "include"]},
-    {"type": "correlates_with", "label": "与…相关", "verbs": ["correlate with", "associated with", "related to", "linked to"]},
-    {"type": "prevents", "label": "防止/避免", "verbs": ["prevent", "avoid", "eliminate", "remove", "guard against"]}
-  ]
+  "version": "2.0",
+  "note": "受控关系词表：断言 predicate 必须取自 relations 的键（16 个）。subject_types/object_types 是类型签名，主体类型落在 object_types 或客体类型落在 subject_types 即方向错误；direction 标注 forward（单向）或 symmetric（可交换）。cues 用于证据触发词校验。",
+  "entity_types": {
+    "MODEL": {
+      "zh": "模型或系统",
+      "cues": [
+        "model",
+        "bert",
+        "gpt",
+        "transformer",
+        "network",
+        "lstm",
+        "encoder",
+        "decoder",
+        "classifier",
+        "roberta",
+        "bart",
+        "t5",
+        "resnet",
+        "模型"
+      ]
+    },
+    "DATASET": {
+      "zh": "数据集或语料",
+      "cues": [
+        "dataset",
+        "corpus",
+        "books",
+        "wikipedia",
+        "text",
+        "images",
+        "sentences",
+        "documents",
+        "tokens",
+        "数据",
+        "语料"
+      ]
+    },
+    "TASK": {
+      "zh": "任务",
+      "cues": [
+        "task",
+        "glue",
+        "squad",
+        "ner",
+        "qa",
+        "question answering",
+        "classification",
+        "translation",
+        "parsing",
+        "sentiment",
+        "entailment",
+        "任务",
+        "问答",
+        "分类",
+        "翻译"
+      ]
+    },
+    "METRIC": {
+      "zh": "指标或数值",
+      "cues": [
+        "f1",
+        "accuracy",
+        "score",
+        "error",
+        "rate",
+        "perplexity",
+        "bleu",
+        "rouge",
+        "precision",
+        "recall",
+        "loss",
+        "accuracy",
+        "指标",
+        "精度",
+        "分数"
+      ]
+    },
+    "METHOD": {
+      "zh": "方法、技术或组件",
+      "cues": [
+        "method",
+        "masked",
+        "attention",
+        "fine-tuning",
+        "pretraining",
+        "pre-training",
+        "embedding",
+        "tokenization",
+        "objective",
+        "task",
+        "objective",
+        "loss function",
+        "layer",
+        "方法",
+        "机制"
+      ]
+    },
+    "BENCHMARK": {
+      "zh": "基准评测集",
+      "cues": [
+        "benchmark",
+        "suite",
+        "evaluation set",
+        "test set",
+        "dev set",
+        "基准",
+        "评测集"
+      ]
+    },
+    "ENTITY": {
+      "zh": "未归类实体",
+      "cues": []
+    }
+  },
+  "relations": {
+    "ACHIEVES": {
+      "zh": "达到/取得",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "METRIC"
+      ],
+      "direction": "forward",
+      "verb": "achieves",
+      "passive": false,
+      "cues": [
+        "achieve",
+        "obtain",
+        "reach",
+        "attain",
+        "score",
+        "get",
+        "report",
+        "achieves",
+        "obtains",
+        "reaches"
+      ]
+    },
+    "IMPROVES": {
+      "zh": "提升/优于",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "METRIC",
+        "TASK"
+      ],
+      "direction": "forward",
+      "verb": "improves",
+      "passive": false,
+      "cues": [
+        "improve",
+        "improves",
+        "boost",
+        "boosted",
+        "enhance",
+        "enhances",
+        "raise",
+        "raises",
+        "提升",
+        "改进"
+      ]
+    },
+    "REDUCES": {
+      "zh": "降低/减少",
+      "subject_types": [
+        "METHOD",
+        "MODEL"
+      ],
+      "object_types": [
+        "METRIC"
+      ],
+      "direction": "forward",
+      "verb": "reduces",
+      "passive": false,
+      "cues": [
+        "reduce",
+        "reduces",
+        "decrease",
+        "decreases",
+        "lower",
+        "lowers",
+        "mitigate",
+        "降低",
+        "减少"
+      ]
+    },
+    "USES": {
+      "zh": "使用/采用",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "METHOD",
+        "DATASET",
+        "MODEL"
+      ],
+      "direction": "forward",
+      "verb": "uses",
+      "passive": false,
+      "cues": [
+        "use",
+        "uses",
+        "employ",
+        "employs",
+        "apply",
+        "applies",
+        "leverage",
+        "adopt",
+        "采用",
+        "使用"
+      ]
+    },
+    "PROPOSES": {
+      "zh": "提出/引入",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "METHOD",
+        "MODEL"
+      ],
+      "direction": "forward",
+      "verb": "proposes",
+      "passive": false,
+      "cues": [
+        "propose",
+        "proposes",
+        "introduce",
+        "introduces",
+        "present",
+        "presents",
+        "design",
+        "designs",
+        "提出",
+        "引入"
+      ]
+    },
+    "EVALUATES": {
+      "zh": "评估/测试",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "TASK",
+        "BENCHMARK",
+        "MODEL"
+      ],
+      "direction": "forward",
+      "verb": "evaluates",
+      "passive": false,
+      "cues": [
+        "evaluate",
+        "evaluates",
+        "test",
+        "tests",
+        "benchmark",
+        "benchmarks",
+        "assess",
+        "assesses",
+        "评估",
+        "测试"
+      ]
+    },
+    "TRAINED_ON": {
+      "zh": "在…上训练",
+      "subject_types": [
+        "MODEL"
+      ],
+      "object_types": [
+        "DATASET"
+      ],
+      "direction": "forward",
+      "verb": "is trained on",
+      "passive": true,
+      "cues": [
+        "train on",
+        "trained on",
+        "pre-train on",
+        "pretrain on",
+        "pre-trained on",
+        "训练"
+      ]
+    },
+    "FINE_TUNED_ON": {
+      "zh": "在…上微调",
+      "subject_types": [
+        "MODEL"
+      ],
+      "object_types": [
+        "TASK",
+        "DATASET",
+        "BENCHMARK"
+      ],
+      "direction": "forward",
+      "verb": "is fine-tuned on",
+      "passive": true,
+      "cues": [
+        "fine-tune on",
+        "fine-tuned on",
+        "finetune on",
+        "finetuned on",
+        "微调"
+      ]
+    },
+    "CAUSES": {
+      "zh": "导致/引起",
+      "subject_types": [
+        "METHOD",
+        "MODEL",
+        "CONDITION"
+      ],
+      "object_types": [
+        "METRIC",
+        "CONDITION"
+      ],
+      "direction": "forward",
+      "verb": "causes",
+      "passive": false,
+      "cues": [
+        "cause",
+        "causes",
+        "lead to",
+        "leads to",
+        "result in",
+        "results in",
+        "induce",
+        "导致",
+        "引起"
+      ]
+    },
+    "IS_A": {
+      "zh": "是…的一种",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "direction": "forward",
+      "verb": "is a",
+      "passive": true,
+      "cues": [
+        "is a",
+        "is an",
+        "is a type of",
+        "belongs to",
+        "是一种"
+      ]
+    },
+    "COMPARED_WITH": {
+      "zh": "与…比较",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "direction": "symmetric",
+      "verb": "is compared with",
+      "passive": true,
+      "cues": [
+        "compare with",
+        "compared with",
+        "compared to",
+        "versus",
+        "vs.",
+        "对比",
+        "相比"
+      ]
+    },
+    "SHOWS": {
+      "zh": "表明/显示",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "METRIC",
+        "CONDITION"
+      ],
+      "direction": "forward",
+      "verb": "shows",
+      "passive": false,
+      "cues": [
+        "show",
+        "shows",
+        "demonstrate",
+        "demonstrates",
+        "indicate",
+        "indicates",
+        "reveal",
+        "reveals",
+        "表明",
+        "显示"
+      ]
+    },
+    "OUTPERFORMS": {
+      "zh": "胜过基线",
+      "subject_types": [
+        "MODEL"
+      ],
+      "object_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "direction": "forward",
+      "verb": "outperforms",
+      "passive": false,
+      "cues": [
+        "outperform",
+        "outperforms",
+        "beat",
+        "beats",
+        "surpass",
+        "surpasses",
+        "exceed",
+        "exceeds",
+        "胜过",
+        "优于"
+      ]
+    },
+    "CONSISTS_OF": {
+      "zh": "由…组成",
+      "subject_types": [
+        "MODEL",
+        "METHOD"
+      ],
+      "object_types": [
+        "METHOD"
+      ],
+      "direction": "forward",
+      "verb": "consists of",
+      "passive": false,
+      "cues": [
+        "consist of",
+        "consists of",
+        "comprise",
+        "composed of",
+        "made of",
+        "include",
+        "由",
+        "组成"
+      ]
+    },
+    "CORRELATES_WITH": {
+      "zh": "与…相关",
+      "subject_types": [
+        "*"
+      ],
+      "object_types": [
+        "*"
+      ],
+      "direction": "symmetric",
+      "verb": "correlates with",
+      "passive": false,
+      "cues": [
+        "correlate with",
+        "correlated with",
+        "associated with",
+        "related to",
+        "linked to",
+        "相关",
+        "关联"
+      ]
+    },
+    "PREVENTS": {
+      "zh": "防止/避免",
+      "subject_types": [
+        "METHOD",
+        "MODEL"
+      ],
+      "object_types": [
+        "METRIC",
+        "CONDITION"
+      ],
+      "direction": "forward",
+      "verb": "prevents",
+      "passive": false,
+      "cues": [
+        "prevent",
+        "prevents",
+        "avoid",
+        "avoids",
+        "eliminate",
+        "eliminates",
+        "防止",
+        "避免"
+      ]
+    }
+  }
 }

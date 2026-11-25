@@ -23,28 +23,32 @@
 
 `subject` 含 and/or 时质量检查器报 `subject_confusion`（主体混淆），强制拆多条。
 
-### 2.2 对得上 —— 最小充分证据绑定
+### 2.2 对得上 —— 最小充分证据绑定 + 逐字核对
 
-每条断言绑定 `evidence.quote`（原文最短支撑片段）+ `location{session,page,line}` + `evidence_type`（direct/indirect）。实测 BERT 提取 1323 视觉行（带 `id/page/column/section`），63 个章节候选，供证据精确定位。
+每条断言绑定 `evidence.quote`（原文最短支撑片段）+ `location{section,page,line}` + `evidence_type`（direct/indirect）。`validate.py` 做**逐字核对**：quote 必须在全文 `normal_text` 中逐字出现（否则 `evidence_drift`）、页码匹配（否则 `page_mismatch`）、主客体必须出现在证据里（否则 `subject_not_in_evidence`/`object_not_in_evidence`）。实测 BERT 经 `pdf_text.py` 解析出 16 页、60 段、539 句，句子级 char_span 定位可用（quote 命中 → `located_page`/`sid`/`char_span` 回填）。
 
 ### 2.3 追得回 —— 来源元数据链路
 
 `provenance.wasDerivedFrom`（源自哪篇/哪章/哪页）+ `pubinfo`（论文/作者/年份/版本/DOI/arXiv）形成完整链路。实测提取：标题 "BERT: Pre-training of Deep Bidirectional Transformers..."、作者 "Language Understanding"（首页作者块）。
 
-### 2.4 读得懂 —— 受控词表 + 结构与词表校验
+### 2.4 读得懂 —— 受控词表 + AIDA + TriG 四图导出
 
-**受控关系词表**（16 个标准谓词，`resources/predicates.json`）：`achieves/improves/reduces/uses/proposes/evaluates/trained_on/fine_tuned_on/causes/is_a/compared_with/shows/outperforms/consists_of/correlates_with/prevents`，每个带 `verbs` 自然语言映射。
+**受控关系词表**（16 个标准谓词，`resources/predicates.json`，带 `subject_types/object_types/direction/cues` 类型签名 + `entity_types`：MODEL/DATASET/TASK/METRIC/METHOD/BENCHMARK/ENTITY）：`ACHIEVES/IMPROVES/REDUCES/USES/PROPOSES/EVALUATES/TRAINED_ON/FINE_TUNED_ON/CAUSES/IS_A/COMPARED_WITH/SHOWS/OUTPERFORMS/CONSISTS_OF/CORRELATES_WITH/PREVENTS`。
+
+**AIDA 四判据**（`aida_rules.py`）：Atomic/Independent/Declarative/Absolute 逐句机械检查（分号/并列动词/指代词/第一人称/发现动词/时态/hedge/scope 丢失），带可复现判据与修复提示。
+
+**TriG 四图导出**（`emit.py` 实测）：20 条示例断言 → `assertions.trig`，每条 4 个命名图（Head/assertion/provenance/pubinfo），用 `np:/npx:/hycl:/cito:/prov:` 官方词表，证据走 `cito:hasQuotedText`，内容哈希 IRI（`urn:np:draft:`）保证重跑字节一致。实测 `emit.to_legacy_claim` 转换正确：subject "BERT LARGE"→`{label,type=MODEL}`、predicate `achieves`→`ACHIEVES`、object "80.5 GLUE score"→`{label,type=METRIC}`。
 
 **结构与词表校验**（`nanopub_schema.py` 实测，只判结构/词表，不判语义）：
 
 | 输入断言 | 判定 |
 |-|-|
-| 完整断言（SPO+证据+来源齐全，predicate=achieves） | `ok` |
+| 完整断言（SPO+证据+来源齐全） | `ok` |
 | 全空断言 | `error`：subject_object_empty + predicate 缺失 + evidence_quote_empty + 来源缺失（6 项） |
 | subject="A and B"（多主体线索） | `warning`：subject_conjunction + identifier_missing |
 | predicate="freeform_verb"（非词表） | `error`：predicate_out_of_vocab |
 
-脚本给出**可复现的结构/词表判定**（字段缺失/词表越界/主体混淆线索/来源缺失）；语义质量（断言是否真的过宽、证据是否真的充分）由 Agent 按 SKILL.md §5.2 的判据复核，脚本不冒充语义判断。
+**全链路实测**（BERT 真文）：`validate.py` 正确捕获 `evidence_drift`（合成示例 quote 非逐字，18/20 命中）、`subject_not_in_evidence`、`no_trigger`；`contract.py` 正确做 `claims→assertions` 别名、`evidence→evidence_index` 派生、未知字段写 null。语义质量（断言是否真的过宽、证据是否真的充分）由 Agent 按 SKILL.md §5.2 判据复核。
 
 ## 3. 使用增益（与基础 Agent 对照，机制层面）
 
@@ -53,7 +57,7 @@
 | 拆得细 | 整段结论塞进一个"断言"字段 | SPO 原子断言，复合句拆分 |
 | 对得上 | 证据笼统"见原文" | 最小片段 + section/page/line |
 | 追得回 | 来源缺失 | provenance + pubinfo 全链路 |
-| 读得懂 | 自然语言不可解析 | 受控词表 + 字段化 JSON |
+| 读得懂 | 自然语言不可解析 | 受控词表 + AIDA 判据 + TriG 四图 |
 
 ## 4. 诚实标注的不足
 
@@ -63,4 +67,4 @@
 
 ## 5. 结论
 
-本 Skill 已形成"确定性章节/段落提取 + 受控关系词表 + 结构与词表校验 + 模型拆断言"的最小闭环，四个问题各有**可执行、可核验**的解决方案，主攻方向（断言拆解 + 证据绑定）有明确机制证据。下一步：建 GitHub 仓库 → dry-run 预检 →（确认后）提交。
+本 Skill 已形成"确定性提取（extract_document + pdf_text）→ 受控关系词表 + AIDA 判据 → 模型拆断言 → emit 出 TriG 四图 → validate 逐字核对 → contract 补 output_contract"的完整闭环，四个问题各有**可执行、可核验**的解决方案，主攻方向（断言拆解 + 证据绑定）有明确机制证据。下一步：dry-run 预检 →（确认后）提交。
