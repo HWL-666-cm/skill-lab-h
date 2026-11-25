@@ -1,0 +1,5 @@
+{
+  "case_id": "ab-mini",
+  "task": "依据配置与说明写方法章节，数值可回到文件与行",
+  "output_contract": ["methods", "parameters", "gaps", "uncertainty", "change_log"]
+}

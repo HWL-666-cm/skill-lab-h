@@ -1,0 +1,10 @@
+train:
+  learning_rate: 1e-4
+  batch_size: 256
+  epochs: 100
+data:
+  image_size: 512
+  split_ratio: 0.9
+setup:
+  seed: 42
+  gpus: 8

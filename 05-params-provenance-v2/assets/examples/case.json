@@ -1,0 +1,16 @@
+{
+  "_note": "example: true —— 这是形状示例，不是平台固定案例的答案。路径由运行时替换。",
+  "example": true,
+  "case_id": "example-mini",
+  "task": "依据配置与 README 写出方法章节，每个数值可回到文件和行。",
+  "output_contract": [
+    "methods",
+    "parameters",
+    "gaps",
+    "uncertainty",
+    "change_log"
+  ],
+  "material_dirs": [
+    "material"
+  ]
+}

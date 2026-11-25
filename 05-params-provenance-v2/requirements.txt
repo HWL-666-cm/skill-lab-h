@@ -1,0 +1,13 @@
+# 本 Skill 的脚本只用 Python 标准库，不需要安装任何第三方包。
+# 运行环境：Python 3.9+（用了 dataclass 之外的现代类型标注，3.9 已足够）
+#
+# 可选（有则自动优先使用，无则退到内置解码并在 uncertainty 里标注）：
+#   pdftotext（poppler-utils）  PDF 文本层，最可靠
+#   pymupdf                    PDF 文本层 + 版面
+#   pypdf / PyPDF2             PDF 文本层，纯 Python
+#   都没有时          → 内置 zlib + Tj/TJ 提取，字符编码不可靠，会明确标注
+#
+# 不解析扫描版 PDF 的版面，不做 OCR：那属于 PDF 结构类 Skill 的职责。
+#
+# 自检（不需要任何材料）：
+#   python assets/tests/run_selftest.py
