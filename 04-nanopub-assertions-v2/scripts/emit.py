@@ -142,6 +142,8 @@ def to_legacy_claim(np: dict, lexicon: dict | None = None) -> dict:
     pred = (a.get("predicate") or "ASSOCIATED_WITH").upper()
     condition = (a.get("condition") or "").strip()
     negation = bool(a.get("negation"))
+    subj_type = (a.get("subject_type") or "").strip() or _guess_type(subj_label, lexicon)
+    obj_type = (a.get("object_type") or "").strip() or _guess_type(obj_label, lexicon)
 
     verb = _verb_form(pred, lexicon)
     parts = [subj_label, verb, obj_label]
@@ -162,9 +164,9 @@ def to_legacy_claim(np: dict, lexicon: dict | None = None) -> dict:
     return {
         "id": np.get("id", ""),
         "text": text,
-        "subject": {"label": subj_label, "type": _guess_type(subj_label, lexicon)},
+        "subject": {"label": subj_label, "type": subj_type},
         "predicate": pred,
-        "object": {"label": obj_label, "type": _guess_type(obj_label, lexicon)},
+        "object": {"label": obj_label, "type": obj_type},
         "qualifiers": {"scope": scope, "polarity": None, "population": None},
         "evidence": {
             "quote": ev.get("quote", ""),

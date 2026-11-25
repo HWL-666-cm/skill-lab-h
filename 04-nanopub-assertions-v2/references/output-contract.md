@@ -10,6 +10,8 @@
 | `assertion.subject` | string | 是 | 主体名词短语（如 `BERT LARGE`） |
 | `assertion.predicate` | string | 是 | 受控关系名，小写，取自 `resources/predicates.json` 的 `relations` 键（16 个） |
 | `assertion.object` | string | 是 | 客体名词短语（如 `80.5 GLUE score`） |
+| `assertion.subject_type` | string | 否 | 显式类型（纠正自动猜测，如 `CQL`→`METHOD`）；留空则按标签自动猜 |
+| `assertion.object_type` | string | 否 | 显式类型（如 `MDP tuple`→`ENTITY`）；留空则按标签自动猜 |
 | `assertion.condition` | string | 否 | 限定条件/适用范围（如 `on GLUE benchmark`） |
 | `assertion.negation` | bool | 是 | 是否否定 |
 | `assertion.modality` | string | 是 | `fact` / `claim` / `hypothesis` |
@@ -31,9 +33,9 @@
 
 | 嵌套字段 | 四图/legacy 字段 |
 |---|---|
-| `assertion.subject`（string） | `subject = {"label", "type"}`（type 由 entity_types 词表 cue 猜出） |
+| `assertion.subject`（string） | `subject = {"label", "type"}`（type 优先取 `subject_type`，否则由 entity_types 词表 cue 猜出） |
 | `assertion.predicate`（小写） | `predicate`（转大写，如 `achieves` → `ACHIEVES`） |
-| `assertion.object`（string） | `object = {"label", "type"}` |
+| `assertion.object`（string） | `object = {"label", "type"}`（type 优先取 `object_type`，否则猜出） |
 | `assertion.condition` | `qualifiers.scope[]` |
 | `assertion.negation` | `text` 中加 `does not`，`qualifiers.polarity` 记 loss |
 | `evidence.location.page` | `evidence.page` |

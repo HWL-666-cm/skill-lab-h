@@ -479,7 +479,8 @@
         "METHOD"
       ],
       "object_types": [
-        "METHOD"
+        "METHOD",
+        "ENTITY"
       ],
       "direction": "forward",
       "verb": "consists of",

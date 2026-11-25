@@ -759,7 +759,8 @@
         "object": "CQL",
         "condition": "",
         "negation": false,
-        "modality": "fact"
+        "modality": "fact",
+        "object_type": "METHOD"
       },
       "evidence": {
         "quote": "Decision Transformer (DT) performs comparably to CQL on 3 out of 4 games, and outperforms other baselines in most games.",
@@ -909,7 +910,8 @@
         "object": "states, actions, transition dynamics, and a reward function",
         "condition": "",
         "negation": false,
-        "modality": "fact"
+        "modality": "fact",
+        "object_type": "ENTITY"
       },
       "evidence": {
         "quote": "The MDP tuple consists of states s ∈ S, actions a ∈ A, transition dynamics P (s0 |s, a), and a reward function r = R(s, a).",
@@ -955,11 +957,12 @@
       "id": "A20",
       "assertion": {
         "subject": "Transformers",
-        "predicate": "proposes",
-        "object": "architecture to efficiently model sequential data",
+        "predicate": "is_a",
+        "object": "an architecture to efficiently model sequential data",
         "condition": "",
         "negation": false,
-        "modality": "fact"
+        "modality": "fact",
+        "object_type": "METHOD"
       },
       "evidence": {
         "quote": "Transformers were proposed by Vaswani et al. [1] as an architecture to efficiently model sequential data.",

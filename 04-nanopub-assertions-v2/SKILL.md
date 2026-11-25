@@ -100,21 +100,24 @@ python3 scripts/run.py
 
 ```json
 {
-  "id": "np-1",
-  "assertion": {"subject":"BERT LARGE","predicate":"achieves","object":"80.5 GLUE score",
-                "condition":"on GLUE benchmark","negation":false,"modality":"fact"},
-  "evidence": {"quote":"BERT LARGE obtains a score of 80.5 on GLUE",
-               "location":{"section":"4.1","page":5,"line":12},
+  "id": "A16",
+  "assertion": {"subject":"Decision Transformer","predicate":"compared_with","object":"CQL",
+                "subject_type":"","object_type":"METHOD",
+                "condition":"","negation":false,"modality":"fact"},
+  "evidence": {"quote":"Decision Transformer (DT) performs comparably to CQL on 3 out of 4 games, and outperforms other baselines in most games.",
+               "location":{"section":"","page":7,"line":null},
                "evidence_type":"direct","supports":true},
-  "provenance": {"wasDerivedFrom":{"paper":"BERT: Pre-training of...","section":"4.1","page":5},
+  "provenance": {"wasDerivedFrom":{"paper":"Decision Transformer: Reinforcement Learning via Sequence Modeling","section":"","page":7},
                  "method":"text-extraction"},
-  "pubinfo": {"paper":"BERT: Pre-training of...","authors":["Jacob Devlin","..."],
-              "year":2019,"version":"v2","identifier":"arXiv:1810.04805"},
+  "pubinfo": {"paper":"Decision Transformer: Reinforcement Learning via Sequence Modeling","authors":["Lili Chen","..."],
+              "year":2021,"version":"v1","identifier":"arXiv:2106.01345"},
   "confidence": {"basis":"直接证据","level":"high"}
 }
 ```
 
 四图对应：`assertion`（主断言 SPO）+ `provenance`（断言来源：wasDerivedFrom）+ `pubinfo`（发布信息：作者/年份/版本/标识符）+ `head`（id 链接各图）。
+
+`subject_type`/`object_type` 为**可选**字段：填了就用它（用于纠正自动类型猜测，如 CQL→METHOD、MDP tuple→ENTITY）；留空则 `emit.to_legacy_claim` 按标签自动猜（`_guess_type`）。
 
 ## 7. 输出格式（三份产物）
 

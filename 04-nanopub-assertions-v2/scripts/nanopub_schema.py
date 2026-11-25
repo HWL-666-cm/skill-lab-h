@@ -130,6 +130,7 @@ def empty_nanopub_template():
     return {
         "id": "",
         "assertion": {"subject": "", "predicate": "", "object": "",
+                      "subject_type": "", "object_type": "",
                       "condition": "", "negation": False, "modality": "fact"},
         "evidence": {"quote": "", "location": {"section": "", "page": None, "line": None},
                      "evidence_type": "direct", "supports": True},

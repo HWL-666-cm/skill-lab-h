@@ -729,7 +729,7 @@
       "predicate_iri": "https://w3id.org/np/rel/COMPARED_WITH",
       "object": {
         "label": "CQL",
-        "type": "ENTITY"
+        "type": "METHOD"
       },
       "qualifiers": {
         "scope": [],
@@ -752,14 +752,8 @@
       },
       "confidence_basis": "直接引文",
       "relation_type": "direct",
-      "status": "warning",
-      "issues": [
-        {
-          "code": "type_unresolved",
-          "detail": "COMPARED_WITH was not checked against a signature because ['ENTITY'] carry no type",
-          "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
-        }
-      ]
+      "status": "verified",
+      "issues": []
     },
     {
       "id": "A17",
@@ -881,7 +875,7 @@
       "predicate_iri": "https://w3id.org/np/rel/CONSISTS_OF",
       "object": {
         "label": "states, actions, transition dynamics, and a reward function",
-        "type": "METRIC"
+        "type": "ENTITY"
       },
       "qualifiers": {
         "scope": [],
@@ -908,14 +902,14 @@
       "issues": [
         {
           "code": "type_unresolved",
-          "detail": "CONSISTS_OF was not checked against a signature because ['ENTITY'] carry no type",
+          "detail": "CONSISTS_OF was not checked against a signature because ['ENTITY', 'ENTITY'] carry no type",
           "fix": "Label subject.type and object.type from relation-lexicon.json so the direction can be verified."
         }
       ]
     },
     {
       "id": "A20",
-      "text": "Transformers proposes architecture to efficiently model sequential data.",
+      "text": "Transformers is a an architecture to efficiently model sequential data.",
       "aida": {
         "atomic": true,
         "independent": true,
@@ -926,10 +920,10 @@
         "label": "Transformers",
         "type": "MODEL"
       },
-      "predicate": "PROPOSES",
-      "predicate_iri": "https://w3id.org/np/rel/PROPOSES",
+      "predicate": "IS_A",
+      "predicate_iri": "https://w3id.org/np/rel/IS_A",
       "object": {
-        "label": "architecture to efficiently model sequential data",
+        "label": "an architecture to efficiently model sequential data",
         "type": "METHOD"
       },
       "qualifiers": {
@@ -953,8 +947,14 @@
       },
       "confidence_basis": "直接引文",
       "relation_type": "direct",
-      "status": "verified",
-      "issues": []
+      "status": "warning",
+      "issues": [
+        {
+          "code": "no_trigger",
+          "detail": "no cue for IS_A found in the quote",
+          "fix": "Either quote the sentence carrying the relation verb, or set predicate to ASSOCIATED_WITH and confidence_basis to 'co-occurrence only'."
+        }
+      ]
     }
   ],
   "sources": [
@@ -976,14 +976,14 @@
     "top_failures": [
       {
         "code": "no_trigger",
-        "n": 6
-      },
-      {
-        "code": "type_unresolved",
-        "n": 5
+        "n": 7
       },
       {
         "code": "type_mismatch",
+        "n": 4
+      },
+      {
+        "code": "type_unresolved",
         "n": 4
       }
     ],
