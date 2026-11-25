@@ -57,15 +57,15 @@ playground submit --challenge-id <ID> --outputs <目录> --trace <原生会话�
 
 | 平台题号 | 目录 | 状态 |
 |---|---|---|
-| 阅读01 文献文档解析 | `01-pdf-structure-audit/` | 已提交（attempt 106279，干净包重交 106838） |
+| 阅读01 文献文档解析 | `01-pdf-structure-audit/` | 已提交（attempt 107003） |
 | 阅读03 文献翻译 | `02-translation-audit/` | 已提交（attempt 106280） |
 | 阅读10 文献总结与结构化笔记 | `03-structured-notes/` | 已提交（attempt 106281） |
-| 阅读14 Nanopublication | `04-nanopub-assertions/` | 已提交（attempt 106282，干净包重交 106840） |
-| 写作09 方法与实验章节写作 | `05-params-provenance/` | 已提交（attempt 106284） |
+| 阅读14 Nanopublication | `04-nanopub-assertions/` | 已提交（attempt 107004） |
+| 写作09 方法与实验章节写作 | `05-params-provenance/` | 已提交（attempt 107005） |
 | 写作02 学术语言润色 | `06-academic-polishing/` | 已提交（attempt 106276） |
 | 写作04 参考文献与引用管理 | `07-citation-audit/` | 已提交（attempt 106286） |
 | 写作08 引言与相关工作写作 | `08-claim-evidence-binding/` | 已提交（attempt 106837） |
-| 阅读15 文献知识图谱构建 | `10-knowledge-graph/` | 已提交（attempt 106288） |
+| 阅读15 文献知识图谱构建 | `10-knowledge-graph/` | 已提交（attempt 107006） |
 | 写作13 LaTeX 写作与编译 | `13-latex-compile-repro/` | 已提交（attempt 106999） |
 
 ## 各题技术要点
