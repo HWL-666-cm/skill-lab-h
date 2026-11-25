@@ -71,6 +71,7 @@ playground submit --challenge-id <ID> --outputs <目录> --trace <原生会话�
 | 写作04 参考文献与引用管理 | `07-citation-audit/` | 已提交（attempt 106286） |
 | 写作04 参考文献与引用管理（v2 重做，修 status 契约层 + render + 论断召回） | `07-citation-audit-v2/` | 已提交（attempt 110048） |
 | 写作08 引言与相关工作写作 | `08-claim-evidence-binding/` | 已提交（attempt 106837） |
+| 写作08 引言与相关工作写作（v2 重做，修章节识别 + 证据先行回改回路） | `08-claim-evidence-binding-v2/` | 开发中 |
 | 阅读15 文献知识图谱构建 | `10-knowledge-graph/` | 已提交（attempt 107006） |
 | 阅读15 文献知识图谱构建（v2 重做，主攻跨篇实体对齐 + 自动缩写识别 + 增量更新） | `10-knowledge-graph-v2/` | 开发中 |
 | 写作13 LaTeX 写作与编译 | `13-latex-compile-repro/` | 已提交（attempt 106999） |

@@ -1,0 +1,945 @@
+{
+  "case_id": "example_claim_binding",
+  "status": "complete",
+  "intro_related_work_markdown": "## 研究背景\n海雾显著降低能见度并扰乱海上交通。然而 Smith2020 指出既有统计方法在复杂海岸场景下受限。\n\n## 相关工作\n### 问题设定\nSmith et al. (2020) 用逻辑回归做能见度预测。Lee et al. (2021) 用随机森林做雾检测。\n### 方法路线\nZhang and Wang (2022) 将卷积网络用于卫星影像。Chen et al. (2023) 提出了物理引导模型。\n\n## 研究空白\n然而这些工作没有联合考虑能见度阈值与天气码，且对类别不平衡关注有限（Smith2020）。\n\n## 贡献\n本文提出双阈值标注方案。如 Fig. 1 所示，该方案区分雾与低能见度非雾情形。Table 2 总结了改进。\n",
+  "claim_ledger": {
+    "rows": [
+      {
+        "claim_id": "c0001",
+        "claim_type": "background",
+        "text": "海雾显著降低能见度并扰乱海上交通。然而 Smith2020 指出既有统计方法在复杂海岸场景下受限。",
+        "section": "background",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "Smith2020",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0002",
+        "claim_type": "related_work",
+        "text": "Smith et al. (2020) 用逻辑回归做能见度预测。Lee et al. (2021) 用随机森林做雾检测。",
+        "section": "related_work",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "Smith et al. (2020)",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            },
+            {
+              "raw": "Lee et al. (2021)",
+              "kind": "author_year",
+              "ref_key": "Lee2021",
+              "ref_author": "Lee et al.",
+              "ref_year": "2021"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0003",
+        "claim_type": "related_work",
+        "text": "Zhang and Wang (2022) 将卷积网络用于卫星影像。Chen et al. (2023) 提出了物理引导模型。",
+        "section": "related_work",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "Wang (2022)",
+              "kind": "author_year",
+              "ref_key": "zhang2022",
+              "ref_author": "Zhang, Y. and Wang, H.",
+              "ref_year": "2022"
+            },
+            {
+              "raw": "Chen et al. (2023)",
+              "kind": "author_year",
+              "ref_key": "Chen2023",
+              "ref_author": "Chen et al.",
+              "ref_year": "2023"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0004",
+        "claim_type": "gap",
+        "text": "然而这些工作没有联合考虑能见度阈值与天气码，且对类别不平衡关注有限（Smith2020）。",
+        "section": "gap",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "（Smith2020）",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0005",
+        "claim_type": "contribution",
+        "text": "本文提出双阈值标注方案。如 Fig. 1 所示，该方案区分雾与低能见度非雾情形。Table 2 总结了改进。",
+        "section": "contribution",
+        "status": "loose",
+        "evidence": {
+          "citations": [],
+          "figures": [
+            {
+              "pattern": "fig",
+              "kind": "figure",
+              "raw": "Fig. 1",
+              "number": "1"
+            },
+            {
+              "pattern": "table",
+              "kind": "table",
+              "raw": "Table 2",
+              "number": "2"
+            }
+          ],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      }
+    ],
+    "by_status": {
+      "anchored": 4,
+      "loose": 1
+    },
+    "trace_rate": 1.0
+  },
+  "citation_check": {
+    "references_in_material": [
+      {
+        "kind": "bib",
+        "key": "smith2020",
+        "entry_type": "article",
+        "fields": {
+          "title": "Visibility prediction with logistic regression",
+          "author": "Smith, J. and Jones, A.",
+          "year": "2020",
+          "journal": "Weather Forecasting"
+        },
+        "raw": "author = {Smith, J. and Jones, A.}, title = {Visibility prediction with logistic regression}, journal = {Weather Forecasting}, year = {2020}"
+      },
+      {
+        "kind": "bib",
+        "key": "lee2021",
+        "entry_type": "article",
+        "fields": {
+          "title": "Random forests for fog detection",
+          "author": "Lee, K. and Park, S.",
+          "year": "2021",
+          "journal": "Atmospheric Research"
+        },
+        "raw": "author = {Lee, K. and Park, S.}, title = {Random forests for fog detection}, journal = {Atmospheric Research}, year = {2021}"
+      },
+      {
+        "kind": "bib",
+        "key": "zhang2022",
+        "entry_type": "inproceedings",
+        "fields": {
+          "title": "Convolutional networks for satellite imagery",
+          "author": "Zhang, Y. and Wang, H.",
+          "year": "2022",
+          "booktitle": "CVPR"
+        },
+        "raw": "author = {Zhang, Y. and Wang, H.}, title = {Convolutional networks for satellite imagery}, booktitle = {CVPR}, year = {2022}"
+      },
+      {
+        "kind": "bib",
+        "key": "chen2023",
+        "entry_type": "article",
+        "fields": {
+          "title": "Physics-guided fog modeling",
+          "author": "Chen, L. and Liu, M.",
+          "year": "2023",
+          "journal": "Journal of Climate"
+        },
+        "raw": "author = {Chen, L. and Liu, M.}, title = {Physics-guided fog modeling}, journal = {Journal of Climate}, year = {2023}"
+      },
+      {
+        "kind": "author_year_ref",
+        "key": "Smith2020",
+        "fields": {
+          "author": "Smith et al.",
+          "year": "2020",
+          "title": "studied visibility prediction with logistic regression."
+        },
+        "raw": "Smith et al. (2020) studied visibility prediction with logistic regression.",
+        "source": "material/paper.tex",
+        "locator": "L10"
+      },
+      {
+        "kind": "author_year_ref",
+        "key": "Lee2021",
+        "fields": {
+          "author": "Lee et al.",
+          "year": "2021",
+          "title": "used random forests for fog detection."
+        },
+        "raw": "Lee et al. (2021) used random forests for fog detection.",
+        "source": "material/paper.tex",
+        "locator": "L11"
+      },
+      {
+        "kind": "author_year_ref",
+        "key": "Zhang2022",
+        "fields": {
+          "author": "Zhang and Wang",
+          "year": "2022",
+          "title": "applied a convolutional network to satellite imagery."
+        },
+        "raw": "Zhang and Wang (2022) applied a convolutional network to satellite imagery.",
+        "source": "material/paper.tex",
+        "locator": "L13"
+      },
+      {
+        "kind": "author_year_ref",
+        "key": "Chen2023",
+        "fields": {
+          "author": "Chen et al.",
+          "year": "2023",
+          "title": "proposed a physics-guided model."
+        },
+        "raw": "Chen et al. (2023) proposed a physics-guided model.",
+        "source": "material/paper.tex",
+        "locator": "L14"
+      }
+    ],
+    "key_works": [
+      {
+        "key": "smith2020",
+        "author": "Smith, J. and Jones, A.",
+        "year": "2020",
+        "title": "Visibility prediction with logistic regression",
+        "cited_in_body": true,
+        "source": "",
+        "locator": ""
+      },
+      {
+        "key": "lee2021",
+        "author": "Lee, K. and Park, S.",
+        "year": "2021",
+        "title": "Random forests for fog detection",
+        "cited_in_body": true,
+        "source": "",
+        "locator": ""
+      },
+      {
+        "key": "zhang2022",
+        "author": "Zhang, Y. and Wang, H.",
+        "year": "2022",
+        "title": "Convolutional networks for satellite imagery",
+        "cited_in_body": true,
+        "source": "",
+        "locator": ""
+      },
+      {
+        "key": "chen2023",
+        "author": "Chen, L. and Liu, M.",
+        "year": "2023",
+        "title": "Physics-guided fog modeling",
+        "cited_in_body": true,
+        "source": "",
+        "locator": ""
+      },
+      {
+        "key": "Smith2020",
+        "author": "Smith et al.",
+        "year": "2020",
+        "title": "studied visibility prediction with logistic regression.",
+        "cited_in_body": true,
+        "source": "material/paper.tex",
+        "locator": "L10"
+      },
+      {
+        "key": "Lee2021",
+        "author": "Lee et al.",
+        "year": "2021",
+        "title": "used random forests for fog detection.",
+        "cited_in_body": true,
+        "source": "material/paper.tex",
+        "locator": "L11"
+      },
+      {
+        "key": "Zhang2022",
+        "author": "Zhang and Wang",
+        "year": "2022",
+        "title": "applied a convolutional network to satellite imagery.",
+        "cited_in_body": true,
+        "source": "material/paper.tex",
+        "locator": "L13"
+      },
+      {
+        "key": "Chen2023",
+        "author": "Chen et al.",
+        "year": "2023",
+        "title": "proposed a physics-guided model.",
+        "cited_in_body": true,
+        "source": "material/paper.tex",
+        "locator": "L14"
+      }
+    ],
+    "mismatch_count": 0,
+    "unverifiable_count": 0
+  },
+  "coverage": {
+    "background": {
+      "state": "written",
+      "sentences": 1,
+      "anchored": 1
+    },
+    "related_work": {
+      "state": "written",
+      "sentences": 2,
+      "anchored": 2
+    },
+    "gap": {
+      "state": "written",
+      "sentences": 1,
+      "anchored": 1
+    },
+    "contribution": {
+      "state": "written",
+      "sentences": 1,
+      "anchored": 1
+    },
+    "citation_coverage": {
+      "state": "written",
+      "references_in_material": 8,
+      "key_works": 8,
+      "works_written": 4
+    }
+  },
+  "alignment": {
+    "forward": {
+      "rows": [
+        {
+          "sentence": "海雾显著降低能见度并扰乱海上交通。然而 Smith2020 指出既有统计方法在复杂海岸场景下受限。",
+          "section": "background",
+          "claim_type": "background",
+          "status": "anchored",
+          "citations": [
+            {
+              "raw": "Smith2020",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown",
+          "metadata_mismatch": [],
+          "overclaim_terms": [],
+          "hedge_terms": [],
+          "cliche_terms": [],
+          "explicit_judgement": false
+        },
+        {
+          "sentence": "Smith et al. (2020) 用逻辑回归做能见度预测。Lee et al. (2021) 用随机森林做雾检测。",
+          "section": "related_work",
+          "claim_type": "related_work",
+          "status": "anchored",
+          "citations": [
+            {
+              "raw": "Smith et al. (2020)",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            },
+            {
+              "raw": "Lee et al. (2021)",
+              "kind": "author_year",
+              "ref_key": "Lee2021",
+              "ref_author": "Lee et al.",
+              "ref_year": "2021"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown",
+          "metadata_mismatch": [],
+          "overclaim_terms": [],
+          "hedge_terms": [],
+          "cliche_terms": [],
+          "explicit_judgement": false
+        },
+        {
+          "sentence": "Zhang and Wang (2022) 将卷积网络用于卫星影像。Chen et al. (2023) 提出了物理引导模型。",
+          "section": "related_work",
+          "claim_type": "related_work",
+          "status": "anchored",
+          "citations": [
+            {
+              "raw": "Wang (2022)",
+              "kind": "author_year",
+              "ref_key": "zhang2022",
+              "ref_author": "Zhang, Y. and Wang, H.",
+              "ref_year": "2022"
+            },
+            {
+              "raw": "Chen et al. (2023)",
+              "kind": "author_year",
+              "ref_key": "Chen2023",
+              "ref_author": "Chen et al.",
+              "ref_year": "2023"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown",
+          "metadata_mismatch": [],
+          "overclaim_terms": [],
+          "hedge_terms": [],
+          "cliche_terms": [],
+          "explicit_judgement": false
+        },
+        {
+          "sentence": "然而这些工作没有联合考虑能见度阈值与天气码，且对类别不平衡关注有限（Smith2020）。",
+          "section": "gap",
+          "claim_type": "gap",
+          "status": "anchored",
+          "citations": [
+            {
+              "raw": "（Smith2020）",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown",
+          "metadata_mismatch": [],
+          "overclaim_terms": [],
+          "hedge_terms": [],
+          "cliche_terms": [],
+          "explicit_judgement": false
+        },
+        {
+          "sentence": "本文提出双阈值标注方案。如 Fig. 1 所示，该方案区分雾与低能见度非雾情形。Table 2 总结了改进。",
+          "section": "contribution",
+          "claim_type": "contribution",
+          "status": "loose",
+          "citations": [],
+          "figures": [
+            {
+              "pattern": "fig",
+              "kind": "figure",
+              "raw": "Fig. 1",
+              "number": "1"
+            },
+            {
+              "pattern": "table",
+              "kind": "table",
+              "raw": "Table 2",
+              "number": "2"
+            }
+          ],
+          "verbatim_source": "result.json:key:intro_related_work_markdown",
+          "metadata_mismatch": [],
+          "overclaim_terms": [],
+          "hedge_terms": [],
+          "cliche_terms": [],
+          "explicit_judgement": false
+        }
+      ],
+      "by_status": {
+        "anchored": 4,
+        "loose": 1
+      },
+      "trace_rate": 1.0,
+      "total": 5
+    },
+    "backward": {
+      "rows": [
+        {
+          "kind": "key_work",
+          "key": "smith2020",
+          "author": "Smith, J. and Jones, A.",
+          "year": "2020",
+          "title": "Visibility prediction with logistic regression",
+          "status": "mentioned_without_anchor"
+        },
+        {
+          "kind": "key_work",
+          "key": "lee2021",
+          "author": "Lee, K. and Park, S.",
+          "year": "2021",
+          "title": "Random forests for fog detection",
+          "status": "mentioned_without_anchor"
+        },
+        {
+          "kind": "key_work",
+          "key": "zhang2022",
+          "author": "Zhang, Y. and Wang, H.",
+          "year": "2022",
+          "title": "Convolutional networks for satellite imagery",
+          "status": "mentioned_without_anchor"
+        },
+        {
+          "kind": "key_work",
+          "key": "chen2023",
+          "author": "Chen, L. and Liu, M.",
+          "year": "2023",
+          "title": "Physics-guided fog modeling",
+          "status": "mentioned_without_anchor"
+        },
+        {
+          "kind": "key_work",
+          "key": "Smith2020",
+          "author": "Smith et al.",
+          "year": "2020",
+          "title": "studied visibility prediction with logistic regression.",
+          "status": "written"
+        },
+        {
+          "kind": "key_work",
+          "key": "Lee2021",
+          "author": "Lee et al.",
+          "year": "2021",
+          "title": "used random forests for fog detection.",
+          "status": "written"
+        },
+        {
+          "kind": "key_work",
+          "key": "Zhang2022",
+          "author": "Zhang and Wang",
+          "year": "2022",
+          "title": "applied a convolutional network to satellite imagery.",
+          "status": "written"
+        },
+        {
+          "kind": "key_work",
+          "key": "Chen2023",
+          "author": "Chen et al.",
+          "year": "2023",
+          "title": "proposed a physics-guided model.",
+          "status": "written"
+        },
+        {
+          "kind": "figure",
+          "key": "1",
+          "label": "Fig. 1",
+          "source": "material/paper.tex",
+          "status": "written"
+        },
+        {
+          "kind": "figure",
+          "key": "2",
+          "label": "Table 2",
+          "source": "material/paper.tex",
+          "status": "written"
+        },
+        {
+          "kind": "figure",
+          "key": "1",
+          "label": "Fig. 1",
+          "source": "result.json",
+          "status": "written"
+        },
+        {
+          "kind": "figure",
+          "key": "2",
+          "label": "Table 2",
+          "source": "result.json",
+          "status": "written"
+        }
+      ],
+      "by_status": {
+        "mentioned_without_anchor": 4,
+        "written": 8
+      },
+      "total": 12
+    }
+  },
+  "validation": {
+    "status": "warn",
+    "counts": {
+      "pass": 13,
+      "warn": 1
+    },
+    "checks": [
+      {
+        "id": "material_readable",
+        "status": "pass",
+        "detail": "3 readable material files"
+      },
+      {
+        "id": "four_sections_present",
+        "status": "pass",
+        "detail": "sections found: ['background', 'contribution', 'gap', 'related_work']; missing: []"
+      },
+      {
+        "id": "no_evidence_for_claim",
+        "status": "pass",
+        "detail": "0 sentence(s) with no citation, figure, quote or judgement marker"
+      },
+      {
+        "id": "citation_metadata_mismatch",
+        "status": "pass",
+        "detail": "0 citation metadata field mismatch(es)"
+      },
+      {
+        "id": "citation_unverifiable",
+        "status": "pass",
+        "detail": "0 sentence(s) with untraceable citation"
+      },
+      {
+        "id": "gap_without_citation",
+        "status": "pass",
+        "detail": "0/1 gap sentence(s) lack citation anchor"
+      },
+      {
+        "id": "contribution_without_figure",
+        "status": "pass",
+        "detail": "0/1 contribution sentence(s) lack figure/result anchor"
+      },
+      {
+        "id": "hedge_overclaim",
+        "status": "pass",
+        "detail": "0 strong-assertion sentence(s) without evidence"
+      },
+      {
+        "id": "cliche_background",
+        "status": "pass",
+        "detail": "0 cliche hit(s) in background"
+      },
+      {
+        "id": "related_work_no_grouping",
+        "status": "warn",
+        "detail": "dimensions in material=[]; grouped headings=0"
+      },
+      {
+        "id": "key_work_not_written",
+        "status": "pass",
+        "detail": "0 key work(s) not mentioned in draft"
+      },
+      {
+        "id": "contract_fields_filled",
+        "status": "pass",
+        "detail": "declared=8; missing=[]"
+      },
+      {
+        "id": "partial_has_limits",
+        "status": "pass",
+        "detail": "status=complete; limits=0"
+      },
+      {
+        "id": "no_prepared_answer",
+        "status": "pass",
+        "detail": "Skill ships no formal case answer; examples are marked example:true"
+      }
+    ],
+    "top_failures": []
+  },
+  "gaps": [
+    {
+      "severity": "warn",
+      "type": "mentioned_without_citation",
+      "where": "backward check",
+      "text": "Smith, J. and Jones, A.",
+      "question": "提到了该工作但没有可定位的引用锚点。"
+    },
+    {
+      "severity": "warn",
+      "type": "mentioned_without_citation",
+      "where": "backward check",
+      "text": "Lee, K. and Park, S.",
+      "question": "提到了该工作但没有可定位的引用锚点。"
+    },
+    {
+      "severity": "warn",
+      "type": "mentioned_without_citation",
+      "where": "backward check",
+      "text": "Zhang, Y. and Wang, H.",
+      "question": "提到了该工作但没有可定位的引用锚点。"
+    },
+    {
+      "severity": "warn",
+      "type": "mentioned_without_citation",
+      "where": "backward check",
+      "text": "Chen, L. and Liu, M.",
+      "question": "提到了该工作但没有可定位的引用锚点。"
+    }
+  ],
+  "gaps_summary": {
+    "by_severity": {
+      "warn": 4
+    },
+    "by_type": {
+      "mentioned_without_citation": 4
+    }
+  },
+  "sources": [
+    {
+      "path": "material/paper.tex",
+      "kind": "manuscript",
+      "reader": "text/utf-8",
+      "units": 21,
+      "note": ""
+    },
+    {
+      "path": "material/refs.bib",
+      "kind": "config",
+      "reader": "text/utf-8",
+      "units": 24,
+      "note": ""
+    },
+    {
+      "path": "result.json",
+      "kind": "config",
+      "reader": "json",
+      "units": 525,
+      "note": ""
+    }
+  ],
+  "uncertainty": [],
+  "change_log": [],
+  "draft": "## 研究背景\n海雾显著降低能见度并扰乱海上交通。然而 Smith2020 指出既有统计方法在复杂海岸场景下受限。\n\n## 相关工作\n### 问题设定\nSmith et al. (2020) 用逻辑回归做能见度预测。Lee et al. (2021) 用随机森林做雾检测。\n### 方法路线\nZhang and Wang (2022) 将卷积网络用于卫星影像。Chen et al. (2023) 提出了物理引导模型。\n\n## 研究空白\n然而这些工作没有联合考虑能见度阈值与天气码，且对类别不平衡关注有限（Smith2020）。\n\n## 贡献\n本文提出双阈值标注方案。如 Fig. 1 所示，该方案区分雾与低能见度非雾情形。Table 2 总结了改进。\n",
+  "claims": {
+    "rows": [
+      {
+        "claim_id": "c0001",
+        "claim_type": "background",
+        "text": "海雾显著降低能见度并扰乱海上交通。然而 Smith2020 指出既有统计方法在复杂海岸场景下受限。",
+        "section": "background",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "Smith2020",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0002",
+        "claim_type": "related_work",
+        "text": "Smith et al. (2020) 用逻辑回归做能见度预测。Lee et al. (2021) 用随机森林做雾检测。",
+        "section": "related_work",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "Smith et al. (2020)",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            },
+            {
+              "raw": "Lee et al. (2021)",
+              "kind": "author_year",
+              "ref_key": "Lee2021",
+              "ref_author": "Lee et al.",
+              "ref_year": "2021"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0003",
+        "claim_type": "related_work",
+        "text": "Zhang and Wang (2022) 将卷积网络用于卫星影像。Chen et al. (2023) 提出了物理引导模型。",
+        "section": "related_work",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "Wang (2022)",
+              "kind": "author_year",
+              "ref_key": "zhang2022",
+              "ref_author": "Zhang, Y. and Wang, H.",
+              "ref_year": "2022"
+            },
+            {
+              "raw": "Chen et al. (2023)",
+              "kind": "author_year",
+              "ref_key": "Chen2023",
+              "ref_author": "Chen et al.",
+              "ref_year": "2023"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0004",
+        "claim_type": "gap",
+        "text": "然而这些工作没有联合考虑能见度阈值与天气码，且对类别不平衡关注有限（Smith2020）。",
+        "section": "gap",
+        "status": "anchored",
+        "evidence": {
+          "citations": [
+            {
+              "raw": "（Smith2020）",
+              "kind": "author_year",
+              "ref_key": "Smith2020",
+              "ref_author": "Smith et al.",
+              "ref_year": "2020"
+            }
+          ],
+          "figures": [],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      },
+      {
+        "claim_id": "c0005",
+        "claim_type": "contribution",
+        "text": "本文提出双阈值标注方案。如 Fig. 1 所示，该方案区分雾与低能见度非雾情形。Table 2 总结了改进。",
+        "section": "contribution",
+        "status": "loose",
+        "evidence": {
+          "citations": [],
+          "figures": [
+            {
+              "pattern": "fig",
+              "kind": "figure",
+              "raw": "Fig. 1",
+              "number": "1"
+            },
+            {
+              "pattern": "table",
+              "kind": "table",
+              "raw": "Table 2",
+              "number": "2"
+            }
+          ],
+          "verbatim_source": "result.json:key:intro_related_work_markdown"
+        },
+        "scope": {
+          "hedge": [],
+          "overclaim": [],
+          "explicit_judgement": false
+        },
+        "metadata_mismatch": []
+      }
+    ],
+    "by_status": {
+      "anchored": 4,
+      "loose": 1
+    },
+    "trace_rate": 1.0
+  },
+  "contract_report": {
+    "declared": [
+      "draft",
+      "claims",
+      "citation_check",
+      "coverage",
+      "gaps",
+      "uncertainty",
+      "status",
+      "case_id"
+    ],
+    "satisfied": [
+      "citation_check",
+      "coverage",
+      "gaps",
+      "uncertainty",
+      "status",
+      "case_id"
+    ],
+    "aliased": [
+      {
+        "field": "draft",
+        "from": "intro_related_work_markdown"
+      },
+      {
+        "field": "claims",
+        "from": "claim_ledger"
+      }
+    ],
+    "derived": [],
+    "missing": [],
+    "note": ""
+  },
+  "example": true
+}

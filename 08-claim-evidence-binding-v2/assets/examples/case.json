@@ -1,0 +1,10 @@
+{
+  "case_id": "example_claim_binding",
+  "example": true,
+  "title": "海雾预报引言与相关工作（示例）",
+  "task": "基于材料写一段引言与相关工作，含背景/相关工作/空白/贡献四部分，引用落在具体论断上",
+  "material_dirs": ["material"],
+  "output_contract": {
+    "fields": ["draft", "claims", "citation_check", "coverage", "gaps", "uncertainty", "status", "case_id"]
+  }
+}
